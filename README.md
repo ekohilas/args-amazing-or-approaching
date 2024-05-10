@@ -45,3 +45,7 @@ And finally, we'll cover some design principles and methodologies for you to kee
 1. Output (with `logging`)
 1. Profile (with Scalene)
 1. Think (with "There must be a better way")
+
+## Cloning
+Since reveal.js exists as a submodule, `git clone --recurse-submodules` needs to be used when cloning (or `git submodule update --init --recursive` if already cloned).
+
