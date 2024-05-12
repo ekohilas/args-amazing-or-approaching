@@ -1,10 +1,8 @@
 <!-- intentionally blank -->
 
-TODO: Is it override or overload?
-TODO: QR code Automatically?
-TODO: ZWS
+TODO: Update html for presenting
 
----
+------
 
 # Args: Amazing or Approaching? 
 <!-- .element: class="r-fit-text" -->
@@ -16,7 +14,7 @@ Hello everyone!
 
 As someone who's passionate on working towards nohumanerrors.com,
 
----
+------
 
 <div class="r-stack">
     <img src="images/hearts.png">
@@ -37,7 +35,7 @@ void rectangle(
 Take for example, this function, that creates a rectangle.
 If we're using another language, and we want to setup rotation to default to 0
 
----
+------
 ```java
 void rectangle(
     int width,
@@ -47,9 +45,9 @@ void rectangle(
 }
 ```
 
-then we often need to overload the function name, that calls it with our defaults.
+then we often need to define an overload of the function name, that calls it with our defaults.
 
----
+------
 ```python [4]
 def rectangle(
     width,
@@ -64,7 +62,7 @@ rotated = rectangle(width, height, rotation)
 
 But in python, since we have default arguments...
 
----
+------
 ```python [8-9]
 def rectangle(
     width,
@@ -77,7 +75,7 @@ normal = rectangle(width, height)
 rotated = rectangle(width, height, rotation)
 ```
 
-there's no need for chained overrides, because if we don't specify a rotation, it'll default to 0 instead.
+there's no need for chained overloads, because if we don't specify a rotation, it'll default to 0 instead.
 
 ---
 ```java
@@ -98,7 +96,7 @@ Rectangle.builder(height, width)
 
 resolving this issue by allowing for optionally added data.
 
----
+------
 ```java
 Rectangle.builder(height, width)
     .build();
@@ -109,25 +107,37 @@ Rectangle.builder(height, width)
 But yet another issue lies, due to the nature of these **required** ordered arguments.
 And that is that there's no knowing whether the arguments are set correctly 
 
----
-```java
-Rectangle.builder(width, height)
-    .build();
- 
-```
-
-For example, put your hand up if you noticed that these arguments were swapped?
-
-There's not many of you that realised that it should be width and height,
-
----
+------
+<!-- .element: data-auto-animate -->
 ```java
 Rectangle.builder(height, width)
     .build();
- 
+  
 ```
+<!-- .element: data-notrim -->
+<!-- .element: data-id="builder" -->
+
+For example, put your hand up, if you noticed, that when I defined this builder, the ordering of height and width were swapped?
+
+(Pause to look)
+
+Even with [so many] people in this audience, there's actually only [a few] of you that realised that it should be width and height,
+
+------
+<!-- .element: data-auto-animate -->
+```java [1,5,6]
+Rectangle.builder(height, width)
+    .build();
+ 
+void rectangle(
+    int width,
+    int height
+);
+```
+<!-- .element: data-id="builder" -->
 
 Not height and width.
+(3s pause for effect)
 
 ---
 ```python
@@ -139,7 +149,7 @@ rectangle(
 
 Python is beautiful, in that it solves this with named arguments (and thus also does away with builders)
 
----
+------
 ```python
 rectangle(
     width=1,
@@ -149,7 +159,7 @@ rectangle(
 
 Meaning that not only are our functions self documenting by having constant arguments labelled
 
----
+------
 ```python
 rectangle(
     height=2,
@@ -159,7 +169,7 @@ rectangle(
 
 But now our argument ordering is redundant!
 
----
+------
 ```python
 rectangle(
     width=width,
@@ -186,7 +196,7 @@ rectangle(1, 2, 3,)
 
 Like for example, if we go back to a default argument being used for rotation
 
----
+------
 <!-- .element: data-auto-animate -->
 ```python [9-13]
 def rectangle(
@@ -207,7 +217,7 @@ rectangle(
 
 then we could call that function,
 
----
+------
 ```python [12]
 def rectangle(
     height,
@@ -226,7 +236,7 @@ rectangle(
 
 with the 3rd argument overriding that default.
 
----
+------
 ```python [4]
 def rectangle(
     height,
@@ -245,7 +255,7 @@ rectangle(
 
 But once we introduce a new required positional argument like opacity
 
----
+------
 ```python [9-13]
 def rectangle(
     height,
@@ -264,7 +274,7 @@ rectangle(
 
 Where 1, 2, and 3 were previously for height, width, and rotation
 
----
+------
 ```python [12]
 def rectangle(
     height,
@@ -283,7 +293,7 @@ rectangle(
 
 They're now actually for height, width, and opacity, without us ever knowing.
 
----
+------
 ```python [10-12]
 def rectangle(
     height,
@@ -321,7 +331,7 @@ rectangle(
 
 But in addition, also reduces issues with refactoring!
 
----
+------
 ```python [2-3]
 def rectangle(
     width,
@@ -340,7 +350,7 @@ rectangle(
 
 such as in the case where we want to fix the mis-ordered parameters,
 
----
+------
 ```python [10-11]
 def rectangle(
     width,
@@ -360,93 +370,7 @@ rectangle(
 we now don't have to make changes to re-order those arguments where that function is called.
 
 ---
-```python []
-for edge in self.edges(
-    port=port,
-    city=city,
-)
-```
 
-Now you might be wondering, what about the case where the name of the variable being passed in is named the same as the argument?
-
-Isn't that redundant and noisy?
-
-Well maybe this is a good opportunity to rename parameters.
-
----
-```python []
-for edge in self.edges(
-    from=port,
-    to=city,
-)
-```
-
-Perhaps it would be more descriptive to use names like from and to, making the code more natural to read.
-
----
-```python []
-def edges(from, to):
-    ...
-```
-
-But then, they might not make for great variable names inside the context of the function.
-
-Or like in this case, where from is a keyword in python.
-
----
-```python
-def map(
-    iterable: typing.Iterable,
-    with function: typing.Callable,
-) -> list:
-    return [function(item) for item in iterable]
-    
-map(
-    [1, 2, 3],
-    with=float,
-)
-```
-
-If Python learned from Swift's named parameters, then we would be able to do something like this, which lets us specify both an 
-
-
----
-```python [3,5,9]
-def map(
-    iterable: typing.Iterable,
-    with function: typing.Callable,
-) -> list:
-    return [function(item) for item in iterable]
-    
-map(
-    [1, 2, 3],
-    with=float,
-)
-```
-
-external name like `with` and an internal name like `function`.
-
----
-```python []
-for edge in self.edges(
-    port=port,
-    city=city,
-)
-```
-
-But if we are stuck with something like our edges function that we want to clear up, our final choice is to use linters that check whether the parameter names match the variable names used in the arguments.
-
----
-```python []
-for edge in self.edges(
-    port,
-    city,
-)
-```
-
-Allowing us to more safely go back to using positional arguments.
-
----
 <!-- .element: data-auto-animate -->
 ```python []
 def rectangle(
@@ -464,7 +388,7 @@ rectangle(
 
 If you are convinced by named arguments, then there is a way to force using them,
 
----
+------
 <!-- .element: data-auto-animate -->
 ```python [2]
 def rectangle(
@@ -483,7 +407,7 @@ rectangle(
 
 and that is by putting `*` as the first parameter,
 
----
+------
 <!-- .element: data-auto-animate -->
 ```python [13-]
 def rectangle(
@@ -506,15 +430,170 @@ TypeError: rectangle() takes 0 positional arguments but 2 were given
 
 which will throw us an error when we try to call the function without naming our arguments.
 
-But that can be cumbersome, as it can be forgotten, can make the code messy, and would also require updating all previous functions.
+But that can be cumbersome, as it can be forgotten, can make the code noisy, and would also require updating all previous functions.
 
 ---
-<!-- .element: data-background-image="images/fist.gif" -->
+<!-- .element: data-auto-animate -->
+```python [9-10]
+def rectangle(
+    *,
+    height,
+    width,
+):
+    ...
+    
+rectangle(
+    height=height,
+    width=width,
+)
+```
+<!-- .element: data-id="named" -->
 
-And if you think there's a better way, you'd be right!
+Not to mention the redundant case where the names of the variables being passed in are the the same as the parameters.
+
+------
+```python []
+def shortest_path(
+    node_a,
+    node_b,
+):
+    queue = [node_a]
+    ...
+
+shortest_path(
+    node_a=node_a,
+    node_b=node_b,
+)
+```
+
+A better example would be this pathfinding function.
+
+------
+```python [9-10]
+def shortest_path(
+    node_a,
+    node_b,
+):
+    queue = [node_a]
+    ...
+
+shortest_path(
+    node_a=node_a,
+    node_b=node_b,
+)
+```
+
+That takes in two nodes.
+
+In this case, there's a good opportunity to rename parameters.
+
+------
+```python [9-10]
+def shortest_path(
+    from,
+    to,
+):
+    queue = [from]
+    ...
+
+shortest_path(
+    from=node_a,
+    to=node_b,
+)
+```
+
+As perhaps it would be more descriptive to use names like from and to, making the calling code more natural to read.
+
+------
+```python [2-3,5]
+def shortest_path(
+    from,
+    to,
+):
+    queue = [from]
+    ...
+
+shortest_path(
+    from=node_a,
+    to=node_b,
+)
+```
+
+But then, they might not make for great variable names inside the context of the function.
+
+------
+```python [2,5]
+def shortest_path(
+    from,
+    to,
+):
+    queue = [from]
+    ...
+
+shortest_path(
+    from=node_a,
+    to=node_b,
+)
+```
+
+like in this case, where from is a keyword in python.
+
+------
+```python []
+def shortest_path(
+    from start,
+    to end,
+):
+    queue = [from]
+    ...
+
+shortest_path(
+    from=node_a,
+    to=node_b,
+)
+```
+
+If Python learned about named parameters from a language like Swift, then we would be able to do something like this, which lets us specify both an 
+
+------
+```python [2,9]
+def shortest_path(
+    from start,
+    to end,
+):
+    queue = [start]
+    ...
+
+shortest_path(
+    from=node_a,
+    to=node_b,
+)
+```
+
+external name like `from`,
+
+------
+<!-- .element: data-auto-animate -->
+```python [2,5]
+def shortest_path(
+    from start,
+    to end,
+):
+    queue = [start]
+    ...
+
+shortest_path(
+    from=node_a,
+    to=node_b,
+)
+```
+<!-- .element: data-id="named" -->
+
+and an internal name like `start`.
 
 ---
-```python
+
+```python [8-10]
 def rectangle(
     height,
     width,
@@ -522,38 +601,76 @@ def rectangle(
     ...
     
 rectangle(
-    *, # PEP###
+    # PEP736
+    height=,
+    width=,
+)
+```
+
+The good news is, for when we don't have control over the interface, there's currently a proposal that's debating either using a trailing = for arguments that should take from variable names
+
+------
+```python [8-10]
+def rectangle(
+    height,
+    width,
+):
+    ...
+    
+rectangle(
+    *, # PEP736
     height,
     width,
 )
 ```
 
-There's currently a proposal that allows you to add `*` as an argument, so that every argument aftwards would be taken based on its parameter name.
+or adding `*` as an argument, for every argument afterwards to do the same.
 
----
+------
+```python [2, 9-10]
+def rectangle(
+    *,
+    height,
+    width,
+):
+    ...
+    
+rectangle(
+    height,
+    width,
+)
+```
+
+Personally I feel like the best approach is for this sugar to be set at the function definition.
+
+But given the way Python has been built, it might not be currently possible.
+
+------
 ![ruff logo](images/ruff.svg)
 
-But personally I think linters are a cleaner way to check and correct this for us!
+So until something changes, I feel that linters are a cleaner, more pragmatic way to not only check, but also correct this for us!
 
 ---
 
 <!-- .element: data-background-image="images/sprints.svg"-->
 
-So if this excites you, come find me at the sprints where we can contribute to automatically finding and applying these guardrails and enhancements!
+So if this excites you, come find me at the sprints where we can contribute to automatically finding and applying these kinds of guardrails and enhancements!
 
----
+------
 
 # <br> 
-![QR](images/refactoring_qr_code.svg)<br>
+![args-amazing-or-approaching.nohumanerrors.com](images/args-amazing-or-approaching.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
+<!-- .element: class="r-stretch"-->
 # `nohumanerrors.com`
 # `@ekohilas`
 
-Or if you can't make it, you can find me online at @ekohilas, or collaborate work with me on nohumanerrors.com.
+Or if you can't make it, you can find me online at @ekohilas, or collaborate with me on nohumanerrors.com.
 
----
+------
 
 # Thanks! 
-![QR](images/refactoring_qr_code.svg)<br>
+![args-amazing-or-approaching.nohumanerrors.com](images/args-amazing-or-approaching.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
+<!-- .element: class="r-stretch"-->
 # `nohumanerrors.com`
 # `@ekohilas`
 
