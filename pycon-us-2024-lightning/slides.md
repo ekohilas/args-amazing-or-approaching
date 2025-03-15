@@ -4,15 +4,14 @@ TODO: Update html for presenting
 
 ------
 
-# Args: Amazing or Approaching? 
+# PEP736 & Keyword Args: Kudos or Approaching? 
 <!-- .element: class="r-fit-text" -->
-## Lighting Edition 
 ### Evan Kohilas
-### @ekohilas - nohumanerrors.com
+### `@ekohilas` - `nohumanerrors.com`
 
 Hello everyone!
 
-As someone who's passionate on working towards nohumanerrors.com,
+As someone who's passionate about working towards nohumanerrors.com,
 
 ------
 
@@ -147,7 +146,7 @@ rectangle(
 )
 ```
 
-Python is beautiful, in that it solves this with named arguments (and thus also does away with builders)
+Python is beautiful, in that it solves this with keyword arguments (and thus also does away with builders)
 
 ------
 ```python
@@ -177,7 +176,7 @@ rectangle(
 )
 ```
 
-Thus, by always using named arguments, our code is always future proofed against errors,
+Thus, by always using keyword arguments, our code is always future proofed against errors,
 
 ---
 <!-- .element: data-auto-animate -->
@@ -272,7 +271,7 @@ rectangle(
 )
 ```
 
-Where 1, 2, and 3 were previously for height, width, and rotation
+where 1, 2, and 3 were previously for height, width, and rotation
 
 ------
 ```python [12]
@@ -386,7 +385,7 @@ rectangle(
 ```
 <!-- .element: data-id="named" -->
 
-If you are convinced by named arguments, then there is a way to force using them,
+If you are convinced by keyword arguments, then there is a way to force using them,
 
 ------
 <!-- .element: data-auto-animate -->
@@ -434,9 +433,8 @@ But that can be cumbersome, as it can be forgotten, can make the code noisy, and
 
 ---
 <!-- .element: data-auto-animate -->
-```python [9-10]
+```python [8-9]
 def rectangle(
-    *,
     height,
     width,
 ):
@@ -451,148 +449,8 @@ rectangle(
 
 Not to mention the redundant case where the names of the variables being passed in are the the same as the parameters.
 
-------
-```python []
-def shortest_path(
-    node_a,
-    node_b,
-):
-    queue = [node_a]
-    ...
-
-shortest_path(
-    node_a=node_a,
-    node_b=node_b,
-)
-```
-
-A better example would be this pathfinding function.
-
-------
-```python [9-10]
-def shortest_path(
-    node_a,
-    node_b,
-):
-    queue = [node_a]
-    ...
-
-shortest_path(
-    node_a=node_a,
-    node_b=node_b,
-)
-```
-
-That takes in two nodes.
-
-In this case, there's a good opportunity to rename parameters.
-
-------
-```python [9-10]
-def shortest_path(
-    from,
-    to,
-):
-    queue = [from]
-    ...
-
-shortest_path(
-    from=node_a,
-    to=node_b,
-)
-```
-
-As perhaps it would be more descriptive to use names like from and to, making the calling code more natural to read.
-
-------
-```python [2-3,5]
-def shortest_path(
-    from,
-    to,
-):
-    queue = [from]
-    ...
-
-shortest_path(
-    from=node_a,
-    to=node_b,
-)
-```
-
-But then, they might not make for great variable names inside the context of the function.
-
-------
-```python [2,5]
-def shortest_path(
-    from,
-    to,
-):
-    queue = [from]
-    ...
-
-shortest_path(
-    from=node_a,
-    to=node_b,
-)
-```
-
-like in this case, where from is a keyword in python.
-
-------
-```python []
-def shortest_path(
-    from start,
-    to end,
-):
-    queue = [from]
-    ...
-
-shortest_path(
-    from=node_a,
-    to=node_b,
-)
-```
-
-If Python learned about named parameters from a language like Swift, then we would be able to do something like this, which lets us specify both an 
-
-------
-```python [2,9]
-def shortest_path(
-    from start,
-    to end,
-):
-    queue = [start]
-    ...
-
-shortest_path(
-    from=node_a,
-    to=node_b,
-)
-```
-
-external name like `from`,
-
-------
-<!-- .element: data-auto-animate -->
-```python [2,5]
-def shortest_path(
-    from start,
-    to end,
-):
-    queue = [start]
-    ...
-
-shortest_path(
-    from=node_a,
-    to=node_b,
-)
-```
-<!-- .element: data-id="named" -->
-
-and an internal name like `start`.
-
 ---
-
+<!-- .element: data-auto-animate -->
 ```python [8-10]
 def rectangle(
     height,
@@ -606,10 +464,12 @@ rectangle(
     width=,
 )
 ```
+<!-- .element: data-id="named" -->
 
-The good news is, for when we don't have control over the interface, there's currently a proposal that's debating either using a trailing = for arguments that should take from variable names
+The good news is, for when we don't have control over the interface, PEP736 is currently debating either using something like a trailing = for arguments that should take from variable names
 
 ------
+<!-- .element: data-auto-animate -->
 ```python [8-10]
 def rectangle(
     height,
@@ -623,10 +483,31 @@ rectangle(
     width,
 )
 ```
+<!-- .element: data-id="named" -->
 
 or adding `*` as an argument, for every argument afterwards to do the same.
 
 ------
+<!-- .element: data-auto-animate -->
+```python [8-9]
+def rectangle(
+    height,
+    width,
+):
+    ...
+    
+rectangle(
+    height,
+    width,
+)
+```
+<!-- .element: data-id="named" -->
+
+Personally I feel like the best approach is for this sugar to be enabled and checked by default,
+
+------
+<!-- .element: data-auto-animate -->
+
 ```python [2, 9-10]
 def rectangle(
     *,
@@ -640,15 +521,16 @@ rectangle(
     width,
 )
 ```
+<!-- .element: data-id="named" -->
 
-Personally I feel like the best approach is for this sugar to be set at the function definition.
+or at the least, have `*` in the function definition specify that, that can be the case.
 
 But given the way Python has been built, it might not be currently possible.
 
 ------
 ![ruff logo](images/ruff.svg)
 
-So until something changes, I feel that linters are a cleaner, more pragmatic way to not only check, but also correct this for us!
+So until something changes, I personally feel that linters are a cleaner, more pragmatic way to not only check, but also correct this for us!
 
 ---
 
@@ -659,9 +541,9 @@ So if this excites you, come find me at the sprints where we can contribute to a
 ------
 
 # <br> 
-![args-amazing-or-approaching.nohumanerrors.com](images/args-amazing-or-approaching.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
+![pep736.nohumanerrors.com](images/pep736.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
 <!-- .element: class="r-stretch"-->
-# `nohumanerrors.com`
+# `pep736.nohumanerrors.com`
 # `@ekohilas`
 
 Or if you can't make it, you can find me online at @ekohilas, or collaborate with me on nohumanerrors.com.
@@ -669,9 +551,9 @@ Or if you can't make it, you can find me online at @ekohilas, or collaborate wit
 ------
 
 # Thanks! 
-![args-amazing-or-approaching.nohumanerrors.com](images/args-amazing-or-approaching.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
+![pep736.nohumanerrors.com](images/pep736.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
 <!-- .element: class="r-stretch"-->
-# `nohumanerrors.com`
+# `pep736.nohumanerrors.com`
 # `@ekohilas`
 
-Thanks for listening!
+Thanks to Joshua and Chris for authoring the PEP, and to you for listening!
