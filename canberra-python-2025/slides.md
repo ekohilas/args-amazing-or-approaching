@@ -408,6 +408,18 @@ Not height and width.
 (3s pause for effect)
 
 ---
+> TODO: add code
+
+Going one step further, this same issue is what can cause function overloading to be harmful
+
+Both of these are valid definitions, but updating an existing function to use rotation would lead to incorrect output.
+
+rectangle(width, height, rotation)
+vs
+rectangle(height, width)
+
+
+---
 ```python
 rectangle(
     width=width,
@@ -415,7 +427,7 @@ rectangle(
 )
 ```
 
-Python is beautiful, in that it solves this with keyword arguments (and thus also does away with builders)
+Python is beautiful, in that it solves both of these issues with keyword arguments (and thus does away with builders and function overloading)
 
 ------
 ```python
@@ -718,6 +730,8 @@ rectangle(
 
 Not to mention the redundant case where the names of the variables being passed in are the same as the parameters.
 
+> TODO: Reference typescript or swift?
+
 ---
 <!-- .element: data-auto-animate -->
 ```python [8-10]
@@ -840,8 +854,93 @@ This is because of another special parameter, unlike `*` which makes all further
 
 
 ------
-`/` prevents all previous parameters from being passed with keywords.
+`/` prevents all previous parameters from being passed using keywords.
 
+Given the wonders you've just seen with keyword arguments, you might be wondering, how is this helpful?
+
+------
+Well there's two cases that I've found
+
+The first may be made apparant if we had to refactor our function and change the name of our paramters.
+
+For example, we may want to change the specification, and be more specific that the rotation is in degrees, not radians.
+
+If we updated the name of our parameter, any calls that pass in the `rotation` argument would now fail.
+
+Thus, by enforcing that a parameter like rotation can only be passed in as a positional argument, this refactoring would no longer be a breaking change.
+
+Or maybe we want to keep the external argument name the same, and change the internal parameter name within our function.
+
+We could do this by setting this parameter to another name at the top of the function.
+
+However this can become messy, and the reference to the original paramter is still kept.
+
+This is another case where you could argue that Python isn't perfect.
+
+------
+> TODO: Add swift example
+
+If we look at other languages like Swift, then this concept exists as argument labels and paramter names.
+
+------
+```python
+def map(
+    iterable: typing.Iterable,
+    with function: typing.Callable,
+) -> list:
+    return [function(item) for item in iterable]
+    
+map(
+    [1, 2, 3],
+    with=float,
+)
+```
+
+If Python learned from Swift, then we would be able to do something like this, which lets us specify both an 
+
+
+------
+```python [3,5,9]
+def map(
+    iterable: typing.Iterable,
+    with function: typing.Callable,
+) -> list:
+    return [function(item) for item in iterable]
+    
+map(
+    [1, 2, 3],
+    with=float,
+)
+```
+
+external name like `with` and an internal name like `function`.
+
+> TODO: Update examples
+
+------
+```javascript
+function f({a: b}) {
+    console.log(b);
+}
+
+f({a: 1})
+```
+
+Another language where this exists is Javascript
+
+
+> The second case is where we use **kwargs
+
+> So to recap:
+```python
+def f(
+    positional_only,
+    /,
+    *aribitrary_argument_list,
+    c,
+    **kwargs
+):
+```
 ------
 
 # <br> 
