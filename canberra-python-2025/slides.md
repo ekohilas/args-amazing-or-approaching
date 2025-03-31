@@ -915,7 +915,14 @@ map(
 
 external name like `with` and an internal name like `function`.
 
+Isn't that cool! So much more readable!
+
 > TODO: Update examples
+
+------
+> TODO: Javascript logo
+
+Another language where this exists is Javascript
 
 ------
 ```javascript
@@ -925,11 +932,79 @@ function f({a: b}) {
 
 f({a: 1})
 ```
+Where it looks something like this.
 
-Another language where this exists is Javascript
+------
+```javascript
+f(
+{a: 1}
+)
+```
 
+For those unfamiliar with javascript, there's quite a bit going on here.
+
+Normally we have a function that takes in a single argument, which in our case is this thing in brackets that defines an object, similar to python's dictionaries
+
+------
+```javascript
+function f(args) {
+    const a = args.a
+    console.log(b);
+}
+
+f({a: 1})
+```
+
+then that value can be assigned to a constant, such as a
+
+------
+```javascript
+function f(args) {
+    const {a} = args;
+        const b = args.c;
+    console.log(b);
+}
+
+f({a: 1})
+```
+
+but because of a language feature called object destructuring, we can have it assigned like this instead 
+
+------
+```javascript
+function f(args) {
+    const {a, b: c} = args;
+    console.log(b);
+}
+
+f({a: 1})
+```
+
+we can also re-assign variables during descructuring
+
+------
+```javascript
+function f({a, b: c}) {
+    console.log(a);
+}
+
+f({a: 1})
+```
+
+And, because this feature works within a functions parameters, we can do this!
+
+------
+
+This works similarly to swift, allowing us to rename our function parameters, and have different internal and external parameters names.
+
+---
+
+What's also great about this is that it let's us pass in an object with an arbtary number of arguments
 
 > The second case is where we use **kwargs
+
+Finally, there's one last case for args, and that is *args
+Using that requires that it's the last positional argument, and all furture arguments are keyword only
 
 > So to recap:
 ```python
