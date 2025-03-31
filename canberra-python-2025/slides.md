@@ -991,20 +991,111 @@ function f({a, b: c}) {
 f({a: 1})
 ```
 
-And, because this feature works within a functions parameters, we can do this!
+And, because this feature works within the parameters of a function definition, we can do this!
+
+And so javascript works similarly to swift, allowing us to rename our function parameters, and have different internal and external parameters names.
+
+------
+And additionally since this parameter is an object, it can be saved to a variable and only have that passed in instead.
 
 ------
 
-This works similarly to swift, allowing us to rename our function parameters, and have different internal and external parameters names.
+Python let's you do this with dictionaries too!
+
+------
+
+By using the `**` operator within a function call, python will unpack the keys of the dictionary as the keywords, and the values as the arguments.
+
+------
+
+This might make you wonder, what happens if extra properties are passed into these function calls?
+
+Well, I'm sorry to dissapoint you, but in javascript, the answer is, nothing. They don't get unpacked and thus they're ignored.
+
+Buut, there is a way to keep them, and that is by using the `...rest` property.
+
+Allowing us to save the remaining properties for whatever they may be needed for.
+
+But if this is how javascript named parameters work, what happens in python, if we pass extra keyword arguments into a python function?
+
+Well, unlike javascript, we'll get an error, telling us off that we passed in an unexpected keyword argument, which you could argue is pretty good default behaviour!
+
+And I say default here because you can also specify a way to keep these leftover argumnets, and that is by using our good friend `**` again, adding it to a `rest` paramter.
+
+As a side note, similar to javascript, this paramter doesn't have to be called `rest` either. The general convention in Python is `kwargs` for keyword args.
+
+And unlike Javascript, Python currently doesn't have a way to unpack paramters within function definitions.
+
+But fun fact, it did used to in python 2! https://peps.python.org/pep-3113/
+
+Well... it was only for tuples
+
+```python
+>>> tuple = (1, 2)
+>>> def func((a, b)):
+...     print "a:", a, "b:", b
+... 
+>>> func(tuple)
+a: 1 b: 2
+```
+
+But who knows, maybe it'll come back to Python after a PEP?
+
+Anyways where were we...
+
+So, by specifying `**kwargs` as the last parameter, any additional arguments that were passed in as keywords, and not caught by previous parameters will now be caught by `kwargs`.
+
+What do I mean by this?
+
+Remember how I mentioned earlier that there was two cases where you might want a `/` in your parameters?
+
+Well, the second case is where you have a definition like this, both with a normal paramter and `**kwargs`.
+
+And when you call this function with only keyword paramters, that first argument would be captured by the first paramter.
+
+If you instead wanted this keyword argument to be captured by **kwargs, you can use the `/` operator to specify that that argument (along with all before it) is positional only.
+
+Now you might have noticed that **kwargs is pretty cool, since it lets us pass in an arbitatry number of arguments.
+
+But there are also cases where we can't define a keyword for every argument.
+
+Say for example, when we want to sum a list of numbers.
+
+This is where `*args` comes in, which is like **kwargs but for positional arguments.
+
+`args` then appears as a variable that holds a tuple of all the arguments.
+
+And similar to `**` within a function call, `*` can be used to unpack a list into these variable arguments.
+
+But you can't have the benefits of named args to do something like args=args, or kwargs=kwargs.
+
+> TODO: But I guess you don't need to because *args and **kwargs is self descriptive?
+
+It's also worth noting that by nature of `*args` capturing all additional positional arguments, any further paramters become keyword only.
+
+`*` can also be used by itself, similar to `/`, if you still want to mandate that futher parameters are keyword only, but didn't want to capture additional positional arguments.
+
+And there are good reasons for not wanting arbitrary keyword or positional arguments!
+
+Rust for example hasn't implemented varaible args because...
+
+And in python...
+
+> TODO: Typing, signiture makes it difficult to know what should be passed in https://chatgpt.com/share/67ea8fb7-5874-8004-a270-1fa956b296f2 
+
+If you're new to python, I will note for you to look into the other types of unpacking uses for this `*` operator, as that's outside the scope of this talk.
+
+> TODO: Could cut this ** and * content. How to segue?
+
+> TODO: Rust variadics?
+
+arbitatry argument lists might be suprising to yo
+
 
 ---
 
-What's also great about this is that it let's us pass in an object with an arbtary number of arguments
+> TODO: Maybe use sub as the example isntead of rectangle to make the statement?
 
-> The second case is where we use **kwargs
-
-Finally, there's one last case for args, and that is *args
-Using that requires that it's the last positional argument, and all furture arguments are keyword only
 
 > So to recap:
 ```python
