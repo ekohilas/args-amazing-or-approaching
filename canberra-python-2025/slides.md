@@ -651,6 +651,35 @@ we now don't have to make changes to re-order those arguments where that functio
 
 ---
 
+Even if you're not refactoring, not using keyword arguments has led to errors.
+
+```python
+re.sub(pattern, repl, string, count=0, flags=0)
+```
+See if you can spot it in this example (and if you already know then let others have a guess)
+>  https://github.com/python/cpython/issues/56166
+
+---
+
+Yes, Flags.MULTILINE isn't being passed in as a flag here, but instead as a count
+
+and ... is an enum with value 0
+
+so you can guess how many hours I spent trying to figure out why my regex substitution wasn't working, and second guessing my substitution function instead.
+
+The way that Python is fixing this was by introducing a deprecation warning in python 3.13, noting that the use of count and flags as a positional argument will be removed and needs to be keyword instead.
+
+And the way that they will do that is to put `*` as a parameter before those parameters
+
+which will throw us an error when we try to call the function without naming those arguments.
+
+Of course, if you're convinced by keyword arguments, you could force using them everywhere by putting * as the first paramters
+but that can be tedious.
+
+> TODO: figure out if the above or below works better
+
+---
+
 <!-- .element: data-auto-animate -->
 ```python []
 def rectangle(
@@ -1067,9 +1096,7 @@ This is where `*args` comes in, which is like **kwargs but for positional argume
 
 And similar to `**` within a function call, `*` can be used to unpack a list into these variable arguments.
 
-But you can't have the benefits of named args to do something like args=args, or kwargs=kwargs.
-
-> TODO: But I guess you don't need to because *args and **kwargs is self descriptive?
+Which is nesscary since if we want to pass arguments along, we can't use named arguments like args=args, or kwargs=kwargs.
 
 It's also worth noting that by nature of `*args` capturing all additional positional arguments, any further paramters become keyword only.
 
@@ -1077,36 +1104,91 @@ It's also worth noting that by nature of `*args` capturing all additional positi
 
 And there are good reasons for not wanting arbitrary keyword or positional arguments!
 
-Rust for example hasn't implemented varaible args because...
+------
+```rust
+fn main() {
+    println!("Hello", "world!");
+}
 
-And in python...
+//error: argument never used
+// --> src/main.rs:2:23
+//  |
+//2 |     println!("Hello", "world!");
+//  |              -------  ^^^^^^^^ argument never used
+//  |              |
+//  |              formatting specifier missing
+```
 
-> TODO: Typing, signiture makes it difficult to know what should be passed in https://chatgpt.com/share/67ea8fb7-5874-8004-a270-1fa956b296f2 
+For example, Rust doesn't support variable function arguments by design, as it hasn't found a way that wouldn't add complexity for the reader and the type checker to try and . Instead it encourages using macros which let the user encode the complexity or passing in lists which doesn't cause variable type signatures.
 
-If you're new to python, I will note for you to look into the other types of unpacking uses for this `*` operator, as that's outside the scope of this talk.
+```python
+f(*args, **kwargs):
+```
 
+And in Python, they can make functions difficult to understand how they should be used, given there's no need for types.
+
+------
+```python
+f(*args: int, **kwargs: str):
+```
+Even if they are typed like this, then all the values need to be of the same type.
+
+Which for the case of args is fine, because if they needed to be typed differently
+
+------
+```python
+f(a1: int, a2: str, *args: int):
+```
+then in most cases, the definition should be updated with those param types.
+
+> https://docs.python.org/3/library/typing.html#typing.TypeVarTuple
+
+------
+```python
+from typing import TypedDict, Unpack
+
+class Movie(TypedDict):
+    name: str
+    year: int
+
+# This function expects two keyword arguments - `name` of type `str`
+# and `year` of type `int`.
+def foo(**kwargs: Unpack[Movie]): ...
+```
+
+And for typing keyword arguments, only from Python 3.11 were additions added as support.
+
+> https://docs.python.org/3/library/typing.html#typing.Unpack
+> https://typing.python.org/en/latest/spec/callables.html#unpack-kwargs
+> https://chatgpt.com/share/67ea8fb7-5874-8004-a270-1fa956b296f2 
+
+> If you're new to python, I will note for you to look into the other types of unpacking uses for this `*` operator, as that's outside the scope of this talk.
 > TODO: Could cut this ** and * content. How to segue?
-
-> TODO: Rust variadics?
-
-arbitatry argument lists might be suprising to yo
-
 
 ---
 
 > TODO: Maybe use sub as the example isntead of rectangle to make the statement?
 
-
-> So to recap:
+------
 ```python
 def f(
-    positional_only,
+    positional_only: int,
+    positional_with_default: str = "hello",
     /,
-    *aribitrary_argument_list,
-    c,
-    **kwargs
+    *aribitrary_argument_list: int,
+    keyword_only_arg: str,
+    **kwargs: typing.Unpack[Kw]
 ):
 ```
+So to recap
+
+This, is python's argument system
+
+> TODO: run through them
+
+and while You can argue that it's both approaching, and amazing
+it's forever changing.
+
 ------
 
 # <br> 
@@ -1129,6 +1211,25 @@ Thanks to Joshua and Chris for authoring the PEP, and to you for listening!
 
 
 ------
-One issue with this approach, is that you may realise that not all functions allow keyword arguments.
 
-This is because of the `/` parameter syntax
+------
+```python
+f(*args: int, **kwargs: str):
+```
+If you wanted to type specific args,
+
+------
+```python
+f(*args: *tuple[int, ...]):
+```
+first we expand the definition to use the tuple form
+you could do thisWith args, it can be re-written Even if they are typed like this, then all the values need to be of the same type.
+
+
+------
+```python
+def foo(*args: *tuple[int, str, int, *tuple[]): ...
+```
+
+With args, you **can** specify
+
