@@ -86,10 +86,22 @@ Okay now that that's out of the way let's go back to python's beautiful function
 void rectangle(
     int width,
     int height,
+) {
+    // function code
+}
+```
+
+To show what I mean, I'll start by using a function from another language.
+
+---
+```java
+void rectangle(
+    int width,
+    int height,
 );
 ```
 
-I'll show this by example in comparison to most other languages. Here we have a function.
+I'll also cut it down to just the signature, to simplify this example.
 
 ---
 ```java [6]
@@ -100,7 +112,7 @@ void rectangle(
 
 basic_rectangle = rectangle(10, 20);
 ```
-And we can call it to create a basic rectangle of a particular width and height.
+Now, this function can be called to create a basic rectangle of a particular width and height.
 
 ```java
 void rectangle(
@@ -110,7 +122,7 @@ void rectangle(
 
 basic_rectangle = rectangle(10, 20);
 ```
-Now let's say that a basic rectangle isn't good enough, and we need to create a rotated one instead.
+But let's say that a basic rectangle isn't good enough, and we need to create a rotated one instead.
 
 > TODO: Change type signature of rectangle
 
@@ -137,7 +149,7 @@ void rectangle(
 
 basic_rectangle = rectangle(10, 20);
 ```
-But now our previous function needs to be updated.
+But now our previous function now needs to be updated.
 
 ---
 ```java [7]
@@ -177,11 +189,10 @@ void rectangle(
     rotated_rectangle(width, height, 0);
 }
 ```
-> TODO: Split
-> TODO: Too wordy
-And that is by creating a new function `rotated_rectangle` with this rotation parameter, and updating the old `rectangle` function, such that it calls the new `rotated_rectangle` function while setting the new `rotation` parameter with a default argument, which in our case will be 0.
+> TODO: Split to highlight
+And that is by creating a new function with this rotation parameter, and updating the old function, such that it calls the new function while setting the new parameter with a default argument, which in our case will be 0.
 
-Now you can start to see how this might get a bit messy. The good news it, that this messyness can be avoided through the use of function overloading.
+Now you can start to see how this might get a bit messy. The good news is, that this messyness can be avoided through the use of function overloading.
 
 ------
 ```java
@@ -210,8 +221,7 @@ def rectangle(
 normal = rectangle(width, height)
 ```
 
-So now if we switch back to Python,
-So how does Python do it?
+So now if we switch back to Python (which doesn't have function overloading), how does Python do it?
 
 ------
 ```python [4]
@@ -319,7 +329,7 @@ print(small.metadata) # {"width": 200, "height": 100"}
 print(big.metadata)   # {"width": 200, "height": 100"}
 ```
 
-Instead, their metadata is the same.
+Instead, their metadata ends up being the same.
 
 That's because these default parameters are instantiated at the time the function is defined, instead of when the function is called.
 
@@ -353,7 +363,7 @@ Rectangle.builder(height, width)
 ```
 <!-- .element: data-notrim -->
 
-And that is through a programming construct called the builder pattern, which stores and create this state.
+And that is through a programming construct called the builder pattern, which stores and creates this state.
 
 ---
 ```java
@@ -384,6 +394,8 @@ Rectangle.builder(height, width)
 ```
 <!-- .element: data-notrim -->
 <!-- .element: data-id="builder" -->
+
+> For example, can anyone see the error here?
 
 For example, put your hand up, if you noticed, that when I defined this builder, the ordering of height and width were swapped?
 
@@ -656,7 +668,7 @@ Even if you're not refactoring, not using keyword arguments has led to errors.
 ```python
 re.sub(pattern, repl, string, count=0, flags=0)
 ```
-See if you can spot it in this example (and if you already know then let others have a guess)
+See if you can spot it in this example (and if you already know then let others have a chance)
 >  https://github.com/python/cpython/issues/56166
 
 ---
@@ -667,13 +679,13 @@ and ... is an enum with value 0
 
 so you can guess how many hours I spent trying to figure out why my regex substitution wasn't working, and second guessing my substitution function instead.
 
-The way that Python is fixing this was by introducing a deprecation warning in python 3.13, noting that the use of count and flags as a positional argument will be removed and needs to be keyword instead.
+The way that Python is fixing this is by introducing a deprecation warning from python 3.13, noting that the use of count and flags as a positional argument will be removed and needs to be keyword instead.
 
 And the way that they will do that is to put `*` as a parameter before those parameters
 
 which will throw us an error when we try to call the function without naming those arguments.
 
-Of course, if you're convinced by keyword arguments, you could force using them everywhere by putting * as the first paramters
+And if you're really convinced by keyword arguments, you could force using them everywhere by putting * as the first paramters
 but that can be tedious.
 
 > TODO: figure out if the above or below works better
@@ -759,7 +771,25 @@ rectangle(
 
 Not to mention the redundant case where the names of the variables being passed in are the same as the parameters.
 
-> TODO: Reference typescript or swift?
+---
+<!-- .element: data-auto-animate -->
+```python [8-9]
+def rectangle(
+    height,
+    width,
+):
+    ...
+    
+rectangle(
+    height=height,
+    width=width,
+)
+```
+<!-- .element: data-id="named" -->
+
+> TODO: update example
+
+Like in the case where the parameter names and list was much longer, doesn't that make things unreadable?
 
 ---
 <!-- .element: data-auto-animate -->
@@ -837,7 +867,7 @@ rectangle(
 
 or at the least, have `*` in the function definition specify that, that can be the case.
 
-But given the way Python has been built, it might not be currently possible.
+But given the way Python has been built, it might not be currently possible, or they might need your help!
 
 ------
 ![ruff logo](images/ruff.svg)
@@ -845,12 +875,18 @@ But given the way Python has been built, it might not be currently possible.
 So until something changes, I personally feel that linters are a cleaner, more pragmatic way to not only check, but also correct this for us!
 
 ---
+
+For example, a rule that auto fixes all our function calls to use keyword arguments wherever possible
+
+Or, if you want the safety without the redundancy, it could be extended to not use keyword arguments where the variable names are the same as the parameter names.
+
+---
 <!-- .element: data-background-image="images/sprints.svg"-->
 
 > TOOD: Update image to repo
 > TODO: Could expand? e.g. this is because these lint rules can analyse the definitions during the calls of functions
 
-So if this excites you, come contribute on making this lint rule a reality!
+So if mitigating human errors excites you, I'd love to work with you in make these kinds of tools a reality!
 
 ------
 
@@ -879,13 +915,13 @@ TypeError: range() takes no keyword arguments
 that not _all_ functions are happy with that.
 
 ------
-This is because of another special parameter, unlike `*` which makes all further parameters keyword only, 
+This is because of another special parameter, `/`. Unlike `*` which makes all further parameters keyword only, 
 
 
 ------
 `/` prevents all previous parameters from being passed using keywords.
 
-Given the wonders you've just seen with keyword arguments, you might be wondering, how is this helpful?
+Given the wonders you've just seen with keyword arguments, you might be wondering, when is this helpful?
 
 ------
 Well there's two cases that I've found
@@ -970,7 +1006,7 @@ f(
 )
 ```
 
-For those unfamiliar with javascript, there's quite a bit going on here.
+For those unfamiliar with javascript, there's quite a bit going on here, so let's unpack it together.
 
 Normally we have a function that takes in a single argument, which in our case is this thing in brackets that defines an object, similar to python's dictionaries
 
@@ -1029,7 +1065,7 @@ And additionally since this parameter is an object, it can be saved to a variabl
 
 ------
 
-Python let's you do this with dictionaries too!
+In fact, Python let's you do this with dictionaries too!
 
 ------
 
@@ -1041,7 +1077,7 @@ This might make you wonder, what happens if extra properties are passed into the
 
 Well, I'm sorry to dissapoint you, but in javascript, the answer is, nothing. They don't get unpacked and thus they're ignored.
 
-Buut, there is a way to keep them, and that is by using the `...rest` property.
+Buut, there is a way to keep them, and that is by using the ellipses `...rest` property.
 
 Allowing us to save the remaining properties for whatever they may be needed for.
 
@@ -1068,11 +1104,11 @@ Well... it was only for tuples
 a: 1 b: 2
 ```
 
-But who knows, maybe it'll come back to Python after a PEP?
+But who knows, maybe it'll come back to Python 3 after a PEP?
 
 Anyways where were we...
 
-So, by specifying `**kwargs` as the last parameter, any additional arguments that were passed in as keywords, and not caught by previous parameters will now be caught by `kwargs`.
+So, by specifying `**kwargs` as the last parameter, what this does, it tell python that any additional arguments that were passed in as keywords, and not caught by previous parameters will now be caught by `kwargs`.
 
 What do I mean by this?
 
@@ -1082,7 +1118,7 @@ Well, the second case is where you have a definition like this, both with a norm
 
 And when you call this function with only keyword paramters, that first argument would be captured by the first paramter.
 
-If you instead wanted this keyword argument to be captured by **kwargs, you can use the `/` operator to specify that that argument (along with all before it) is positional only.
+If you instead wanted this keyword argument to be captured by **kwargs, you can use the `/` operator to specify that that parameter (and everything before the slash) is positional only.
 
 Now you might have noticed that **kwargs is pretty cool, since it lets us pass in an arbitatry number of arguments.
 
@@ -1092,7 +1128,7 @@ Say for example, when we want to sum a list of numbers.
 
 This is where `*args` comes in, which is like **kwargs but for positional arguments.
 
-`args` then appears as a variable that holds a tuple of all the arguments.
+`args` then appears as a variable that holds a tuple of all the extra arguments that were passed in.
 
 And similar to `**` within a function call, `*` can be used to unpack a list into these variable arguments.
 
@@ -1100,7 +1136,9 @@ Which is nesscary since if we want to pass arguments along, we can't use named a
 
 It's also worth noting that by nature of `*args` capturing all additional positional arguments, any further paramters become keyword only.
 
-`*` can also be used by itself, similar to `/`, if you still want to mandate that futher parameters are keyword only, but didn't want to capture additional positional arguments.
+You could you say that this is because of the existance of `*` within the parameters.
+
+Because `*` can also be used by itself, similar to `/`, if you still want to mandate that futher parameters are keyword only, but didn't want to capture additional positional arguments.
 
 And there are good reasons for not wanting arbitrary keyword or positional arguments!
 
@@ -1125,7 +1163,7 @@ For example, Rust doesn't support variable function arguments by design, as it h
 f(*args, **kwargs):
 ```
 
-And in Python, they can make functions difficult to understand how they should be used, given there's no need for types.
+And this can also be evident in Python, since they can make functions difficult to understand how they should be used, given there's no need for types.
 
 ------
 ```python
@@ -1133,7 +1171,9 @@ f(*args: int, **kwargs: str):
 ```
 Even if they are typed like this, then all the values need to be of the same type.
 
-Which for the case of args is fine, because if they needed to be typed differently
+Which you could say for the case of args is fine, because if they needed to be typed differently
+
+> TODO: inverse int and str
 
 ------
 ```python
@@ -1156,7 +1196,7 @@ class Movie(TypedDict):
 def foo(**kwargs: Unpack[Movie]): ...
 ```
 
-And for typing keyword arguments, only from Python 3.11 were additions added as support.
+And for typing keyword arguments, only from Python 3.11 were additions added as support, to help specify what keywords could be caught, and what their types could be.
 
 > https://docs.python.org/3/library/typing.html#typing.Unpack
 > https://typing.python.org/en/latest/spec/callables.html#unpack-kwargs
@@ -1174,10 +1214,11 @@ And for typing keyword arguments, only from Python 3.11 were additions added as 
 def f(
     positional_only: int,
     positional_with_default: str = "hello",
-    /,
-    *aribitrary_argument_list: int,
-    keyword_only_arg: str,
-    **kwargs: typing.Unpack[Kw]
+    /, # Positional only parameter seperator
+    positional_or_keyword,
+    *aribitrary_argument_tuple: int, # Also marks further paramaters as keyword only
+    keyword_only: str,
+    **keyword_argument_dict: typing.Unpack[Kw]
 ):
 ```
 So to recap
@@ -1197,7 +1238,9 @@ it's forever changing.
 # `pep736.nohumanerrors.com`
 # `@ekohilas`
 
-Or if you can't make it, you can find me online at @ekohilas, or collaborate with me on nohumanerrors.com.
+If you're after the resources for this talk, you can find them in the links above.
+
+Or if you're after me, you can collaborate with me on nohumanerrors.com, find me online at ekohilas, or here if you have any questions or feedback!
 
 ------
 
@@ -1207,7 +1250,7 @@ Or if you can't make it, you can find me online at @ekohilas, or collaborate wit
 # `pep736.nohumanerrors.com`
 # `@ekohilas`
 
-Thanks to Joshua and Chris for authoring the PEP, and to you for listening!
+Thanks to my friends, family, the open source community, as well as to you for listening!
 
 
 ------
