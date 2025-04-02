@@ -2537,28 +2537,55 @@ fn main() {
 //  |              formatting specifier missing
 ```
 
-For example, Rust doesn't support variable function arguments by design, as it hasn't found a way that wouldn't add complexity for the reader and the type checker to try and . Instead it encourages using macros which let the user encode the complexity or passing in lists which doesn't cause variable type signatures.
+While I'm not an expert in Rust, to my understanding, Rust doesn't support variable function arguments by design, due to the complexity for the reader and the type checker to try. Instead it encourages passing in lists, which doesn't cause variable type signatures, and offers using macros which let the user encode the complexity.
 
-```python
-f(*args, **kwargs):
+------
+```python[4-5,10-11]
+def rectangle(
+    width,
+    height,
+    *args,
+    **kwargs,
+):
+    return shape(
+        width,
+        height,
+        *args,
+        **kwargs
+    )
 ```
 
 And this can also be evident in Python, since they can make functions difficult to understand how they should be used, given there's no need for types.
+What can really be passed into rectangle?
 
 ------
-```python
-f(*args: int, **kwargs: str):
+```python[4-5]
+def rectangle(
+    width: int,
+    height: int,
+    *args: str,
+    **kwargs: int,
+):
+    ...
 ```
-Even if they are typed like this, then all the values need to be of the same type.
+
+Even if they are typed in their most simple form, it requires the values to be of the same type.
 
 Which you could say for the case of args is fine, because if they needed to be typed differently
 
-> TODO: inverse int and str
-
 ------
-```python
-f(a1: int, a2: str, *args: int):
+```python[4-6]
+def rectangle(
+    width: int,
+    height: int,
+    name: str,
+    rotation: int
+    *args: str,
+    **kwargs: int,
+):
+    ...
 ```
+
 then in most cases, the definition should be updated with those param types.
 
 > https://docs.python.org/3/library/typing.html#typing.TypeVarTuple
@@ -2567,13 +2594,17 @@ then in most cases, the definition should be updated with those param types.
 ```python
 from typing import TypedDict, Unpack
 
-class Movie(TypedDict):
+class ShapeValues(TypedDict):
+    rotation: int
     name: str
-    year: int
 
-# This function expects two keyword arguments - `name` of type `str`
-# and `year` of type `int`.
-def foo(**kwargs: Unpack[Movie]): ...
+def rectangle(
+    width: int,
+    height: int,
+    *args: str,
+    **kwargs: Unpack[ShapeValues],
+):
+    ...
 ```
 
 And for typing keyword arguments, only from Python 3.11 were additions added as support, to help specify what keywords could be caught, and what their types could be.
@@ -2584,23 +2615,22 @@ And for typing keyword arguments, only from Python 3.11 were additions added as 
 
 > If you're new to python, I will note for you to look into the other types of unpacking uses for this `*` operator, as that's outside the scope of this talk.
 > TODO: Could cut this ** and * content. How to segue?
-
----
-
 > TODO: Maybe use sub as the example isntead of rectangle to make the statement?
 
 ------
 ```python
-def f(
+def function(
     positional_only: int,
     positional_with_default: str = "hello",
     /, # Positional only parameter seperator
     positional_or_keyword,
     *aribitrary_argument_tuple: int, # Also marks further paramaters as keyword only
     keyword_only: str,
+    keyword_with_default: str = "world",
     **keyword_argument_dict: typing.Unpack[Kw]
 ):
 ```
+
 So to recap
 
 This, is python's argument system
@@ -2608,7 +2638,7 @@ This, is python's argument system
 > TODO: run through them
 
 and while You can argue that it's both approaching, and amazing
-it's forever changing.
+at the least it's forever changing.
 
 ------
 
