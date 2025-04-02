@@ -3,6 +3,7 @@
 > TODO: Update html for presenting
 > TODO: Spellcheck
 > TODO: Fix sectioning
+> TODO: Ensure height and width are ordered where they're meant to be
 
 ------
 
@@ -645,6 +646,7 @@ Now if we step away from the thunderstorms and lightning (which are very very fr
 > TODO: Link all code
 > TODO: Finalise code examples
 > TODO: Add highlighting to code examples 
+> TODO: add comic effect for thunderstorms
 
 ---
 ```java
@@ -654,16 +656,39 @@ Rectangle.builder(height, width)
 ```
 <!-- .element: data-notrim -->
 
-And that is through a programming construct called the builder pattern, which stores and creates this state.
+And that is through a programming construct called the builder pattern.
+
+> TODO: use var rectangle = Rectange\n.builder otherwise not clear it's not a definition.
 
 ---
-```java
+```java[1]
+Rectangle.builder(height, width)
+    .build();
+ 
+```
+<!-- .element: data-notrim -->
+
+On initiation, it requires and stores all nesscary data
+
+---
+```java[2]
 Rectangle.builder(height, width)
     .withRotation(rotation)
     .build();
 ```
+<!-- .element: data-notrim -->
 
-This resolves this issue by allowing for optionally added data.
+and then allows for adding of any optional data
+
+---
+```java[3]
+Rectangle.builder(height, width)
+    .withRotation(rotation)
+    .build();
+```
+<!-- .element: data-notrim -->
+
+before building the final state.
 
 ------
 ```java
@@ -673,54 +698,96 @@ Rectangle.builder(height, width)
 ```
 <!-- .element: data-notrim -->
 
-But yet another issue lies, due to the nature of these **required** ordered arguments.
-And that is that there's no knowing whether the arguments are set correctly 
+But yet another issue lies with required arguments, that even builders can't fix.
+
+Can anyone spot the error here?
+
+(water break)
+
+[No one noticed, that when I defined this builder, the ordering of height and width were swapped?]
+
+[Yes well done] It should be width and height,
 
 ------
 <!-- .element: data-auto-animate -->
-```java
-Rectangle.builder(height, width)
-    .build();
-  
-```
-<!-- .element: data-notrim -->
-<!-- .element: data-id="builder" -->
-
-> For example, can anyone see the error here?
-
-For example, put your hand up, if you noticed, that when I defined this builder, the ordering of height and width were swapped?
-
-(Pause to look)
-
-Even with [so many] people in this audience, there's actually only [a few] of you that realised that it should be width and height,
-
-------
-<!-- .element: data-auto-animate -->
-```java [1,5,6]
-Rectangle.builder(height, width)
-    .build();
- 
+```java [2-3,6]
 void rectangle(
     int width,
     int height
 );
+
+Rectangle.builder(height, width)
+    .build();
 ```
 <!-- .element: data-id="builder" -->
 
 Not height and width.
-(3s pause for effect)
+
+(pause for effect)
 
 ---
-> TODO: add code
+```java
+void rectangle(
+    int width,
+    int height,
+);
 
-Going one step further, this same issue is what can cause function overloading to be harmful
+void rectangle(
+    int height,
+    int width,
+    int rotation,
+);
 
-Both of these are valid definitions, but updating an existing function to use rotation would lead to incorrect output.
+shape_1 = rectangle(10, 20);
+shape_2 = rectangle(20, 10, 45);
+```
+<!-- .element: data-notrim -->
 
-rectangle(width, height, rotation)
-vs
-rectangle(height, width)
+Going one step further, this same issue is what can cause function overloading to be harmful.
 
+For example, both of these are valid definitions,
+
+---
+```java [2-3,7-8]
+void rectangle(
+    int width,
+    int height,
+);
+
+void rectangle(
+    int height,
+    int width,
+    int rotation,
+);
+
+shape_1 = rectangle(10, 20);
+shape_2 = rectangle(20, 10, 45);
+```
+<!-- .element: data-notrim -->
+
+the only difference being the ordering of the paramters
+
+---
+```java[13]
+void rectangle(
+    int width,
+    int height,
+);
+
+void rectangle(
+    int height,
+    int width,
+    int rotation,
+);
+
+shape_1 = rectangle(10, 20);
+shape_2 = rectangle(20, 10);
+```
+<!-- .element: data-notrim -->
+
+But as soon as we remove the rotation of the shape, the shapes dimensions are now different.
+
+Without having to reference the signature of the functions, there's no knowing whether the arguments are set correctly.
 
 ---
 ```python
@@ -952,37 +1019,131 @@ rectangle(
 
 we now don't have to make changes to re-order those arguments where that function is called.
 
----
+But even in the cases where you're not refactoring, not using keyword arguments has led to errors.
 
-Even if you're not refactoring, not using keyword arguments has led to errors.
-
+------
 ```python
-re.sub(pattern, repl, string, count=0, flags=0)
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
 ```
-See if you can spot it in this example (and if you already know then let others have a chance)
+
+Can anyone spot the error in this example?
+(and if you already know then let others have a chance)
+
+[Yes it's how the flag is being passed in!]
+
 >  https://github.com/python/cpython/issues/56166
 
+------
+```python[8-14]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+
+re.sub(
+    pattern,
+    repl,
+    string,
+    count=0,
+    flags=0,
+)
+```
+
+If we bring up the definition of re.sub,
+
+------
+```python[5,12]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+
+re.sub(
+    pattern,
+    repl,
+    string,
+    count=0,
+    flags=0,
+)
+```
+
+and we look at the parameter that the flag is passed in as, you'll see it's count, not flags.
+
+------
+```python[5]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE, # 2
+)
+
+re.sub(
+    pattern,
+    repl,
+    string,
+    count=0,
+    flags=0,
+)
+```
+
+and then the flag is read as an int, setting the maximum number of subtitutions to 2.
+
+That would explain why I spent hours trying to figure out why my expected thousands of substitutions weren't working, and was instead second guessing my replacement function.
+
+------
+> TODO: Screenshot deprecation warning https://docs.python.org/3/library/re.html#re.sub
+
+In fact, so many people have had this issue, that Python has fixed it by introducing a deprecation warning from 3.13, noting that the use of count and flags as a positional argument will be removed and needs to be a keyword instead.
+
+------
+```python[5,13]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    flags=re.IGNORECASE,
+)
+
+re.sub(
+    pattern,
+    repl,
+    string,
+    *,
+    count=0,
+    flags=0,
+)
+```
+
+And the way that they will do that, is to put `*` as a parameter before count and flags.
+
+------
+```python
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+# TypeError: sub() takes 3 positional arguments but 4 were given
+
+```
+
+What this will do, is throw us an error when we try to call the function without naming those arguments.
+
 ---
-
-Yes, Flags.MULTILINE isn't being passed in as a flag here, but instead as a count
-
-and ... is an enum with value 0
-
-so you can guess how many hours I spent trying to figure out why my regex substitution wasn't working, and second guessing my substitution function instead.
-
-The way that Python is fixing this is by introducing a deprecation warning from python 3.13, noting that the use of count and flags as a positional argument will be removed and needs to be keyword instead.
-
-And the way that they will do that is to put `*` as a parameter before those parameters
-
-which will throw us an error when we try to call the function without naming those arguments.
-
-And if you're really convinced by keyword arguments, you could force using them everywhere by putting * as the first paramters
-but that can be tedious.
-
-> TODO: figure out if the above or below works better
-
----
-
 <!-- .element: data-auto-animate -->
 ```python []
 def rectangle(
@@ -998,58 +1159,38 @@ rectangle(
 ```
 <!-- .element: data-id="named" -->
 
-If you are convinced by keyword arguments, then there is a way to force using them,
+So, if you are convinced by keyword arguments, and want to ensure that functions like rectangle are always called with them.
 
 ------
 <!-- .element: data-auto-animate -->
-```python [2]
+```python [2,9-10]
 def rectangle(
     *,
-    height,
     width,
+    height,
 ):
     ...
     
 rectangle(
-    1, # height
-    2, # width
+    height=1,
+    width=2,
 )
 ```
 <!-- .element: data-id="named" -->
 
-and that is by putting `*` as the first parameter,
+then one way you could force that, is by putting `*` as the first parameter,
 
-------
-<!-- .element: data-auto-animate -->
-```python [13-]
-def rectangle(
-    *,
-    height,
-    width,
-):
-    ...
-    
-rectangle(
-    1, # height
-    2, # width
-)
+---
+> TODO: anogising emoji face
 
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: rectangle() takes 0 positional arguments but 2 were given
-```
-<!-- .element: data-id="named" -->
-
-which will throw us an error when we try to call the function without naming our arguments.
-
-But that can be cumbersome, as it can be forgotten, can make the code noisy, and would also require updating all previous functions.
+But that can be cumbersome, as it can be forgotten, can make the code noisy, and would also require updating all previously made functions.
 
 ---
 <!-- .element: data-auto-animate -->
 ```python [8-9]
 def rectangle(
-    height,
     width,
+    height,
 ):
     ...
     
@@ -1060,27 +1201,25 @@ rectangle(
 ```
 <!-- .element: data-id="named" -->
 
-Not to mention the redundant case where the names of the variables being passed in are the same as the parameters.
+Not to mention the redundant cases where the names of the variables being passed in are the same as the parameters.
+And while it might look fine in this case,
 
 ---
 <!-- .element: data-auto-animate -->
-```python [8-9]
-def rectangle(
-    height,
-    width,
-):
-    ...
-    
+```python
 rectangle(
-    height=height,
-    width=width,
+    top_left_pos_from_x_origin=top_left_pos_from_x_origin,
+    top_left_pos_from_y_origin=top_left_pos_from_y_origin,
+    bottom_right_pos_from_x_origin=bottom_right_pos_from_x_origin,
+    bottom_right_pos_from_y_origin=bottom_right_pos_from_y_origin,
+    rotation_in_radians=rotation_in_radians,
+    color_in_hex=color_in_hex,
+    line_thickness_in_pixels=line_thickness_in_pixels,
 )
 ```
 <!-- .element: data-id="named" -->
 
-> TODO: update example
-
-Like in the case where the parameter names and list was much longer, doesn't that make things unreadable?
+it can get pretty unreadable when the number of parameters and their names are much longer
 
 ---
 <!-- .element: data-auto-animate -->
@@ -1099,7 +1238,7 @@ rectangle(
 ```
 <!-- .element: data-id="named" -->
 
-The good news is, for when we don't have control over the interface, PEP736 is currently debating either using something like a trailing = for arguments that should take from variable names
+The good news is, for when we don't have control over the interface, PEP736 is currently debating either using something like a trailing = for arguments that should take from existing variable names
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1118,7 +1257,7 @@ rectangle(
 ```
 <!-- .element: data-id="named" -->
 
-or adding `*` as an argument, for every argument afterwards to do the same.
+or adding `*` as an argument, to signify that every argument afterwards should be looked up from a variable name.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1158,7 +1297,7 @@ rectangle(
 
 or at the least, have `*` in the function definition specify that, that can be the case.
 
-But given the way Python has been built, it might not be currently possible, or they might need your help!
+But given the way Python has been built, it might not be currently possible, or they might just need your help to do so!
 
 ------
 ![ruff logo](images/ruff.svg)
@@ -1166,20 +1305,96 @@ But given the way Python has been built, it might not be currently possible, or 
 So until something changes, I personally feel that linters are a cleaner, more pragmatic way to not only check, but also correct this for us!
 
 ---
+```python[8-9]
+def rectangle(
+    width,
+    height,
+):
+    ...
+    
+rectangle(
+    height=height,
+    width=width,
+)
+```
 
 For example, a rule that auto fixes all our function calls to use keyword arguments wherever possible
 
-Or, if you want the safety without the redundancy, it could be extended to not use keyword arguments where the variable names are the same as the parameter names.
+---
+```python[2-3,8-9]
+def rectangle(
+    width,
+    height,
+):
+    ...
+    
+rectangle(
+    width,
+    width,
+)
+```
+
+Or, if you want the safety without the redundancy, a rule that checks that for every given positional argument, it's name is the same as the corresponding parameter.
+
+---
+```python[2,8]
+def rectangle(
+    width,
+    height,
+):
+    ...
+    
+rectangle(
+    width,
+    width,
+)
+```
+
+Which would pass in this case,
+
+---
+```python[3,9]
+def rectangle(
+    width,
+    height,
+):
+    ...
+    
+rectangle(
+    width,
+    width,
+)
+```
+
+and in this case, give a warning,
+
+---
+```python[3,9]
+def rectangle(
+    width,
+    height,
+):
+    ...
+    
+rectangle(
+    width,
+    height=width,
+)
+```
+
+or bring clarity with a keyword argument.
 
 ---
 <!-- .element: data-background-image="images/sprints.svg"-->
 
-> TOOD: Update image to repo
-> TODO: Could expand? e.g. this is because these lint rules can analyse the definitions during the calls of functions
-
 So if mitigating human errors excites you, I'd love to work with you in make these kinds of tools a reality!
 
+> TOOD: Update image to github
+> TODO: Could expand? e.g. this is because these lint rules can analyse the definitions during the calls of functions
+
+
 ------
+> TODO: Image of influence or tips
 
 Or, if I've influenced you enough to start using this paradigm in your code day to day, here are some things that may be worth noting. 
 
@@ -1187,73 +1402,310 @@ Or, if I've influenced you enough to start using this paradigm in your code day 
 ```python
 range(
     start=0,
-    stop=10
-    skip=2
+    stop=10,
+    skip=2,
 )   
 ```
 
-For one, you may notice in your excitement to add the parameter names as keyword arguments to all your function calls...
+For one, you may notice in your excitement to use keyword arguments for all your function calls...
 
 ------
 ```python
->>> range(start=0, stop=1, skip=2)
+>>> range(start=0, stop=10, skip=2)
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 TypeError: range() takes no keyword arguments
-
 ```
 
 that not _all_ functions are happy with that.
 
 ------
-This is because of another special parameter, `/`. Unlike `*` which makes all further parameters keyword only, 
+```python[5]
+def range(
+    start,
+    stop,
+    skip=1,
+    /,
+)
+```
 
+This is because of another special parameter, `/`.
+Unlike `*` which makes all further parameters keyword only,
+`/` prevents all previous parameters from being passed into using keyword arguments.
 
 ------
-`/` prevents all previous parameters from being passed using keywords.
+> TODO: But why gif
 
 Given the wonders you've just seen with keyword arguments, you might be wondering, when is this helpful?
 
+Well there's two cases that I've seen
+
 ------
-Well there's two cases that I've found
+```python
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    ...
+    
+rectangle(
+    height=10,
+    width=20,
+    rotation=45,
+)
+```
 
 The first may be made apparant if we had to refactor our function and change the name of our paramters.
 
+------
+```python [4]
+def rectangle(
+    width,
+    height,
+    rotation_in_degrees=0,
+):
+    ...
+    
+rectangle(
+    height=10,
+    width=20,
+    rotation=45,
+)
+```
+
 For example, we may want to change the specification, and be more specific that the rotation is in degrees, not radians.
 
-If we updated the name of our parameter, any calls that pass in the `rotation` argument would now fail.
+------
+```python [11,14-16]
+def rectangle(
+    width,
+    height,
+    rotation_in_degrees=0,
+):
+    ...
+    
+rectangle(
+    height=10,
+    width=20,
+    rotation=45,
+)
 
-Thus, by enforcing that a parameter like rotation can only be passed in as a positional argument, this refactoring would no longer be a breaking change.
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+# TypeError: rectangle() got an unexpected keyword argument 'rotation'
+```
 
-Or maybe we want to keep the external argument name the same, and change the internal parameter name within our function.
+If we updated the name of our parameter, now any calls that pass in the `rotation` argument would now fail.
 
-We could do this by setting this parameter to another name at the top of the function.
+------
+```python [5]
+def rectangle(
+    width,
+    height,
+    rotation_in_degrees=0,
+    /,
+):
+    ...
+    
+rectangle(
+    height=10,
+    width=20,
+    rotation=45,
+)
+```
+
+Thus, by enforcing that a parameter like rotation can only be passed in as a positional argument, this refactoring would no longer be a breaking change,
+
+------
+```python [9-13]
+def rectangle(
+    width,
+    height,
+    rotation_in_degrees=0,
+    /,
+):
+    ...
+    
+rectangle(
+    10,
+    20,
+    45,
+)
+```
+
+With the trade off being that our functions couldn't use keyword arguments.
+
+------
+```python
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    rotation_in_degrees=rotation
+    ...
+    
+rectangle(
+    height=10,
+    width=20,
+    rotation=45,
+)
+```
+
+Another case may be where we want to keep the external argument name the same, and change the internal parameter name within our function.
+
+------
+```python[4,6]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    rotation_in_degrees=rotation
+    ...
+    
+rectangle(
+    height=10,
+    width=20,
+    rotation=45,
+)
+```
+
+And we could do that by setting this parameter to another variable at the top of the function.
+
+------
+```python[7-8]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    rotation_in_degrees=rotation
+    print(rotation_in_degrees)
+    print(rotation)
+    ...
+    
+rectangle(
+    height=10,
+    width=20,
+    rotation=45,
+)
+```
 
 However this can become messy, and the reference to the original paramter is still kept.
+
+---
+> TODO: Sad python
 
 This is another case where you could argue that Python isn't perfect.
 
 ------
-> TODO: Add swift example
+```swift
+func map(
+    iterable: [Double],
+    function: (Double) -> Double
+) -> [Double] {}
+
+map(
+    iterable: [-0.5, 0.5, 1.5],
+    function: round
+)
+```
 
 If we look at other languages like Swift, then this concept exists as argument labels and paramter names.
 
 ------
-```python
-def map(
-    iterable: typing.Iterable,
-    with function: typing.Callable,
-) -> list:
-    return [function(item) for item in iterable]
-    
+```swift[8]
+func map(
+    iterable: [Double],
+    function: (Double) -> Double
+) -> [Double] {}
+
 map(
-    [1, 2, 3],
-    with=float,
+    iterable: [-0.5, 0.5, 1.5],
+    function: round
 )
 ```
 
-If Python learned from Swift, then we would be able to do something like this, which lets us specify both an 
+In this case, map is called with the argument label, `function`,
 
+------
+```swift[3]
+func map(
+    iterable: [Double],
+    function: (Double) -> Double
+) -> [Double] {}
+
+map(
+    iterable: [-0.5, 0.5, 1.5],
+    function: round
+)
+```
+
+which is taken from the parameter name.
+
+------
+```swift[3]
+func map(
+    iterable: [Double],
+    with function: (Double) -> Double
+) -> [Double] {}
+
+map(
+    iterable: [-0.5, 0.5, 1.5],
+    with: round
+)
+```
+
+But in Swift, we can also specify the argument label as `with` for that paramter 
+
+------
+```swift[8]
+func map(
+    iterable: [Double],
+    with function: (Double) -> Double
+) -> [Double] {}
+
+map(
+    iterable: [-0.5, 0.5, 1.5],
+    with: round
+)
+```
+
+Now, when map is called, it's done so using this label
+
+------
+```swift[6-9]
+func map(
+    iterable: [Double],
+    with function: (Double) -> Double
+) -> [Double] {}
+
+map(
+    iterable: [-0.5, 0.5, 1.5],
+    with: round
+)
+```
+
+I think this is awesome because I find reads so nicely!
+
+"map this iterable with the round function."
+
+------
+```python[3,8]
+def map(
+    iterable: list[float],
+    with function: typing.Callable[float],
+) -> list[float]: ...
+    
+map(
+    iterable=[-0.5, 0.5, 1.5],
+    with=round,
+)
+```
+
+Imagine if Python had this functionality. Oh how much more readable python could be!
 
 ------
 ```python [3,5,9]
