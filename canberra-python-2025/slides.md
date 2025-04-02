@@ -1605,7 +1605,13 @@ This is another case where you could argue that Python isn't perfect.
 func map(
     iterable: [Double],
     function: (Double) -> Double
-) -> [Double] {}
+) -> [Double] {
+    var result: [Double] = []
+    for item in iterable {
+        result.append(function(item))
+    }
+    return result
+}
 
 map(
     iterable: [-0.5, 0.5, 1.5],
@@ -1614,13 +1620,20 @@ map(
 ```
 
 If we look at other languages like Swift, then this concept exists as argument labels and paramter names.
+Take this example map function:
 
 ------
-```swift[8]
+```swift[14]
 func map(
     iterable: [Double],
     function: (Double) -> Double
-) -> [Double] {}
+) -> [Double] {
+    var result: [Double] = []
+    for item in iterable {
+        result.append(function(item))
+    }
+    return result
+}
 
 map(
     iterable: [-0.5, 0.5, 1.5],
@@ -1628,14 +1641,20 @@ map(
 )
 ```
 
-In this case, map is called with the argument label, `function`,
+where its called with the argument label, `function`,
 
 ------
 ```swift[3]
 func map(
     iterable: [Double],
     function: (Double) -> Double
-) -> [Double] {}
+) -> [Double] {
+    var result: [Double] = []
+    for item in iterable {
+        result.append(function(item))
+    }
+    return result
+}
 
 map(
     iterable: [-0.5, 0.5, 1.5],
@@ -1643,14 +1662,41 @@ map(
 )
 ```
 
-which is taken from the parameter name.
+which is taken from the parameter name,
+
+------
+```swift[7]
+func map(
+    iterable: [Double],
+    function: (Double) -> Double
+) -> [Double] {
+    var result: [Double] = []
+    for item in iterable {
+        result.append(function(item))
+    }
+    return result
+}
+
+map(
+    iterable: [-0.5, 0.5, 1.5],
+    function: round
+)
+```
+
+and used in the function body.
 
 ------
 ```swift[3]
 func map(
     iterable: [Double],
     with function: (Double) -> Double
-) -> [Double] {}
+) -> [Double] {
+    var result: [Double] = []
+    for item in iterable {
+        result.append(function(item))
+    }
+    return result
+}
 
 map(
     iterable: [-0.5, 0.5, 1.5],
@@ -1661,11 +1707,17 @@ map(
 But in Swift, we can also specify the argument label as `with` for that paramter 
 
 ------
-```swift[8]
+```swift[14]
 func map(
     iterable: [Double],
     with function: (Double) -> Double
-) -> [Double] {}
+) -> [Double] {
+    var result: [Double] = []
+    for item in iterable {
+        result.append(function(item))
+    }
+    return result
+}
 
 map(
     iterable: [-0.5, 0.5, 1.5],
@@ -1673,14 +1725,20 @@ map(
 )
 ```
 
-Now, when map is called, it's done so using this label
+Now, when map is called, it's done so using this label,
 
 ------
-```swift[6-9]
+```swift[7]
 func map(
     iterable: [Double],
     with function: (Double) -> Double
-) -> [Double] {}
+) -> [Double] {
+    var result: [Double] = []
+    for item in iterable {
+        result.append(function(item))
+    }
+    return result
+}
 
 map(
     iterable: [-0.5, 0.5, 1.5],
@@ -1688,16 +1746,38 @@ map(
 )
 ```
 
-I think this is awesome because I find reads so nicely!
+leaving the function body unchanged.
+
+------
+```swift[12-15]
+func map(
+    iterable: [Double],
+    with function: (Double) -> Double
+) -> [Double] {
+    var result: [Double] = []
+    for item in iterable {
+        result.append(function(item))
+    }
+    return result
+}
+
+map(
+    iterable: [-0.5, 0.5, 1.5],
+    with: round
+)
+```
+
+This is awesome because it reads so nicely!
 
 "map this iterable with the round function."
 
 ------
-```python[3,8]
+```python[3,5,9]
 def map(
     iterable: list[float],
     with function: typing.Callable[float],
-) -> list[float]: ...
+) -> list[float]:
+    return [function(item) for item in iterable]
     
 map(
     iterable=[-0.5, 0.5, 1.5],
@@ -1708,178 +1788,767 @@ map(
 Imagine if Python had this functionality. Oh how much more readable python could be!
 
 ------
-```python [3,5,9]
-def map(
-    iterable: typing.Iterable,
-    with function: typing.Callable,
-) -> list:
-    return [function(item) for item in iterable]
-    
-map(
-    [1, 2, 3],
-    with=float,
-)
-```
-
-external name like `with` and an internal name like `function`.
-
-Isn't that cool! So much more readable!
-
-> TODO: Update examples
-
-------
 > TODO: Javascript logo
 
 Another language where this exists is Javascript
 
 ------
 ```javascript
-function f({a: b}) {
-    console.log(b);
+function map({
+    iterable,
+    using: func,
+}) {
+    const result = [];
+    for (const  item  of iterable) {
+        result.push(func(item));
+    }
+    return result;
 }
 
-f({a: 1})
-```
-Where it looks something like this.
-
-------
-```javascript
-f(
-{a: 1}
-)
+map({
+    iterable: [-0.5, 0.5, 1.5],
+    using: Math.round,
+});
 ```
 
-For those unfamiliar with javascript, there's quite a bit going on here, so let's unpack it together.
-
-Normally we have a function that takes in a single argument, which in our case is this thing in brackets that defines an object, similar to python's dictionaries
+Where our prevous example looks something like this.
 
 ------
-```javascript
-function f(args) {
-    const a = args.a
-    console.log(b);
+```javascript[2-3,13-14]
+function map({
+    iterable,
+    using: func,
+}) {
+    const result = [];
+    for (const  item  of iterable) {
+        result.push(func(item));
+    }
+    return result;
 }
 
-f({a: 1})
+map({
+    iterable: [-0.5, 0.5, 1.5],
+    using: Math.round,
+});
 ```
 
-then that value can be assigned to a constant, such as a
+For those unfamiliar with javascript, even though this looks similar to swift (igoring the fact that I've replaced `function` and `with` with `func` and `using`), the way it works is quite different.
+
+There's quite a bit going on here, so if you can bare with me for a bit, I'll show you what I mean.
 
 ------
-```javascript
-function f(args) {
-    const {a} = args;
-        const b = args.c;
-    console.log(b);
+```javascript[1]
+function map(arg) {
+    const iterable = arg.iterable;
+    const func = arg.using;
+    
+    const result = [];
+    for (const  item  of iterable) {
+        result.push(func(item));
+    }
+    return result;
 }
 
-f({a: 1})
+map({
+    iterable: [-0.5, 0.5, 1.5],
+    using: Math.round,
+});
 ```
 
-but because of a language feature called object destructuring, we can have it assigned like this instead 
+Normally we have a function that takes in a single argument
 
 ------
-```javascript
-function f(args) {
-    const {a, b: c} = args;
-    console.log(b);
+```javascript[12-15]
+function map(arg) {
+    const iterable = arg.iterable;
+    const func = arg.using;
+    
+    const result = [];
+    for (const  item  of iterable) {
+        result.push(func(item));
+    }
+    return result;
 }
 
-f({a: 1})
+map({
+    iterable: [-0.5, 0.5, 1.5],
+    using: Math.round,
+});
 ```
 
-we can also re-assign variables during descructuring
+which in our case is this thing in brackets that defines an object, similar to python's dictionaries
 
 ------
-```javascript
-function f({a, b: c}) {
-    console.log(a);
+```javascript[2-3]
+function map(arg) {
+    const iterable = arg.iterable;
+    const func = arg.using;
+    
+    const result = [];
+    for (const  item  of iterable) {
+        result.push(func(item));
+    }
+    return result;
 }
 
-f({a: 1})
+map({
+    iterable: [-0.5, 0.5, 1.5],
+    using: Math.round,
+});
 ```
 
-And, because this feature works within the parameters of a function definition, we can do this!
-
-And so javascript works similarly to swift, allowing us to rename our function parameters, and have different internal and external parameters names.
+then that value can be assigned to a constant, such as `iterable`, or `func`
 
 ------
-And additionally since this parameter is an object, it can be saved to a variable and only have that passed in instead.
+```javascript[2]
+function map(arg) {
+    const { iterable, using } = arg;
+    const func = using;
+    
+    const result = [];
+    for (const  item  of iterable) {
+        result.push(func(item));
+    }
+    return result;
+}
+
+map({
+    iterable: [-0.5, 0.5, 1.5],
+    using: Math.round,
+});
+```
+
+but because of a language feature called object destructuring, we can have those variables assigned like this instead 
 
 ------
+```javascript[3]
+function map(arg) {
+    const { iterable, using } = arg;
+    const func = using;
+    
+    const result = [];
+    for (const  item  of iterable) {
+        result.push(func(item));
+    }
+    return result;
+}
 
-In fact, Python let's you do this with dictionaries too!
+map({
+    iterable: [-0.5, 0.5, 1.5],
+    using: Math.round,
+});
+```
+
+with the caveat being that we still have to re-assign `using` to `func`
 
 ------
+```javascript[2]
+function map(arg) {
+    const { iterable, using: func } = arg;
+    
+    
+    const result = [];
+    for (const  item  of iterable) {
+        result.push(func(item));
+    }
+    return result;
+}
+
+map({
+    iterable: [-0.5, 0.5, 1.5],
+    using: Math.round,
+});
+```
+
+but destructuring also lets us re-assign variables.
+
+------
+```javascript[1-4]
+function map({
+    iterable,
+    using: func,
+}) {
+    const result = [];
+    for (const  item  of iterable) {
+        result.push(func(item));
+    }
+    return result;
+}
+
+map({
+    iterable: [-0.5, 0.5, 1.5],
+    using: Math.round,
+});
+```
+
+And, better yet, this feature works within the parameters of a function definition!
+
+------
+```javascript[12-15]
+function map({
+    iterable,
+    using: func,
+}) {
+    const result = [];
+    for (const  item  of iterable) {
+        result.push(func(item));
+    }
+    return result;
+}
+
+map({
+    iterable: [-0.5, 0.5, 1.5],
+    using: Math.round,
+});
+```
+
+Now, since this parameter is an object, 
+
+------
+```javascript[12-16]
+function map({
+    iterable,
+    using: func,
+}) {
+    const result = [];
+    for (const  item  of iterable) {
+        result.push(func(item));
+    }
+    return result;
+}
+
+const params = {
+    iterable: [-0.5, 0.5, 1.5],
+    using: Math.round,
+};
+map(params);
+```
+
+it can be saved to a variable and only have that passed in instead.
+
+------
+```python[6-11]
+def map(
+    iterable: list[float],
+    with function: typing.Callable[float],
+) -> list[float]:
+    return [function(item) for item in iterable]
+    
+params = {
+    "iterable": [-0.5, 0.5, 1.5],
+    "function": round,
+}   
+map(**params)
+```
+
+In fact, (and this is the point that I've been building up to) Python let's you do this with dictionaries too!
+
+------
+```python[11]
+def map(
+    iterable: list[float],
+    with function: typing.Callable[float],
+) -> list[float]:
+    return [function(item) for item in iterable]
+    
+params = {
+    "iterable": [-0.5, 0.5, 1.5],
+    "function": round,
+}   
+map(**params)
+```
 
 By using the `**` operator within a function call, python will unpack the keys of the dictionary as the keywords, and the values as the arguments.
 
 ------
 
+> TODO: Thinking emoji
+
 This might make you wonder, what happens if extra properties are passed into these function calls?
 
-Well, I'm sorry to dissapoint you, but in javascript, the answer is, nothing. They don't get unpacked and thus they're ignored.
+------
+```javascript[15]
+function map({
+    iterable,
+    using: func,
+}) {
+    const result = [];
+    for (const  item  of iterable) {
+        result.push(func(item));
+    }
+    return result;
+}
+
+map({
+    iterable: [-0.5, 0.5, 1.5],
+    using: Math.round,
+    extra: "argument",
+});
+```
+
+Well, I'm sorry to dissapoint you, but in javascript, the answer is... nothing. They don't get unpacked and thus they're ignored.
+
+------
+```javascript[4]
+function map({
+    iterable,
+    using: func,
+    ...rest,
+}) {
+    const result = [];
+    for (const  item  of iterable) {
+        result.push(func(item));
+    }
+    return result;
+}
+
+map({
+    iterable: [-0.5, 0.5, 1.5],
+    using: Math.round,
+    extra: "argument",
+});
+```
 
 Buut, there is a way to keep them, and that is by using the ellipses `...rest` property.
 
+------
+```javascript[4]
+function map({
+    iterable,
+    using: func,
+    ...rest, // { extra: "argument" }
+}) {
+    const result = [];
+    for (const  item  of iterable) {
+        result.push(func(item));
+    }
+    return result;
+}
+
+map({
+    iterable: [-0.5, 0.5, 1.5],
+    using: Math.round,
+    extra: "argument",
+});
+```
+
 Allowing us to save the remaining properties for whatever they may be needed for.
+
+------
+```python[10]
+def map(
+    iterable: list[float],
+    with function: typing.Callable[float],
+) -> list[float]:
+    return [function(item) for item in iterable]
+    
+params = {
+    "iterable": [-0.5, 0.5, 1.5],
+    "function": round,
+    "extra": "argument",
+}   
+map(**params)
+```
 
 But if this is how javascript named parameters work, what happens in python, if we pass extra keyword arguments into a python function?
 
+------
+```python[11]
+def map(
+    iterable: list[float],
+    with function: typing.Callable[float],
+) -> list[float]:
+    return [function(item) for item in iterable]
+    
+params = {
+    "iterable": [-0.5, 0.5, 1.5],
+    "function": round,
+}   
+map(**params)
+
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+# TypeError: map() got an unexpected keyword argument 'extra'
+
+```
+
 Well, unlike javascript, we'll get an error, telling us off that we passed in an unexpected keyword argument, which you could argue is pretty good default behaviour!
+
+> TODO: use rectangle example instead.
+> TODO: remove with from other python examples
+
+------
+```python[5]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+    **rest, # { "extra": "argument" }
+):
+    ...
+    
+params = {
+    "height": 10,
+    "width": 20,
+    "extra": "argument",
+}
+rectangle(**params)
+```
 
 And I say default here because you can also specify a way to keep these leftover argumnets, and that is by using our good friend `**` again, adding it to a `rest` paramter.
 
+------
+```python[5]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+    **kwargs, # { "extra": "argument" }
+):
+    ...
+    
+params = {
+    "height": 10,
+    "width": 20,
+    "extra": "argument",
+}
+rectangle(**params)
+```
+
 As a side note, similar to javascript, this paramter doesn't have to be called `rest` either. The general convention in Python is `kwargs` for keyword args.
+
+------
+```python[2]
+def rectangle(
+    { width, height}, # No can do!
+    height,
+    rotation=0,
+    **kwargs,
+):
+    ...
+    
+params = {
+    "height": 10,
+    "width": 20,
+    "extra": "argument",
+}
+rectangle(**params)
+```
 
 And unlike Javascript, Python currently doesn't have a way to unpack paramters within function definitions.
 
+------
+> TODO: Image to represent old days
+
 But fun fact, it did used to in python 2! https://peps.python.org/pep-3113/
 
-Well... it was only for tuples
-
+------
 ```python
->>> tuple = (1, 2)
->>> def func((a, b)):
-...     print "a:", a, "b:", b
-... 
->>> func(tuple)
-a: 1 b: 2
+def rectangle(
+    (width, height),
+):
+    print "width:", width, "height:", height
+    
+rectangle((10, 20)) # width: 10 height: 20
 ```
+
+Well... it was only for tuples
 
 But who knows, maybe it'll come back to Python 3 after a PEP?
 
 Anyways where were we...
 
-So, by specifying `**kwargs` as the last parameter, what this does, it tell python that any additional arguments that were passed in as keywords, and not caught by previous parameters will now be caught by `kwargs`.
+------
+```python
+def rectangle(
+    width,
+    height,
+    rotation=0,
+    **kwargs, # { "extra": "argument" }
+):
+    ...
+    
+params = {
+    "height": 10,
+    "width": 20,
+    "extra": "argument",
+}
+rectangle(**params)
+```
+
+So, by specifying `**kwargs` as the last parameter, what this does, is tell python that any additional arguments that were passed in as keywords, and not caught by previous parameters will now be caught by `kwargs`.
 
 What do I mean by this?
 
-Remember how I mentioned earlier that there was two cases where you might want a `/` in your parameters?
+------
+```python [5]
+def rectangle(
+    width,
+    height,
+    /,
+):
+    ...
+    
+rectangle(
+    10,
+    20,
+)
+```
 
-Well, the second case is where you have a definition like this, both with a normal paramter and `**kwargs`.
+Remember how I mentioned earlier that there was two cases where you might want a `/` in your parameters to make them positional only?
 
-And when you call this function with only keyword paramters, that first argument would be captured by the first paramter.
+------
+```python[8-17]
+def rectangle(
+    width,
+    height,
+    **kwargs,
+):
+    ...
+    
+params = {
+    "height": 30,
+    "width": 40,
+    "extra": "argument",
+}
+rectangle(
+    10,
+    20,
+    **params
+)
+```
 
-If you instead wanted this keyword argument to be captured by **kwargs, you can use the `/` operator to specify that that parameter (and everything before the slash) is positional only.
+Well, the second case is where you have a call like this, both with a normal parameters and `**kwargs`.
+
+------
+```python[18-20]
+def rectangle(
+    width,
+    height,
+    **kwargs,
+):
+    ...
+    
+params = {
+    "height": 30,
+    "width": 40,
+    "extra": "argument",
+}
+rectangle(
+    10,
+    20,
+    **params
+)
+# Traceback (most recent call last):
+#  File "<stdin>", line 1, in <module>
+# TypeError: rectangle() got multiple values for argument 'height'
+```
+
+And when you call this function, it fails since `height` is attempted to be filled both by the positional argument and the keyword argument.
+
+------
+```python[4-5,8-17]
+def rectangle(
+    width,
+    height,
+    /,
+    **kwargs, # { "height": 30, "width": 40, "extra": "argument" } 
+):
+    ...
+    
+params = {
+    "height": 30,
+    "width": 40,
+    "extra": "argument",
+}
+rectangle(
+    10,
+    20,
+    **params
+)
+```
+
+So `/` can be used if you instead wanted these keyword arguments to be captured by **kwargs.
+
+------
+```python[4,9-13]
+def rectangle(
+    width,
+    height,
+    **kwargs,
+):
+    ...
+    
+rectangle(
+    width=10,
+    height=20,
+    rotation=45,
+    color="green",
+    line_width=1, 
+)
+```
 
 Now you might have noticed that **kwargs is pretty cool, since it lets us pass in an arbitatry number of arguments.
+
+------
+```python
+sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+```
 
 But there are also cases where we can't define a keyword for every argument.
 
 Say for example, when we want to sum a list of numbers.
 
-This is where `*args` comes in, which is like **kwargs but for positional arguments.
+------
+```python[4,8]
+def rectangle(
+    width,
+    height,
+    *args,
+):
+    ...
+    
+rectangle(10, 20, "round", 40)
+```
+
+This is where `*args` comes in, which is like `**kwargs` but for positional arguments.
+
+------
+```python[4]
+def rectangle(
+    width,
+    height,
+    *args, # ("round", 40)
+):
+    ...
+    
+rectangle(10, 20, "round", 40)
+```
 
 `args` then appears as a variable that holds a tuple of all the extra arguments that were passed in.
 
-And similar to `**` within a function call, `*` can be used to unpack a list into these variable arguments.
+And notice how these these arguments can be of any type?
 
-Which is nesscary since if we want to pass arguments along, we can't use named arguments like args=args, or kwargs=kwargs.
+------
+```python[4,8]
+def rectangle(
+    width, # 0
+    height, # 1
+    *args, # (2, 3)
+):
+    ...
+    
+numbers = list(range(4))
+rectangle(*numbers)
+```
+
+Similar to `**` within a function call, `*` can be used to unpack iterables into these variable arguments.
+
+
+------
+```python[4-5,10-11]
+def rectangle(
+    width,
+    height,
+    *args,
+    **kwargs,
+):
+    return shape(
+        width,
+        height,
+        *args,
+        **kwargs
+    )
+```
+
+This is particularly useful when we want to pass extra arguments along!
+
+------
+```python[4-5,7-12]
+def rectangle(
+    width,
+    height,
+    *args,
+    **kwargs,
+):
+    return shape(
+        width,
+        height, 
+        args=args, 
+        kwargs=kwargs,
+    ) 
+```
+
+Since using named arguments won't have the intended effect...
+
+------
+```python[4-5,12-13]
+def rectangle(
+    width, # 10
+    height, # 20
+    *args, # (30, )
+    rotation = 0, # 45 
+):
+    ...
+    
+rectangle(
+    10,
+    20,
+    30,
+    rotation=45
+)
+```
 
 It's also worth noting that by nature of `*args` capturing all additional positional arguments, any further paramters become keyword only.
 
-You could you say that this is because of the existance of `*` within the parameters.
+------
+```python[5,9]
+def rectangle(
+    width, # 10
+    height, # 20
+    *args, # (30, 40)
+    rotation = 0, # keyword only
+):
+    ...
+    
+rectangle(10, 20, 30, 40)
+```
+
+And won't be affected otherwise.
+
+------
+```python[4]
+def rectangle(
+    width, # 10
+    height, # 20
+    *args, # (30, 40)
+    rotation=0, # keyword only
+):
+    ...
+    
+rectangle(10, 20, 30, 40)
+```
+
+
+------
+```python[4,5]
+def rectangle(
+    width,
+    height,
+    *,
+    rotation=0, # keyword only
+):
+    ...
+    
+rectangle(
+    10,
+    20, 
+    45,
+) 
+# Traceback (most recent call last):
+#  File "<stdin>", line 1, in <module>
+# TypeError: rectangle() takes 2 positional arguments but 3 were given
+```
 
 Because `*` can also be used by itself, similar to `/`, if you still want to mandate that futher parameters are keyword only, but didn't want to capture additional positional arguments.
 
