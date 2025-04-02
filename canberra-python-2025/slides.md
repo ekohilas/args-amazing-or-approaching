@@ -1,10 +1,12 @@
 <!-- intentionally blank -->
 
-TODO: Update html for presenting
+> TODO: Update html for presenting
+> TODO: Spellcheck
+> TODO: Fix sectioning
 
 ------
 
-# PEP736 & Keyword Args: Kudos or Approaching? 
+# Args: Amazing or Approaching? 
 <!-- .element: class="r-fit-text" -->
 ### Evan Kohilas
 ### `@ekohilas` - `nohumanerrors.com`
@@ -12,6 +14,9 @@ TODO: Update html for presenting
 Hello everyone!
 
 As someone who's passionate about working towards nohumanerrors.com,
+
+> TODO: Change intro
+> TODO: Newline title
 
 ------
 
@@ -24,16 +29,19 @@ I have utmost adoration for python's beautiful function argument system.
 
 ---
 ```python
-def func(a, b):
+def function(
+    a,
+    b,
+):
     ...
 ```
 
 Just look at it, isn't it great? Okay I'm not that crazy, ... at least I think.
 Anyways, let's get some formalities out of the way. 
 
----
+------
 ```python [2-3]
-def func(
+def function(
     a,
     b,
 ):
@@ -43,37 +51,36 @@ def func(
 Anyone know what the name of these are called?
 
 Anyone else thought they were called arguments?
-Yeah it still confuses me...
+
+Yeah it still gets me, so don't fault me if I get confused!
 
 ---
 ```python [8-9]
-def func(
+def function(
     a,
     b,
 ):
     ...
     
-func(
+function(
     a, 
     b, 
 )
 ```
 
-Okay so anyone want to take a guess at what these are called?
-
-Anyone know what the name of these are?
+Okay so, anyone want to take a guess at what these are called?
 
 Yeah these are arguments!
 
 ---
 ```python
-def func(
+def function(
     a,
     b,
 ):
     ...
     
-func(
+function(
     a, 
     b, 
 )
@@ -83,9 +90,9 @@ Okay now that that's out of the way let's go back to python's beautiful function
 
 ---
 ```java
-void rectangle(
-    int width,
-    int height,
+void function(
+    int a,
+    int b,
 ) {
     // function code
 }
@@ -98,10 +105,22 @@ To show what I mean, I'll start by using a function from another language.
 void rectangle(
     int width,
     int height,
+) {
+    // function code
+}
+```
+
+And I'll change it up to a more concrete, relatable example, making rectangles!
+
+---
+```java
+void rectangle(
+    int width,
+    int height,
 );
 ```
 
-I'll also cut it down to just the signature, to simplify this example.
+I'll also simplify it down to just the signature.
 
 ---
 ```java [6]
@@ -112,8 +131,10 @@ void rectangle(
 
 basic_rectangle = rectangle(10, 20);
 ```
-Now, this function can be called to create a basic rectangle of a particular width and height.
 
+And now, this function can be called to create a basic rectangle of a particular width and height.
+
+---
 ```java
 void rectangle(
     int width,
@@ -122,9 +143,11 @@ void rectangle(
 
 basic_rectangle = rectangle(10, 20);
 ```
-But let's say that a basic rectangle isn't good enough, and we need to create a rotated one instead.
 
-> TODO: Change type signature of rectangle
+But let's say that a basic rectangle isn't good enough. And we've been asked to create a rotated one instead.
+
+> TODO: Change return type signature of rectangle
+> TODO: Update variable name
 
 ---
 ```java [4]
@@ -140,6 +163,20 @@ basic_rectangle = rectangle(10, 20);
 And to do so, we need to add the rotation paramter.
 
 ---
+```java [8]
+void rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+basic_rectangle = rectangle(10, 20);
+rotated = rectangle(10, 20, 45);
+```
+
+Now we can make a rotated rectangle!
+
+---
 ```java [7]
 void rectangle(
     int width,
@@ -148,8 +185,10 @@ void rectangle(
 );
 
 basic_rectangle = rectangle(10, 20);
+rotated = rectangle(10, 20, 45);
 ```
-But now our previous function now needs to be updated.
+
+But now our previous function call needs to be updated.
 
 ---
 ```java [7]
@@ -160,9 +199,12 @@ void rectangle(
 );
 
 basic_rectangle = rectangle(10, 20, 0);
+rotated = rectangle(10, 20, 45);
 ```
-And this creates a problem, because we now need to go through and update all existing function calls to specify a default rotation of 0.
 
+And this creates a problem, because we now need to go through and update all existing function calls for any unrotated rectangles, and add an additional argument for a default rotation of 0
+
+---
 ```java
 void rectangle(
     int width,
@@ -171,8 +213,73 @@ void rectangle(
 );
 
 basic_rectangle = rectangle(10, 20, 0);
+rotated = rectangle(10, 20, 45);
 ```
-But in most of these languages, there are other ways that a default rotation can be setup, so that this can be avoided.
+
+Because this is tedious work that we want to avoid, in most of these languages, there are other ways that a default rotation can be setup.
+
+------
+```java[1-5]
+void rotated_rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+void rectangle(
+    int width,
+    int height,
+);
+
+basic_rectangle = rectangle(10, 20);
+rotated = rotated_rectangle(10, 20, 45);
+```
+
+The most basic way, is by creating a new function with this rotation parameter.
+
+Of course, we don't want to duplicate the code that makes these rectangles.
+
+------
+```java[10-12]
+void rotated_rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+void rectangle(
+    int width,
+    int height
+) {
+    return rotated_rectangle(width, height);
+}
+
+basic_rectangle = rectangle(10, 20);
+rotated = rotated_rectangle(10, 20, 45);
+```
+
+So we update the old function, such that it calls the new function
+
+------
+```java[10-12]
+void rotated_rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+void rectangle(
+    int width,
+    int height
+) {
+    return rotated_rectangle(width, height, 0);
+}
+
+basic_rectangle = rectangle(10, 20);
+rotated = rotated_rectangle(10, 20, 45);
+```
+
+And sets the new parameter with a default argument, which in our case will be 0.
 
 ------
 ```java
@@ -186,87 +293,229 @@ void rectangle(
     int width,
     int height
 ) {
-    rotated_rectangle(width, height, 0);
+    return rotated_rectangle(width, height, 0);
 }
-```
-> TODO: Split to highlight
-And that is by creating a new function with this rotation parameter, and updating the old function, such that it calls the new function while setting the new parameter with a default argument, which in our case will be 0.
 
-Now you can start to see how this might get a bit messy. The good news is, that this messyness can be avoided through the use of function overloading.
+basic_rectangle = rectangle(10, 20);
+rotated = rotated_rectangle(10, 20, 45);
+```
+
+Now if we take a step back, we might start to see how this might get a bit messy. The good news is, in some languages, we can do a bit of clean up through the use of function overloading.
 
 ------
-```java
+```java[1-4,7-9]
+void rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
 void rectangle(
     int width,
     int height
 ) {
-    rectangle(width, height, 0);
+    return rectangle(width, height, 0);
 }
+
+basic_rectangle = rectangle(10, 20);
+rotated = rectangle(10, 20, 45);
 ```
-This is function overloading, and it removes the need for us to rename any functions, as these programming languages will determine which functions to call using the parameter types instead.
 
-That being said, this can also become problematic, for reasons that will become more apparrant later.
-
-> as you can have multiple indetically named functions that may all do different things. Calling with the wrong arguments that have the same type but different names
-
+With function overloading, we can define multiple functions with the same name, but different type signatures.
 
 ------
-```python [4]
-def rectangle(
-    width,
-    height,
-):
-    ...
+```java[11,14,15]
+void rectangle(
+    int width,
+    int height,
+    int rotation,
+);
 
-normal = rectangle(width, height)
+void rectangle(
+    int width,
+    int height,
+) {
+    return rectangle(width, height, 0);
+}
+
+basic_rectangle = rectangle(10, 20);
+rotated = rectangle(10, 20, 45);
 ```
 
-So now if we switch back to Python (which doesn't have function overloading), how does Python do it?
+This removes the need for us to rename any functions, as these programming languages will determine which functions to call using the parameter types instead.
 
-------
-```python [4]
-def rectangle(
-    width,
-    height,
-    rotation=0,
-):
-    ...
-
-normal = rectangle(width, height)
-rotated = rectangle(width, height, rotation)
-```
-
-Well in python, since the concept of default arguments is built into the lanaguage (using the equals sign in the parameter definition)
-
-------
-```python [8-9]
-def rectangle(
-    width,
-    height,
-    rotation=0,
-):
-    ...
-
-normal = rectangle(width, height)
-rotated = rectangle(width, height, rotation)
-```
-
-there's no need for chained overloads, because if we don't specify a rotation, we've told it default to 0 instead.
+> TODO: Check code syntax, e.g. trailing commas
 
 ------
 ```python
 def rectangle(
-    width,
-    height,
-    rotation=0,
-):
-    ...
+    width: int,
+    height: int,
+    rotation int,
+): ...
 
-normal = rectangle(width, height)
-rotated = rectangle(width, height, rotation)
+def rectangle(
+    width: int,
+    height: int,
+):
+    return rectangle(width, height, 0)
+
+basic = rectangle(10, 20) 
+rotated = rectangle(10, 20, 45)
 ```
 
-As a side note, Python is not perfect in this case either (I don't think any language is!)
+If we looked at the same code in python
+
+------
+```python[14-17]
+def rectangle(
+    width: int,
+    height: int,
+    rotation int,
+): ...
+
+def rectangle(
+    width: int,
+    height: int,
+):
+    return rectangle(width, height, 0)
+
+basic = rectangle(10, 20) 
+rotated = rectangle(10, 20, 45)
+
+# TypeError:
+#  rectangle() takes 2 positional arguments but 3 were given
+```
+
+It would fail!
+
+------
+```python[1-10]
+def rectangle(
+    width: int,
+    height: int,
+    rotation int,
+): ...
+
+def rectangle(
+    width: int,
+    height: int,
+):
+    return rectangle(width, height, 0)
+
+basic = rectangle(10, 20) 
+rotated = rectangle(10, 20, 45)
+```
+
+And this is because in Python, defining a function with the same name overwrites the previous definiton.
+
+------
+> TODO: Screenshot https://pypi.org/project/multipledispatch/
+
+While there are packages like multipledispatch that you can use to replicate function overloading
+
+------
+> TODO: Screenshot with problem face https://pypi.org/project/multipledispatch/
+
+function overloading in general can also become problematic, for reasons that will become more apparrant later.
+
+> TODO: fix rotation int to rotation: int
+
+------
+```python
+def rotated_rectangle(
+    width: int,
+    height: int,
+    rotation int,
+): ...
+
+def rectangle(
+    width: int,
+    height: int,
+):
+    return rotated_rectangle(width, height, 0)
+
+basic = rectangle(10, 20) 
+rotated = rotated_rectangle(10, 20, 45)
+```
+
+So without function overloading, how does Python let us simplify this?
+
+------
+```python[4]
+def rotated_rectangle(
+    width: int,
+    height: int,
+    rotation: int = 0,
+): ...
+
+def rectangle(
+    width: int,
+    height: int,
+):
+    return rotated_rectangle(width, height, 0)
+
+basic = rectangle(10, 20) 
+rotated = rotated_rectangle(10, 20, 45)
+```
+
+Well in python, the concept of default arguments is built into the lanaguage (using the equals sign in the parameter definition)
+
+------
+```python[7]
+def rotated_rectangle(
+    width: int,
+    height: int,
+    rotation: int = 0,
+): ...
+
+basic = rotated_rectangle(10, 20, 0) 
+rotated = rotated_rectangle(10, 20, 45)
+```
+
+So now, if we only keep a single definition, we can remove the need for function chaining
+
+------
+```python[7]
+def rotated_rectangle(
+    width: int,
+    height: int,
+    rotation: int = 0,
+): ...
+
+basic = rotated_rectangle(10, 20) 
+rotated = rotated_rectangle(10, 20, 45)
+```
+
+And then, remove the need to pass in 0, since it'll use the default instead.
+
+------
+```python[1,7,8]
+def rectangle(
+    width: int,
+    height: int,
+    rotation: int = 0,
+): ...
+
+basic = rectangle(10, 20) 
+rotated = rectangle(10, 20, 45)
+```
+
+Then we can rename our function back to rectangle, to get our beautiful definition.
+
+------
+```python
+def rectangle(
+    width: int,
+    height: int,
+    rotation: int = 0,
+): ...
+
+basic = rectangle(10, 20) 
+rotated = rectangle(10, 20, 45)
+```
+
+As a side note, Python is not all sunshine and rainbows either (I don't think any language is!)
 
 And I highlight that because of one detail that can be easily missed.
 
@@ -281,6 +530,9 @@ def rectangle(
 ```
 
 Let's say for example, that we wanted to set a default argument for our rectangles to contain metadata based on how they were created.
+
+> TODO: Update types to be similar to other code
+> TODO: Update to highlight metadata
 
 ------
 ```python
@@ -307,6 +559,7 @@ def rectangle(
     
 small = rectangle(10, 20)
 big = rectangle(200, 100)
+
 print(small.metadata) # {"width": 10, "height": 20"}
 print(big.metadata)   # {"width": 200, "height": 100"}
 ```
@@ -314,7 +567,7 @@ print(big.metadata)   # {"width": 200, "height": 100"}
 What you'll find, is that instead of the obvious answer that you'd expect when printing this metadata
 
 ------
-```python [11-12]
+```python [12-13]
 def rectangle(
     width,
     height,
@@ -325,6 +578,7 @@ def rectangle(
     
 small = rectangle(10, 20)
 big = rectangle(200, 100)
+
 print(small.metadata) # {"width": 200, "height": 100"}
 print(big.metadata)   # {"width": 200, "height": 100"}
 ```
@@ -336,24 +590,61 @@ That's because these default parameters are instantiated at the time the functio
 Giving this strange outcome, where all functions are sharing the same state.
 
 ------
-```python [8-9]
+```python[4]
 def rectangle(
     width,
     height,
-    rotation=0,
+    metadata={},
 ):
-    ...
+    metadata["width"] = width
+    metadata["height"] = height
+    
+small = rectangle(10, 20)
+big = rectangle(200, 100)
 
-normal = rectangle(width, height)
-rotated = rectangle(width, height, rotation)
+print(small.metadata) # {"width": 200, "height": 100"}
+print(big.metadata)   # {"width": 200, "height": 100"}
 ```
 
-Now if we step back to our original example, those of you that are experienced might be thinking of another way of how default arguments are usually done. 
-> TODO: Code example
+This is because in Python, the values for these default paramters are created when the function is defined, **not** when it's called.
+
+------
+```python[4,6-7]
+def rectangle(
+    width,
+    height,
+    metadata=None,
+):
+    if metadata is None:
+        metadata = {}
+        
+    metadata["width"] = width
+    metadata["height"] = height
+    
+small = rectangle(10, 20)
+big = rectangle(200, 100)
+
+print(small.metadata) # {"width": 200, "height": 100"}
+print(big.metadata)   # {"width": 200, "height": 100"}
+```
+
+So if your functions need mutable defaults, the best way to do so is to default them to None, and set the mutable that you want if it hasn't been specified.
+
+------
+```java
+void rectangle(
+    int width,
+    int height,
+);
+
+basic_rectangle = rectangle(10, 20);
+```
+
+Now if we step away from the thunderstorms and lightning (which are very very freightening), and go back to our original example, those of you that are experienced might be thinking of another way that defaults can be done. 
+
 > TODO: Link all code
 > TODO: Finalise code examples
 > TODO: Add highlighting to code examples 
-> TODO: Add code example replacing width/height with param1, param2, arg1, arg2
 
 ---
 ```java
