@@ -2668,6 +2668,7 @@ Thanks to my friends, family, the open source community, as well as to you for l
 > TODO: Setup domain
 > TODO: Remove below
 > TODO: Run through again
+> TODO: Setup on Laptop
 
 ------
 ```python
