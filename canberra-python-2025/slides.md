@@ -2624,7 +2624,7 @@ def function(
     positional_with_default: str = "hello",
     /, # Positional only parameter seperator
     positional_or_keyword,
-    *aribitrary_argument_tuple: int, # Also marks further paramaters as keyword only
+    *aribitrary_argument_tuple: int, # * also marks further paramaters as keyword only
     keyword_only: str,
     keyword_with_default: str = "world",
     **keyword_argument_dict: typing.Unpack[Kw]
@@ -2664,6 +2664,10 @@ Thanks to my friends, family, the open source community, as well as to you for l
 
 
 ------
+> TODO: Create new QR Codes
+> TODO: Setup domain
+> TODO: Remove below
+> TODO: Run through again
 
 ------
 ```python
