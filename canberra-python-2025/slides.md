@@ -2516,43 +2516,11 @@ rectangle(10, 20, 30, 40)
 
 And won't be affected otherwise.
 
-------
-```python[4]
-def rectangle(
-    width, # 10
-    height, # 20
-    *args, # (30, 40)
-    rotation=0, # keyword only
-):
-    ...
-    
-rectangle(10, 20, 30, 40)
-```
+---
 
+> TODO: Thinking emoji
 
-------
-```python[4,5]
-def rectangle(
-    width,
-    height,
-    *,
-    rotation=0, # keyword only
-):
-    ...
-    
-rectangle(
-    10,
-    20, 
-    45,
-) 
-# Traceback (most recent call last):
-#  File "<stdin>", line 1, in <module>
-# TypeError: rectangle() takes 2 positional arguments but 3 were given
-```
-
-Because `*` can also be used by itself, similar to `/`, if you still want to mandate that futher parameters are keyword only, but didn't want to capture additional positional arguments.
-
-And there are good reasons for not wanting arbitrary keyword or positional arguments!
+But are arbitrary keyword or positional arguments a good idea?
 
 ------
 ```rust
