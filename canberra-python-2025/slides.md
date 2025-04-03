@@ -1,6 +1,6 @@
 <!-- intentionally blank -->
 
-> TODO: Update html for presenting
+> TODO: Emphasise point at rust, make 
 > TODO: Spellcheck
 > TODO: Fix sectioning
 > TODO: Ensure height and width are ordered where they're meant to be
@@ -28,7 +28,7 @@ As someone who's passionate about working towards nohumanerrors.com,
 
 I have utmost adoration for python's beautiful function argument system.
 
----
+------
 ```python
 def function(
     a,
@@ -51,11 +51,11 @@ def function(
 
 Anyone know what the name of these are called?
 
-Anyone else thought they were called arguments?
+[Anyone else thought they were called arguments?]
 
-Yeah it still gets me, so don't fault me if I get confused!
+[Yeah it still gets me, so don't fault me if I get confused!]
 
----
+------
 ```python [8-9]
 def function(
     a,
@@ -73,7 +73,7 @@ Okay so, anyone want to take a guess at what these are called?
 
 Yeah these are arguments!
 
----
+------
 ```python
 def function(
     a,
@@ -89,7 +89,7 @@ function(
 
 Okay now that that's out of the way let's go back to python's beautiful function argument system, that maybe I am crazy for...
 
----
+------
 ```java
 void function(
     int a,
@@ -101,7 +101,7 @@ void function(
 
 To show what I mean, I'll start by using a function from another language.
 
----
+------
 ```java
 void rectangle(
     int width,
@@ -113,7 +113,7 @@ void rectangle(
 
 And I'll change it up to a more concrete, relatable example, making rectangles!
 
----
+------
 ```java
 void rectangle(
     int width,
@@ -123,7 +123,7 @@ void rectangle(
 
 I'll also simplify it down to just the signature.
 
----
+------
 ```java [6]
 void rectangle(
     int width,
@@ -135,7 +135,7 @@ basic_rectangle = rectangle(10, 20);
 
 And now, this function can be called to create a basic rectangle of a particular width and height.
 
----
+------
 ```java
 void rectangle(
     int width,
@@ -150,7 +150,7 @@ But let's say that a basic rectangle isn't good enough. And we've been asked to 
 > TODO: Change return type signature of rectangle
 > TODO: Update variable name
 
----
+------
 ```java [4]
 void rectangle(
     int width,
@@ -163,7 +163,7 @@ basic_rectangle = rectangle(10, 20);
 
 And to do so, we need to add the rotation paramter.
 
----
+------
 ```java [8]
 void rectangle(
     int width,
@@ -177,7 +177,7 @@ rotated = rectangle(10, 20, 45);
 
 Now we can make a rotated rectangle!
 
----
+------
 ```java [7]
 void rectangle(
     int width,
@@ -191,7 +191,7 @@ rotated = rectangle(10, 20, 45);
 
 But now our previous function call needs to be updated.
 
----
+------
 ```java [7]
 void rectangle(
     int width,
@@ -205,7 +205,7 @@ rotated = rectangle(10, 20, 45);
 
 And this creates a problem, because we now need to go through and update all existing function calls for any unrotated rectangles, and add an additional argument for a default rotation of 0
 
----
+------
 ```java
 void rectangle(
     int width,
@@ -411,12 +411,12 @@ rotated = rectangle(10, 20, 45)
 And this is because in Python, defining a function with the same name overwrites the previous definiton.
 
 ------
-> TODO: Screenshot https://pypi.org/project/multipledispatch/
+<!-- .slide: data-background-image="images/multipledispatch-pypi.png"-->
 
 While there are packages like multipledispatch that you can use to replicate function overloading
 
 ------
-> TODO: Screenshot with problem face https://pypi.org/project/multipledispatch/
+<!-- .slide: data-background-image="images/overloading-problem.png"-->
 
 function overloading in general can also become problematic, for reasons that will become more apparrant later.
 
@@ -648,7 +648,7 @@ Now if we step away from the thunderstorms and lightning (which are very very fr
 > TODO: Add highlighting to code examples 
 > TODO: add comic effect for thunderstorms
 
----
+------
 ```java
 Rectangle.builder(height, width)
     .build();
@@ -660,7 +660,7 @@ And that is through a programming construct called the builder pattern.
 
 > TODO: use var rectangle = Rectange\n.builder otherwise not clear it's not a definition.
 
----
+------
 ```java[1]
 Rectangle.builder(height, width)
     .build();
@@ -670,7 +670,7 @@ Rectangle.builder(height, width)
 
 On initiation, it requires and stores all nesscary data
 
----
+------
 ```java[2]
 Rectangle.builder(height, width)
     .withRotation(rotation)
@@ -680,7 +680,7 @@ Rectangle.builder(height, width)
 
 and then allows for adding of any optional data
 
----
+------
 ```java[3]
 Rectangle.builder(height, width)
     .withRotation(rotation)
@@ -725,7 +725,7 @@ Not height and width.
 
 (pause for effect)
 
----
+------
 ```java
 void rectangle(
     int width,
@@ -747,7 +747,7 @@ Going one step further, this same issue is what can cause function overloading t
 
 For example, both of these are valid definitions,
 
----
+------
 ```java [2-3,7-8]
 void rectangle(
     int width,
@@ -767,7 +767,7 @@ shape_2 = rectangle(20, 10, 45);
 
 the only difference being the ordering of the paramters
 
----
+------
 ```java[13]
 void rectangle(
     int width,
@@ -789,7 +789,7 @@ But as soon as we remove the rotation of the shape, the shapes dimensions are no
 
 Without having to reference the signature of the functions, there's no knowing whether the arguments are set correctly.
 
----
+------
 ```python
 rectangle(
     width=width,
@@ -829,7 +829,7 @@ rectangle(
 
 Thus, by always using keyword arguments, our code is always future proofed against errors,
 
----
+------
 <!-- .element: data-auto-animate -->
 ```python []
 def rectangle(
@@ -962,7 +962,7 @@ rectangle(
 
 Naming our arguments easily lets us prevent this issue!
 
----
+------
 ```python []
 def rectangle(
     height,
@@ -1034,7 +1034,8 @@ re.sub(
 Can anyone spot the error in this example?
 (and if you already know then let others have a chance)
 
-[Yes it's how the flag is being passed in!]
+[Yes it's how the IGNORECASE flag is being passed in!]
+[Isn't it interesting how much harder errors are to spot when there's complexity?]
 
 >  https://github.com/python/cpython/issues/56166
 
@@ -1101,7 +1102,7 @@ and then the flag is read as an int, setting the maximum number of subtitutions 
 That would explain why I spent hours trying to figure out why my expected thousands of substitutions weren't working, and was instead second guessing my replacement function.
 
 ------
-> TODO: Screenshot deprecation warning https://docs.python.org/3/library/re.html#re.sub
+<!-- .slide: data-background-image="images/positional-deprecated.png"-->
 
 In fact, so many people have had this issue, that Python has fixed it by introducing a deprecation warning from 3.13, noting that the use of count and flags as a positional argument will be removed and needs to be a keyword instead.
 
@@ -1143,7 +1144,7 @@ re.sub(
 
 What this will do, is throw us an error when we try to call the function without naming those arguments.
 
----
+------
 <!-- .element: data-auto-animate -->
 ```python []
 def rectangle(
@@ -1180,12 +1181,12 @@ rectangle(
 
 then one way you could force that, is by putting `*` as the first parameter,
 
----
-> TODO: anogising emoji face
+------
+<!-- .slide: data-background-image="images/agonising-emoji.png"-->
 
 But that can be cumbersome, as it can be forgotten, can make the code noisy, and would also require updating all previously made functions.
 
----
+------
 <!-- .element: data-auto-animate -->
 ```python [8-9]
 def rectangle(
@@ -1204,7 +1205,7 @@ rectangle(
 Not to mention the redundant cases where the names of the variables being passed in are the same as the parameters.
 And while it might look fine in this case,
 
----
+------
 <!-- .element: data-auto-animate -->
 ```python
 rectangle(
@@ -1221,7 +1222,7 @@ rectangle(
 
 it can get pretty unreadable when the number of parameters and their names are much longer
 
----
+------
 <!-- .element: data-auto-animate -->
 ```python [8-10]
 def rectangle(
@@ -1304,7 +1305,7 @@ But given the way Python has been built, it might not be currently possible, or 
 
 So until something changes, I personally feel that linters are a cleaner, more pragmatic way to not only check, but also correct this for us!
 
----
+------
 ```python[8-9]
 def rectangle(
     width,
@@ -1320,7 +1321,7 @@ rectangle(
 
 For example, a rule that auto fixes all our function calls to use keyword arguments wherever possible
 
----
+------
 ```python[2-3,8-9]
 def rectangle(
     width,
@@ -1336,7 +1337,7 @@ rectangle(
 
 Or, if you want the safety without the redundancy, a rule that checks that for every given positional argument, it's name is the same as the corresponding parameter.
 
----
+------
 ```python[2,8]
 def rectangle(
     width,
@@ -1352,7 +1353,7 @@ rectangle(
 
 Which would pass in this case,
 
----
+------
 ```python[3,9]
 def rectangle(
     width,
@@ -1368,7 +1369,7 @@ rectangle(
 
 and in this case, give a warning,
 
----
+------
 ```python[3,9]
 def rectangle(
     width,
@@ -1384,8 +1385,8 @@ rectangle(
 
 or bring clarity with a keyword argument.
 
----
-<!-- .element: data-background-image="images/sprints.svg"-->
+------
+<!-- .slide: data-background-image="images/agonising-emoji.png"-->
 
 So if mitigating human errors excites you, I'd love to work with you in make these kinds of tools a reality!
 
@@ -1394,9 +1395,9 @@ So if mitigating human errors excites you, I'd love to work with you in make the
 
 
 ------
-> TODO: Image of influence or tips
+<!-- .slide: data-background-image="images/inspired-emoji.png"-->
 
-Or, if I've influenced you enough to start using this paradigm in your code day to day, here are some things that may be worth noting. 
+Or, if I've inspired you enough to start using this paradigm in your code day to day, here are some things that may be worth noting. 
 
 ------
 ```python
@@ -1434,7 +1435,7 @@ Unlike `*` which makes all further parameters keyword only,
 `/` prevents all previous parameters from being passed into using keyword arguments.
 
 ------
-> TODO: But why gif
+![but why gif](images/but_why.gif)
 
 Given the wonders you've just seen with keyword arguments, you might be wondering, when is this helpful?
 
@@ -1595,8 +1596,8 @@ rectangle(
 
 However this can become messy, and the reference to the original paramter is still kept.
 
----
-> TODO: Sad python
+------
+<!-- .slide: data-background-image="images/inspired-emoji.png"-->
 
 This is another case where you could argue that Python isn't perfect.
 
@@ -1788,7 +1789,7 @@ map(
 Imagine if Python had this functionality. Oh how much more readable python could be!
 
 ------
-> TODO: Javascript logo
+<!-- .slide: data-background-image="images/javascript-logo.png"-->
 
 Another language where this exists is Javascript
 
@@ -2061,8 +2062,7 @@ map(**params)
 By using the `**` operator within a function call, python will unpack the keys of the dictionary as the keywords, and the values as the arguments.
 
 ------
-
-> TODO: Thinking emoji
+<!-- .slide: data-background-image="images/javascript-logo.png"-->
 
 This might make you wonder, what happens if extra properties are passed into these function calls?
 
@@ -2238,7 +2238,7 @@ rectangle(**params)
 And unlike Javascript, Python currently doesn't have a way to unpack paramters within function definitions.
 
 ------
-> TODO: Image to represent old days
+<!-- .slide: data-background-image="images/good-old-days.png"-->
 
 But fun fact, it did used to in python 2! https://peps.python.org/pep-3113/
 
@@ -2516,9 +2516,9 @@ rectangle(10, 20, 30, 40)
 
 And won't be affected otherwise.
 
----
+------
 
-> TODO: Thinking emoji
+<!-- .slide: data-background-image="images/thinking.svg"-->
 
 But are arbitrary keyword or positional arguments a good idea?
 
@@ -2643,9 +2643,9 @@ at the least it's forever changing.
 ------
 
 # <br> 
-![pep736.nohumanerrors.com](images/pep736.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
+![args-amazing-or-approaching.nohumanerrors.com](images/args-amazing-or-approaching.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
 <!-- .element: class="r-stretch"-->
-# `pep736.nohumanerrors.com`
+## `args-amazing-or-approaching.nohumanerrors.com`
 # `@ekohilas`
 
 If you're after the resources for this talk, you can find them in the links above.
@@ -2655,13 +2655,14 @@ Or if you're after me, you can collaborate with me on nohumanerrors.com, find me
 ------
 
 # Thanks! 
-![pep736.nohumanerrors.com](images/pep736.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
+![args-amazing-or-approaching.nohumanerrors.com](images/args-amazing-or-approaching.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
 <!-- .element: class="r-stretch"-->
-# `pep736.nohumanerrors.com`
+## `args-amazing-or-approaching.nohumanerrors.com`
 # `@ekohilas`
 
 Thanks to my friends, family, the open source community, as well as to you for listening!
 
+------
 
 ------
 > TODO: Create new QR Codes
