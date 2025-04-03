@@ -1,7 +1,6 @@
 <!-- intentionally blank -->
 
 > TODO: Emphasise point at rust, make 
-> TODO: Spellcheck
 > TODO: Fix sectioning
 > TODO: Ensure height and width are ordered where they're meant to be
 
@@ -14,7 +13,7 @@
 
 Hello everyone!
 
-As someone who's passionate about working towards nohumanerrors.com,
+I'm Evan, a senior software platform engineer and serial speaker who's passionate about working towards nohumanerrors.com,
 
 > TODO: Change intro
 > TODO: Newline title
@@ -91,7 +90,7 @@ Okay now that that's out of the way let's go back to python's beautiful function
 
 ------
 ```java
-void function(
+Rectangle function(
     int a,
     int b,
 ) {
@@ -103,7 +102,7 @@ To show what I mean, I'll start by using a function from another language.
 
 ------
 ```java
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
 ) {
@@ -115,7 +114,7 @@ And I'll change it up to a more concrete, relatable example, making rectangles!
 
 ------
 ```java
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
 );
@@ -125,7 +124,7 @@ I'll also simplify it down to just the signature.
 
 ------
 ```java [6]
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
 );
@@ -137,7 +136,7 @@ And now, this function can be called to create a basic rectangle of a particular
 
 ------
 ```java
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
 );
@@ -152,7 +151,7 @@ But let's say that a basic rectangle isn't good enough. And we've been asked to 
 
 ------
 ```java [4]
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
     int rotation
@@ -165,7 +164,7 @@ And to do so, we need to add the rotation paramter.
 
 ------
 ```java [8]
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
     int rotation
@@ -179,7 +178,7 @@ Now we can make a rotated rectangle!
 
 ------
 ```java [7]
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
     int rotation
@@ -193,7 +192,7 @@ But now our previous function call needs to be updated.
 
 ------
 ```java [7]
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
     int rotation
@@ -207,7 +206,7 @@ And this creates a problem, because we now need to go through and update all exi
 
 ------
 ```java
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
     int rotation
@@ -221,13 +220,13 @@ Because this is tedious work that we want to avoid, in most of these languages, 
 
 ------
 ```java[1-5]
-void rotated_rectangle(
+Rectangle rotated_rectangle(
     int width,
     int height,
     int rotation
 );
 
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
 );
@@ -242,13 +241,13 @@ Of course, we don't want to duplicate the code that makes these rectangles.
 
 ------
 ```java[10-12]
-void rotated_rectangle(
+Rectangle rotated_rectangle(
     int width,
     int height,
     int rotation
 );
 
-void rectangle(
+Rectangle rectangle(
     int width,
     int height
 ) {
@@ -263,13 +262,13 @@ So we update the old function, such that it calls the new function
 
 ------
 ```java[10-12]
-void rotated_rectangle(
+Rectangle rotated_rectangle(
     int width,
     int height,
     int rotation
 );
 
-void rectangle(
+Rectangle rectangle(
     int width,
     int height
 ) {
@@ -284,13 +283,13 @@ And sets the new parameter with a default argument, which in our case will be 0.
 
 ------
 ```java
-void rotated_rectangle(
+Rectangle rotated_rectangle(
     int width,
     int height,
     int rotation
 );
 
-void rectangle(
+Rectangle rectangle(
     int width,
     int height
 ) {
@@ -305,13 +304,13 @@ Now if we take a step back, we might start to see how this might get a bit messy
 
 ------
 ```java[1-4,7-9]
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
     int rotation
 );
 
-void rectangle(
+Rectangle rectangle(
     int width,
     int height
 ) {
@@ -326,13 +325,13 @@ With function overloading, we can define multiple functions with the same name, 
 
 ------
 ```java[11,14,15]
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
     int rotation,
 );
 
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
 ) {
@@ -408,7 +407,7 @@ basic = rectangle(10, 20)
 rotated = rectangle(10, 20, 45)
 ```
 
-And this is because in Python, defining a function with the same name overwrites the previous definiton.
+And this is because in Python, defining a function with the same name overwrites the previous definition.
 
 ------
 <!-- .slide: data-background-image="images/multipledispatch-pypi.png"-->
@@ -586,10 +585,6 @@ print(big.metadata)   # {"width": 200, "height": 100"}
 
 Instead, their metadata ends up being the same.
 
-That's because these default parameters are instantiated at the time the function is defined, instead of when the function is called.
-
-Giving this strange outcome, where all functions are sharing the same state.
-
 ------
 ```python[4]
 def rectangle(
@@ -607,7 +602,26 @@ print(small.metadata) # {"width": 200, "height": 100"}
 print(big.metadata)   # {"width": 200, "height": 100"}
 ```
 
-This is because in Python, the values for these default paramters are created when the function is defined, **not** when it's called.
+This is because in Python, the values for these default parameters are created when the function is defined, **not** when it's called.
+
+------
+```python [12-13]
+def rectangle(
+    width,
+    height,
+    metadata={},
+):
+    metadata["width"] = width
+    metadata["height"] = height
+    
+small = rectangle(10, 20)
+big = rectangle(200, 100)
+
+print(small.metadata) # {"width": 200, "height": 100"}
+print(big.metadata)   # {"width": 200, "height": 100"}
+```
+
+Giving this strange outcome, where all functions are sharing the same state.
 
 ------
 ```python[4,6-7]
@@ -633,7 +647,7 @@ So if your functions need mutable defaults, the best way to do so is to default 
 
 ------
 ```java
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
 );
@@ -641,7 +655,7 @@ void rectangle(
 basic_rectangle = rectangle(10, 20);
 ```
 
-Now if we step away from the thunderstorms and lightning (which are very very freightening), and go back to our original example, those of you that are experienced might be thinking of another way that defaults can be done. 
+Now if we step away from the thunderstorms and lightning (which are very very frightening), and go back to our original example, those of you that are experienced might be thinking of another way that defaults can be done. 
 
 > TODO: Link all code
 > TODO: Finalise code examples
@@ -668,7 +682,7 @@ Rectangle.builder(height, width)
 ```
 <!-- .element: data-notrim -->
 
-On initiation, it requires and stores all nesscary data
+On initiation, it requires and stores all necessary data
 
 ------
 ```java[2]
@@ -711,7 +725,7 @@ Can anyone spot the error here?
 ------
 <!-- .element: data-auto-animate -->
 ```java [2-3,6]
-void rectangle(
+Rectangle rectangle(
     int width,
     int height
 );
@@ -727,12 +741,12 @@ Not height and width.
 
 ------
 ```java
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
 );
 
-void rectangle(
+Rectangle rectangle(
     int height,
     int width,
     int rotation,
@@ -749,12 +763,12 @@ For example, both of these are valid definitions,
 
 ------
 ```java [2-3,7-8]
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
 );
 
-void rectangle(
+Rectangle rectangle(
     int height,
     int width,
     int rotation,
@@ -765,16 +779,16 @@ shape_2 = rectangle(20, 10, 45);
 ```
 <!-- .element: data-notrim -->
 
-the only difference being the ordering of the paramters
+the only difference being the ordering of the parameters
 
 ------
 ```java[13]
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
 );
 
-void rectangle(
+Rectangle rectangle(
     int height,
     int width,
     int rotation,
@@ -1386,13 +1400,11 @@ rectangle(
 or bring clarity with a keyword argument.
 
 ------
-<!-- .slide: data-background-image="images/agonising-emoji.png"-->
+<!-- .slide: data-background-image="images/github-logo.png"-->
 
 So if mitigating human errors excites you, I'd love to work with you in make these kinds of tools a reality!
 
-> TOOD: Update image to github
 > TODO: Could expand? e.g. this is because these lint rules can analyse the definitions during the calls of functions
-
 
 ------
 <!-- .slide: data-background-image="images/inspired-emoji.png"-->
@@ -1403,7 +1415,7 @@ Or, if I've inspired you enough to start using this paradigm in your code day to
 ```python
 range(
     start=0,
-    stop=10,
+    stop=10, 
     skip=2,
 )   
 ```
@@ -1412,10 +1424,15 @@ For one, you may notice in your excitement to use keyword arguments for all your
 
 ------
 ```python
->>> range(start=0, stop=10, skip=2)
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: range() takes no keyword arguments
+range(
+    start=0,
+    stop=10, 
+    skip=2,
+)   
+
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+# TypeError: range() takes no keyword arguments
 ```
 
 that not _all_ functions are happy with that.
@@ -1457,7 +1474,7 @@ rectangle(
 )
 ```
 
-The first may be made apparant if we had to refactor our function and change the name of our paramters.
+The first may be made apparent if we had to refactor our function and change the name of our parameters.
 
 ------
 ```python [4]
@@ -1597,7 +1614,7 @@ rectangle(
 However this can become messy, and the reference to the original paramter is still kept.
 
 ------
-<!-- .slide: data-background-image="images/inspired-emoji.png"-->
+<!-- .slide: data-background-image="images/sad-python.png"-->
 
 This is another case where you could argue that Python isn't perfect.
 
@@ -1620,7 +1637,7 @@ map(
 )
 ```
 
-If we look at other languages like Swift, then this concept exists as argument labels and paramter names.
+If we look at other languages like Swift, then this concept exists as argument labels and parameter names.
 Take this example map function:
 
 ------
@@ -1812,7 +1829,7 @@ map({
 });
 ```
 
-Where our prevous example looks something like this.
+Where our previous example looks something like this.
 
 ------
 ```javascript[2-3,13-14]
@@ -1833,7 +1850,7 @@ map({
 });
 ```
 
-For those unfamiliar with javascript, even though this looks similar to swift (igoring the fact that I've replaced `function` and `with` with `func` and `using`), the way it works is quite different.
+For those unfamiliar with JavaScript, even though this looks similar to swift (igoring the fact that I've replaced `function` and `with` with `func` and `using`), the way it works is quite different.
 
 There's quite a bit going on here, so if you can bare with me for a bit, I'll show you what I mean.
 
@@ -2062,7 +2079,7 @@ map(**params)
 By using the `**` operator within a function call, python will unpack the keys of the dictionary as the keywords, and the values as the arguments.
 
 ------
-<!-- .slide: data-background-image="images/javascript-logo.png"-->
+<!-- .slide: data-background-image="images/thinking.svg"-->
 
 This might make you wonder, what happens if extra properties are passed into these function calls?
 
@@ -2086,7 +2103,7 @@ map({
 });
 ```
 
-Well, I'm sorry to dissapoint you, but in javascript, the answer is... nothing. They don't get unpacked and thus they're ignored.
+Well, I'm sorry to disappoint you, but in JavaScript, the answer is... nothing. They don't get unpacked and thus they're ignored.
 
 ------
 ```javascript[4]
@@ -2150,7 +2167,7 @@ params = {
 map(**params)
 ```
 
-But if this is how javascript named parameters work, what happens in python, if we pass extra keyword arguments into a python function?
+But if this is how JavaScript named parameters work, what happens in python, if we pass extra keyword arguments into a python function?
 
 ------
 ```python[11]
@@ -2172,7 +2189,7 @@ map(**params)
 
 ```
 
-Well, unlike javascript, we'll get an error, telling us off that we passed in an unexpected keyword argument, which you could argue is pretty good default behaviour!
+Well, unlike JavaScript, we'll get an error, telling us off that we passed in an unexpected keyword argument, which you could argue is pretty good default behaviour!
 
 > TODO: use rectangle example instead.
 > TODO: remove with from other python examples
@@ -2235,7 +2252,7 @@ params = {
 rectangle(**params)
 ```
 
-And unlike Javascript, Python currently doesn't have a way to unpack paramters within function definitions.
+And unlike JavaScript, Python currently doesn't have a way to unpack parameters within function definitions.
 
 ------
 <!-- .slide: data-background-image="images/good-old-days.png"-->
@@ -2388,7 +2405,7 @@ rectangle(
 )
 ```
 
-Now you might have noticed that **kwargs is pretty cool, since it lets us pass in an arbitatry number of arguments.
+Now you might have noticed that **kwargs is pretty cool, since it lets us pass in an arbitrary number of arguments.
 
 ------
 ```python
@@ -2499,7 +2516,7 @@ rectangle(
 )
 ```
 
-It's also worth noting that by nature of `*args` capturing all additional positional arguments, any further paramters become keyword only.
+It's also worth noting that by nature of `*args` capturing all additional positional arguments, any further parameters become keyword only.
 
 ------
 ```python[5,9]
@@ -2615,7 +2632,7 @@ And for typing keyword arguments, only from Python 3.11 were additions added as 
 
 > If you're new to python, I will note for you to look into the other types of unpacking uses for this `*` operator, as that's outside the scope of this talk.
 > TODO: Could cut this ** and * content. How to segue?
-> TODO: Maybe use sub as the example isntead of rectangle to make the statement?
+> TODO: Maybe use sub as the example instead of rectangle to make the statement?
 
 ------
 ```python
@@ -2661,34 +2678,4 @@ Or if you're after me, you can collaborate with me on nohumanerrors.com, find me
 # `@ekohilas`
 
 Thanks to my friends, family, the open source community, as well as to you for listening!
-
-------
-
-------
-> TODO: Create new QR Codes
-> TODO: Setup domain
-> TODO: Remove below
-> TODO: Run through again
-> TODO: Setup on Laptop
-
-------
-```python
-f(*args: int, **kwargs: str):
-```
-If you wanted to type specific args,
-
-------
-```python
-f(*args: *tuple[int, ...]):
-```
-first we expand the definition to use the tuple form
-you could do thisWith args, it can be re-written Even if they are typed like this, then all the values need to be of the same type.
-
-
-------
-```python
-def foo(*args: *tuple[int, str, int, *tuple[]): ...
-```
-
-With args, you **can** specify
 
