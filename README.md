@@ -25,6 +25,9 @@ He'll then give examples for where that system lacks, where it could bite you, a
 #### Cheatsheet
 1. TODO
 
+#### Sources
+- https://docs.python.org/3/tutorial/controlflow.html#defining-functions
+
 ## Setup 
 1. Since reveal.js exists as a submodule, `git clone --recurse-submodules` needs to be used when cloning (or `git submodule update --init --recursive` if already cloned).
 2. `cd src/reveal.js && npm install`
