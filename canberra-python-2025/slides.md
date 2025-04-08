@@ -1789,6 +1789,8 @@ This is awesome because it reads so nicely!
 
 "map this iterable with the round function."
 
+> https://docs.swift.org/swift-book/documentation/the-swift-programming-language/functions/
+
 ------
 ```python[3,5,9]
 def map(
@@ -2001,6 +2003,8 @@ map({
 
 And, better yet, this feature works within the parameters of a function definition!
 
+> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring
+
 ------
 ```javascript[12-15]
 function map({
@@ -2127,6 +2131,8 @@ map({
 ```
 
 Buut, there is a way to keep them, and that is by using the ellipses `...rest` property.
+
+> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters
 
 ------
 ```javascript[4]
@@ -2555,6 +2561,12 @@ fn main() {
 ```
 
 While I'm not an expert in Rust, to my understanding, Rust doesn't support variable function arguments by design, due to the complexity for the reader and the type checker to try. Instead it encourages passing in lists, which doesn't cause variable type signatures, and offers using macros which let the user encode the complexity.
+
+> https://doc.rust-lang.org/rust-by-example/macros/variadics.html
+> https://thoughtbot.com/blog/rust-doesn-t-have-named-arguments-so-what
+> https://github.com/rust-lang/rfcs/issues/376
+> https://github.com/rust-lang/rust/issues/44930
+> https://geo-ant.github.io/blog/2021/rust-traits-and-variadic-functions/
 
 ------
 ```python[4-5,10-11]
