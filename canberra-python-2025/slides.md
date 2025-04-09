@@ -416,6 +416,8 @@ While there are packages like multipledispatch that you can use to replicate fun
 
 > https://docs.python.org/3/library/functools.html#functools.singledispatch
 > https://pypi.org/project/multipledispatch/
+> https://web.archive.org/web/20250214142144/https://www.artima.com/weblogs/viewpost.jsp?thread=101605
+> https://stackoverflow.com/questions/6434482/python-function-overloading
 
 ------
 <!-- .slide: data-background-image="images/overloading-problem.png"-->
@@ -2284,6 +2286,10 @@ But who knows, maybe it'll come back to Python 3 after a PEP?
 
 Anyways where were we...
 
+> https://discuss.python.org/t/syntax-for-dictionnary-unpacking-to-variables/18718
+> https://stackoverflow.com/a/21108258
+> https://peps.python.org/pep-3113/
+
 ------
 ```python
 def rectangle(
@@ -2566,6 +2572,7 @@ fn main() {
 While I'm not an expert in Rust, to my understanding, Rust doesn't support variable function arguments by design, due to the complexity for the reader and the type checker to try. Instead it encourages passing in lists, which doesn't cause variable type signatures, and offers using macros which let the user encode the complexity.
 
 > https://doc.rust-lang.org/rust-by-example/macros/variadics.html
+> https://www.reddit.com/r/rust/comments/14rg4pw/rust_doesnt_have_named_arguments_so_what/
 > https://thoughtbot.com/blog/rust-doesn-t-have-named-arguments-so-what
 > https://github.com/rust-lang/rfcs/issues/376
 > https://github.com/rust-lang/rust/issues/44930
@@ -2643,7 +2650,8 @@ And for typing keyword arguments, only from Python 3.11 were additions added as 
 
 > https://docs.python.org/3/library/typing.html#typing.Unpack
 > https://typing.python.org/en/latest/spec/callables.html#unpack-kwargs
-> https://chatgpt.com/share/67ea8fb7-5874-8004-a270-1fa956b296f2 
+> https://chatgpt.com/share/67ea8fb7-5874-8004-a270-1fa956b296f2
+> https://github.com/python/mypy/pull/13471
 
 > If you're new to python, I will note for you to look into the other types of unpacking uses for this `*` operator, as that's outside the scope of this talk.
 > TODO: Could cut this ** and * content. How to segue?
