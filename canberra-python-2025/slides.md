@@ -414,6 +414,9 @@ And this is because in Python, defining a function with the same name overwrites
 
 While there are packages like multipledispatch that you can use to replicate function overloading
 
+> https://docs.python.org/3/library/functools.html#functools.singledispatch
+> https://pypi.org/project/multipledispatch/
+
 ------
 <!-- .slide: data-background-image="images/overloading-problem.png"-->
 
