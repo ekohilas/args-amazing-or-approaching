@@ -1125,6 +1125,8 @@ That would explain why I spent hours trying to figure out why my expected thousa
 
 In fact, so many people have had this issue, that Python has fixed it by introducing a deprecation warning from 3.13, noting that the use of count and flags as a positional argument will be removed and needs to be a keyword instead.
 
+> https://docs.python.org/3/library/re.html#re.sub
+
 ------
 ```python[5,13]
 re.sub(
@@ -2268,7 +2270,7 @@ And unlike JavaScript, Python currently doesn't have a way to unpack parameters 
 ------
 <!-- .slide: data-background-image="images/good-old-days.png"-->
 
-But fun fact, it did used to in python 2! https://peps.python.org/pep-3113/
+But fun fact, it did used to in python 2!
 
 ------
 ```python
@@ -2289,6 +2291,11 @@ Anyways where were we...
 > https://discuss.python.org/t/syntax-for-dictionnary-unpacking-to-variables/18718
 > https://stackoverflow.com/a/21108258
 > https://peps.python.org/pep-3113/
+> https://bugs.python.org/issue1678060
+> https://docs.python.org/2/reference/compound_stmts.html#function-definitions
+> https://docs.python.org/2/reference/expressions.html#calls
+> https://docs.python.org/release/1.4/ref/ref5.html#REF41934
+> 
 
 ------
 ```python
