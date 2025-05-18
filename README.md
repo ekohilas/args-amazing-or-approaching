@@ -7,7 +7,7 @@ A [repo](https://github.com/ekohilas/args-amazing-or-approaching) for resources 
 | Conference | Slides | Video | Notes | Length | Year |
 |------------|:------:|:-----:|:-----:|-------:|-----:|
 | [Canberra Python User Group](https://www.meetup.com/canberra-python-meetup-group/) | [🔗](https://ekohilas.github.io/args-amazing-or-approaching/canberra-python-2025) | [🔗](https://youtube.com/watch?v=xH2qPTn2ybk) | [🔗](https://www.meetup.com/canberra-python-meetup-group/events/305683255/?eventOrigin=home_next_event_you_are_hosting) | 30 min | 2025 |
-| [PyCon US](https://us.pycon.org) | [🔗](https://ekohilas.github.io/args-amazing-or-approaching/pycon-us-2024) | [🔗](https://youtube.com/@ekohilas) | [🔗](https://us.pycon.org/2025) | 5 min | 2025 |
+| [PyCon US](https://us.pycon.org) | [🔗](https://ekohilas.github.io/args-amazing-or-approaching/pycon-us-2025) | [🔗](https://youtube.com/@ekohilas) | [🔗](https://us.pycon.org/2025) | 5 min | 2025 |
 
 
 #### Abstract
