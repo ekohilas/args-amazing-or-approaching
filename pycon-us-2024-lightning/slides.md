@@ -25,33 +25,33 @@ really exictes me!
 ------
 <!-- .slide: data-background-image="images/question_mark.svg"-->
 
-So what did they do? Stay to the end to find out!
-
-> Mayve start with the problem and then
-> Why? Because it fixes the error in this code.
-> What's the error?, well stay tuned to find out.
-> Nah I won't do that to you
-
-------
-<!-- .slide: data-background-image="images/kidding.svg"-->
-
-Nah I wouldn't do that to you.
+So what did they do? I won't keep you on the hook... 
 
 ------
 <!-- .slide: data-background-image="images/positional_deprecated.svg"-->
 
-What they did was deprecate passing in positional arguments.
+They deprecated passing in the optional arguments as positional arguments.
+
+Can you beleive it? I can!
 
 ------
 <!-- .slide: data-background-image="images/but_why.gif"-->
 
 But why?
 
-Well that's the most exciting part for me.
+Well that's the most exciting part for me!
 
-And if you hear me out, you too, can learn why it should excite you!
+------
+<!-- .slide: data-background-image="images/double_excited.svg"-->
 
-> TODO: Split slide
+And because I want you to be excited too,
+
+let me ask you, with a...
+
+------
+<!-- .slide: data-background-image="images/code_review.svg"-->
+
+suprise code review under pressure!
 
 ------
 
