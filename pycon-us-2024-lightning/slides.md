@@ -13,7 +13,7 @@ Hello everyone!
 I'm Evan, and as someone who's super passionate about achieving nohumanerrors.com,
 
 ------
-<!-- .slide: data-background-image="images/excited.svg"-->
+<!-- .slide: data-background-image="images/angry.svg"-->
 
 What they've done to re.sub from Python 3.13...
 
@@ -587,8 +587,6 @@ What this will do, is throw us an error when we try to call the function without
 
 so if you've now been convinced to use keyword arguments
 
-> TODO: Add heart eyes emoji
-
 ------
 <!-- .element: data-auto-animate -->
 ```python [2,9-10]
@@ -671,7 +669,7 @@ rectangle(
 Did anyone notice the typo on this line?, where the parameter and argument should both be `y`
 
 ------
-![ruff logo](images/ruff.svg)
+<!-- .slide: data-background-image="images/ruff.svg"-->
 
 This is where linters come in!
 
@@ -735,7 +733,7 @@ def rectangle(
     
 rectangle(
     width,
-    width,
+    width, # WARN: `width` passed into parameter named `height`
 )
 ```
 
@@ -761,8 +759,6 @@ or bring clarity with a keyword argument.
 <!-- .slide: data-background-image="images/sprints.svg"-->
 
 So if mitigating human errors excites you, I'd love to work with you in make these kinds of tools a reality!
-
-> TODO: Call for sprints
 
 ------
 <!-- .slide: data-background-image="images/inspired.svg"-->
