@@ -10,12 +10,17 @@ TODO: Update html for presenting
 
 Hello everyone!
 
-I'm Evan, and as someone who's passionate about achieving nohumanerrors.com,
+I'm Evan, and as someone who's super passionate about achieving nohumanerrors.com,
 
 ------
 <!-- .slide: data-background-image="images/excited.svg"-->
 
-What they've done to re.sub from Python 3.13 really exictes me!
+What they've done to re.sub from Python 3.13...
+
+------
+<!-- .slide: data-background-image="images/excited.svg"-->
+
+really exictes me!
 
 ------
 <!-- .slide: data-background-image="images/question_mark.svg"-->
@@ -35,7 +40,7 @@ Nah I wouldn't do that to you.
 ------
 <!-- .slide: data-background-image="images/positional_deprecated.svg"-->
 
-What they did was deprecate passing positional arguments.
+What they did was deprecate passing in positional arguments.
 
 ------
 <!-- .slide: data-background-image="images/but_why.gif"-->
@@ -506,7 +511,8 @@ def sub(
 
 and then the flag is read as an int, setting the maximum number of subtitutions to 2.
 
-> TODO: Add frustrated emoji
+------
+<!-- .slide: data-background-image="images/frustrated.svg"-->
 
 That would explain why I spent hours trying to figure out why my expected thousands of substitutions weren't working, and was instead second guessing my replacement function.
 
@@ -572,6 +578,9 @@ re.sub(
 ```
 
 What this will do, is throw us an error when we try to call the function without naming those arguments following the `*`
+
+> This is only one of the few reasons why I love keyword arguments and python's beautiful function argument system
+> If this alone doesn't convince you of keyword arguments, consider the case where content and pattern are swapped (for ordering) 
 
 ------
 <!-- .slide: data-background-image="images/convinced.svg"-->
