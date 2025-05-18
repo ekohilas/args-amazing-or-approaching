@@ -4,14 +4,46 @@ TODO: Update html for presenting
 
 ------
 
-# PEP736 & Keyword Args: Kudos or Approaching? 
+# Changing `re.sub` from Python 3.13? What have they done!
+
 <!-- .element: class="r-fit-text" -->
 ### Evan Kohilas
 ### `@ekohilas` - `nohumanerrors.com`
 
 Hello everyone!
 
-As someone who's passionate about working towards nohumanerrors.com,
+As someone who's passionate about achieving nohumanerrors.com,
+
+------
+<!-- .slide: data-background-image="images/excited.svg"-->
+
+What they've done to re.sub from Python 3.13 really exictes me!
+
+------
+<!-- .slide: data-background-image="images/question_mark.svg"-->
+
+So what did they do? Stay to the end to find out!
+
+------
+<!-- .slide: data-background-image="images/kidding.svg"-->
+
+Nah I wouldn't do that to you.
+
+------
+<!-- .slide: data-background-image="images/positional_deprecated.svg"-->
+
+What they did was deprecate passing positional arguments.
+
+------
+<!-- .slide: data-background-image="images/but_why.gif"-->
+
+But why?
+
+Well that's the most exciting part for me.
+
+And if you hear me out, you can learn why it should excite you too!
+
+> TODO: segway count=count into pep
 
 ------
 
@@ -20,23 +52,23 @@ As someone who's passionate about working towards nohumanerrors.com,
     <img src="images/python.svg">
 </div>
 
-I have utmost adoration for python's beautiful function argument system.
+Maybe I'm biased by having the utmost adoration for python's beautiful function argument system.
 
 ---
 ```java
-void rectangle(
+Rectangle rectangle(
     int width,
     int height,
     int rotation
 );
 ```
 
-Take for example, this function, that creates a rectangle.
-If we're using another language, and we want to setup rotation to default to 0
+To show what I mean, I'll start with a function from another language, that creates a rectangle.
+In this language, if we want to setup rotation to default to 0,
 
 ------
 ```java
-void rectangle(
+Rectangle rectangle(
     int width,
     int height
 ) {
@@ -136,7 +168,10 @@ void rectangle(
 <!-- .element: data-id="builder" -->
 
 Not height and width.
-(3s pause for effect)
+
+(3s pause)
+
+And that's not your fault, because without having to reference the signature of the functions, there's no knowing whether the arguments are set correctly.
 
 ---
 ```python
@@ -368,75 +403,209 @@ rectangle(
 
 we now don't have to make changes to re-order those arguments where that function is called.
 
----
+But even in the cases where you're not refactoring, not using keyword arguments has led to errors.
 
-<!-- .element: data-auto-animate -->
-```python []
-def rectangle(
-    height,
-    width,
-):
-    ...
-    
-rectangle(
-    1, # height
-    2, # width
+------
+```python
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
 )
 ```
-<!-- .element: data-id="named" -->
 
-If you are convinced by keyword arguments, then there is a way to force using them,
+And this takes us back to `re.sub`
+
+Can I get a show of hands if you can spot the error in this example, and didn't know before this talk?  
+
+> TODO: Surpise code review! can you spot the error?
+
+[That's about X of you!]
+
+------
+```python[5]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+```
+
+The error is here, with how the `re.IGNORECASE` flag is being passed in.
+
+And if you didn't spot it, I don't blame you.
+
+How can anyone be expected to quickly spot this error amongst so much complexity?
+
+>  https://github.com/python/cpython/issues/56166
+
+------
+```python[8-14]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+
+def sub(
+    pattern,
+    repl,
+    string,
+    count=0,
+    flags=0,
+)
+```
+
+If we bring up the definition of re.sub,
+
+------
+```python[5,12]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+
+def sub(
+    pattern,
+    repl,
+    string,
+    count=0,
+    flags=0,
+)
+```
+
+and we look at the parameter that the flag is passed in as, you'll see it's count, not flags.
+
+------
+```python[5]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE, # 2
+)
+
+def sub(
+    pattern,
+    repl,
+    string,
+    count=0,
+    flags=0,
+)
+```
+
+and then the flag is read as an int, setting the maximum number of subtitutions to 2.
+
+That would explain why I spent hours trying to figure out why my expected thousands of substitutions weren't working, and was instead second guessing my replacement function.
+
+------
+<!-- .slide: data-background-image="images/positional-deprecated.png"-->
+
+In fact, so many people have had this issue, that Python has fixed it by introducing a deprecation warning from 3.13, noting that the use of count and flags as a positional argument will be removed and needs to be a keyword instead.
+
+------
+```python[5]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    flags=re.IGNORECASE,
+)
+
+def sub(
+    pattern,
+    repl,
+    string,
+    count=0,
+    flags=0,
+)
+```
+
+So what Python is now suggesting we do, is to pass in `flags` using keyword arguments.
+
+------
+```python [12]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    flags=re.IGNORECASE,
+)
+
+def sub(
+    pattern,
+    repl,
+    string,
+    *,
+    count=0,
+    flags=0,
+)
+```
+
+And in future, they'll likely change flags and count to be required, by adding a * in the function signature
+
+------
+```python [5,8-10]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+# TypeError: sub() takes 3 positional arguments but 4 were given
+
+```
+
+What this will do, is throw us an error when we try to call the function without naming those arguments following the `*`
+
+------
+<!-- .slide: data-background-image="images/agonising-emoji.png"-->
+
+so if you've now been convinced to use keyword arguments
+
+> TODO: Add heart eyes emoji
 
 ------
 <!-- .element: data-auto-animate -->
-```python [2]
+```python [2,9-10]
 def rectangle(
     *,
-    height,
     width,
+    height,
 ):
     ...
     
 rectangle(
-    1, # height
-    2, # width
+    height=1,
+    width=2,
 )
 ```
 <!-- .element: data-id="named" -->
 
-and that is by putting `*` as the first parameter,
+you _could_ force that by updating functions to have `*` as the first parameter
+
+------
+<!-- .slide: data-background-image="images/agonising-emoji.png"-->
+
+But that can be tedious, as it can be forgotten, can make the code noisy, and would also require updating **all** previously made functions.
+
+> TODO: Update by splitting to require `*` in one part, and then mentioning the linter rule working without star in another.
 
 ------
 <!-- .element: data-auto-animate -->
-```python [13-]
+```python [2, 10-11]
 def rectangle(
-    *,
-    height,
+    *
     width,
-):
-    ...
-    
-rectangle(
-    1, # height
-    2, # width
-)
-
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: rectangle() takes 0 positional arguments but 2 were given
-```
-<!-- .element: data-id="named" -->
-
-which will throw us an error when we try to call the function without naming our arguments.
-
-But that can be cumbersome, as it can be forgotten, can make the code noisy, and would also require updating all previous functions.
-
----
-<!-- .element: data-auto-animate -->
-```python [8-9]
-def rectangle(
     height,
-    width,
 ):
     ...
     
@@ -447,113 +616,214 @@ rectangle(
 ```
 <!-- .element: data-id="named" -->
 
-Not to mention the redundant case where the names of the variables being passed in are the the same as the parameters.
+Not to mention the redundant cases where the names of the variables being passed in are the same as the parameters.
 
----
-<!-- .element: data-auto-animate -->
-```python [8-10]
-def rectangle(
-    height,
-    width,
-):
-    ...
-    
-rectangle(
-    # PEP736
-    height=,
-    width=,
-)
-```
-<!-- .element: data-id="named" -->
-
-The good news is, for when we don't have control over the interface, PEP736 is currently debating either using something like a trailing = for arguments that should take from variable names
+And while it might look fine in this case,
 
 ------
 <!-- .element: data-auto-animate -->
-```python [8-10]
-def rectangle(
-    height,
-    width,
-):
-    ...
-    
+```python
 rectangle(
-    *, # PEP736
-    height,
-    width,
+    top_left_pos_from_x_origin=top_left_pos_from_x_origin,
+    top_left_pos_from_y_origin=top_left_pos_from_x_origin,
+    bottom_right_pos_from_x_origin=bottom_right_pos_from_x_origin,
+    bottom_right_pos_from_y_origin=bottom_right_pos_from_y_origin,
+    rotation_in_radians=rotation_in_radians,
+    color_in_hex=color_in_hex,
+    line_thickness_in_pixels=line_thickness_in_pixels,
 )
 ```
 <!-- .element: data-id="named" -->
 
-or adding `*` as an argument, for every argument afterwards to do the same.
+it can get pretty unreadable or error prone when the number of parameters and their names are much longer
 
 ------
 <!-- .element: data-auto-animate -->
-```python [8-9]
-def rectangle(
-    height,
-    width,
-):
-    ...
-    
+```python [2]
 rectangle(
-    height,
-    width,
+    top_left_pos_from_x_origin=top_left_pos_from_x_origin,
+    top_left_pos_from_y_origin=top_left_pos_from_x_origin,
+    bottom_right_pos_from_x_origin=bottom_right_pos_from_x_origin,
+    bottom_right_pos_from_y_origin=bottom_right_pos_from_y_origin,
+    rotation_in_radians=rotation_in_radians,
+    color_in_hex=color_in_hex,
+    line_thickness_in_pixels=line_thickness_in_pixels,
 )
 ```
 <!-- .element: data-id="named" -->
 
-Personally I feel like the best approach is for this sugar to be enabled and checked by default,
-
-------
-<!-- .element: data-auto-animate -->
-
-```python [2, 9-10]
-def rectangle(
-    *,
-    height,
-    width,
-):
-    ...
-    
-rectangle(
-    height,
-    width,
-)
-```
-<!-- .element: data-id="named" -->
-
-or at the least, have `*` in the function definition specify that, that can be the case.
-
-But given the way Python has been built, it might not be currently possible.
+Anyone notice the typo on this line?, where the parameter and argument should both be `y`
 
 ------
 ![ruff logo](images/ruff.svg)
 
-So until something changes, I personally feel that linters are a cleaner, more pragmatic way to not only check, but also correct this for us!
+This is where linters come in!
 
----
+I **love** linters, as they're a cleaner, more pragmatic way to not only check, but also correct this for us!
 
-<!-- .element: data-background-image="images/sprints.svg"-->
+------
+```python [8-9]
+def rectangle(
+    width,
+    height,
+):
+    ...
+    
+rectangle(
+    height=height,
+    width=width,
+)
+```
 
-So if this excites you, come find me at the sprints where we can contribute to automatically finding and applying these kinds of guardrails and enhancements!
+For example, a rule that auto fixes all our function calls to use keyword arguments wherever possible
+
+------
+```python[2-3,8-9]
+def rectangle(
+    width,
+    height,
+):
+    ...
+    
+rectangle(
+    width,
+    width,
+)
+```
+
+Or, if you want the safety without the redundancy, a rule that checks that for every given positional argument, it's name is the same as the corresponding parameter.
+
+------
+```python[2,8]
+def rectangle(
+    width,
+    height,
+):
+    ...
+    
+rectangle(
+    width,
+    width,
+)
+```
+
+Which would pass in this case,
+
+------
+```python[3,9]
+def rectangle(
+    width,
+    height,
+):
+    ...
+    
+rectangle(
+    width,
+    width,
+)
+```
+
+and in this case, give a warning,
+
+------
+```python[3,9]
+def rectangle(
+    width,
+    height,
+):
+    ...
+    
+rectangle(
+    width,
+    height=width,
+)
+```
+
+or bring clarity with a keyword argument.
+
+------
+<!-- .slide: data-background-image="images/github-logo.png"-->
+
+So if mitigating human errors excites you, I'd love to work with you in make these kinds of tools a reality!
+
+> TODO: Call for sprints
+
+------
+<!-- .slide: data-background-image="images/inspired-emoji.png"-->
+
+Or, if at the least I've inspired you enough to use this paradigm in your code day to day, there's one thing worth noting. 
+
+> TODO: Cut out?
+
+------
+```python
+range(
+    start=0,
+    stop=10, 
+    skip=2,
+)   
+```
+
+You may notice in your excitement to use keyword arguments for all your function calls...
+
+------
+```python
+range(
+    start=0,
+    stop=10, 
+    skip=2,
+)   
+
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+# TypeError: range() takes no keyword arguments
+```
+
+that not _all_ functions are happy with that.
+
+------
+```python[5]
+def range(
+    start,
+    stop,
+    skip=1,
+    /,
+)
+```
+
+And maybe this is a call to action for removing the offending `/` special parameter,
+
+------
+```python
+def range(
+    start,
+    stop,
+    skip=1,
+)
+```
+
+allowing for consistency (granted that maybe this isn't the best example)
 
 ------
 
 # <br> 
-![pep736.nohumanerrors.com](images/pep736.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
+![args-amazing-or-approaching.nohumanerrors.com](images/args-amazing-or-approaching.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
 <!-- .element: class="r-stretch"-->
-# `pep736.nohumanerrors.com`
+## `args-amazing-or-approaching.nohumanerrors.com`
 # `@ekohilas`
+
+If you can't make it to the sprints, If you're after the resources for this talk, you can find them in the links above.
+
+Or if you're after me, you can collaborate with me on nohumanerrors.com, find me online at ekohilas, or here if you have any questions or feedback!
 
 Or if you can't make it, you can find me online at @ekohilas, or collaborate with me on nohumanerrors.com.
 
 ------
 
 # Thanks! 
-![pep736.nohumanerrors.com](images/pep736.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
+![args-amazing-or-approaching.nohumanerrors.com](images/args-amazing-or-approaching.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
 <!-- .element: class="r-stretch"-->
-# `pep736.nohumanerrors.com`
+## `args-amazing-or-approaching.nohumanerrors.com`
 # `@ekohilas`
 
-Thanks to Joshua and Chris for authoring the PEP, and to you for listening!
+Thanks!
