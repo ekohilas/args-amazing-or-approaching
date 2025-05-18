@@ -579,8 +579,13 @@ re.sub(
 
 What this will do, is throw us an error when we try to call the function without naming those arguments following the `*`
 
+> TODO:
 > This is only one of the few reasons why I love keyword arguments and python's beautiful function argument system
 > If this alone doesn't convince you of keyword arguments, consider the case where content and pattern are swapped (for ordering) 
+> Keyword arguments don't only solve problems with default positional arguments
+> They also solve misordering of positional arguments
+> And make fixing them easier
+> And make them self documenting 
 
 ------
 <!-- .slide: data-background-image="images/convinced.svg"-->
