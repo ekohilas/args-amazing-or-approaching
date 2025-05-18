@@ -1,6 +1,5 @@
 <!-- intentionally blank -->
 
-> TODO: Update html for presenting
 > TODO: Publish youtube video
 > TODO: Update repo and folder name 
 > TODO: Sprint submission?
