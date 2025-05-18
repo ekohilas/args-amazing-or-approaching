@@ -1,6 +1,10 @@
 <!-- intentionally blank -->
 
-TODO: Update html for presenting
+> TODO: Update html for presenting
+> TODO: Publish youtube video
+> TODO: Update repo and folder name 
+> TODO: Download images
+> TODO: Add animations
 
 ------
 # Changing `re.sub` from Python 3.13?<br>😱 What have they done! 😱
@@ -63,13 +67,9 @@ re.sub(
 )
 ```
 
-And this takes us back to `re.sub`
+Can I get a show of hands if you can spot the error in this example, **and** didn't know before this talk?  
 
-Can I get a show of hands if you can spot the error in this example, and didn't know before this talk?  
-
-> TODO: Surpise code review! can you spot the error?
-
-[That's about X of you!]
+Okay I don't have much time so...
 
 ------
 ```python[5]
@@ -85,7 +85,7 @@ The error is here, with how the `re.IGNORECASE` flag is being passed in.
 
 And if you didn't spot it, I don't blame you.
 
-How can anyone be expected to quickly spot this error amongst so much complexity?
+How can anyone be expected to quickly spot this error under pressure and amongst so much complexity?
 
 >  https://github.com/python/cpython/issues/56166
 
@@ -104,7 +104,8 @@ def sub(
     string,
     count=0,
     flags=0,
-)
+):
+    ...
 ```
 
 If we bring up the definition of re.sub,
@@ -124,7 +125,8 @@ def sub(
     string,
     count=0,
     flags=0,
-)
+):
+    ...
 ```
 
 and we look at the parameter that the flag is passed in as, you'll see it's count, not flags.
@@ -144,7 +146,8 @@ def sub(
     string,
     count=0,
     flags=0,
-)
+):
+    ...
 ```
 
 and then the flag is read as an int, setting the maximum number of subtitutions to 2.
@@ -157,7 +160,9 @@ That would explain why I spent hours trying to figure out why my expected thousa
 ------
 <!-- .slide: data-background-image="images/positional_deprecated.svg"-->
 
-In fact, so many people have had this issue, that Python has fixed it by introducing a deprecation warning from 3.13, noting that the use of count and flags as a positional arguments will be removed and will now need to be a keyword arguments instead.
+This is why Python introduced the deprecation warning, because it wasn't just me who experienced this problem.
+
+> TODO: Add screenshot of github issue
 
 ------
 ```python[5]
@@ -174,7 +179,8 @@ def sub(
     string,
     count=0,
     flags=0,
-)
+):
+    ...
 ```
 
 So what Python is now suggesting we do, is to pass in `flags` using the keyword argument.
@@ -195,10 +201,11 @@ def sub(
     *,
     count=0,
     flags=0,
-)
+):
+    ...
 ```
 
-And in future, they'll likely change flags and count to be required, by adding a * in the function signature
+And in future, they'll change flags and count to be required, by adding a * in the function signature
 
 ------
 ```python [5,8-10]
@@ -217,13 +224,145 @@ re.sub(
 
 What this will do, is throw us an error when we try to call the function without naming those arguments following the `*`
 
-> TODO:
-> This is only one of the few reasons why I love keyword arguments and python's beautiful function argument system
-> If this alone doesn't convince you of keyword arguments, consider the case where content and pattern are swapped (for ordering) 
-> Keyword arguments don't only solve problems with default positional arguments
-> They also solve misordering of positional arguments
-> And make fixing them easier
-> And make them self documenting 
+------
+<!-- .slide: data-background-image="images/love.svg"-->
+
+This is actually one of the few reasons why I love keyword arguments, which is what the talk is **actually** about.
+
+------
+<!-- .slide: data-background-image="images/thinking.svg"-->
+
+So if that didn't convince you, let me tell you more!
+
+------
+```python [5,8-10]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    content,
+    replacement_function,
+    re.IGNORECASE,
+)
+```
+
+Consider the case where `repl` and `string` were in the wrong order.
+
+Well in this case the function would fail to run, because `re.sub` will fail to handle the string to search through being a function.
+
+> TODO: show error
+
+------
+```python [5,8-10]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    content,
+    "", 
+    re.IGNORECASE,
+)
+```
+
+But what if it was a string?
+
+------
+```python [5,8-10]
+re.sub(
+    content,
+    replacement_function,
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    re.IGNORECASE,
+)
+```
+
+Or if `pattern` and `string` were swapped?
+
+We'd never know there's a problem unless we knew the function definition!
+
+------
+```python 
+re.sub(
+    string=content,
+    repl=replacement_function,
+    pattern=r"(\w+)(\[.*?\])\s*\n(.*?)",
+    flags=re.IGNORECASE,
+)
+```
+
+So by always using keyword arguments, not only does the ordering now become redundant!
+
+------
+```python 
+re.sub(
+    flags=re.IGNORECASE,
+    pattern=r"(\w+)(\[.*?\])\s*\n(.*?)",
+    repl=replacement_function,
+    string=content,
+)
+```
+
+Allowing us to order them however we want,
+
+------
+```python 
+re.sub(
+    string=content,
+    repl=replacement_function,
+    pattern=r"(\w+)(\[.*?\])\s*\n(.*?)",
+    flags=re.IGNORECASE,
+)
+```
+
+But our usage is now self documenting,
+
+------
+```python [4]
+re.sub(
+    string=content,
+    repl=replacement_function,
+    pattern=r"(\w+)(\[.*?\])\s*\n(.*?)",
+    flags=re.IGNORECASE,
+)
+```
+
+labels constant arguments,
+
+------
+```python
+rectangle(
+    height=10,
+    width=20,
+    opacity=1,
+    color="green",
+)
+
+def rectangle(
+    height,
+    width,
+    opacity,
+    color,
+):
+    ...
+```
+
+**and**, if this was a function we defined ourselves, and the parameter ordering was important,
+
+------
+```python [2-3,9-10]
+rectangle(
+    height=10,
+    width=20,
+    opacity=1,
+    color="green",
+)
+
+def rectangle(
+    width,
+    height,
+    opacity,
+    color,
+):
+    ...
+```
+
+then when refactoring, we only have to make the changes to the definition, and not all the calls across a codebase. 
 
 ------
 <!-- .slide: data-background-image="images/convinced.svg"-->
@@ -241,8 +380,8 @@ def rectangle(
     ...
     
 rectangle(
-    height=1,
-    width=2,
+    width=1,
+    height=2,
 )
 ```
 <!-- .element: data-id="named" -->
@@ -401,7 +540,7 @@ or bring clarity with a keyword argument.
 ------
 <!-- .slide: data-background-image="images/sprints.svg"-->
 
-So if mitigating human errors excites you, I'd love to work with you in make these kinds of tools a reality!
+So if mitigating human errors excites you, I'd love to collaborate with you in working on these kinds of tools!
 
 ------
 <!-- .slide: data-background-image="images/inspired.svg"-->
@@ -467,11 +606,7 @@ allowing for consistency (granted that maybe this isn't the best example)
 <!-- .element: class="r-stretch"-->
 # <br> 
 
-If you can't make it to the sprints, If you're after the resources for this talk, you can find them in the links above.
-
-Or if you're after me, you can collaborate with me on nohumanerrors.com, find me online at ekohilas, or here if you have any questions or feedback!
-
-Or if you can't make it, you can find me online at @ekohilas, or collaborate with me on nohumanerrors.com.
+If you're after the resources for this talk, want to watch it's longer form, or you want to get in touch with either questions, feedback, or to collaborate, find me at @ekohilas or go to nohumanerrors.com!
 
 ------
 
