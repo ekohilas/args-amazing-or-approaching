@@ -3,16 +3,14 @@
 TODO: Update html for presenting
 
 ------
-
-# Changing `re.sub` from Python 3.13? What have they done!
-
+# Changing `re.sub` from Python 3.13?<br>😱 What have they done! 😱
 <!-- .element: class="r-fit-text" -->
 ### Evan Kohilas
 ### `@ekohilas` - `nohumanerrors.com`
 
 Hello everyone!
 
-As someone who's passionate about achieving nohumanerrors.com,
+I'm Evan, and as someone who's passionate about achieving nohumanerrors.com,
 
 ------
 <!-- .slide: data-background-image="images/excited.svg"-->
@@ -23,6 +21,11 @@ What they've done to re.sub from Python 3.13 really exictes me!
 <!-- .slide: data-background-image="images/question_mark.svg"-->
 
 So what did they do? Stay to the end to find out!
+
+> Mayve start with the problem and then
+> Why? Because it fixes the error in this code.
+> What's the error?, well stay tuned to find out.
+> Nah I won't do that to you
 
 ------
 <!-- .slide: data-background-image="images/kidding.svg"-->
@@ -41,9 +44,9 @@ But why?
 
 Well that's the most exciting part for me.
 
-And if you hear me out, you can learn why it should excite you too!
+And if you hear me out, you too, can learn why it should excite you!
 
-> TODO: segway count=count into pep
+> TODO: Split slide
 
 ------
 
@@ -52,7 +55,7 @@ And if you hear me out, you can learn why it should excite you too!
     <img src="images/python.svg">
 </div>
 
-Maybe I'm biased by having the utmost adoration for python's beautiful function argument system.
+Full disclosure, I _might_ be biased by having the utmost adoration for python's beautiful function argument system.
 
 ---
 ```java
@@ -77,6 +80,8 @@ Rectangle rectangle(
 ```
 
 then we often need to define an overload of the function name, that calls it with our defaults.
+
+> TODO: remove the need for overloading?
 
 ------
 ```python [4]
@@ -171,7 +176,7 @@ Not height and width.
 
 (3s pause)
 
-And that's not your fault, because without having to reference the signature of the functions, there's no knowing whether the arguments are set correctly.
+And that's not your fault, because for one, this is a lightning talk, and two, there's no knowing whether the arguments are set correctly, without having to reference the signature of the functions.
 
 ---
 ```python
@@ -501,12 +506,14 @@ def sub(
 
 and then the flag is read as an int, setting the maximum number of subtitutions to 2.
 
+> TODO: Add frustrated emoji
+
 That would explain why I spent hours trying to figure out why my expected thousands of substitutions weren't working, and was instead second guessing my replacement function.
 
 ------
-<!-- .slide: data-background-image="images/positional-deprecated.png"-->
+<!-- .slide: data-background-image="images/positional_deprecated.svg"-->
 
-In fact, so many people have had this issue, that Python has fixed it by introducing a deprecation warning from 3.13, noting that the use of count and flags as a positional argument will be removed and needs to be a keyword instead.
+In fact, so many people have had this issue, that Python has fixed it by introducing a deprecation warning from 3.13, noting that the use of count and flags as a positional arguments will be removed and will now need to be a keyword arguments instead.
 
 ------
 ```python[5]
@@ -526,7 +533,7 @@ def sub(
 )
 ```
 
-So what Python is now suggesting we do, is to pass in `flags` using keyword arguments.
+So what Python is now suggesting we do, is to pass in `flags` using the keyword argument.
 
 ------
 ```python [12]
@@ -567,7 +574,7 @@ re.sub(
 What this will do, is throw us an error when we try to call the function without naming those arguments following the `*`
 
 ------
-<!-- .slide: data-background-image="images/agonising-emoji.png"-->
+<!-- .slide: data-background-image="images/convinced.svg"-->
 
 so if you've now been convinced to use keyword arguments
 
@@ -590,10 +597,10 @@ rectangle(
 ```
 <!-- .element: data-id="named" -->
 
-you _could_ force that by updating functions to have `*` as the first parameter
+you _could_ require that in all your functions by putting `*` as the first parameter
 
 ------
-<!-- .slide: data-background-image="images/agonising-emoji.png"-->
+<!-- .slide: data-background-image="images/agonising.svg"-->
 
 But that can be tedious, as it can be forgotten, can make the code noisy, and would also require updating **all** previously made functions.
 
@@ -652,7 +659,7 @@ rectangle(
 ```
 <!-- .element: data-id="named" -->
 
-Anyone notice the typo on this line?, where the parameter and argument should both be `y`
+Did anyone notice the typo on this line?, where the parameter and argument should both be `y`
 
 ------
 ![ruff logo](images/ruff.svg)
@@ -742,14 +749,14 @@ rectangle(
 or bring clarity with a keyword argument.
 
 ------
-<!-- .slide: data-background-image="images/github-logo.png"-->
+<!-- .slide: data-background-image="images/sprints.svg"-->
 
 So if mitigating human errors excites you, I'd love to work with you in make these kinds of tools a reality!
 
 > TODO: Call for sprints
 
 ------
-<!-- .slide: data-background-image="images/inspired-emoji.png"-->
+<!-- .slide: data-background-image="images/inspired.svg"-->
 
 Or, if at the least I've inspired you enough to use this paradigm in your code day to day, there's one thing worth noting. 
 
@@ -806,11 +813,11 @@ allowing for consistency (granted that maybe this isn't the best example)
 
 ------
 
-# <br> 
+# `@ekohilas`
+## `args-amazing-or-approaching.nohumanerrors.com`
 ![args-amazing-or-approaching.nohumanerrors.com](images/args-amazing-or-approaching.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
 <!-- .element: class="r-stretch"-->
-## `args-amazing-or-approaching.nohumanerrors.com`
-# `@ekohilas`
+# <br> 
 
 If you can't make it to the sprints, If you're after the resources for this talk, you can find them in the links above.
 
@@ -820,10 +827,10 @@ Or if you can't make it, you can find me online at @ekohilas, or collaborate wit
 
 ------
 
-# Thanks! 
+# `@ekohilas`
+## `args-amazing-or-approaching.nohumanerrors.com`
 ![args-amazing-or-approaching.nohumanerrors.com](images/args-amazing-or-approaching.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
 <!-- .element: class="r-stretch"-->
-## `args-amazing-or-approaching.nohumanerrors.com`
-# `@ekohilas`
+# Thanks! 
 
 Thanks!
