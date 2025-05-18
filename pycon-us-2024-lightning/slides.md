@@ -3,7 +3,6 @@
 > TODO: Update html for presenting
 > TODO: Publish youtube video
 > TODO: Update repo and folder name 
-> TODO: Download images
 > TODO: Add animations
 
 ------
