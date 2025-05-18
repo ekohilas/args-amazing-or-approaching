@@ -3,8 +3,7 @@
 > TODO: Update html for presenting
 > TODO: Publish youtube video
 > TODO: Update repo and folder name 
-> TODO: Add animations
-
+> TODO: Sprint submission?
 ------
 # Changing `re.sub` from Python 3.13?<br>😱 What have they done! 😱
 <!-- .element: class="r-fit-text" -->
@@ -71,7 +70,8 @@ Can I get a show of hands if you can spot the error in this example, **and** did
 Okay I don't have much time so...
 
 ------
-```python[5]
+<!-- .element: data-auto-animate -->
+```python [5]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
@@ -79,6 +79,7 @@ re.sub(
     re.IGNORECASE,
 )
 ```
+<!-- .element: data-id="re" -->
 
 The error is here, with how the `re.IGNORECASE` flag is being passed in.
 
@@ -89,7 +90,8 @@ How can anyone be expected to quickly spot this error under pressure and amongst
 >  https://github.com/python/cpython/issues/56166
 
 ------
-```python[8-14]
+<!-- .element: data-auto-animate -->
+```python [8-14]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
@@ -106,11 +108,12 @@ def sub(
 ):
     ...
 ```
+<!-- .element: data-id="re" -->
 
 If we bring up the definition of re.sub,
 
 ------
-```python[5,12]
+```python [5,12]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
@@ -127,11 +130,12 @@ def sub(
 ):
     ...
 ```
+<!-- .element: data-id="re" -->
 
 and we look at the parameter that the flag is passed in as, you'll see it's count, not flags.
 
 ------
-```python[5]
+```python [5,12]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
@@ -148,6 +152,7 @@ def sub(
 ):
     ...
 ```
+<!-- .element: data-id="re" -->
 
 and then the flag is read as an int, setting the maximum number of subtitutions to 2.
 
@@ -164,7 +169,8 @@ This is why Python introduced the deprecation warning, because it wasn't just me
 > TODO: Add screenshot of github issue
 
 ------
-```python[5]
+<!-- .element: data-auto-animate -->
+```python [5, 12]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
@@ -181,10 +187,12 @@ def sub(
 ):
     ...
 ```
+<!-- .element: data-id="re" -->
 
 So what Python is now suggesting we do, is to pass in `flags` using the keyword argument.
 
 ------
+<!-- .element: data-auto-animate -->
 ```python [12]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
@@ -203,10 +211,12 @@ def sub(
 ):
     ...
 ```
+<!-- .element: data-id="re" -->
 
 And in future, they'll change flags and count to be required, by adding a * in the function definition 
 
 ------
+<!-- .element: data-auto-animate -->
 ```python [5,8-10]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
@@ -220,6 +230,7 @@ re.sub(
 # TypeError: sub() takes 3 positional arguments but 4 were given
 
 ```
+<!-- .element: data-id="re" -->
 
 What this will do, is throw us an error when we try to call the function without naming those arguments following the `*`
 
@@ -234,7 +245,22 @@ This is actually one of the many reasons why I love keyword arguments, which is 
 So if that didn't convince you, let me tell you more!
 
 ------
-```python [5,8-10]
+<!-- .element: data-auto-animate -->
+```python [3-4]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+```
+<!-- .element: data-id="re" -->
+
+What if for some arguments, such as `repl` and `string`
+
+------
+<!-- .element: data-auto-animate -->
+```python [3-4]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     content,
@@ -242,15 +268,33 @@ re.sub(
     re.IGNORECASE,
 )
 ```
+<!-- .element: data-id="re" -->
 
-Consider the case where `repl` and `string` were in the wrong order.
+Their ordering was accidentally swapped?
+
+------
+<!-- .element: data-auto-animate -->
+```python [8-12]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    content,
+    replacement_function,
+    re.IGNORECASE,
+)
+
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+#    return _compile(pattern, flags).sub(repl, string, count)
+#           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# TypeError: expected string or bytes-like object, got 'function'
+```
+<!-- .element: data-id="re" -->
 
 Well in this case the function would fail to run, because `re.sub` will fail to handle the string to search through being a function.
 
-> TODO: show error
-
 ------
-```python [5,8-10]
+<!-- .element: data-auto-animate -->
+```python [4]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     content,
@@ -258,11 +302,27 @@ re.sub(
     re.IGNORECASE,
 )
 ```
+<!-- .element: data-id="re" -->
 
 But what if it was a string?
 
 ------
-```python [5,8-10]
+<!-- .element: data-auto-animate -->
+```python [2,4]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+```
+<!-- .element: data-id="re" -->
+
+Or, if for the other string arguments, `pattern` and `string`
+
+------
+<!-- .element: data-auto-animate -->
+```python [2,4]
 re.sub(
     content,
     replacement_function,
@@ -270,13 +330,14 @@ re.sub(
     re.IGNORECASE,
 )
 ```
+<!-- .element: data-id="re" -->
 
-Or if `pattern` and `string` were swapped?
+they were swapped?
 
 We'd never know there's a problem unless we knew the function definition!
 
 ------
-```python 
+```python [2-5]
 re.sub(
     string=content,
     repl=replacement_function,
@@ -284,11 +345,27 @@ re.sub(
     flags=re.IGNORECASE,
 )
 ```
+<!-- .element: data-id="re" -->
 
-So by always using keyword arguments, not only does the ordering now become redundant!
+So by always using keyword arguments,
 
 ------
-```python 
+<!-- .element: data-auto-animate -->
+```python [2-5]
+re.sub(
+    string=content,
+    repl=replacement_function,
+    pattern=r"(\w+)(\[.*?\])\s*\n(.*?)",
+    flags=re.IGNORECASE,
+)
+```
+<!-- .element: data-id="re" -->
+
+not only does the ordering now become redundant!
+
+------
+<!-- .element: data-auto-animate -->
+```python [2-5]
 re.sub(
     flags=re.IGNORECASE,
     pattern=r"(\w+)(\[.*?\])\s*\n(.*?)",
@@ -296,10 +373,12 @@ re.sub(
     string=content,
 )
 ```
+<!-- .element: data-id="re" -->
 
 Allowing us to order them however we want,
 
 ------
+<!-- .element: data-auto-animate -->
 ```python 
 re.sub(
     string=content,
@@ -308,10 +387,12 @@ re.sub(
     flags=re.IGNORECASE,
 )
 ```
+<!-- .element: data-id="re" -->
 
 But our usage is now self documenting,
 
 ------
+<!-- .element: data-auto-animate -->
 ```python [4]
 re.sub(
     string=content,
@@ -320,11 +401,41 @@ re.sub(
     flags=re.IGNORECASE,
 )
 ```
+<!-- .element: data-id="re" -->
 
 labels constant arguments,
 
 ------
+<!-- .element: data-auto-animate -->
 ```python
+re.sub(
+    string=content,
+    repl=replacement_function,
+    pattern=r"(\w+)(\[.*?\])\s*\n(.*?)",
+    flags=re.IGNORECASE,
+)
+```
+<!-- .element: data-id="re" -->
+
+**and**,
+
+------
+<!-- .element: data-auto-animate -->
+```python
+rectangle(
+    height=10,
+    width=20,
+    opacity=1,
+    color="green",
+)
+```
+<!-- .element: data-id="re" -->
+
+if this was a function we defined ourselves,
+
+------
+<!-- .element: data-auto-animate -->
+```python []
 rectangle(
     height=10,
     width=20,
@@ -340,10 +451,12 @@ def rectangle(
 ):
     ...
 ```
+<!-- .element: data-id="re" -->
 
-**and**, if this was a function we defined ourselves, and the parameter ordering was important,
+and the parameter ordering was important,
 
 ------
+<!-- .element: data-auto-animate -->
 ```python [2-3,9-10]
 rectangle(
     height=10,
@@ -360,6 +473,7 @@ def rectangle(
 ):
     ...
 ```
+<!-- .element: data-id="re" -->
 
 then when refactoring, we only have to make the changes to the definition, and not all the calls across a codebase. 
 
@@ -395,7 +509,6 @@ But that can be tedious, as it can be forgotten, can make the code noisy, and wo
 > TODO: Update by splitting to require `*` in one part, and then mentioning the linter rule working without star in another.
 
 ------
-<!-- .element: data-auto-animate -->
 ```python [2, 10-11]
 def rectangle(
     *
@@ -428,13 +541,13 @@ rectangle(
     line_thickness_in_pixels=line_thickness_in_pixels,
 )
 ```
-<!-- .element: data-id="named" -->
+<!-- .element: data-id="typo" -->
 
 it can get pretty unreadable or error prone when the number of parameters and their names are much longer
 
 ------
 <!-- .element: data-auto-animate -->
-```python [2]
+```python [3]
 rectangle(
     top_left_pos_from_x_origin=top_left_pos_from_x_origin,
     top_left_pos_from_y_origin=top_left_pos_from_x_origin,
@@ -445,7 +558,7 @@ rectangle(
     line_thickness_in_pixels=line_thickness_in_pixels,
 )
 ```
-<!-- .element: data-id="named" -->
+<!-- .element: data-id="typo" -->
 
 Did anyone notice the typo on this line?, where the parameter and argument should both be `y`
 
@@ -534,12 +647,12 @@ rectangle(
 )
 ```
 
-or bring clarity with a keyword argument.
+or bring clarity by autofixing with a keyword argument.
 
 ------
 <!-- .slide: data-background-image="images/sprints.svg"-->
 
-So if mitigating human errors excites you, I'd love to collaborate with you in working on these kinds of tools!
+So if mitigating human errors excites you, I'd love to collaborate with you, such as at the sprints, in working on these kinds of tools!
 
 ------
 <!-- .slide: data-background-image="images/inspired.svg"-->
