@@ -50,7 +50,7 @@ Well that's the most exciting part for me!
 
 And because I want you to be excited too,
 
-let me ask you, with a...
+let me give you, a...
 
 ------
 <!-- .slide: data-background-image="images/code_review.svg"-->
@@ -205,7 +205,7 @@ def sub(
     ...
 ```
 
-And in future, they'll change flags and count to be required, by adding a * in the function signature
+And in future, they'll change flags and count to be required, by adding a * in the function definition 
 
 ------
 ```python [5,8-10]
@@ -227,7 +227,7 @@ What this will do, is throw us an error when we try to call the function without
 ------
 <!-- .slide: data-background-image="images/love.svg"-->
 
-This is actually one of the few reasons why I love keyword arguments, which is what the talk is **actually** about.
+This is actually one of the many reasons why I love keyword arguments, which is what the talk is **actually** about.
 
 ------
 <!-- .slide: data-background-image="images/thinking.svg"-->
