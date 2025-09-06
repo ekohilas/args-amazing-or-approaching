@@ -13,9 +13,7 @@
 
 Hello everyone!
 
-I'm Evan, a senior software platform engineer and serial speaker who's passionate about working towards nohumanerrors.com,
-
-> TODO: Change intro
+I hope you're as excited as I am to be here, because...
 
 ------
 
