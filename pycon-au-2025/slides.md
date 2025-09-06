@@ -512,10 +512,7 @@ def rectangle(
 basic = rectangle(10, 20) 
 rotated = rectangle(10, 20, 45)
 ```
-
-As a side note, Python is not all sunshine and rainbows either (I don't think any language is!)
-
-And I highlight that because of one detail that can be easily missed.
+<!-- .slide: data-background-image="images/sunshine_and_rainbows.png"-->
 
 ------
 ```python
@@ -643,6 +640,11 @@ print(big.metadata)   # {"width": 200, "height": 100"}
 So if your functions need mutable defaults, the best way to do so is to default them to None, and set the mutable that you want if it hasn't been specified.
 
 ------
+<!-- .slide: data-background-image="images/thunderstorms_and_lightning.png"-->
+
+Now if we step away from the thunderstorms and lightning (which are very very frightening),
+
+------
 ```java
 Rectangle rectangle(
     int width,
@@ -652,7 +654,7 @@ Rectangle rectangle(
 basic = rectangle(10, 20);
 ```
 
-Now if we step away from the thunderstorms and lightning (which are very very frightening), and go back to our original example, those of you that are experienced might be thinking of another way that defaults can be done. 
+and go back to our original example, those of you that are experienced might be thinking of another way that defaults can be done. 
 
 > TODO: Link all code
 > TODO: Finalise code examples
