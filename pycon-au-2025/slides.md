@@ -91,7 +91,7 @@ Okay now that that's out of the way let's go back to python's beautiful function
 
 ------
 ```java
-Rectangle function(
+void function(
     int a,
     int b
 ) {
@@ -349,14 +349,14 @@ This removes the need for us to rename any functions, as these programming langu
 ------
 ```python
 def rectangle(
-    width: int,
-    height: int,
-    rotation: int,
+    width,
+    height,
+    rotation,
 ): ...
 
 def rectangle(
-    width: int,
-    height: int,
+    width,
+    height,
 ):
     return rectangle(width, height, 0)
 
@@ -369,14 +369,14 @@ If we looked at the same code in python
 ------
 ```python [14-17]
 def rectangle(
-    width: int,
-    height: int,
-    rotation: int,
+    width,
+    height,
+    rotation,
 ): ...
 
 def rectangle(
-    width: int,
-    height: int,
+    width,
+    height,
 ):
     return rectangle(width, height, 0)
 
@@ -392,14 +392,14 @@ It would fail!
 ------
 ```python [1-10]
 def rectangle(
-    width: int,
-    height: int,
-    rotation: int,
+    width,
+    height,
+    rotation,
 ): ...
 
 def rectangle(
-    width: int,
-    height: int,
+    width,
+    height,
 ):
     return rectangle(width, height, 0)
 
@@ -422,14 +422,14 @@ function overloading in general can also become problematic, for reasons that wi
 ------
 ```python
 def rotated_rectangle(
-    width: int,
-    height: int,
-    rotation: int,
+    width,
+    height,
+    rotation,
 ): ...
 
 def rectangle(
-    width: int,
-    height: int,
+    width,
+    height,
 ):
     return rotated_rectangle(width, height, 0)
 
@@ -442,14 +442,14 @@ So without function overloading, how does Python let us simplify this?
 ------
 ```python [4]
 def rotated_rectangle(
-    width: int,
-    height: int,
-    rotation: int = 0,
+    width,
+    height,
+    rotation=0,
 ): ...
 
 def rectangle(
-    width: int,
-    height: int,
+    width,
+    height,
 ):
     return rotated_rectangle(width, height, 0)
 
@@ -462,9 +462,9 @@ Well in python, the concept of default arguments is built into the lanaguage (us
 ------
 ```python [7]
 def rotated_rectangle(
-    width: int,
-    height: int,
-    rotation: int = 0,
+    width,
+    height,
+    rotation=0,
 ): ...
 
 basic = rotated_rectangle(10, 20, 0) 
@@ -476,9 +476,9 @@ So now, if we only keep a single definition, we can remove the need for function
 ------
 ```python [7]
 def rotated_rectangle(
-    width: int,
-    height: int,
-    rotation: int = 0,
+    width,
+    height,
+    rotation=0,
 ): ...
 
 basic = rotated_rectangle(10, 20) 
@@ -490,9 +490,9 @@ And then, remove the need to pass in 0, since it'll use the default instead.
 ------
 ```python [1,7,8]
 def rectangle(
-    width: int,
-    height: int,
-    rotation: int = 0,
+    width,
+    height,
+    rotation=0,
 ): ...
 
 basic = rectangle(10, 20) 
@@ -504,9 +504,9 @@ Then we can rename our function back to rectangle, to get our beautiful definiti
 ------
 ```python
 def rectangle(
-    width: int,
-    height: int,
-    rotation: int = 0,
+    width,
+    height,
+    rotation=0,
 ): ...
 
 basic = rectangle(10, 20) 
@@ -529,7 +529,6 @@ def rectangle(
 
 Let's say for example, that we wanted to set a default argument for our rectangles to contain metadata based on how they were created.
 
-> TODO: Update types to be similar to other code
 > TODO: Update to highlight metadata
 
 ------
