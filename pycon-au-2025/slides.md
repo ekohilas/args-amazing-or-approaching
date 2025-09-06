@@ -1632,7 +1632,6 @@ map(
 
 Take this example map function:
 
-> TODO: Unhighlight all code
 > TODO: Don't use map as example
 
 ------
@@ -1836,8 +1835,6 @@ map({
 ```
 
 Where our previous example looks something like this.
-
-> TODO: Unhighlight all slide code
 
 ------
 ```javascript [1,3-4,14-15]
