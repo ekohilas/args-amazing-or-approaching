@@ -1603,11 +1603,9 @@ However this can become messy, and the reference to the original paramter is sti
 
 This is another case where you could argue that Python isn't perfect.
 
-> TODO: Add a comment to highlight that the language is swift
-> TODO: Add a comment to highlight that the language is javascript
-
 ------
-```swift
+```swift [1]
+// swift
 func map(
     iterable: [Double],
     function: (Double) -> Double
@@ -1633,7 +1631,8 @@ Take this example map function:
 > TODO: Don't use map as example
 
 ------
-```swift [14]
+```swift [1,15]
+// swift
 func map(
     iterable: [Double],
     function: (Double) -> Double
@@ -1654,7 +1653,8 @@ map(
 where its called with the argument label, `function`,
 
 ------
-```swift [3]
+```swift [1,4]
+// swift
 func map(
     iterable: [Double],
     function: (Double) -> Double
@@ -1675,7 +1675,8 @@ map(
 which is taken from the parameter name,
 
 ------
-```swift [7]
+```swift [1,8]
+// swift
 func map(
     iterable: [Double],
     function: (Double) -> Double
@@ -1696,7 +1697,8 @@ map(
 and used in the function body.
 
 ------
-```swift [3]
+```swift [1,4]
+// swift
 func map(
     iterable: [Double],
     with function: (Double) -> Double
@@ -1717,7 +1719,8 @@ map(
 But in Swift, we can also specify the argument label as `with` for that paramter 
 
 ------
-```swift [14]
+```swift [1,15]
+// swift
 func map(
     iterable: [Double],
     with function: (Double) -> Double
@@ -1738,7 +1741,8 @@ map(
 Now, when map is called, it's done so using this label,
 
 ------
-```swift [7]
+```swift [1,8]
+// swift
 func map(
     iterable: [Double],
     with function: (Double) -> Double
@@ -1759,7 +1763,8 @@ map(
 leaving the function body unchanged.
 
 ------
-```swift [12-15]
+```swift [1,13-16]
+// swift
 func map(
     iterable: [Double],
     with function: (Double) -> Double
@@ -1806,7 +1811,8 @@ Imagine if Python had this functionality. Oh how much more readable python could
 Another language where this exists is Javascript
 
 ------
-```javascript
+```javascript [1]
+// javascript
 function map({
     iterable,
     using: func,
@@ -1829,7 +1835,8 @@ Where our previous example looks something like this.
 > TODO: Unhighlight all slide code
 
 ------
-```javascript [2-3,13-14]
+```javascript [1,3-4,14-15]
+// javascript
 function map({
     iterable,
     using: func,
@@ -1852,7 +1859,8 @@ For those unfamiliar with JavaScript, even though this looks similar to swift (i
 There's quite a bit going on here, so if you can bare with me for a bit, I'll show you what I mean.
 
 ------
-```javascript [1]
+```javascript [1,2]
+// javascript
 function map(arg) {
     const iterable = arg.iterable;
     const func = arg.using;
@@ -1873,7 +1881,8 @@ map({
 Normally we have a function that takes in a single argument
 
 ------
-```javascript [12-15]
+```javascript [1, 13-16]
+// javascript
 function map(arg) {
     const iterable = arg.iterable;
     const func = arg.using;
@@ -1894,7 +1903,8 @@ map({
 which in our case is this thing in brackets that defines an object, similar to python's dictionaries
 
 ------
-```javascript [2-3]
+```javascript [1,3-4]
+// javascript
 function map(arg) {
     const iterable = arg.iterable;
     const func = arg.using;
@@ -1917,7 +1927,8 @@ then that value can be assigned to a constant, such as `iterable`, or `func`
 > TODO: Start with the {iterable, using} = arg example
 
 ------
-```javascript [2]
+```javascript [1,3]
+// javascript
 function map(arg) {
     const { iterable, using } = arg;
     const func = using;
@@ -1938,7 +1949,8 @@ map({
 but because of a language feature called object destructuring, we can have those variables assigned like this instead 
 
 ------
-```javascript [3]
+```javascript [1,4]
+// javascript
 function map(arg) {
     const { iterable, using } = arg;
     const func = using;
@@ -1959,7 +1971,8 @@ map({
 with the caveat being that we still have to re-assign `using` to `func`
 
 ------
-```javascript [2]
+```javascript [1,3]
+// javascript
 function map(arg) {
     const { iterable, using: func } = arg;
     
@@ -1980,7 +1993,8 @@ map({
 but destructuring also lets us re-assign variables.
 
 ------
-```javascript [1-4]
+```javascript [1,2-5]
+// javascript
 function map({
     iterable,
     using: func,
@@ -2001,7 +2015,8 @@ map({
 And, better yet, this feature works within the parameters of a function definition!
 
 ------
-```javascript [12-15]
+```javascript [1,13-16]
+// javascript
 function map({
     iterable,
     using: func,
@@ -2022,7 +2037,8 @@ map({
 Now, since this parameter is an object, 
 
 ------
-```javascript [12-16]
+```javascript [1,13-17]
+// javascript
 function map({
     iterable,
     using: func,
@@ -2083,7 +2099,8 @@ By using the `**` operator within a function call, python will unpack the keys o
 This might make you wonder, what happens if extra properties are passed into these function calls?
 
 ------
-```javascript [15]
+```javascript [1,15]
+// javascript
 function map({
     iterable,
     using: func,
@@ -2106,6 +2123,7 @@ Well, I'm sorry to disappoint you, but in JavaScript, the answer is... nothing. 
 
 ------
 ```javascript [4]
+// javascript
 function map({
     iterable,
     using: func,
@@ -2129,6 +2147,7 @@ Buut, there is a way to keep them, and that is by using the ellipses `...rest` p
 
 ------
 ```javascript [4]
+// javascript
 function map({
     iterable,
     using: func,
