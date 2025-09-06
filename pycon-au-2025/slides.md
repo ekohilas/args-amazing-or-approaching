@@ -717,19 +717,17 @@ Can anyone spot the error here?
 
 [Yes well done] It should be width and height,
 
-> TODO: Move function definition to the bottom
-
 ------
 <!-- .element: data-auto-animate -->
 ```java [2-3,6]
+var rectangle = Rectangle
+    .builder(height, width)
+    .build();
+
 Rectangle rectangle(
     int width,
     int height
 );
-
-var rectangle = Rectangle
-    .builder(height, width)
-    .build();
 ```
 <!-- .element: data-id="builder" -->
 
@@ -831,21 +829,14 @@ rectangle(
 
 But now our argument ordering is redundant!
 
-> TODO: Talk about why that's useful with diffs, updating, and alphabetical ordering
-
 ------
-```python
-rectangle(
-    width=width,
-    height=height,
-)
-```
+<!-- .slide: data-background-image="images/never_ending_benefits.svg"-->
 
-Thus, by always using keyword arguments, our code is always future proofed against errors,
+This might not seem like much, but this little change, of always using keywords arguments, leads to so many benefits, and prevetion of errors.
 
 ------
 <!-- .element: data-auto-animate -->
-```python []
+```python [4]
 def rectangle(
     height,
     width,
@@ -857,7 +848,6 @@ def rectangle(
 rectangle(1, 2, 3,)
 ```
 <!-- .element: data-id="rectangle" -->
-
 Like for example, if we go back to a default argument being used for rotation
 
 ------
@@ -1032,6 +1022,8 @@ rectangle(
 ```
 
 we now don't have to make changes to re-order those arguments where that function is called.
+
+> TODO: Insert slide to talk about ordering and git diffs
 
 But even in the cases where you're not refactoring, not using keyword arguments has led to errors.
 
