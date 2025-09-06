@@ -130,7 +130,7 @@ Rectangle rectangle(
     int height,
 );
 
-basic_rectangle = rectangle(10, 20);
+basic = rectangle(10, 20);
 ```
 
 And now, this function can be called to create a basic rectangle of a particular width and height.
@@ -142,7 +142,7 @@ Rectangle rectangle(
     int height,
 );
 
-basic_rectangle = rectangle(10, 20);
+basic = rectangle(10, 20);
 ```
 
 But let's say that a basic rectangle isn't good enough. And we've been asked to create a rotated one instead.
@@ -158,7 +158,7 @@ Rectangle rectangle(
     int rotation
 );
 
-basic_rectangle = rectangle(10, 20);
+basic = rectangle(10, 20);
 ```
 
 And to do so, we need to add the rotation paramter.
@@ -171,7 +171,7 @@ Rectangle rectangle(
     int rotation
 );
 
-basic_rectangle = rectangle(10, 20);
+basic = rectangle(10, 20);
 rotated = rectangle(10, 20, 45);
 ```
 
@@ -185,7 +185,7 @@ Rectangle rectangle(
     int rotation
 );
 
-basic_rectangle = rectangle(10, 20);
+basic = rectangle(10, 20);
 rotated = rectangle(10, 20, 45);
 ```
 
@@ -201,7 +201,7 @@ Rectangle rectangle(
     int rotation
 );
 
-basic_rectangle = rectangle(10, 20, 0);
+basic = rectangle(10, 20, 0);
 rotated = rectangle(10, 20, 45);
 ```
 
@@ -215,7 +215,7 @@ Rectangle rectangle(
     int rotation
 );
 
-basic_rectangle = rectangle(10, 20, 0);
+basic = rectangle(10, 20, 0);
 rotated = rectangle(10, 20, 45);
 ```
 
@@ -234,7 +234,7 @@ Rectangle rectangle(
     int height,
 );
 
-basic_rectangle = rectangle(10, 20);
+basic = rectangle(10, 20);
 rotated = rotated_rectangle(10, 20, 45);
 ```
 
@@ -257,7 +257,7 @@ Rectangle rectangle(
     return rotated_rectangle(width, height);
 }
 
-basic_rectangle = rectangle(10, 20);
+basic = rectangle(10, 20);
 rotated = rotated_rectangle(10, 20, 45);
 ```
 
@@ -278,7 +278,7 @@ Rectangle rectangle(
     return rotated_rectangle(width, height, 0);
 }
 
-basic_rectangle = rectangle(10, 20);
+basic = rectangle(10, 20);
 rotated = rotated_rectangle(10, 20, 45);
 ```
 
@@ -299,7 +299,7 @@ Rectangle rectangle(
     return rotated_rectangle(width, height, 0);
 }
 
-basic_rectangle = rectangle(10, 20);
+basic = rectangle(10, 20);
 rotated = rotated_rectangle(10, 20, 45);
 ```
 
@@ -320,7 +320,7 @@ Rectangle rectangle(
     return rectangle(width, height, 0);
 }
 
-basic_rectangle = rectangle(10, 20);
+basic = rectangle(10, 20);
 rotated = rectangle(10, 20, 45);
 ```
 
@@ -341,7 +341,7 @@ Rectangle rectangle(
     return rectangle(width, height, 0);
 }
 
-basic_rectangle = rectangle(10, 20);
+basic = rectangle(10, 20);
 rotated = rectangle(10, 20, 45);
 ```
 
@@ -655,7 +655,7 @@ Rectangle rectangle(
     int height,
 );
 
-basic_rectangle = rectangle(10, 20);
+basic = rectangle(10, 20);
 ```
 
 Now if we step away from the thunderstorms and lightning (which are very very frightening), and go back to our original example, those of you that are experienced might be thinking of another way that defaults can be done. 
