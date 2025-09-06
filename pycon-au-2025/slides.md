@@ -509,7 +509,7 @@ As a side note, Python is not all sunshine and rainbows either (I don't think an
 And I highlight that because of one detail that can be easily missed.
 
 ------
-```python
+```python [4]
 def rectangle(
     width,
     height,
@@ -520,10 +520,8 @@ def rectangle(
 
 Let's say for example, that we wanted to set a default argument for our rectangles to contain metadata based on how they were created.
 
-> TODO: Update to highlight metadata
-
 ------
-```python
+```python [6-7]
 def rectangle(
     width,
     height,
@@ -536,7 +534,7 @@ def rectangle(
 And then, we added that metadata within the function.
 
 ------
-```python
+```python [12-13]
 def rectangle(
     width,
     height,
