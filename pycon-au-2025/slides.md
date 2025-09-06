@@ -3,6 +3,7 @@
 > TODO: Emphasise point at rust, make 
 > TODO: Fix sectioning
 > TODO: Ensure height and width are ordered where they're meant to be
+> TODO: Ensure all slides are highlighting the right part
 
 ------
 
@@ -186,6 +187,8 @@ rotated = rectangle(10, 20, 45);
 ```
 
 But now our previous function call needs to be updated.
+
+> TODO: show error
 
 ------
 ```java [7]
@@ -719,6 +722,8 @@ Can anyone spot the error here?
 
 [Yes well done] It should be width and height,
 
+> TODO: Move function definition to the bottom
+
 ------
 <!-- .element: data-auto-animate -->
 ```java [2-3,6]
@@ -829,6 +834,8 @@ rectangle(
 ```
 
 But now our argument ordering is redundant!
+
+> TODO: Talk about why that's useful with diffs, updating, and alphabetical ordering
 
 ------
 ```python
@@ -1044,6 +1051,8 @@ re.sub(
 
 Can anyone spot the error in this example?
 (and if you already know then let others have a chance)
+(water break)
+(hint, it's do to with function arguments and parameters)
 
 [Yes it's how the IGNORECASE flag is being passed in!]
 [Isn't it interesting how much harder errors are to spot when there's complexity?]
@@ -1138,6 +1147,8 @@ re.sub(
 
 And the way that they will do that, is to put `*` as a parameter before count and flags.
 
+> TODO: remove flags= and Fix highlighting to include * and count/flags
+
 ------
 ```python
 re.sub(
@@ -1154,6 +1165,8 @@ re.sub(
 ```
 
 What this will do, is throw us an error when we try to call the function without naming those arguments.
+
+> TODO: add slide with flags having argument
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1233,6 +1246,8 @@ rectangle(
 
 it can get pretty unreadable when the number of parameters and their names are much longer
 
+> TODO: Ask audience to spot the error, and add slide highlighting the line with the error
+
 ------
 <!-- .element: data-auto-animate -->
 ```python [8-10]
@@ -1251,6 +1266,8 @@ rectangle(
 <!-- .element: data-id="named" -->
 
 The good news is, for when we don't have control over the interface, PEP736 is currently debating either using something like a trailing = for arguments that should take from existing variable names
+
+> TODO: Update for rejected PEP "Good news is, I'm not the only one who's though about this, and there's a PEP that talks about... bad news is that it was rejected"
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1332,6 +1349,8 @@ rectangle(
 
 For example, a rule that auto fixes all our function calls to use keyword arguments wherever possible
 
+> TODO: Add example of lint rule that enforces *
+
 ------
 ```python[2-3,8-9]
 def rectangle(
@@ -1402,6 +1421,8 @@ or bring clarity with a keyword argument.
 So if mitigating human errors excites you, I'd love to work with you in make these kinds of tools a reality!
 
 > TODO: Could expand? e.g. this is because these lint rules can analyse the definitions during the calls of functions
+
+> TODO: Add sprints
 
 ------
 <!-- .slide: data-background-image="images/inspired-emoji.png"-->
@@ -1637,6 +1658,10 @@ map(
 If we look at other languages like Swift, then this concept exists as argument labels and parameter names.
 Take this example map function:
 
+> TODO: Prepend slide with swift logo
+> TODO: Unhighlight all code
+> TODO: Don't use map as example
+
 ------
 ```swift[14]
 func map(
@@ -1827,6 +1852,8 @@ map({
 ```
 
 Where our previous example looks something like this.
+
+> TODO: Unhighlight all slide code
 
 ------
 ```javascript[2-3,13-14]
@@ -2294,6 +2321,10 @@ So, by specifying `**kwargs` as the last parameter, what this does, is tell pyth
 
 What do I mean by this?
 
+> TODO: What does "this" mean?
+> TODO: Prepend slide with previously seen example and highlight on added params
+
+
 ------
 ```python [5]
 def rectangle(
@@ -2444,7 +2475,7 @@ rectangle(10, 20, "round", 40)
 And notice how these these arguments can be of any type?
 
 ------
-```python[4,8]
+```python[4,9]
 def rectangle(
     width, # 0
     height, # 1
@@ -2453,19 +2484,18 @@ def rectangle(
     ...
     
 numbers = list(range(4))
-rectangle(*numbers)
+rectangle(*numbers) # rectangle(0, 1, 2, 3)
 ```
 
 Similar to `**` within a function call, `*` can be used to unpack iterables into these variable arguments.
 
-
 ------
 ```python[4-5,10-11]
 def rectangle(
-    width,
-    height,
-    *args,
-    **kwargs,
+    width, # 10
+    height, # 20
+    *args, # (30, )
+    **kwargs, # {"rotation": 45}
 ):
     return shape(
         width,
@@ -2473,9 +2503,13 @@ def rectangle(
         *args,
         **kwargs
     )
+
+    # shape(10, 20, 30, rotation=45)
+
+rectangle(10, 20, 30, rotation=45) 
 ```
 
-This is particularly useful when we want to pass extra arguments along!
+And if we combine this with kwargs, then it's super useful when we want to pass extra arguments along!
 
 ------
 ```python[4-5,7-12]
@@ -2494,6 +2528,8 @@ def rectangle(
 ```
 
 Since using named arguments won't have the intended effect...
+
+> TODO: remove slide?
 
 ------
 ```python[4-5,12-13]
@@ -2514,6 +2550,8 @@ rectangle(
 ```
 
 It's also worth noting that by nature of `*args` capturing all additional positional arguments, any further parameters become keyword only.
+
+> TODO: Split slide into two, highlighting the extra argument, and then what it becomes.
 
 ------
 ```python[5,9]
