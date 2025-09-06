@@ -17,7 +17,7 @@
 Hello everyone!
 
 Are you excited?!
-Great! Because I am too as...
+Great! Because I am too since...
 
 ------
 
