@@ -351,7 +351,7 @@ This removes the need for us to rename any functions, as these programming langu
 def rectangle(
     width: int,
     height: int,
-    rotation int,
+    rotation: int,
 ): ...
 
 def rectangle(
@@ -371,7 +371,7 @@ If we looked at the same code in python
 def rectangle(
     width: int,
     height: int,
-    rotation int,
+    rotation: int,
 ): ...
 
 def rectangle(
@@ -394,7 +394,7 @@ It would fail!
 def rectangle(
     width: int,
     height: int,
-    rotation int,
+    rotation: int,
 ): ...
 
 def rectangle(
@@ -419,14 +419,12 @@ While there are packages like multipledispatch that you can use to replicate fun
 
 function overloading in general can also become problematic, for reasons that will become more apparrant later.
 
-> TODO: fix rotation int to rotation: int
-
 ------
 ```python
 def rotated_rectangle(
     width: int,
     height: int,
-    rotation int,
+    rotation: int,
 ): ...
 
 def rectangle(
