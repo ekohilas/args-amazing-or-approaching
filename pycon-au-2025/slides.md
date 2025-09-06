@@ -502,17 +502,11 @@ rotated = rectangle(10, 20, 45)
 Then we can rename our function back to rectangle, to get our beautiful definition.
 
 ------
-```python
-def rectangle(
-    width,
-    height,
-    rotation=0,
-): ...
+<!-- .slide: data-background-image="images/sunshine_and_rainbows.svg"-->
 
-basic = rectangle(10, 20) 
-rotated = rectangle(10, 20, 45)
-```
-<!-- .slide: data-background-image="images/sunshine_and_rainbows.png"-->
+As a side note, Python is not all sunshine and rainbows either (I don't think any language is!)
+
+And I highlight that because of one detail that can be easily missed.
 
 ------
 ```python
@@ -640,7 +634,7 @@ print(big.metadata)   # {"width": 200, "height": 100"}
 So if your functions need mutable defaults, the best way to do so is to default them to None, and set the mutable that you want if it hasn't been specified.
 
 ------
-<!-- .slide: data-background-image="images/thunderstorms_and_lightning.png"-->
+<!-- .slide: data-background-image="images/thunderstorms_and_lightning.svg"-->
 
 Now if we step away from the thunderstorms and lightning (which are very very frightening),
 
@@ -659,7 +653,6 @@ and go back to our original example, those of you that are experienced might be 
 > TODO: Link all code
 > TODO: Finalise code examples
 > TODO: Add highlighting to code examples 
-> TODO: add comic effect for thunderstorms
 
 ------
 ```java
