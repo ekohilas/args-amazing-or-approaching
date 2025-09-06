@@ -848,6 +848,7 @@ def rectangle(
 rectangle(1, 2, 3,)
 ```
 <!-- .element: data-id="rectangle" -->
+
 Like for example, if we go back to a default argument being used for rotation
 
 ------
@@ -1285,7 +1286,9 @@ rectangle(
 ```
 <!-- .element: data-id="named" -->
 
-The good news is, I'm not the only one who's thought about this.PEP736 proposes using a trailing = for arguments that should take from existing variable names
+The good news is, I'm not the only one who's thought about this.
+
+PEP736 proposes using a trailing = for arguments that should take from existing variable names
 
 ------
 <!-- .slide: data-background-image="images/pep_rejected.svg"-->
