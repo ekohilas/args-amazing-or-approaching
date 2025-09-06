@@ -2483,8 +2483,6 @@ rectangle(*numbers) # rectangle(0, 1, 2, 3)
 
 Similar to `**` within a function call, `*` can be used to unpack iterables into these variable arguments.
 
-> TODO: Repharse to reference destructuring
-
 ------
 ```python [4-5,10-11]
 def rectangle(
