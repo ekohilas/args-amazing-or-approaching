@@ -1296,52 +1296,29 @@ PEP736 proposes using a trailing = for arguments that should take from existing 
 The bad news is, that this was rejected earlier this year...
 
 ------
-<!-- .element: data-auto-animate -->
-```python [8-9]
-def rectangle(
-    height,
-    width,
-):
-    ...
-    
-rectangle(
-    height,
-    width,
-)
-```
-<!-- .element: data-id="named" -->
+![ruff logo](images/ruff.svg)
 
-Personally I feel like the best approach is for this sugar to be enabled and checked by default,
+Personally I feel that linters are a cleaner, more pragmatic way to not only check, but also correct this for us!
 
 ------
-<!-- .element: data-auto-animate -->
-
 ```python [2, 9-10]
 def rectangle(
     *,
-    height,
     width,
+    height,
 ):
     ...
-    
+
 rectangle(
-    height,
-    width,
+    height=height,
+    width=width,
 )
 ```
-<!-- .element: data-id="named" -->
 
-or at the least, have `*` in the function definition specify that, that can be the case.
-
-But given the way Python has been built, it might not be currently possible, or they might just need your help to do so!
+For example, a rule that enforces (and auto adds) a star on all function definitions.
 
 ------
-![ruff logo](images/ruff.svg)
-
-So until something changes, I personally feel that linters are a cleaner, more pragmatic way to not only check, but also correct this for us!
-
-------
-```python [8-9]
+```python [2-3,8-9]
 def rectangle(
     width,
     height,
@@ -1354,41 +1331,7 @@ rectangle(
 )
 ```
 
-For example, a rule that auto fixes all our function calls to use keyword arguments wherever possible
-
-> TODO: Add example of lint rule that enforces *
-
-------
-```python [2-3,8-9]
-def rectangle(
-    width,
-    height,
-):
-    ...
-    
-rectangle(
-    width,
-    width,
-)
-```
-
-Or, if you want the safety without the redundancy, a rule that checks that for every given positional argument, it's name is the same as the corresponding parameter.
-
-------
-```python [2,8]
-def rectangle(
-    width,
-    height,
-):
-    ...
-    
-rectangle(
-    width,
-    width,
-)
-```
-
-Which would pass in this case,
+Or if that's not up your alley, a rule that enforces all function calls to use keyword arguments wherever possible
 
 ------
 ```python [3,9]
@@ -1404,7 +1347,24 @@ rectangle(
 )
 ```
 
-and in this case, give a warning,
+Or, if you want the safety without the redundancy, a rule that for this parameter and argument,
+
+------
+```python [3,9-10]
+def rectangle(
+    width,
+    height,
+):
+    ...
+    
+rectangle(
+    width,
+    # "width" argument name != "height" parameter name.
+    width, 
+)
+```
+
+Warns when a parameter and argument don't match.
 
 ------
 ```python [3,9]
@@ -1420,12 +1380,12 @@ rectangle(
 )
 ```
 
-or bring clarity with a keyword argument.
+And if that's the intention, provides a fix to bring clarity with a keyword argument.
 
 ------
 <!-- .slide: data-background-image="images/github-logo.png"-->
 
-So if mitigating human errors excites you, I'd love to work with you in make these kinds of tools a reality!
+So if mitigating human errors excites you, I'd love to work with you on these tools!
 
 > TODO: Could expand? e.g. this is because these lint rules can analyse the definitions during the calls of functions
 
