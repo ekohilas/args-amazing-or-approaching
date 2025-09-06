@@ -29,7 +29,7 @@ Great! Because I am too since...
 I have utmost adoration for python's beautiful function argument system.
 
 ------
-```python
+```python []
 def function(
     a,
     b,
@@ -221,7 +221,7 @@ rotated = rectangle(10, 20, 45);
 Because this is tedious work that we want to avoid, in most of these languages, there are other ways that a default rotation can be setup.
 
 ------
-```java[1-5]
+```java [1-5]
 Rectangle rotated_rectangle(
     int width,
     int height,
@@ -242,7 +242,7 @@ The most basic way, is by creating a new function with this rotation parameter.
 Of course, we don't want to duplicate the code that makes these rectangles.
 
 ------
-```java[10-12]
+```java [10-12]
 Rectangle rotated_rectangle(
     int width,
     int height,
@@ -263,7 +263,7 @@ rotated = rotated_rectangle(10, 20, 45);
 So we update the old function, such that it calls the new function
 
 ------
-```java[10-12]
+```java [10-12]
 Rectangle rotated_rectangle(
     int width,
     int height,
@@ -305,7 +305,7 @@ rotated = rotated_rectangle(10, 20, 45);
 Now if we take a step back, we might start to see how this might get a bit messy. The good news is, in some languages, we can do a bit of clean up through the use of function overloading.
 
 ------
-```java[1-4,7-9]
+```java [1-4,7-9]
 Rectangle rectangle(
     int width,
     int height,
@@ -326,7 +326,7 @@ rotated = rectangle(10, 20, 45);
 With function overloading, we can define multiple functions with the same name, but different type signatures.
 
 ------
-```java[11,14,15]
+```java [11,14,15]
 Rectangle rectangle(
     int width,
     int height,
@@ -369,7 +369,7 @@ rotated = rectangle(10, 20, 45)
 If we looked at the same code in python
 
 ------
-```python[14-17]
+```python [14-17]
 def rectangle(
     width: int,
     height: int,
@@ -392,7 +392,7 @@ rotated = rectangle(10, 20, 45)
 It would fail!
 
 ------
-```python[1-10]
+```python [1-10]
 def rectangle(
     width: int,
     height: int,
@@ -444,7 +444,7 @@ rotated = rotated_rectangle(10, 20, 45)
 So without function overloading, how does Python let us simplify this?
 
 ------
-```python[4]
+```python [4]
 def rotated_rectangle(
     width: int,
     height: int,
@@ -464,7 +464,7 @@ rotated = rotated_rectangle(10, 20, 45)
 Well in python, the concept of default arguments is built into the lanaguage (using the equals sign in the parameter definition)
 
 ------
-```python[7]
+```python [7]
 def rotated_rectangle(
     width: int,
     height: int,
@@ -478,7 +478,7 @@ rotated = rotated_rectangle(10, 20, 45)
 So now, if we only keep a single definition, we can remove the need for function chaining
 
 ------
-```python[7]
+```python [7]
 def rotated_rectangle(
     width: int,
     height: int,
@@ -492,7 +492,7 @@ rotated = rotated_rectangle(10, 20, 45)
 And then, remove the need to pass in 0, since it'll use the default instead.
 
 ------
-```python[1,7,8]
+```python [1,7,8]
 def rectangle(
     width: int,
     height: int,
@@ -588,7 +588,7 @@ print(big.metadata)   # {"width": 200, "height": 100"}
 Instead, their metadata ends up being the same.
 
 ------
-```python[4]
+```python [4]
 def rectangle(
     width,
     height,
@@ -626,7 +626,7 @@ print(big.metadata)   # {"width": 200, "height": 100"}
 Giving this strange outcome, where all functions are sharing the same state.
 
 ------
-```python[4,6-7]
+```python [4,6-7]
 def rectangle(
     width,
     height,
@@ -677,7 +677,7 @@ And that is through a programming construct called the builder pattern.
 > TODO: use var rectangle = Rectange\n.builder otherwise not clear it's not a definition.
 
 ------
-```java[1]
+```java [1]
 Rectangle.builder(height, width)
     .build();
  
@@ -687,7 +687,7 @@ Rectangle.builder(height, width)
 On initiation, it requires and stores all necessary data
 
 ------
-```java[2]
+```java [2]
 Rectangle.builder(height, width)
     .withRotation(rotation)
     .build();
@@ -697,7 +697,7 @@ Rectangle.builder(height, width)
 and then allows for adding of any optional data
 
 ------
-```java[3]
+```java [3]
 Rectangle.builder(height, width)
     .withRotation(rotation)
     .build();
@@ -786,7 +786,7 @@ shape_2 = rectangle(20, 10, 45);
 the only difference being the ordering of the parameters
 
 ------
-```java[13]
+```java [13]
 Rectangle rectangle(
     int width,
     int height,
@@ -1064,7 +1064,7 @@ Can anyone spot the error in this example?
 >  https://github.com/python/cpython/issues/56166
 
 ------
-```python[8-14]
+```python [8-14]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
@@ -1084,7 +1084,7 @@ re.sub(
 If we bring up the definition of re.sub,
 
 ------
-```python[5,12]
+```python [5,12]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
@@ -1104,7 +1104,7 @@ re.sub(
 and we look at the parameter that the flag is passed in as, you'll see it's count, not flags.
 
 ------
-```python[5]
+```python [5]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
@@ -1131,7 +1131,7 @@ That would explain why I spent hours trying to figure out why my expected thousa
 In fact, so many people have had this issue, that Python has fixed it by introducing a deprecation warning from 3.13, noting that the use of count and flags as a positional argument will be removed and needs to be a keyword instead.
 
 ------
-```python[5,13]
+```python [5,13]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
@@ -1338,7 +1338,7 @@ But given the way Python has been built, it might not be currently possible, or 
 So until something changes, I personally feel that linters are a cleaner, more pragmatic way to not only check, but also correct this for us!
 
 ------
-```python[8-9]
+```python [8-9]
 def rectangle(
     width,
     height,
@@ -1356,7 +1356,7 @@ For example, a rule that auto fixes all our function calls to use keyword argume
 > TODO: Add example of lint rule that enforces *
 
 ------
-```python[2-3,8-9]
+```python [2-3,8-9]
 def rectangle(
     width,
     height,
@@ -1372,7 +1372,7 @@ rectangle(
 Or, if you want the safety without the redundancy, a rule that checks that for every given positional argument, it's name is the same as the corresponding parameter.
 
 ------
-```python[2,8]
+```python [2,8]
 def rectangle(
     width,
     height,
@@ -1388,7 +1388,7 @@ rectangle(
 Which would pass in this case,
 
 ------
-```python[3,9]
+```python [3,9]
 def rectangle(
     width,
     height,
@@ -1404,7 +1404,7 @@ rectangle(
 and in this case, give a warning,
 
 ------
-```python[3,9]
+```python [3,9]
 def rectangle(
     width,
     height,
@@ -1460,7 +1460,7 @@ range(
 that not _all_ functions are happy with that.
 
 ------
-```python[5]
+```python [5]
 def range(
     start,
     stop,
@@ -1596,7 +1596,7 @@ rectangle(
 Another case may be where we want to keep the external argument name the same, and change the internal parameter name within our function.
 
 ------
-```python[4,6]
+```python [4,6]
 def rectangle(
     width,
     height,
@@ -1615,7 +1615,7 @@ rectangle(
 And we could do that by setting this parameter to another variable at the top of the function.
 
 ------
-```python[7-8]
+```python [7-8]
 def rectangle(
     width,
     height,
@@ -1670,7 +1670,7 @@ Take this example map function:
 > TODO: Don't use map as example
 
 ------
-```swift[14]
+```swift [14]
 func map(
     iterable: [Double],
     function: (Double) -> Double
@@ -1691,7 +1691,7 @@ map(
 where its called with the argument label, `function`,
 
 ------
-```swift[3]
+```swift [3]
 func map(
     iterable: [Double],
     function: (Double) -> Double
@@ -1712,7 +1712,7 @@ map(
 which is taken from the parameter name,
 
 ------
-```swift[7]
+```swift [7]
 func map(
     iterable: [Double],
     function: (Double) -> Double
@@ -1733,7 +1733,7 @@ map(
 and used in the function body.
 
 ------
-```swift[3]
+```swift [3]
 func map(
     iterable: [Double],
     with function: (Double) -> Double
@@ -1754,7 +1754,7 @@ map(
 But in Swift, we can also specify the argument label as `with` for that paramter 
 
 ------
-```swift[14]
+```swift [14]
 func map(
     iterable: [Double],
     with function: (Double) -> Double
@@ -1775,7 +1775,7 @@ map(
 Now, when map is called, it's done so using this label,
 
 ------
-```swift[7]
+```swift [7]
 func map(
     iterable: [Double],
     with function: (Double) -> Double
@@ -1796,7 +1796,7 @@ map(
 leaving the function body unchanged.
 
 ------
-```swift[12-15]
+```swift [12-15]
 func map(
     iterable: [Double],
     with function: (Double) -> Double
@@ -1819,7 +1819,7 @@ This is awesome because it reads so nicely!
 "map this iterable with the round function."
 
 ------
-```python[3,5,9]
+```python [3,5,9]
 def map(
     iterable: list[float],
     with function: typing.Callable[float],
@@ -1866,7 +1866,7 @@ Where our previous example looks something like this.
 > TODO: Unhighlight all slide code
 
 ------
-```javascript[2-3,13-14]
+```javascript [2-3,13-14]
 function map({
     iterable,
     using: func,
@@ -1889,7 +1889,7 @@ For those unfamiliar with JavaScript, even though this looks similar to swift (i
 There's quite a bit going on here, so if you can bare with me for a bit, I'll show you what I mean.
 
 ------
-```javascript[1]
+```javascript [1]
 function map(arg) {
     const iterable = arg.iterable;
     const func = arg.using;
@@ -1910,7 +1910,7 @@ map({
 Normally we have a function that takes in a single argument
 
 ------
-```javascript[12-15]
+```javascript [12-15]
 function map(arg) {
     const iterable = arg.iterable;
     const func = arg.using;
@@ -1931,7 +1931,7 @@ map({
 which in our case is this thing in brackets that defines an object, similar to python's dictionaries
 
 ------
-```javascript[2-3]
+```javascript [2-3]
 function map(arg) {
     const iterable = arg.iterable;
     const func = arg.using;
@@ -1954,7 +1954,7 @@ then that value can be assigned to a constant, such as `iterable`, or `func`
 > TODO: Start with the {iterable, using} = arg example
 
 ------
-```javascript[2]
+```javascript [2]
 function map(arg) {
     const { iterable, using } = arg;
     const func = using;
@@ -1975,7 +1975,7 @@ map({
 but because of a language feature called object destructuring, we can have those variables assigned like this instead 
 
 ------
-```javascript[3]
+```javascript [3]
 function map(arg) {
     const { iterable, using } = arg;
     const func = using;
@@ -1996,7 +1996,7 @@ map({
 with the caveat being that we still have to re-assign `using` to `func`
 
 ------
-```javascript[2]
+```javascript [2]
 function map(arg) {
     const { iterable, using: func } = arg;
     
@@ -2017,7 +2017,7 @@ map({
 but destructuring also lets us re-assign variables.
 
 ------
-```javascript[1-4]
+```javascript [1-4]
 function map({
     iterable,
     using: func,
@@ -2038,7 +2038,7 @@ map({
 And, better yet, this feature works within the parameters of a function definition!
 
 ------
-```javascript[12-15]
+```javascript [12-15]
 function map({
     iterable,
     using: func,
@@ -2059,7 +2059,7 @@ map({
 Now, since this parameter is an object, 
 
 ------
-```javascript[12-16]
+```javascript [12-16]
 function map({
     iterable,
     using: func,
@@ -2081,7 +2081,7 @@ map(params);
 it can be saved to a variable and only have that passed in instead.
 
 ------
-```python[6-11]
+```python [6-11]
 def map(
     iterable: list[float],
     with function: typing.Callable[float],
@@ -2098,7 +2098,7 @@ map(**params)
 In fact, (and this is the point that I've been building up to) Python let's you do this with dictionaries too!
 
 ------
-```python[11]
+```python [11]
 def map(
     iterable: list[float],
     with function: typing.Callable[float],
@@ -2120,7 +2120,7 @@ By using the `**` operator within a function call, python will unpack the keys o
 This might make you wonder, what happens if extra properties are passed into these function calls?
 
 ------
-```javascript[15]
+```javascript [15]
 function map({
     iterable,
     using: func,
@@ -2142,7 +2142,7 @@ map({
 Well, I'm sorry to disappoint you, but in JavaScript, the answer is... nothing. They don't get unpacked and thus they're ignored.
 
 ------
-```javascript[4]
+```javascript [4]
 function map({
     iterable,
     using: func,
@@ -2165,7 +2165,7 @@ map({
 Buut, there is a way to keep them, and that is by using the ellipses `...rest` property.
 
 ------
-```javascript[4]
+```javascript [4]
 function map({
     iterable,
     using: func,
@@ -2188,7 +2188,7 @@ map({
 Allowing us to save the remaining properties for whatever they may be needed for.
 
 ------
-```python[10]
+```python [10]
 def map(
     iterable: list[float],
     with function: typing.Callable[float],
@@ -2206,7 +2206,7 @@ map(**params)
 But if this is how JavaScript named parameters work, what happens in python, if we pass extra keyword arguments into a python function?
 
 ------
-```python[11]
+```python [11]
 def map(
     iterable: list[float],
     with function: typing.Callable[float],
@@ -2231,7 +2231,7 @@ Well, unlike JavaScript, we'll get an error, telling us off that we passed in an
 > TODO: remove with from other python examples
 
 ------
-```python[5]
+```python [5]
 def rectangle(
     width,
     height,
@@ -2251,7 +2251,7 @@ rectangle(**params)
 And I say default here because you can also specify a way to keep these leftover argumnets, and that is by using our good friend `**` again, adding it to a `rest` paramter.
 
 ------
-```python[5]
+```python [5]
 def rectangle(
     width,
     height,
@@ -2271,7 +2271,7 @@ rectangle(**params)
 As a side note, similar to javascript, this paramter doesn't have to be called `rest` either. The general convention in Python is `kwargs` for keyword args.
 
 ------
-```python[2]
+```python [2]
 def rectangle(
     { width, height}, # No can do!
     height,
@@ -2355,7 +2355,7 @@ rectangle(
 Remember how I mentioned earlier that there was two cases where you might want a `/` in your parameters to make them positional only?
 
 ------
-```python[8-17]
+```python [8-17]
 def rectangle(
     width,
     height,
@@ -2378,7 +2378,7 @@ rectangle(
 Well, the second case is where you have a call like this, both with a normal parameters and `**kwargs`.
 
 ------
-```python[18-20]
+```python [18-20]
 def rectangle(
     width,
     height,
@@ -2404,7 +2404,7 @@ rectangle(
 And when you call this function, it fails since `height` is attempted to be filled both by the positional argument and the keyword argument.
 
 ------
-```python[4-5,8-17]
+```python [4-5,8-17]
 def rectangle(
     width,
     height,
@@ -2428,7 +2428,7 @@ rectangle(
 So `/` can be used if you instead wanted these keyword arguments to be captured by **kwargs.
 
 ------
-```python[4,9-13]
+```python [4,9-13]
 def rectangle(
     width,
     height,
@@ -2457,7 +2457,7 @@ But there are also cases where we can't define a keyword for every argument.
 Say for example, when we want to sum a list of numbers.
 
 ------
-```python[4,8]
+```python [4,8]
 def rectangle(
     width,
     height,
@@ -2471,7 +2471,7 @@ rectangle(10, 20, "round", 40)
 This is where `*args` comes in, which is like `**kwargs` but for positional arguments.
 
 ------
-```python[4]
+```python [4]
 def rectangle(
     width,
     height,
@@ -2487,7 +2487,7 @@ rectangle(10, 20, "round", 40)
 And notice how these these arguments can be of any type?
 
 ------
-```python[4,9]
+```python [4,9]
 def rectangle(
     width, # 0
     height, # 1
@@ -2504,7 +2504,7 @@ Similar to `**` within a function call, `*` can be used to unpack iterables into
 > TODO: Repharse to reference destructuring
 
 ------
-```python[4-5,10-11]
+```python [4-5,10-11]
 def rectangle(
     width, # 10
     height, # 20
@@ -2526,7 +2526,7 @@ rectangle(10, 20, 30, rotation=45)
 And if we combine this with kwargs, then it's super useful when we want to pass extra arguments along!
 
 ------
-```python[4-5,7-12]
+```python [4-5,7-12]
 def rectangle(
     width,
     height,
@@ -2546,7 +2546,7 @@ Since using named arguments won't have the intended effect...
 > TODO: remove slide?
 
 ------
-```python[4-5,12-13]
+```python [4-5,12-13]
 def rectangle(
     width, # 10
     height, # 20
@@ -2568,7 +2568,7 @@ It's also worth noting that by nature of `*args` capturing all additional positi
 > TODO: Split slide into two, highlighting the extra argument, and then what it becomes.
 
 ------
-```python[5,9]
+```python [5,9]
 def rectangle(
     width, # 10
     height, # 20
@@ -2606,7 +2606,7 @@ fn main() {
 While I'm not an expert in Rust, to my understanding, Rust doesn't support variable function arguments by design, due to the complexity for the reader and the type checker to try. Instead it encourages passing in lists, which doesn't cause variable type signatures, and offers using macros which let the user encode the complexity.
 
 ------
-```python[4-5,10-11]
+```python [4-5,10-11]
 def rectangle(
     width,
     height,
@@ -2625,7 +2625,7 @@ And this can also be evident in Python, since they can make functions difficult 
 What can really be passed into rectangle?
 
 ------
-```python[4-5]
+```python [4-5]
 def rectangle(
     width: int,
     height: int,
@@ -2640,7 +2640,7 @@ Even if they are typed in their most simple form, it requires the values to be o
 Which you could say for the case of args is fine, because if they needed to be typed differently
 
 ------
-```python[4-6]
+```python [4-6]
 def rectangle(
     width: int,
     height: int,
