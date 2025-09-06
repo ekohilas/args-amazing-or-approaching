@@ -148,7 +148,6 @@ basic = rectangle(10, 20);
 But let's say that a basic rectangle isn't good enough. And we've been asked to create a rotated one instead.
 
 > TODO: Change return type signature of rectangle
-> TODO: Update variable name
 
 ------
 ```java [4]
