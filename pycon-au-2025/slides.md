@@ -1604,6 +1604,13 @@ However this can become messy, and the reference to the original paramter is sti
 This is another case where you could argue that Python isn't perfect.
 
 ------
+<!-- .slide: data-background-image="images/swift_logo.svg"-->
+
+If we look at other languages like Swift, then this concept of naming parameters different from arguments does exist!
+
+> TODO: commit swift picture
+
+------
 ```swift [1]
 // swift
 func map(
@@ -1623,10 +1630,8 @@ map(
 )
 ```
 
-If we look at other languages like Swift, then this concept exists as argument labels and parameter names.
 Take this example map function:
 
-> TODO: Prepend slide with swift logo
 > TODO: Unhighlight all code
 > TODO: Don't use map as example
 
