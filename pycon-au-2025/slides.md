@@ -1234,10 +1234,10 @@ And while it might look fine in this case,
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python []
 rectangle(
     top_left_pos_from_x_origin=top_left_pos_from_x_origin,
-    top_left_pos_from_y_origin=top_left_pos_from_y_origin,
+    top_left_pos_from_y_origin=top_left_pos_from_x_origin,
     bottom_right_pos_from_x_origin=bottom_right_pos_from_x_origin,
     bottom_right_pos_from_y_origin=bottom_right_pos_from_y_origin,
     rotation_in_radians=rotation_in_radians,
@@ -1245,11 +1245,28 @@ rectangle(
     line_thickness_in_pixels=line_thickness_in_pixels,
 )
 ```
-<!-- .element: data-id="named" -->
+<!-- .element: data-id="long" -->
 
-it can get pretty unreadable when the number of parameters and their names are much longer
+it can get pretty unreadable when the number of parameters and their names are much longer...
 
-> TODO: Ask audience to spot the error, and add slide highlighting the line with the error
+For example, has anyone spotted the mistake here?
+
+------
+<!-- .element: data-auto-animate -->
+```python [3]
+rectangle(
+    top_left_pos_from_x_origin=top_left_pos_from_x_origin,
+    top_left_pos_from_y_origin=top_left_pos_from_x_origin,
+    bottom_right_pos_from_x_origin=bottom_right_pos_from_x_origin,
+    bottom_right_pos_from_y_origin=bottom_right_pos_from_y_origin,
+    rotation_in_radians=rotation_in_radians,
+    color_in_hex=color_in_hex,
+    line_thickness_in_pixels=line_thickness_in_pixels,
+)
+```
+<!-- .element: data-id="long" -->
+
+Yeah it's in the 2nd argument, where the x should be a y.
 
 ------
 <!-- .element: data-auto-animate -->
