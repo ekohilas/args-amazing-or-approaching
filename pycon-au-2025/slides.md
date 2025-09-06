@@ -93,7 +93,7 @@ Okay now that that's out of the way let's go back to python's beautiful function
 ```java
 Rectangle function(
     int a,
-    int b,
+    int b
 ) {
     // function code
 }
@@ -105,7 +105,7 @@ To show what I mean, I'll start by using a function from another language.
 ```java
 Rectangle rectangle(
     int width,
-    int height,
+    int height
 ) {
     // function code
 }
@@ -117,7 +117,7 @@ And I'll change it up to a more concrete, relatable example, making rectangles!
 ```java
 Rectangle rectangle(
     int width,
-    int height,
+    int height
 );
 ```
 
@@ -127,7 +127,7 @@ I'll also simplify it down to just the signature.
 ```java [6]
 Rectangle rectangle(
     int width,
-    int height,
+    int height
 );
 
 basic = rectangle(10, 20);
@@ -139,7 +139,7 @@ And now, this function can be called to create a basic rectangle of a particular
 ```java
 Rectangle rectangle(
     int width,
-    int height,
+    int height
 );
 
 basic = rectangle(10, 20);
@@ -230,7 +230,7 @@ Rectangle rotated_rectangle(
 
 Rectangle rectangle(
     int width,
-    int height,
+    int height
 );
 
 basic = rectangle(10, 20);
@@ -330,12 +330,12 @@ With function overloading, we can define multiple functions with the same name, 
 Rectangle rectangle(
     int width,
     int height,
-    int rotation,
+    int rotation
 );
 
 Rectangle rectangle(
     int width,
-    int height,
+    int height
 ) {
     return rectangle(width, height, 0);
 }
@@ -345,8 +345,6 @@ rotated = rectangle(10, 20, 45);
 ```
 
 This removes the need for us to rename any functions, as these programming languages will determine which functions to call using the parameter types instead.
-
-> TODO: Check code syntax, e.g. trailing commas
 
 ------
 ```python
@@ -651,7 +649,7 @@ So if your functions need mutable defaults, the best way to do so is to default 
 ```java
 Rectangle rectangle(
     int width,
-    int height,
+    int height
 );
 
 basic = rectangle(10, 20);
@@ -747,13 +745,13 @@ Not height and width.
 ```java
 Rectangle rectangle(
     int width,
-    int height,
+    int height
 );
 
 Rectangle rectangle(
     int height,
     int width,
-    int rotation,
+    int rotation
 );
 
 shape_1 = rectangle(10, 20);
@@ -769,13 +767,13 @@ For example, both of these are valid definitions,
 ```java [2-3,7-8]
 Rectangle rectangle(
     int width,
-    int height,
+    int height
 );
 
 Rectangle rectangle(
     int height,
     int width,
-    int rotation,
+    int rotation
 );
 
 shape_1 = rectangle(10, 20);
@@ -789,13 +787,13 @@ the only difference being the ordering of the parameters
 ```java [13]
 Rectangle rectangle(
     int width,
-    int height,
+    int height
 );
 
 Rectangle rectangle(
     int height,
     int width,
-    int rotation,
+    int rotation
 );
 
 shape_1 = rectangle(10, 20);
