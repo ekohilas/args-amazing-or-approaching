@@ -6,17 +6,16 @@
 
 ------
 
-# Args: Amazing or Approaching? 
+# Args: Amazing<br>or Approaching? 
 <!-- .element: class="r-fit-text" -->
-### Evan Kohilas
-### `@ekohilas` - `nohumanerrors.com`
+## Evan Kohilas
+## `@ekohilas` - `nohumanerrors.com`
 
 Hello everyone!
 
 I'm Evan, a senior software platform engineer and serial speaker who's passionate about working towards nohumanerrors.com,
 
 > TODO: Change intro
-> TODO: Newline title
 
 ------
 
