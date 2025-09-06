@@ -665,11 +665,10 @@ var rectangle = Rectangle
 
 And that is through a programming construct called the builder pattern.
 
-> TODO: use var rectangle = Rectange\n.builder otherwise not clear it's not a definition.
-
 ------
 ```java [1]
-Rectangle.builder(height, width)
+var rectangle = Rectangle
+    .builder(height, width)
     .build();
  
 ```
@@ -679,7 +678,8 @@ On initiation, it requires and stores all necessary data
 
 ------
 ```java [2]
-Rectangle.builder(height, width)
+var rectangle = Rectangle
+    .builder(height, width)
     .withRotation(rotation)
     .build();
 ```
@@ -689,7 +689,8 @@ and then allows for adding of any optional data
 
 ------
 ```java [3]
-Rectangle.builder(height, width)
+var rectangle = Rectangle
+    .builder(height, width)
     .withRotation(rotation)
     .build();
 ```
@@ -699,7 +700,8 @@ before building the final state.
 
 ------
 ```java
-Rectangle.builder(height, width)
+var rectangle = Rectangle
+    .builder(height, width)
     .build();
  
 ```
@@ -725,7 +727,8 @@ Rectangle rectangle(
     int height
 );
 
-Rectangle.builder(height, width)
+var rectangle = Rectangle
+    .builder(height, width)
     .build();
 ```
 <!-- .element: data-id="builder" -->
