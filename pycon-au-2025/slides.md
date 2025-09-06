@@ -656,7 +656,8 @@ and go back to our original example, those of you that are experienced might be 
 
 ------
 ```java
-Rectangle.builder(height, width)
+var rectangle = Rectangle
+    .builder(height, width)
     .build();
  
 ```
