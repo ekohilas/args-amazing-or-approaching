@@ -4,6 +4,8 @@
 > TODO: Fix sectioning
 > TODO: Ensure height and width are ordered where they're meant to be
 > TODO: Ensure all slides are highlighting the right part
+> TODO: Add void to function signatures
+> TODO: Add a summary slide to 
 
 ------
 
@@ -1057,6 +1059,8 @@ Can anyone spot the error in this example?
 [Yes it's how the IGNORECASE flag is being passed in!]
 [Isn't it interesting how much harder errors are to spot when there's complexity?]
 
+> TODO: Make it clearer that the error is in not knowing what the function definition is
+
 >  https://github.com/python/cpython/issues/56166
 
 ------
@@ -1636,6 +1640,9 @@ However this can become messy, and the reference to the original paramter is sti
 
 This is another case where you could argue that Python isn't perfect.
 
+> TODO: Add a comment to highlight that the language is swift
+> TODO: Add a comment to highlight that the language is javascript
+
 ------
 ```swift
 func map(
@@ -1827,6 +1834,9 @@ map(
 
 Imagine if Python had this functionality. Oh how much more readable python could be!
 
+> TODO: Expand on "this", make the connection clearer
+> TODO: Use rectangle example to highlight renaming
+
 ------
 <!-- .slide: data-background-image="images/javascript-logo.png"-->
 
@@ -1940,6 +1950,8 @@ map({
 ```
 
 then that value can be assigned to a constant, such as `iterable`, or `func`
+
+> TODO: Start with the {iterable, using} = arg example
 
 ------
 ```javascript[2]
@@ -2488,6 +2500,8 @@ rectangle(*numbers) # rectangle(0, 1, 2, 3)
 ```
 
 Similar to `**` within a function call, `*` can be used to unpack iterables into these variable arguments.
+
+> TODO: Repharse to reference destructuring
 
 ------
 ```python[4-5,10-11]
