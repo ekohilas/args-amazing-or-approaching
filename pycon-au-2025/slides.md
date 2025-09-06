@@ -1042,12 +1042,25 @@ Can anyone spot the error in this example?
 (water break)
 (hint, it's do to with function arguments and parameters)
 
-[Yes it's how the IGNORECASE flag is being passed in!]
-[Isn't it interesting how much harder errors are to spot when there's complexity?]
-
-> TODO: Make it clearer that the error is in not knowing what the function definition is
-
 >  https://github.com/python/cpython/issues/56166
+
+------
+```python [5]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+```
+
+[Yes!]
+
+It's how the IGNORECASE flag is being passed in!
+
+Side note: Isn't it interesting how much harder errors are to spot when there's complexity?
+
+This is pretty hard to spot if we don't know the function definition, so let's bring it up.
 
 ------
 ```python [8-14]
@@ -1058,7 +1071,7 @@ re.sub(
     re.IGNORECASE,
 )
 
-re.sub(
+def sub(
     pattern,
     repl,
     string,
@@ -1067,7 +1080,7 @@ re.sub(
 )
 ```
 
-If we bring up the definition of re.sub,
+If we look at the definition of re.sub,
 
 ------
 ```python [5,12]
@@ -1078,7 +1091,7 @@ re.sub(
     re.IGNORECASE,
 )
 
-re.sub(
+def sub(
     pattern,
     repl,
     string,
@@ -1098,7 +1111,7 @@ re.sub(
     re.IGNORECASE, # 2
 )
 
-re.sub(
+def sub(
     pattern,
     repl,
     string,
@@ -1125,7 +1138,7 @@ re.sub(
     flags=re.IGNORECASE,
 )
 
-re.sub(
+def sub(
     pattern,
     repl,
     string,
