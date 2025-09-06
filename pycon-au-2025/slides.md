@@ -1285,28 +1285,12 @@ rectangle(
 ```
 <!-- .element: data-id="named" -->
 
-The good news is, for when we don't have control over the interface, PEP736 is currently debating either using something like a trailing = for arguments that should take from existing variable names
-
-> TODO: Update for rejected PEP "Good news is, I'm not the only one who's though about this, and there's a PEP that talks about... bad news is that it was rejected"
+The good news is, I'm not the only one who's thought about this.PEP736 proposes using a trailing = for arguments that should take from existing variable names
 
 ------
-<!-- .element: data-auto-animate -->
-```python [8-10]
-def rectangle(
-    height,
-    width,
-):
-    ...
-    
-rectangle(
-    *, # PEP736
-    height,
-    width,
-)
-```
-<!-- .element: data-id="named" -->
+<!-- .slide: data-background-image="images/pep_rejected.svg"-->
 
-or adding `*` as an argument, to signify that every argument afterwards should be looked up from a variable name.
+The bad news is, that this was rejected earlier this year...
 
 ------
 <!-- .element: data-auto-animate -->
