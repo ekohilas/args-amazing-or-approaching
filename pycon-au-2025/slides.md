@@ -2660,8 +2660,8 @@ And for typing keyword arguments, only from Python 3.11 were additions added as 
 > https://chatgpt.com/share/67ea8fb7-5874-8004-a270-1fa956b296f2 
 
 > If you're new to python, I will note for you to look into the other types of unpacking uses for this `*` operator, as that's outside the scope of this talk.
-> TODO: Could cut this ** and * content. How to segue?
-> TODO: Maybe use sub as the example instead of rectangle to make the statement?
+> NOTE: Could cut this ** and * content. How to segue?
+> NOTE: Could use sub as the example instead of rectangle to make the statement?
 
 ------
 ```python
