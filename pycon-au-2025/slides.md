@@ -177,7 +177,7 @@ rotated = rectangle(10, 20, 45);
 Now we can make a rotated rectangle!
 
 ------
-```java [7]
+```java [7, 10]
 Rectangle rectangle(
     int width,
     int height,
@@ -186,11 +186,11 @@ Rectangle rectangle(
 
 basic = rectangle(10, 20);
 rotated = rectangle(10, 20, 45);
+
+// error: constructor Rectangle in class Rectangle cannot be applied to given types;
 ```
 
-But now our previous function call needs to be updated.
-
-> TODO: show error
+But now our previous function call needs to be updated, as it'll now error from not enough arguments.
 
 ------
 ```java [7]
