@@ -1734,282 +1734,252 @@ Wouldn't it be awesome if we could do the same in Python?
 Another language where this exists is Javascript
 
 ------
-```javascript [1]
+```javascript [1,5]
 // javascript
-function map({
-    iterable,
-    using: func,
+function rectangle({
+    width,
+    height,
+    rotation: rotation_in_degrees=0,
 }) {
-    const result = [];
-    for (const  item  of iterable) {
-        result.push(func(item));
-    }
-    return result;
+    console.log(rotation_in_degrees)
 }
 
-map({
-    iterable: [-0.5, 0.5, 1.5],
-    using: Math.round,
+rectangle({
+    width: 10,
+    height: 20,
+    rotation: 45,
 });
 ```
 
 Where our previous example looks something like this.
 
+Now for those unfamiliar with JavaScript, even though this looks similar to swift, the way it works is quite different.
+
 ------
-```javascript [1,3-4,14-15]
+```javascript [1,6,10,14]
 // javascript
-function map({
-    iterable,
-    using: func,
+function rectangle({
+    width,
+    height,
+    rotation: rotation_in_degrees=0,
 }) {
-    const result = [];
-    for (const  item  of iterable) {
-        result.push(func(item));
-    }
-    return result;
+    console.log(rotation_in_degrees)
 }
 
-map({
-    iterable: [-0.5, 0.5, 1.5],
-    using: Math.round,
+rectangle({
+    width: 10,
+    height: 20,
+    rotation: 45,
 });
 ```
 
-For those unfamiliar with JavaScript, even though this looks similar to swift (igoring the fact that I've replaced `function` and `with` with `func` and `using`), the way it works is quite different.
+And the secret is in these braces.
 
-There's quite a bit going on here, so if you can bare with me for a bit, I'll show you what I mean.
+------
+```javascript [1,10-15]
+// javascript
+function rectangle({
+    width,
+    height,
+    rotation: rotation_in_degrees=0,
+}) {
+    console.log(rotation_in_degrees)
+}
+
+const obj = {
+    width: 10,
+    height: 20,
+    rotation: 45,
+};
+rectangle(obj);
+```
+
+Because these braces really define an object (like a python dictionary)
 
 ------
 ```javascript [1,2]
 // javascript
-function map(arg) {
-    const iterable = arg.iterable;
-    const func = arg.using;
-
-    const result = [];
-    for (const  item  of iterable) {
-        result.push(func(item));
-    }
-    return result;
+function rectangle(parameter) {
+    const {
+        width,
+        height,
+        rotation: rotation_in_degrees=0,
+    } = parameter;
+    console.log(rotation_in_degrees)
 }
 
-map({
-    iterable: [-0.5, 0.5, 1.5],
-    using: Math.round,
-});
-```
-
-Normally we have a function that takes in a single argument
-
-------
-```javascript [1, 13-16]
-// javascript
-function map(arg) {
-    const iterable = arg.iterable;
-    const func = arg.using;
-
-    const result = [];
-    for (const  item  of iterable) {
-        result.push(func(item));
-    }
-    return result;
-}
-
-map({
-    iterable: [-0.5, 0.5, 1.5],
-    using: Math.round,
-});
-```
-
-which in our case is this thing in brackets that defines an object, similar to python's dictionaries
-
-------
-```javascript [1,3-4]
-// javascript
-function map(arg) {
-    const iterable = arg.iterable;
-    const func = arg.using;
-
-    const result = [];
-    for (const  item  of iterable) {
-        result.push(func(item));
-    }
-    return result;
-}
-
-map({
-    iterable: [-0.5, 0.5, 1.5],
-    using: Math.round,
-});
-```
-
-then that value can be assigned to a constant, such as `iterable`, or `func`
-
-> TODO: Start with the {iterable, using} = arg example
-
-------
-```javascript [1,3]
-// javascript
-function map(arg) {
-    const { iterable, using } = arg;
-    const func = using;
-
-    const result = [];
-    for (const  item  of iterable) {
-        result.push(func(item));
-    }
-    return result;
-}
-
-map({
-    iterable: [-0.5, 0.5, 1.5],
-    using: Math.round,
-});
-```
-
-but because of a language feature called object destructuring, we can have those variables assigned like this instead
-
-------
-```javascript [1,4]
-// javascript
-function map(arg) {
-    const { iterable, using } = arg;
-    const func = using;
-
-    const result = [];
-    for (const  item  of iterable) {
-        result.push(func(item));
-    }
-    return result;
-}
-
-map({
-    iterable: [-0.5, 0.5, 1.5],
-    using: Math.round,
-});
-```
-
-with the caveat being that we still have to re-assign `using` to `func`
-
-------
-```javascript [1,3]
-// javascript
-function map(arg) {
-    const { iterable, using: func } = arg;
-
-
-    const result = [];
-    for (const  item  of iterable) {
-        result.push(func(item));
-    }
-    return result;
-}
-
-map({
-    iterable: [-0.5, 0.5, 1.5],
-    using: Math.round,
-});
-```
-
-but destructuring also lets us re-assign variables.
-
-------
-```javascript [1,2-5]
-// javascript
-function map({
-    iterable,
-    using: func,
-}) {
-    const result = [];
-    for (const  item  of iterable) {
-        result.push(func(item));
-    }
-    return result;
-}
-
-map({
-    iterable: [-0.5, 0.5, 1.5],
-    using: Math.round,
-});
-```
-
-And, better yet, this feature works within the parameters of a function definition!
-
-------
-```javascript [1,13-16]
-// javascript
-function map({
-    iterable,
-    using: func,
-}) {
-    const result = [];
-    for (const  item  of iterable) {
-        result.push(func(item));
-    }
-    return result;
-}
-
-map({
-    iterable: [-0.5, 0.5, 1.5],
-    using: Math.round,
-});
-```
-
-Now, since this parameter is an object,
-
-------
-```javascript [1,13-17]
-// javascript
-function map({
-    iterable,
-    using: func,
-}) {
-    const result = [];
-    for (const  item  of iterable) {
-        result.push(func(item));
-    }
-    return result;
-}
-
-const params = {
-    iterable: [-0.5, 0.5, 1.5],
-    using: Math.round,
+const obj = {
+    width: 10,
+    height: 20,
+    rotation: 45,
 };
-map(params);
+rectangle(obj);
 ```
 
-it can be saved to a variable and only have that passed in instead.
+So really, there's only ever been one argument to this function.
 
 ------
-```python [6-11]
-def map(
-    iterable: list[float],
-    with function: typing.Callable[float],
-) -> list[float]:
-    return [function(item) for item in iterable]
-
-params = {
-    "iterable": [-0.5, 0.5, 1.5],
-    "function": round,
+```javascript [1,3-7]
+// javascript
+function rectangle(parameter) {
+    const {
+        width,
+        height,
+        rotation: rotation_in_degrees=0,
+    } = parameter;
+    console.log(rotation_in_degrees)
 }
-map(**params)
+
+const obj = {
+    width: 10,
+    height: 20,
+    rotation: 45,
+};
+rectangle(obj);
 ```
 
-In fact, (and this is the point that I've been building up to) Python let's you do this with dictionaries too!
+And what's happening here, is that the
 
 ------
-```python [11]
-def map(
-    iterable: list[float],
-    with function: typing.Callable[float],
-) -> list[float]:
-    return [function(item) for item in iterable]
+```javascript [12-14]
+// javascript
+function rectangle(parameter) {
+    const {
+        width,
+        height,
+        rotation: rotation_in_degrees=0,
+    } = parameter;
+    console.log(rotation_in_degrees)
+}
+
+const obj = {
+    width: 10,
+    height: 20,
+    rotation: 45,
+};
+rectangle(obj);
+```
+
+values of this object being passed in,
+
+------
+```javascript [4-5]
+// javascript
+function rectangle(parameter) {
+    const {
+        width,
+        height,
+        rotation: rotation_in_degrees=0,
+    } = parameter;
+    console.log(rotation_in_degrees)
+}
+
+const obj = {
+    width: 10,
+    height: 20,
+    rotation: 45,
+};
+rectangle(obj);
+```
+
+are being destructed into the variables width and height,
+
+------
+```javascript [6]
+// javascript
+function rectangle(parameter) {
+    const {
+        width,
+        height,
+        rotation: rotation_in_degrees=0,
+    } = parameter;
+    console.log(rotation_in_degrees)
+}
+
+const obj = {
+    width: 10,
+    height: 20,
+    rotation: 45,
+};
+rectangle(obj);
+```
+
+with rotation being re-assigned to a different name
+
+------
+```javascript [1,3-5]
+// javascript
+function rectangle(parameter) {
+    const width = parameter.width;
+    const height = parameter.height;
+    const rotation_in_degrees = parameter.rotation;
+    console.log(rotation_in_degrees)
+}
+
+const obj = {
+    width: 10,
+    height: 20,
+    rotation: 45,
+};
+rectangle(obj);
+```
+
+which in effect, is like assigning the variables from an object individually.
+
+-----
+```javascript []
+// javascript
+function rectangle({
+    width,
+    height,
+    rotation: rotation_in_degrees=0,
+}) {
+    console.log(rotation_in_degrees)
+}
+
+rectangle({
+    width: 10,
+    height: 20,
+    rotation: 45,
+});
+```
+
+Okay so why am I explaining all this?
+
+------
+```python [8-13]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    ...
 
 params = {
-    "iterable": [-0.5, 0.5, 1.5],
-    "function": round,
+    "height": 10,
+    "width": 20,
+    "rotation": 45,
 }
-map(**params)
+rectangle(**params)
+```
+
+Because Python let's you do this with dictionaries too!
+
+------
+```python [13]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    ...
+
+params = {
+    "height": 10,
+    "width": 20,
+    "rotation": 45,
+}
+rectangle(**params)
 ```
 
 By using the `**` operator within a function call, python will unpack the keys of the dictionary as the keywords, and the values as the arguments.
@@ -2020,22 +1990,18 @@ By using the `**` operator within a function call, python will unpack the keys o
 This might make you wonder, what happens if extra properties are passed into these function calls?
 
 ------
-```javascript [1,15]
+```javascript [1,3-5,12]
 // javascript
-function map({
-    iterable,
-    using: func,
-}) {
-    const result = [];
-    for (const  item  of iterable) {
-        result.push(func(item));
-    }
-    return result;
-}
+function rectangle({
+    width,
+    height,
+    rotation,
+});
 
-map({
-    iterable: [-0.5, 0.5, 1.5],
-    using: Math.round,
+rectangle({
+    width: 10,
+    height: 20,
+    rotation: 45,
     extra: "argument",
 });
 ```
@@ -2043,23 +2009,19 @@ map({
 Well, I'm sorry to disappoint you, but in JavaScript, the answer is... nothing. They don't get unpacked and thus they're ignored.
 
 ------
-```javascript [4]
+```javascript [6]
 // javascript
-function map({
-    iterable,
-    using: func,
+function rectangle({
+    width,
+    height,
+    rotation,
     ...rest,
-}) {
-    const result = [];
-    for (const  item  of iterable) {
-        result.push(func(item));
-    }
-    return result;
-}
+});
 
-map({
-    iterable: [-0.5, 0.5, 1.5],
-    using: Math.round,
+rectangle({
+    width: 10,
+    height: 20,
+    rotation: 45,
     extra: "argument",
 });
 ```
@@ -2069,21 +2031,17 @@ Buut, there is a way to keep them, and that is by using the ellipses `...rest` p
 ------
 ```javascript [4]
 // javascript
-function map({
-    iterable,
-    using: func,
+function rectangle({
+    width,
+    height,
+    rotation,
     ...rest, // { extra: "argument" }
-}) {
-    const result = [];
-    for (const  item  of iterable) {
-        result.push(func(item));
-    }
-    return result;
-}
+});
 
-map({
-    iterable: [-0.5, 0.5, 1.5],
-    using: Math.round,
+rectangle({
+    width: 10,
+    height: 20,
+    rotation: 45,
     extra: "argument",
 });
 ```
@@ -2092,46 +2050,44 @@ Allowing us to save the remaining properties for whatever they may be needed for
 
 ------
 ```python [10]
-def map(
-    iterable: list[float],
-    with function: typing.Callable[float],
-) -> list[float]:
-    return [function(item) for item in iterable]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    ...
 
 params = {
-    "iterable": [-0.5, 0.5, 1.5],
-    "function": round,
-    "extra": "argument",
+    "height": 10,
+    "width": 20,
+    "rotation": 45,
+    "extra": "argument,
 }
-map(**params)
+rectangle(**params)
 ```
 
 But if this is how JavaScript named parameters work, what happens in python, if we pass extra keyword arguments into a python function?
 
 ------
-```python [11]
-def map(
-    iterable: list[float],
-    with function: typing.Callable[float],
-) -> list[float]:
-    return [function(item) for item in iterable]
+```python [12,14]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    ...
 
 params = {
-    "iterable": [-0.5, 0.5, 1.5],
-    "function": round,
+    "height": 10,
+    "width": 20,
+    "rotation": 45,
+    "extra": "argument,
 }
-map(**params)
-
-# Traceback (most recent call last):
-#   File "<stdin>", line 1, in <module>
-# TypeError: map() got an unexpected keyword argument 'extra'
-
+# TypeError: rectangle() got an unexpected keyword argument 'extra'
+rectangle(**params)
 ```
 
 Well, unlike JavaScript, we'll get an error, telling us off that we passed in an unexpected keyword argument, which you could argue is pretty good default behaviour!
-
-> TODO: use rectangle example instead.
-> TODO: remove with from other python examples
 
 ------
 ```python [5]
@@ -2176,7 +2132,7 @@ As a side note, similar to javascript, this paramter doesn't have to be called `
 ------
 ```python [2]
 def rectangle(
-    { width, height}, # No can do!
+    { width, height }, # No can do!
     height,
     rotation=0,
     **kwargs,
