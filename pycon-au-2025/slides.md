@@ -5,7 +5,6 @@
 > TODO: Ensure height and width are ordered where they're meant to be
 > TODO: Ensure all slides are highlighting the right part
 > TODO: Add void to function signatures
-> TODO: Add a summary slide to
 > TODO: Spellcheck
 
 ------
@@ -1386,7 +1385,7 @@ And if that's the intention, provides a fix to bring clarity with a keyword argu
 
 So if mitigating human errors excites you, I'd love to work with you on these tools!
 
-> TODO: Could expand? e.g. this is because these lint rules can analyse the definitions during the calls of functions
+> NOTE: Could expand? e.g. this is because these lint rules can analyse the definitions during the calls of functions
 
 > TODO: Add sprints
 
