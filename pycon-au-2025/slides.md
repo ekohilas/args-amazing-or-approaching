@@ -1,6 +1,5 @@
 <!-- intentionally blank -->
 
-> TODO: Emphasise point at rust, make
 > TODO: Fix sectioning
 > TODO: Ensure height and width are ordered where they're meant to be
 > TODO: Ensure all slides are highlighting the right part
@@ -2727,8 +2726,11 @@ fn main() {
 ```
 
 
-While I'm not an expert in Rust, to my understanding, Rust doesn't support variable function arguments. due to the complexity for the reader and the type checker to try.
-Instead you can pass in lists, which don't cause variable type signatures, or macros which pass the complexity onto the writer.
+While I'm not an expert in Rust, to my understanding, Rust doesn't support variable function arguments.
+Instead, you can use lists, which don't cause variable type signatures, or macros, which pass the complexity onto the writer.
+Not only is it hard for the type checker, but also hard for the reader.
+
+TODO: Update rust statement and emphasize point about complexity that Python allows
 
 ------
 ```python [4-5,10-11]
