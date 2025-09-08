@@ -2710,6 +2710,11 @@ We can also do the same thing with `*` to unpack into functions with variable ar
 But are arbitrary keyword or positional arguments a good idea?
 
 ------
+<!-- .slide: data-background-image="images/rust.svg"-->
+
+For that, we could look at the design of newer, safer, languages like rust.
+
+------
 ```rust
 fn main() {
     println!("Hello", "world!");
@@ -2744,8 +2749,9 @@ def rectangle(
     )
 ```
 
-And this can also be evident in Python, since they can make functions difficult to understand how they should be used, given there's no need for types.
-What can really be passed into rectangle?
+And this complexity is seen in Python, since they can make functions difficult to understand how they should be used, given there's no need for types.
+
+For example what can really be passed into rectangle?
 
 ------
 ```python [4-5]
