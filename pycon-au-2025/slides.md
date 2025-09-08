@@ -1,16 +1,16 @@
 <!-- intentionally blank -->
 
-> TODO: Emphasise point at rust, make 
+> TODO: Emphasise point at rust, make
 > TODO: Fix sectioning
 > TODO: Ensure height and width are ordered where they're meant to be
 > TODO: Ensure all slides are highlighting the right part
 > TODO: Add void to function signatures
-> TODO: Add a summary slide to 
+> TODO: Add a summary slide to
 > TODO: Spellcheck
 
 ------
 
-# Args: Amazing<br>or Approaching? 
+# Args: Amazing<br>or Approaching?
 <!-- .element: class="r-fit-text" -->
 ## Evan Kohilas
 ## `@ekohilas` - `nohumanerrors.com`
@@ -39,7 +39,7 @@ def function(
 ```
 
 Just look at it, isn't it great? Okay I'm not that crazy, ... at least I think.
-Anyways, let's get some formalities out of the way. 
+Anyways, let's get some formalities out of the way.
 
 ------
 ```python [2-3]
@@ -63,10 +63,10 @@ def function(
     b,
 ):
     ...
-    
+
 function(
-    a, 
-    b, 
+    a,
+    b,
 )
 ```
 
@@ -81,10 +81,10 @@ def function(
     b,
 ):
     ...
-    
+
 function(
-    a, 
-    b, 
+    a,
+    b,
 )
 ```
 
@@ -361,7 +361,7 @@ def rectangle(
 ):
     return rectangle(width, height, 0)
 
-basic = rectangle(10, 20) 
+basic = rectangle(10, 20)
 rotated = rectangle(10, 20, 45)
 ```
 
@@ -381,7 +381,7 @@ def rectangle(
 ):
     return rectangle(width, height, 0)
 
-basic = rectangle(10, 20) 
+basic = rectangle(10, 20)
 rotated = rectangle(10, 20, 45)
 
 # TypeError:
@@ -404,7 +404,7 @@ def rectangle(
 ):
     return rectangle(width, height, 0)
 
-basic = rectangle(10, 20) 
+basic = rectangle(10, 20)
 rotated = rectangle(10, 20, 45)
 ```
 
@@ -434,7 +434,7 @@ def rectangle(
 ):
     return rotated_rectangle(width, height, 0)
 
-basic = rectangle(10, 20) 
+basic = rectangle(10, 20)
 rotated = rotated_rectangle(10, 20, 45)
 ```
 
@@ -454,7 +454,7 @@ def rectangle(
 ):
     return rotated_rectangle(width, height, 0)
 
-basic = rectangle(10, 20) 
+basic = rectangle(10, 20)
 rotated = rotated_rectangle(10, 20, 45)
 ```
 
@@ -468,7 +468,7 @@ def rotated_rectangle(
     rotation=0,
 ): ...
 
-basic = rotated_rectangle(10, 20, 0) 
+basic = rotated_rectangle(10, 20, 0)
 rotated = rotated_rectangle(10, 20, 45)
 ```
 
@@ -482,7 +482,7 @@ def rotated_rectangle(
     rotation=0,
 ): ...
 
-basic = rotated_rectangle(10, 20) 
+basic = rotated_rectangle(10, 20)
 rotated = rotated_rectangle(10, 20, 45)
 ```
 
@@ -496,7 +496,7 @@ def rectangle(
     rotation=0,
 ): ...
 
-basic = rectangle(10, 20) 
+basic = rectangle(10, 20)
 rotated = rectangle(10, 20, 45)
 ```
 
@@ -543,7 +543,7 @@ def rectangle(
 ):
     metadata["width"] = width
     metadata["height"] = height
-    
+
 small = rectangle(10, 20)
 big = rectangle(200, 100)
 
@@ -562,7 +562,7 @@ def rectangle(
 ):
     metadata["width"] = width
     metadata["height"] = height
-    
+
 small = rectangle(10, 20)
 big = rectangle(200, 100)
 
@@ -581,7 +581,7 @@ def rectangle(
 ):
     metadata["width"] = width
     metadata["height"] = height
-    
+
 small = rectangle(10, 20)
 big = rectangle(200, 100)
 
@@ -600,7 +600,7 @@ def rectangle(
 ):
     metadata["width"] = width
     metadata["height"] = height
-    
+
 small = rectangle(10, 20)
 big = rectangle(200, 100)
 
@@ -619,10 +619,10 @@ def rectangle(
 ):
     if metadata is None:
         metadata = {}
-        
+
     metadata["width"] = width
     metadata["height"] = height
-    
+
 small = rectangle(10, 20)
 big = rectangle(200, 100)
 
@@ -647,18 +647,18 @@ Rectangle rectangle(
 basic = rectangle(10, 20);
 ```
 
-and go back to our original example, those of you that are experienced might be thinking of another way that defaults can be done. 
+and go back to our original example, those of you that are experienced might be thinking of another way that defaults can be done.
 
 > TODO: Link all code
 > TODO: Finalise code examples
-> TODO: Add highlighting to code examples 
+> TODO: Add highlighting to code examples
 
 ------
 ```java
 var rectangle = Rectangle
     .builder(height, width)
     .build();
- 
+
 ```
 <!-- .element: data-notrim -->
 
@@ -669,7 +669,7 @@ And that is through a programming construct called the builder pattern.
 var rectangle = Rectangle
     .builder(height, width)
     .build();
- 
+
 ```
 <!-- .element: data-notrim -->
 
@@ -702,7 +702,7 @@ before building the final state.
 var rectangle = Rectangle
     .builder(height, width)
     .build();
- 
+
 ```
 <!-- .element: data-notrim -->
 
@@ -843,7 +843,7 @@ def rectangle(
 ):
     ...
 
-    
+
 rectangle(1, 2, 3,)
 ```
 <!-- .element: data-id="rectangle" -->
@@ -860,7 +860,7 @@ def rectangle(
 ):
     ...
 
-    
+
 rectangle(
     1,
     2,
@@ -880,7 +880,7 @@ def rectangle(
 ):
     ...
 
-    
+
 rectangle(
     1, # height
     2, # width
@@ -899,7 +899,7 @@ def rectangle(
     rotation=0,
 ):
     ...
-    
+
 rectangle(
     1,
     2,
@@ -918,7 +918,7 @@ def rectangle(
     rotation=0,
 ):
     ...
-    
+
 rectangle(
     1, # height
     2, # width
@@ -937,7 +937,7 @@ def rectangle(
     rotation=0,
 ):
     ...
-    
+
 rectangle(
     1, # height
     2, # width
@@ -956,7 +956,7 @@ def rectangle(
     rotation=0,
 ):
     ...
-    
+
 rectangle(
     height=1,
     width=2,
@@ -975,7 +975,7 @@ def rectangle(
     rotation=0,
 ):
     ...
-    
+
 rectangle(
     height=1,
     width=2,
@@ -993,8 +993,8 @@ def rectangle(
     opacity,
     rotation=0,
 ):
-    ... 
-    
+    ...
+
 rectangle(
     height=1,
     width=2,
@@ -1013,7 +1013,7 @@ def rectangle(
     rotation=0,
 ):
     ...
-    
+
 rectangle(
     height=1,
     width=2,
@@ -1179,7 +1179,7 @@ def rectangle(
     width,
 ):
     ...
-    
+
 rectangle(
     1, # height
     2, # width
@@ -1198,7 +1198,7 @@ def rectangle(
     height,
 ):
     ...
-    
+
 rectangle(
     height=1,
     width=2,
@@ -1221,7 +1221,7 @@ def rectangle(
     height,
 ):
     ...
-    
+
 rectangle(
     height=height,
     width=width,
@@ -1276,7 +1276,7 @@ def rectangle(
     width,
 ):
     ...
-    
+
 rectangle(
     # PEP736
     height=,
@@ -1323,7 +1323,7 @@ def rectangle(
     height,
 ):
     ...
-    
+
 rectangle(
     height=height,
     width=width,
@@ -1339,7 +1339,7 @@ def rectangle(
     height,
 ):
     ...
-    
+
 rectangle(
     width,
     width,
@@ -1355,11 +1355,11 @@ def rectangle(
     height,
 ):
     ...
-    
+
 rectangle(
     width,
     # "width" argument name != "height" parameter name.
-    width, 
+    width,
 )
 ```
 
@@ -1372,7 +1372,7 @@ def rectangle(
     height,
 ):
     ...
-    
+
 rectangle(
     width,
     height=width,
@@ -1393,15 +1393,15 @@ So if mitigating human errors excites you, I'd love to work with you on these to
 ------
 <!-- .slide: data-background-image="images/inspired-emoji.png"-->
 
-Or, if I've inspired you enough to start using this paradigm in your code day to day, here are some things that may be worth noting. 
+Or, if I've inspired you enough to start using this paradigm in your code day to day, here are some things that may be worth noting.
 
 ------
 ```python
 range(
     start=0,
-    stop=10, 
+    stop=10,
     skip=2,
-)   
+)
 ```
 
 For one, you may notice in your excitement to use keyword arguments for all your function calls...
@@ -1410,9 +1410,9 @@ For one, you may notice in your excitement to use keyword arguments for all your
 ```python
 range(
     start=0,
-    stop=10, 
+    stop=10,
     skip=2,
-)   
+)
 
 # Traceback (most recent call last):
 #   File "<stdin>", line 1, in <module>
@@ -1450,7 +1450,7 @@ def rectangle(
     rotation=0,
 ):
     ...
-    
+
 rectangle(
     height=10,
     width=20,
@@ -1468,7 +1468,7 @@ def rectangle(
     rotation_in_degrees=0,
 ):
     ...
-    
+
 rectangle(
     height=10,
     width=20,
@@ -1486,7 +1486,7 @@ def rectangle(
     rotation_in_degrees=0,
 ):
     ...
-    
+
 rectangle(
     height=10,
     width=20,
@@ -1509,7 +1509,7 @@ def rectangle(
     /,
 ):
     ...
-    
+
 rectangle(
     height=10,
     width=20,
@@ -1528,7 +1528,7 @@ def rectangle(
     /,
 ):
     ...
-    
+
 rectangle(
     10,
     20,
@@ -1547,7 +1547,7 @@ def rectangle(
 ):
     rotation_in_degrees=rotation
     ...
-    
+
 rectangle(
     height=10,
     width=20,
@@ -1566,7 +1566,7 @@ def rectangle(
 ):
     rotation_in_degrees=rotation
     ...
-    
+
 rectangle(
     height=10,
     width=20,
@@ -1587,7 +1587,7 @@ def rectangle(
     print(rotation_in_degrees)
     print(rotation)
     ...
-    
+
 rectangle(
     height=10,
     width=20,
@@ -1719,7 +1719,7 @@ map(
 )
 ```
 
-But in Swift, we can also specify the argument label as `with` for that paramter 
+But in Swift, we can also specify the argument label as `with` for that paramter
 
 ------
 ```swift [1,15]
@@ -1796,7 +1796,7 @@ def map(
     with function: typing.Callable[float],
 ) -> list[float]:
     return [function(item) for item in iterable]
-    
+
 map(
     iterable=[-0.5, 0.5, 1.5],
     with=round,
@@ -1865,7 +1865,7 @@ There's quite a bit going on here, so if you can bare with me for a bit, I'll sh
 function map(arg) {
     const iterable = arg.iterable;
     const func = arg.using;
-    
+
     const result = [];
     for (const  item  of iterable) {
         result.push(func(item));
@@ -1887,7 +1887,7 @@ Normally we have a function that takes in a single argument
 function map(arg) {
     const iterable = arg.iterable;
     const func = arg.using;
-    
+
     const result = [];
     for (const  item  of iterable) {
         result.push(func(item));
@@ -1909,7 +1909,7 @@ which in our case is this thing in brackets that defines an object, similar to p
 function map(arg) {
     const iterable = arg.iterable;
     const func = arg.using;
-    
+
     const result = [];
     for (const  item  of iterable) {
         result.push(func(item));
@@ -1933,7 +1933,7 @@ then that value can be assigned to a constant, such as `iterable`, or `func`
 function map(arg) {
     const { iterable, using } = arg;
     const func = using;
-    
+
     const result = [];
     for (const  item  of iterable) {
         result.push(func(item));
@@ -1947,7 +1947,7 @@ map({
 });
 ```
 
-but because of a language feature called object destructuring, we can have those variables assigned like this instead 
+but because of a language feature called object destructuring, we can have those variables assigned like this instead
 
 ------
 ```javascript [1,4]
@@ -1955,7 +1955,7 @@ but because of a language feature called object destructuring, we can have those
 function map(arg) {
     const { iterable, using } = arg;
     const func = using;
-    
+
     const result = [];
     for (const  item  of iterable) {
         result.push(func(item));
@@ -1976,8 +1976,8 @@ with the caveat being that we still have to re-assign `using` to `func`
 // javascript
 function map(arg) {
     const { iterable, using: func } = arg;
-    
-    
+
+
     const result = [];
     for (const  item  of iterable) {
         result.push(func(item));
@@ -2035,7 +2035,7 @@ map({
 });
 ```
 
-Now, since this parameter is an object, 
+Now, since this parameter is an object,
 
 ------
 ```javascript [1,13-17]
@@ -2067,11 +2067,11 @@ def map(
     with function: typing.Callable[float],
 ) -> list[float]:
     return [function(item) for item in iterable]
-    
+
 params = {
     "iterable": [-0.5, 0.5, 1.5],
     "function": round,
-}   
+}
 map(**params)
 ```
 
@@ -2084,11 +2084,11 @@ def map(
     with function: typing.Callable[float],
 ) -> list[float]:
     return [function(item) for item in iterable]
-    
+
 params = {
     "iterable": [-0.5, 0.5, 1.5],
     "function": round,
-}   
+}
 map(**params)
 ```
 
@@ -2177,12 +2177,12 @@ def map(
     with function: typing.Callable[float],
 ) -> list[float]:
     return [function(item) for item in iterable]
-    
+
 params = {
     "iterable": [-0.5, 0.5, 1.5],
     "function": round,
     "extra": "argument",
-}   
+}
 map(**params)
 ```
 
@@ -2195,11 +2195,11 @@ def map(
     with function: typing.Callable[float],
 ) -> list[float]:
     return [function(item) for item in iterable]
-    
+
 params = {
     "iterable": [-0.5, 0.5, 1.5],
     "function": round,
-}   
+}
 map(**params)
 
 # Traceback (most recent call last):
@@ -2222,7 +2222,7 @@ def rectangle(
     **rest, # { "extra": "argument" }
 ):
     ...
-    
+
 params = {
     "height": 10,
     "width": 20,
@@ -2242,7 +2242,7 @@ def rectangle(
     **kwargs, # { "extra": "argument" }
 ):
     ...
-    
+
 params = {
     "height": 10,
     "width": 20,
@@ -2262,7 +2262,7 @@ def rectangle(
     **kwargs,
 ):
     ...
-    
+
 params = {
     "height": 10,
     "width": 20,
@@ -2284,7 +2284,7 @@ def rectangle(
     (width, height),
 ):
     print "width:", width, "height:", height
-    
+
 rectangle((10, 20)) # width: 10 height: 20
 ```
 
@@ -2303,7 +2303,7 @@ def rectangle(
     **kwargs, # { "extra": "argument" }
 ):
     ...
-    
+
 params = {
     "height": 10,
     "width": 20,
@@ -2328,7 +2328,7 @@ def rectangle(
     /,
 ):
     ...
-    
+
 rectangle(
     10,
     20,
@@ -2345,7 +2345,7 @@ def rectangle(
     **kwargs,
 ):
     ...
-    
+
 params = {
     "height": 30,
     "width": 40,
@@ -2368,7 +2368,7 @@ def rectangle(
     **kwargs,
 ):
     ...
-    
+
 params = {
     "height": 30,
     "width": 40,
@@ -2392,10 +2392,10 @@ def rectangle(
     width,
     height,
     /,
-    **kwargs, # { "height": 30, "width": 40, "extra": "argument" } 
+    **kwargs, # { "height": 30, "width": 40, "extra": "argument" }
 ):
     ...
-    
+
 params = {
     "height": 30,
     "width": 40,
@@ -2418,13 +2418,13 @@ def rectangle(
     **kwargs,
 ):
     ...
-    
+
 rectangle(
     width=10,
     height=20,
     rotation=45,
     color="green",
-    line_width=1, 
+    line_width=1,
 )
 ```
 
@@ -2432,7 +2432,12 @@ Now you might have noticed that **kwargs is pretty cool, since it lets us pass i
 
 ------
 ```python
-sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+sum(
+    10,
+    20,
+    30,
+    40,
+)
 ```
 
 But there are also cases where we can't define a keyword for every argument.
@@ -2440,21 +2445,19 @@ But there are also cases where we can't define a keyword for every argument.
 Say for example, when we want to sum a list of numbers.
 
 ------
-```python [4,8]
+```python [4]
 def rectangle(
     width,
     height,
     *args,
 ):
     ...
-    
-rectangle(10, 20, "round", 40)
 ```
 
 This is where `*args` comes in, which is like `**kwargs` but for positional arguments.
 
 ------
-```python [4]
+```python [4, 11-12]
 def rectangle(
     width,
     height,
@@ -2584,7 +2587,9 @@ fn main() {
 //  |              formatting specifier missing
 ```
 
-While I'm not an expert in Rust, to my understanding, Rust doesn't support variable function arguments by design, due to the complexity for the reader and the type checker to try. Instead it encourages passing in lists, which doesn't cause variable type signatures, and offers using macros which let the user encode the complexity.
+
+While I'm not an expert in Rust, to my understanding, Rust doesn't support variable function arguments. due to the complexity for the reader and the type checker to try.
+Instead you can pass in lists, which don't cause variable type signatures, or macros which pass the complexity onto the writer.
 
 ------
 ```python [4-5,10-11]
@@ -2626,7 +2631,7 @@ def rectangle(
     width: int,
     height: int,
     name: str,
-    rotation: int
+    rotation: int,
     *args: str,
     **kwargs: int,
 ):
@@ -2658,7 +2663,7 @@ And for typing keyword arguments, only from Python 3.11 were additions added as 
 
 > https://docs.python.org/3/library/typing.html#typing.Unpack
 > https://typing.python.org/en/latest/spec/callables.html#unpack-kwargs
-> https://chatgpt.com/share/67ea8fb7-5874-8004-a270-1fa956b296f2 
+> https://chatgpt.com/share/67ea8fb7-5874-8004-a270-1fa956b296f2
 
 > If you're new to python, I will note for you to look into the other types of unpacking uses for this `*` operator, as that's outside the scope of this talk.
 > NOTE: Could cut this ** and * content. How to segue?
@@ -2669,7 +2674,7 @@ And for typing keyword arguments, only from Python 3.11 were additions added as 
 def function(
     positional_only: int,
     positional_with_default: str = "hello",
-    /, # Positional only parameter seperator
+    /, # Positional only parameter separator
     positional_or_keyword,
     *aribitrary_argument_tuple: int, # * also marks further paramaters as keyword only
     keyword_only: str,
@@ -2689,7 +2694,7 @@ at the least it's forever changing.
 
 ------
 
-# <br> 
+# <br>
 ![args-amazing-or-approaching.nohumanerrors.com](images/args-amazing-or-approaching.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
 <!-- .element: class="r-stretch"-->
 ## `args-amazing-or-approaching.nohumanerrors.com`
@@ -2701,7 +2706,7 @@ Or if you're after me, you can collaborate with me on nohumanerrors.com, find me
 
 ------
 
-# Thanks! 
+# Thanks!
 ![args-amazing-or-approaching.nohumanerrors.com](images/args-amazing-or-approaching.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
 <!-- .element: class="r-stretch"-->
 ## `args-amazing-or-approaching.nohumanerrors.com`
