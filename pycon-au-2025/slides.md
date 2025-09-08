@@ -1607,8 +1607,6 @@ This is another case where you could argue that Python isn't perfect.
 
 If we look at other languages like Swift, then this concept of naming parameters different from arguments does exist!
 
-> TODO: commit swift picture
-
 ------
 ```swift [1]
 // swift
@@ -2710,7 +2708,7 @@ We can also do the same thing with `*` to unpack into functions with variable ar
 But are arbitrary keyword or positional arguments a good idea?
 
 ------
-<!-- .slide: data-background-image="images/rust.svg"-->
+<!-- .slide: data-background-image="images/rust_logo.svg"-->
 
 For that, we could look at the design of newer, safer, languages like rust.
 
