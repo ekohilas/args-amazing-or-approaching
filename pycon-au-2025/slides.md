@@ -1608,201 +1608,125 @@ If we look at other languages like Swift, then this concept of naming parameters
 ------
 ```swift [1]
 // swift
-func map(
-    iterable: [Double],
-    function: (Double) -> Double
-) -> [Double] {
-    var result: [Double] = []
-    for item in iterable {
-        result.append(function(item))
-    }
-    return result
+func rectangle(
+    width: Int,
+    height: Int,
+    rotation: Int = 0
+) -> Rectangle {
+    let rotationInDegrees = rotation
+    print(rotationInDegrees)
+    print(rotation)
 }
 
-map(
-    iterable: [-0.5, 0.5, 1.5],
-    function: round
+rectangle(
+    width: 20,
+    height: 10,
+    rotation: 45
 )
 ```
 
-Take this example map function:
-
-> TODO: Don't use map as example
+If we convert our previous python rectangle example to swift...
 
 ------
-```swift [1,15]
+```swift [7]
 // swift
-func map(
-    iterable: [Double],
-    function: (Double) -> Double
-) -> [Double] {
-    var result: [Double] = []
-    for item in iterable {
-        result.append(function(item))
-    }
-    return result
+func rectangle(
+    width: Int,
+    height: Int,
+    rotation: Int = 0
+) -> Rectangle {
+    let rotationInDegrees = rotation
+    print(rotationInDegrees)
+    print(rotation)
 }
 
-map(
-    iterable: [-0.5, 0.5, 1.5],
-    function: round
+rectangle(
+    width: 20,
+    height: 10,
+    rotation: 45
 )
 ```
 
-where its called with the argument label, `function`,
+Then instead of creating a new variable to re-name the parameter 
 
 ------
-```swift [1,4]
+```swift [5,7]
 // swift
-func map(
-    iterable: [Double],
-    function: (Double) -> Double
-) -> [Double] {
-    var result: [Double] = []
-    for item in iterable {
-        result.append(function(item))
-    }
-    return result
+func rectangle(
+    width: Int,
+    height: Int,
+    rotation rotation_in_degrees: Int = 0
+) -> Rectangle {
+    print(rotationInDegrees)
 }
 
-map(
-    iterable: [-0.5, 0.5, 1.5],
-    function: round
+rectangle(
+    width: 20,
+    height: 10,
+    rotation: 45
 )
 ```
 
-which is taken from the parameter name,
+An argument label can be used that's internal to the function
 
 ------
-```swift [1,8]
+```swift [13]
 // swift
-func map(
-    iterable: [Double],
-    function: (Double) -> Double
-) -> [Double] {
-    var result: [Double] = []
-    for item in iterable {
-        result.append(function(item))
-    }
-    return result
+func rectangle(
+    width: Int,
+    height: Int,
+    rotation rotation_in_degrees: Int = 0
+) -> Rectangle {
+    print(rotationInDegrees)
 }
 
-map(
-    iterable: [-0.5, 0.5, 1.5],
-    function: round
+rectangle(
+    width: 20,
+    height: 10,
+    rotation: 45
 )
 ```
 
-and used in the function body.
+Avoiding the need to change the interface,
 
 ------
-```swift [1,4]
+```swift [7]
 // swift
-func map(
-    iterable: [Double],
-    with function: (Double) -> Double
-) -> [Double] {
-    var result: [Double] = []
-    for item in iterable {
-        result.append(function(item))
-    }
-    return result
+func rectangle(
+    width: Int,
+    height: Int,
+    rotation rotation_in_degrees: Int = 0
+) -> Rectangle {
+    print(rotationInDegrees)
 }
 
-map(
-    iterable: [-0.5, 0.5, 1.5],
-    with: round
+rectangle(
+    width: 20,
+    height: 10,
+    rotation: 45
 )
 ```
 
-But in Swift, we can also specify the argument label as `with` for that paramter
+or create additional variables.
 
 ------
-```swift [1,15]
-// swift
-func map(
-    iterable: [Double],
-    with function: (Double) -> Double
-) -> [Double] {
-    var result: [Double] = []
-    for item in iterable {
-        result.append(function(item))
-    }
-    return result
-}
+```python [4]
+def rectangle(
+    width,
+    height,
+    rotation rotation_in_degrees=0,
+):
+    print(rotation_in_degrees)
+    ...
 
-map(
-    iterable: [-0.5, 0.5, 1.5],
-    with: round
+rectangle(
+    height=10,
+    width=20,
+    rotation=45,
 )
 ```
 
-Now, when map is called, it's done so using this label,
-
-------
-```swift [1,8]
-// swift
-func map(
-    iterable: [Double],
-    with function: (Double) -> Double
-) -> [Double] {
-    var result: [Double] = []
-    for item in iterable {
-        result.append(function(item))
-    }
-    return result
-}
-
-map(
-    iterable: [-0.5, 0.5, 1.5],
-    with: round
-)
-```
-
-leaving the function body unchanged.
-
-------
-```swift [1,13-16]
-// swift
-func map(
-    iterable: [Double],
-    with function: (Double) -> Double
-) -> [Double] {
-    var result: [Double] = []
-    for item in iterable {
-        result.append(function(item))
-    }
-    return result
-}
-
-map(
-    iterable: [-0.5, 0.5, 1.5],
-    with: round
-)
-```
-
-This is awesome because it reads so nicely!
-
-"map this iterable with the round function."
-
-------
-```python [3,5,9]
-def map(
-    iterable: list[float],
-    with function: typing.Callable[float],
-) -> list[float]:
-    return [function(item) for item in iterable]
-
-map(
-    iterable=[-0.5, 0.5, 1.5],
-    with=round,
-)
-```
-
-Imagine if Python had this functionality. Oh how much more readable python could be!
-
-> TODO: Expand on "this", make the connection clearer
-> TODO: Use rectangle example to highlight renaming
+Wouldn't it be awesome if we could do the same in Python?
 
 ------
 <!-- .slide: data-background-image="images/javascript-logo.png"-->
