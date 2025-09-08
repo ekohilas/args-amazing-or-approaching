@@ -2813,27 +2813,62 @@ And for typing keyword arguments, only from Python 3.11 were additions added as 
 > NOTE: Could use sub as the example instead of rectangle to make the statement?
 
 ------
-```python
+```python [|4|2|3|5|6|7-8]
 def function(
     positional_only: int,
     positional_with_default: str = "hello",
     /, # Positional only parameter separator
     positional_or_keyword,
-    *aribitrary_argument_tuple: int, # * also marks further paramaters as keyword only
+    *, # Keyword only parameter seperator
     keyword_only: str,
     keyword_with_default: str = "world",
-    **keyword_argument_dict: typing.Unpack[Kw]
+    **keyword_argument_dict: Unpack[TypedDict]
 ):
 ```
 
-So to recap
+- So to recap, this is python's argument system:
+- a slash separator marks
+- positional only
+- and those with defaults
+- the standard positional or keyword argument
+- a star separator marks
+- keyword only arguments
 
-This, is python's argument system
+------
+```python [6|7|8|9]
+def function(
+    positional_only: int,
+    positional_with_default: str = "hello",
+    /, # Positional only parameter separator
+    positional_or_keyword,
+    *aribitrary_argument_tuple: int, # * also marks keyword only
+    keyword_only: str,
+    keyword_with_default: str = "world",
+    **keyword_argument_dict: Unpack[TypedDict]
+):
+```
 
-> TODO: run through them
+- and can be used to handle arbitrary positional arguments
+- there's keyword arguments
+- and those with defaults
+- and finally double star, to handle arbitrary keyword arguments
 
-and while You can argue that it's both approaching, and amazing
-at the least it's forever changing.
+------
+```python []
+def function(
+    positional_only: int,
+    positional_with_default: str = "hello",
+    /, # Positional only parameter separator
+    positional_or_keyword,
+    *aribitrary_argument_tuple: int, # * also marks keyword only
+    keyword_only: str,
+    keyword_with_default: str = "world",
+    **keyword_argument_dict: Unpack[TypedDict]
+):
+```
+
+and while you can argue that it's both approaching, and amazing
+at least it's forever changing...
 
 ------
 
