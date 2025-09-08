@@ -6,6 +6,7 @@
 > TODO: Ensure all slides are highlighting the right part
 > TODO: Add void to function signatures
 > TODO: Add a summary slide to 
+> TODO: Spellcheck
 
 ------
 
