@@ -2464,110 +2464,247 @@ def rectangle(
     *args, # ("round", 40)
 ):
     ...
-    
-rectangle(10, 20, "round", 40)
+
+rectangle(
+    10,
+    20,
+    "round", # args[0]
+    40,      # args[1]
+)
 ```
 
 `args` then appears as a variable that holds a tuple of all the extra arguments that were passed in.
 
-And notice how these these arguments can be of any type?
+It's worth noting that by nature of `*args` capturing all additional positional arguments, any further parameters must be keyword only.
 
 ------
-```python [4,9]
+```python [5]
 def rectangle(
-    width, # 0
-    height, # 1
-    *args, # (2, 3)
+    width,
+    height,
+    *args, # ("round", 40)
+    rotation,
 ):
     ...
-    
-numbers = list(range(4))
-rectangle(*numbers) # rectangle(0, 1, 2, 3)
+
+rectangle(
+    10,
+    20,
+    "round",
+    40,
+)
 ```
 
-Similar to `**` within a function call, `*` can be used to unpack iterables into these variable arguments.
+So if a new parameter is added after it...
 
 ------
-```python [4-5,10-11]
+```python [9-14]
 def rectangle(
-    width, # 10
-    height, # 20
-    *args, # (30, )
-    **kwargs, # {"rotation": 45}
+    width,
+    height,
+    *args, # ("round", 40)
+    rotation,
+):
+    ...
+
+rectangle(
+    10,
+    20,
+    "round",
+    40,
+)
+```
+
+and the function is run as before...
+
+------
+```python [9]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+):
+    ...
+
+# TypeError: rectangle() missing 1 required keyword-only argument: 'rotation'
+rectangle(
+    10,
+    20,
+    "round",
+    40,
+)
+```
+
+We'll get a missing keyword argument error.
+
+------
+```python [13]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+):
+    ...
+
+rectangle(
+    10,
+    20,
+    "round",
+    rotation=40,
+)
+```
+
+Unless that argument is passed in with a keyword.
+
+------
+```python [14]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+):
+    ...
+
+rectangle(
+    10,
+    20,
+    "round",
+    rotation=40,
+    color="green",
+)
+```
+
+And if an extra keyword argument is passed in...
+
+------
+```python [9]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+):
+    ...
+
+# TypeError: rectangle() got an unexpected keyword argument 'color'
+rectangle(
+    10,
+    20,
+    "round",
+    rotation=40,
+    color="green",
+)
+```
+
+We'll get an error for an unexpected keyword argument.
+
+------
+```python [9-15]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+):
+    ...
+
+rectangle(
+    10,
+    20,
+    "round",
+    rotation=40,
+    color="green",
+)
+```
+
+What if we wanted to be sure that we could always pass in all arguments?
+
+------
+```python [6]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+    **kwargs,
+):
+    ...
+
+rectangle(
+    10,
+    20,
+    "round",
+    40,
+    color="green",
+)
+```
+
+Then we could end the definition with **kwargs so that our function captures both!
+
+------
+```python [8-14]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+    **kwargs,
+):
+    return shape(
+        width,
+        height,
+        args,
+        rotation,
+        kwargs,
+    )
+```
+
+This would let us pass in all extra arguments down to other functions.
+
+------
+```python [13]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+    **kwargs,
+):
+    return shape(
+        width,
+        height,
+        args,
+        rotation,
+        **kwargs,
+    )
+```
+
+And similar to `**` that allows for unpacking within a function call,
+
+------
+```python [11]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+    **kwargs,
 ):
     return shape(
         width,
         height,
         *args,
-        **kwargs
+        rotation,
+        **kwargs,
     )
-
-    # shape(10, 20, 30, rotation=45)
-
-rectangle(10, 20, 30, rotation=45) 
 ```
 
-And if we combine this with kwargs, then it's super useful when we want to pass extra arguments along!
+We can also do the same thing with `*` to unpack into functions with variable arguments, to respect shape's function definition.
 
 ------
-```python [4-5,7-12]
-def rectangle(
-    width,
-    height,
-    *args,
-    **kwargs,
-):
-    return shape(
-        width,
-        height, 
-        args=args, 
-        kwargs=kwargs,
-    ) 
-```
-
-Since using named arguments won't have the intended effect...
-
-> TODO: remove slide?
-
-------
-```python [4-5,12-13]
-def rectangle(
-    width, # 10
-    height, # 20
-    *args, # (30, )
-    rotation = 0, # 45 
-):
-    ...
-    
-rectangle(
-    10,
-    20,
-    30,
-    rotation=45
-)
-```
-
-It's also worth noting that by nature of `*args` capturing all additional positional arguments, any further parameters become keyword only.
-
-> TODO: Split slide into two, highlighting the extra argument, and then what it becomes.
-
-------
-```python [5,9]
-def rectangle(
-    width, # 10
-    height, # 20
-    *args, # (30, 40)
-    rotation = 0, # keyword only
-):
-    ...
-    
-rectangle(10, 20, 30, 40)
-```
-
-And won't be affected otherwise.
-
-------
-
 <!-- .slide: data-background-image="images/thinking.svg"-->
 
 But are arbitrary keyword or positional arguments a good idea?
