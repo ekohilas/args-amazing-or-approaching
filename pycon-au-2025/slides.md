@@ -2049,7 +2049,7 @@ rectangle({
 Allowing us to save the remaining properties for whatever they may be needed for.
 
 ------
-```python [10]
+```python [12]
 def rectangle(
     width,
     height,
@@ -2061,7 +2061,7 @@ params = {
     "height": 10,
     "width": 20,
     "rotation": 45,
-    "extra": "argument,
+    "extra": "argument",
 }
 rectangle(**params)
 ```
@@ -2089,6 +2089,28 @@ rectangle(**params)
 
 Well, unlike JavaScript, we'll get an error, telling us off that we passed in an unexpected keyword argument, which you could argue is pretty good default behaviour!
 
+And I say default here because you can also specify a way to keep these leftover argumnets,
+
+------
+```python [5]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+    **rest,
+):
+    ...
+
+params = {
+    "height": 10,
+    "width": 20,
+    "extra": "argument",
+}
+rectangle(**params)
+```
+
+and that is by using our good friend `**` again, adding it to a `rest` paramter.
+
 ------
 ```python [5]
 def rectangle(
@@ -2107,7 +2129,9 @@ params = {
 rectangle(**params)
 ```
 
-And I say default here because you can also specify a way to keep these leftover argumnets, and that is by using our good friend `**` again, adding it to a `rest` paramter.
+which captures any extra keyword arguments into a dictionary
+
+As a side note, similar to javascript, this paramter doesn't have to be called `rest` either.
 
 ------
 ```python [5]
@@ -2127,12 +2151,12 @@ params = {
 rectangle(**params)
 ```
 
-As a side note, similar to javascript, this paramter doesn't have to be called `rest` either. The general convention in Python is `kwargs` for keyword args.
+The general convention in Python is `kwargs` for keyword args.
 
 ------
 ```python [2]
 def rectangle(
-    { width, height }, # No can do!
+    { width, height }, # SyntaxError: invalid syntax 
     height,
     rotation=0,
     **kwargs,
@@ -2147,7 +2171,7 @@ params = {
 rectangle(**params)
 ```
 
-And unlike JavaScript, Python currently doesn't have a way to unpack parameters within function definitions.
+And unlike JavaScript, Python doesn't currently have a way to unpack parameters within function definitions.
 
 ------
 <!-- .slide: data-background-image="images/good-old-days.png"-->
@@ -2171,7 +2195,7 @@ But who knows, maybe it'll come back to Python 3 after a PEP?
 Anyways where were we...
 
 ------
-```python
+```python [14]
 def rectangle(
     width,
     height,
@@ -2188,103 +2212,155 @@ params = {
 rectangle(**params)
 ```
 
-So, by specifying `**kwargs` as the last parameter, what this does, is tell python that any additional arguments that were passed in as keywords, and not caught by previous parameters will now be caught by `kwargs`.
-
-What do I mean by this?
-
-> TODO: What does "this" mean?
-> TODO: Prepend slide with previously seen example and highlight on added params
-
+A thing to keep in mind with ** is
 
 ------
-```python [5]
+```python [15-17]
 def rectangle(
     width,
     height,
-    /,
-):
-    ...
-
-rectangle(
-    10,
-    20,
-)
-```
-
-Remember how I mentioned earlier that there was two cases where you might want a `/` in your parameters to make them positional only?
-
-------
-```python [8-17]
-def rectangle(
-    width,
-    height,
+    rotation=0,
     **kwargs,
 ):
     ...
 
 params = {
-    "height": 30,
-    "width": 40,
+    "height": 10,
+    "width": 20,
     "extra": "argument",
 }
 rectangle(
-    10,
-    20,
+    height=30,
+    width=40,
     **params
 )
 ```
 
-Well, the second case is where you have a call like this, both with a normal parameters and `**kwargs`.
+What happens if there's arguments are provided in the function and with the double star? 
 
 ------
-```python [18-20]
+```python [14]
 def rectangle(
     width,
     height,
+    rotation=0,
     **kwargs,
 ):
     ...
 
 params = {
-    "height": 30,
-    "width": 40,
+    "width": 10,
+    "height": 20,
     "extra": "argument",
 }
+# TypeError: rectangle() got multiple values for keyword argument 'width'
 rectangle(
-    10,
-    20,
+    width=30,
+    height=40,
     **params
 )
-# Traceback (most recent call last):
-#  File "<stdin>", line 1, in <module>
-# TypeError: rectangle() got multiple values for argument 'height'
 ```
 
-And when you call this function, it fails since `height` is attempted to be filled both by the positional argument and the keyword argument.
+Python will nicely tell us that we've made a mistake.
 
 ------
-```python [4-5,8-17]
+```python [14,16-17]
 def rectangle(
     width,
     height,
-    /,
-    **kwargs, # { "height": 30, "width": 40, "extra": "argument" }
+    rotation=0,
+    **kwargs,
 ):
     ...
 
 params = {
-    "height": 30,
-    "width": 40,
+    "width": 10,
+    "height": 20,
     "extra": "argument",
 }
+# TypeError: rectangle() got multiple values for keyword argument 'width'
 rectangle(
-    10,
-    20,
+    30,
+    40,
     **params
 )
 ```
 
-So `/` can be used if you instead wanted these keyword arguments to be captured by **kwargs.
+And we'll get the same error if they're passed in as positionals instead.
+
+------
+```python [9-18]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+    **kwargs,
+):
+    ...
+
+params = {
+    "width": 10,
+    "height": 20,
+    "extra": "argument",
+}
+rectangle(
+    30,
+    40,
+    **params
+)
+```
+
+If you did want to make it such that this was okay, there is one thing you can do.
+
+------
+```python [4]
+def rectangle(
+    width,
+    height,
+    /,
+    rotation=0,
+    **kwargs,
+):
+    ...
+
+params = {
+    "width": 10,
+    "height": 20,
+    "extra": "argument",
+}
+rectangle(
+    30,
+    40,
+    **params
+)
+```
+
+And this is the other case I mentioned earlier, for another use of slash to enforce positional arguments. 
+
+------
+```python [2-3,6]
+def rectangle(
+    width, # 30
+    height, # 40
+    /,
+    rotation=0,
+    **kwargs, # {"width": 10, "height": 20", "extra": "argument"}
+):
+    ...
+
+params = {
+    "width": 10,
+    "height": 20,
+    "extra": "argument",
+}
+rectangle(
+    30,
+    40,
+    **params
+)
+```
+
+Making it such that those extra keyword arguments are forced into kwargs.
 
 ------
 ```python [4,9-13]
