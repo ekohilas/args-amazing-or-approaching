@@ -828,6 +828,7 @@ rectangle(
 ```
 
 Meaning that not only are our functions self documenting by having constant arguments labelled
+> TODO: fix numbering of arguments above
 
 ------
 ```python
@@ -1032,11 +1033,89 @@ rectangle(
 )
 ```
 
-we now don't have to make changes to re-order those arguments where that function is called.
+we now don't have to make changes to re-order those arguments everywhere that function is called.
 
-> TODO: Insert slide to talk about ordering and git diffs
+------
+```python [10-11]
+def rectangle(
+    height,
+    width,
+):
+    ...
 
-But even in the cases where you're not refactoring, not using keyword arguments has led to errors.
+rectangle(
+    height=1,
+    width=2,
+)
+```
+
+And if we choose to sort the ordering of arguments and parameters, we can reduce the chance of merge conflicts
+
+------
+```python [10-11]
+def rectangle(
+    height,
+    opacity,
+    rotation,
+    width,
+):
+    ...
+
+rectangle(
+    height=1,
+    opacity
+    width=2,
+)
+```
+
+for example, if one commit adds opacity and rotation,
+
+------
+```python [10-11]
+def rectangle(
+    color,
+    height,
+    opacity,
+    width,
+):
+    ...
+
+rectangle(
+    color="green"
+    height=1,
+    opacity=30,
+    width=2,
+)
+```
+
+and the other adds opacity and color, as when they're combined
+
+------
+```python [10-11]
+def rectangle(
+    color,
+    height,
+    opacity,
+    rotation,
+    width,
+):
+    ...
+
+rectangle(
+    color="green"
+    height=1,
+    opacity=30,
+    rotation=40,
+    width=2,
+)
+```
+
+opacity will be in the same place for both.
+
+------
+<!-- .slide: data-background-image="images/no_teamwork.svg"-->
+
+Even if you don't care for refactoring or collaboration, I'd still recommend using keyword arguments to reduce human errors.
 
 ------
 ```python
@@ -1048,6 +1127,7 @@ re.sub(
 )
 ```
 
+Pop quiz!
 Can anyone spot the error in this example?
 (and if you already know then let others have a chance)
 (water break)
