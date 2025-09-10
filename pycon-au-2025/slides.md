@@ -5,6 +5,10 @@
 > TODO: Ensure all slides are highlighting the right part
 > TODO: Add void to function signatures
 > TODO: Spellcheck
+> TODO: Link all code using
+> TODO: Check code examples
+<!-- .element: data-id="builder" -->
+<!-- .element: data-auto-animate -->
 
 ------
 
@@ -645,11 +649,20 @@ Rectangle rectangle(
 basic = rectangle(10, 20);
 ```
 
-and go back to our original example, those of you that are experienced might be thinking of another way that defaults can be done.
+and go back to our original non python example,
 
-> TODO: Link all code
-> TODO: Finalise code examples
-> TODO: Add highlighting to code examples
+------
+```java
+Rectangle rectangle(
+    int width,
+    int height,
+    int rotation=0 // how?
+);
+
+basic = rectangle(10, 20);
+```
+
+how could defaults be done in a language that doesn't support them?
 
 ------
 ```java
@@ -660,7 +673,7 @@ var rectangle = Rectangle
 ```
 <!-- .element: data-notrim -->
 
-And that is through a programming construct called the builder pattern.
+Well, some of you might be familiar with a programming construct called the builder pattern.
 
 ------
 ```java [1]
