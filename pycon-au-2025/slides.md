@@ -1063,7 +1063,7 @@ def rectangle(
 
 rectangle(
     height=1,
-    opacity
+    opacity=30,
     width=2,
 )
 ```
