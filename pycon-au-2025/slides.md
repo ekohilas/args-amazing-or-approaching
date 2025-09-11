@@ -136,7 +136,7 @@ Rectangle rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-I'll also simplify it down to just the signature.
+I'll also simplify it down to the function type signature.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -364,6 +364,8 @@ rotated = rectangle(10, 20, 45);
 
 With function overloading, we can define multiple functions with the same name, but different type signatures.
 
+> TODO: Split into two slides (one on names, another on type signatures)
+
 ------
 <!-- .element: data-auto-animate -->
 ```java [11,14,15]
@@ -434,6 +436,8 @@ rotated = rectangle(10, 20, 45)
 
 It would fail!
 
+> TODO: fix failure to appear on slide
+
 ------
 <!-- .element: data-auto-animate -->
 ```python [1-10]
@@ -455,6 +459,8 @@ rotated = rectangle(10, 20, 45)
 <!-- .element: data-id="code" -->
 
 And this is because in Python, defining a function with the same name overwrites the previous definition.
+
+> TODO: Fix highlighting to be only on names
 
 ------
 <!-- .slide: data-background-image="images/multipledispatch-pypi.png"-->
@@ -695,12 +701,14 @@ def rectangle(
 small = rectangle(10, 20)
 big = rectangle(200, 100)
 
-print(small.metadata) # {"width": 200, "height": 100"}
+print(small.metadata) # {"width": 10, "height": 20"}
 print(big.metadata)   # {"width": 200, "height": 100"}
 ```
 <!-- .element: data-id="code" -->
 
 So if your functions need mutable defaults, the best way to do so is to default them to None, and set the mutable that you want if it hasn't been specified.
+
+> TODO: Update example to use 3/4 not 1/2
 
 ------
 <!-- .slide: data-background-image="images/thunderstorms_and_lightning.svg"-->
@@ -826,6 +834,8 @@ Rectangle rectangle(
 Not height and width.
 
 (pause for effect)
+
+And, in case you were wondering, I _have_ seen this in a codebase.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1393,6 +1403,7 @@ re.sub(
 What this will do, is throw us an error when we try to call the function without naming those arguments.
 
 > TODO: add slide with flags having argument
+> TOOD: clean up error
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1617,11 +1628,9 @@ And if that's the intention, provides a fix to bring clarity with a keyword argu
 ------
 <!-- .slide: data-background-image="images/github-logo.png"-->
 
-So if mitigating human errors excites you, I'd love to work with you on these tools!
+So if mitigating human errors excites you, I'd love to talk with you on how we can make more of these kinds of tools!
 
 > NOTE: Could expand? e.g. this is because these lint rules can analyse the definitions during the calls of functions
-
-> TODO: Add sprints
 
 ------
 <!-- .slide: data-background-image="images/inspired-emoji.png"-->
@@ -1630,7 +1639,7 @@ Or, if I've inspired you enough to start using this paradigm in your code day to
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python []
 range(
     start=0,
     stop=10,
@@ -1643,15 +1652,12 @@ For one, you may notice in your excitement to use keyword arguments for all your
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python [6]
 range(
     start=0,
     stop=10,
     skip=2,
 )
-
-# Traceback (most recent call last):
-#   File "<stdin>", line 1, in <module>
 # TypeError: range() takes no keyword arguments
 ```
 <!-- .element: data-id="code" -->
@@ -1659,7 +1665,6 @@ range(
 that not _all_ functions are happy with that.
 
 ------
-<!-- .element: data-auto-animate -->
 ```python [5]
 def range(
     start,
@@ -1679,7 +1684,7 @@ Unlike `*` which makes all further parameters keyword only,
 
 Given the wonders you've just seen with keyword arguments, you might be wondering, when is this helpful?
 
-Well there's two cases that I've seen
+Well there's three cases that I've seen
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1757,9 +1762,9 @@ def rectangle(
     ...
 
 rectangle(
-    height=10,
-    width=20,
-    rotation=45,
+    10,
+    20,
+    45,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -1806,7 +1811,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-Another case may be where we want to keep the external argument name the same, and change the internal parameter name within our function.
+Another case is when we want to keep the external argument name the same, and change the internal parameter name within our function.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1917,7 +1922,7 @@ Then instead of creating a new variable to re-name the parameter
 func rectangle(
     width: Int,
     height: Int,
-    rotation rotation_in_degrees: Int = 0
+    rotation rotationInDegrees: Int = 0
 ) -> Rectangle {
     print(rotationInDegrees)
 }
@@ -1939,7 +1944,7 @@ An argument label can be used that's internal to the function
 func rectangle(
     width: Int,
     height: Int,
-    rotation rotation_in_degrees: Int = 0
+    rotation rotationInDegrees: Int = 0
 ) -> Rectangle {
     print(rotationInDegrees)
 }
@@ -1961,7 +1966,7 @@ Avoiding the need to change the interface,
 func rectangle(
     width: Int,
     height: Int,
-    rotation rotation_in_degrees: Int = 0
+    rotation rotationInDegrees: Int = 0
 ) -> Rectangle {
     print(rotationInDegrees)
 }
@@ -1995,12 +2000,12 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-Wouldn't it be awesome if we could do the same in Python?
+Wouldn't it be awesome if we could do the same thing in Python?
 
 ------
 <!-- .slide: data-background-image="images/javascript-logo.png"-->
 
-Another language where this exists is Javascript
+This feature also exists in Javascript
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2009,9 +2014,9 @@ Another language where this exists is Javascript
 function rectangle({
     width,
     height,
-    rotation: rotation_in_degrees=0,
+    rotation: rotationInDegrees=0,
 }) {
-    console.log(rotation_in_degrees)
+    console.log(rotationInDegrees)
 }
 
 rectangle({
@@ -2022,9 +2027,9 @@ rectangle({
 ```
 <!-- .element: data-id="code" -->
 
-Where our previous example looks something like this.
+It looks like this, which is quite similar.
 
-Now for those unfamiliar with JavaScript, even though this looks similar to swift, the way it works is quite different.
+But for those of you unfamiliar with JavaScript, the way it works is quite different.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2033,9 +2038,9 @@ Now for those unfamiliar with JavaScript, even though this looks similar to swif
 function rectangle({
     width,
     height,
-    rotation: rotation_in_degrees=0,
+    rotation: rotationInDegrees=0,
 }) {
-    console.log(rotation_in_degrees)
+    console.log(rotationInDegrees)
 }
 
 rectangle({
@@ -2055,9 +2060,9 @@ And the secret is in these braces.
 function rectangle({
     width,
     height,
-    rotation: rotation_in_degrees=0,
+    rotation: rotationInDegrees=0,
 }) {
-    console.log(rotation_in_degrees)
+    console.log(rotationInDegrees)
 }
 
 const obj = {
@@ -2079,9 +2084,9 @@ function rectangle(parameter) {
     const {
         width,
         height,
-        rotation: rotation_in_degrees=0,
+        rotation: rotationInDegrees=0,
     } = parameter;
-    console.log(rotation_in_degrees)
+    console.log(rotationInDegrees)
 }
 
 const obj = {
@@ -2103,9 +2108,9 @@ function rectangle(parameter) {
     const {
         width,
         height,
-        rotation: rotation_in_degrees=0,
+        rotation: rotationInDegrees=0,
     } = parameter;
-    console.log(rotation_in_degrees)
+    console.log(rotationInDegrees)
 }
 
 const obj = {
@@ -2127,9 +2132,9 @@ function rectangle(parameter) {
     const {
         width,
         height,
-        rotation: rotation_in_degrees=0,
+        rotation: rotationInDegrees=0,
     } = parameter;
-    console.log(rotation_in_degrees)
+    console.log(rotationInDegrees)
 }
 
 const obj = {
@@ -2151,9 +2156,9 @@ function rectangle(parameter) {
     const {
         width,
         height,
-        rotation: rotation_in_degrees=0,
+        rotation: rotationInDegrees=0,
     } = parameter;
-    console.log(rotation_in_degrees)
+    console.log(rotationInDegrees)
 }
 
 const obj = {
@@ -2175,9 +2180,9 @@ function rectangle(parameter) {
     const {
         width,
         height,
-        rotation: rotation_in_degrees=0,
+        rotation: rotationInDegrees=0,
     } = parameter;
-    console.log(rotation_in_degrees)
+    console.log(rotationInDegrees)
 }
 
 const obj = {
@@ -2198,8 +2203,8 @@ with rotation being re-assigned to a different name
 function rectangle(parameter) {
     const width = parameter.width;
     const height = parameter.height;
-    const rotation_in_degrees = parameter.rotation;
-    console.log(rotation_in_degrees)
+    const rotationInDegrees = parameter.rotation;
+    console.log(rotationInDegrees)
 }
 
 const obj = {
@@ -2213,15 +2218,15 @@ rectangle(obj);
 
 which in effect, is like assigning the variables from an object individually.
 
------
+------
 ```javascript []
 // javascript
 function rectangle({
     width,
     height,
-    rotation: rotation_in_degrees=0,
+    rotation: rotationInDegrees=0,
 }) {
-    console.log(rotation_in_degrees)
+    console.log(rotationInDegrees)
 }
 
 rectangle({
@@ -2526,7 +2531,7 @@ rectangle(**params)
 ```
 <!-- .element: data-id="code" -->
 
-A thing to keep in mind with ** is
+A question you may have about `**` is,
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2552,7 +2557,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-What happens if there's arguments are provided in the function and with the double star? 
+what happens if arguments are provided in the function and with the double star? 
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2579,7 +2584,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-Python will nicely tell us that we've made a mistake.
+Well, Python will nicely tell us that we've made a mistake.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2659,7 +2664,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-And this is the other case I mentioned earlier, for another use of slash to enforce positional arguments. 
+And this is the last of three cases I mentioned earlier, as another use of slash to enforce positional arguments. 
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2959,8 +2964,8 @@ def rectangle(
     return shape(
         width,
         height,
-        args,
         rotation,
+        args,
         kwargs,
     )
 ```
@@ -2981,8 +2986,8 @@ def rectangle(
     return shape(
         width,
         height,
-        args,
         rotation,
+        args,
         **kwargs,
     )
 ```
@@ -3003,8 +3008,8 @@ def rectangle(
     return shape(
         width,
         height,
-        *args,
         rotation,
+        *args,
         **kwargs,
     )
 ```
@@ -3041,8 +3046,8 @@ fn main() {
 
 
 While I'm not an expert in Rust, to my understanding, Rust doesn't support variable function arguments.
-Instead, you can use lists, which don't cause variable type signatures, or macros, which pass the complexity onto the writer.
 Not only is it hard for the type checker, but also hard for the reader.
+So if you do want this complexity, you can use lists, which don't cause variable type signatures, or macros, which pass the complexity onto the writer.
 
 TODO: Update rust statement and emphasize point about complexity that Python allows
 
