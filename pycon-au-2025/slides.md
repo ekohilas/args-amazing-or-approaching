@@ -4,7 +4,7 @@
 > TODO: Ensure height and width are ordered where they're meant to be
 > TODO: Ensure all slides are highlighting the right part
 > TODO: Add void to function signatures
-> TODO: Spellcheck
+> TODO: Spellcheck final
 > TODO: Link all code using
 > TODO: Check code examples
 <!-- .element: data-id="builder" -->
@@ -163,7 +163,7 @@ Rectangle rectangle(
 basic = rectangle(10, 20);
 ```
 
-And to do so, we need to add the rotation paramter.
+And to do so, we need to add the rotation parameter.
 
 ------
 ```java [8]
@@ -207,7 +207,7 @@ basic = rectangle(10, 20, 0);
 rotated = rectangle(10, 20, 45);
 ```
 
-And this creates a problem, because we now need to go through and update all existing function calls for any unrotated rectangles, and add an additional argument for a default rotation of 0
+And this creates a problem, because we now need to go through and update all existing function calls for any un-rotated rectangles, and add an additional argument for a default rotation of 0
 
 ------
 ```java
@@ -420,7 +420,7 @@ While there are packages like multipledispatch that you can use to replicate fun
 ------
 <!-- .slide: data-background-image="images/overloading-problem.png"-->
 
-function overloading in general can also become problematic, for reasons that will become more apparrant later.
+function overloading in general can also become problematic, for reasons that will become more apparent later.
 
 ------
 ```python
@@ -460,7 +460,7 @@ basic = rectangle(10, 20)
 rotated = rotated_rectangle(10, 20, 45)
 ```
 
-Well in python, the concept of default arguments is built into the lanaguage (using the equals sign in the parameter definition)
+Well in python, the concept of default arguments is built into the language (using the equals sign in the parameter definition)
 
 ------
 ```python [7]
@@ -843,7 +843,7 @@ But now our argument ordering is redundant!
 ------
 <!-- .slide: data-background-image="images/never_ending_benefits.svg"-->
 
-This might not seem like much, but this little change, of always using keywords arguments, leads to so many benefits, and prevetion of errors.
+This might not seem like much, but this little change, of always using keywords arguments, leads to so many benefits, and prevention of errors.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1211,7 +1211,7 @@ def sub(
 )
 ```
 
-and then the flag is read as an int, setting the maximum number of subtitutions to 2.
+and then the flag is read as an int, setting the maximum number of substitutions to 2.
 
 That would explain why I spent hours trying to figure out why my expected thousands of substitutions weren't working, and was instead second guessing my replacement function.
 
@@ -1686,7 +1686,7 @@ rectangle(
 )
 ```
 
-However this can become messy, and the reference to the original paramter is still kept.
+However this can become messy, and the reference to the original parameter is still kept.
 
 ------
 <!-- .slide: data-background-image="images/sad-python.png"-->
@@ -2119,7 +2119,7 @@ rectangle({
 });
 ```
 
-Buut, there is a way to keep them, and that is by using the ellipses `...rest` property.
+But, there is a way to keep them, and that is by using the ellipses `...rest` property.
 
 ------
 ```javascript [4]
@@ -2180,9 +2180,9 @@ params = {
 rectangle(**params)
 ```
 
-Well, unlike JavaScript, we'll get an error, telling us off that we passed in an unexpected keyword argument, which you could argue is pretty good default behaviour!
+Well, unlike JavaScript, we'll get an error, telling us off that we passed in an unexpected keyword argument, which you could argue is pretty good default behavior!
 
-And I say default here because you can also specify a way to keep these leftover argumnets,
+And I say default here because you can also specify a way to keep these leftover arguments,
 
 ------
 ```python [5]
@@ -2202,7 +2202,7 @@ params = {
 rectangle(**params)
 ```
 
-and that is by using our good friend `**` again, adding it to a `rest` paramter.
+and that is by using our good friend `**` again, adding it to a `rest` parameter.
 
 ------
 ```python [5]
@@ -2224,7 +2224,7 @@ rectangle(**params)
 
 which captures any extra keyword arguments into a dictionary
 
-As a side note, similar to javascript, this paramter doesn't have to be called `rest` either.
+As a side note, similar to javascript, this parameter doesn't have to be called `rest` either.
 
 ------
 ```python [5]
@@ -2867,7 +2867,7 @@ def function(
     positional_with_default: str = "hello",
     /, # Positional only parameter separator
     positional_or_keyword,
-    *, # Keyword only parameter seperator
+    *, # Keyword only parameter separator
     keyword_only: str,
     keyword_with_default: str = "world",
     **keyword_argument_dict: Unpack[TypedDict]
@@ -2889,7 +2889,7 @@ def function(
     positional_with_default: str = "hello",
     /, # Positional only parameter separator
     positional_or_keyword,
-    *aribitrary_argument_tuple: int, # * also marks keyword only
+    *arbitrary_argument_tuple: int, # * also marks keyword only
     keyword_only: str,
     keyword_with_default: str = "world",
     **keyword_argument_dict: Unpack[TypedDict]
@@ -2908,7 +2908,7 @@ def function(
     positional_with_default: str = "hello",
     /, # Positional only parameter separator
     positional_or_keyword,
-    *aribitrary_argument_tuple: int, # * also marks keyword only
+    *arbitrary_argument_tuple: int, # * also marks keyword only
     keyword_only: str,
     keyword_with_default: str = "world",
     **keyword_argument_dict: Unpack[TypedDict]
