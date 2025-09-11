@@ -7,6 +7,7 @@
 > TODO: Spellcheck final
 > TODO: Check code is linked properly
 > TODO: Check code examples
+> TODO: Add history notes for when features were introduced
 
 ------
 
@@ -27,7 +28,7 @@ Great! Because I am too since...
     <img src="images/python.svg">
 </div>
 
-I have utmost adoration for python's beautiful function argument system.
+I have utmost adoration for python's beautiful function argument and parameter system.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -96,7 +97,7 @@ function(
 ```
 <!-- .element: data-id="function" -->
 
-Okay now that that's out of the way let's go back to python's beautiful function argument system, that maybe I am crazy for...
+Okay now that that's out of the way let's go back to python's beautiful function argument and parameter system, that maybe I am crazy for...
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3140,68 +3141,238 @@ And for typing keyword arguments, only from Python 3.11 were additions added as 
 
 ------
 <!-- .element: data-auto-animate -->
-```python [|4|2|3|5|6|7-8]
+```python [1,10]
 def function(
-    positional_only: int,
-    positional_with_default: str = "hello",
-    /, # Positional only parameter separator
+    positional_only,
+    /, # Positional only parameter indicator
     positional_or_keyword,
-    *, # Keyword only parameter separator
-    keyword_only: str,
-    keyword_with_default: str = "world",
-    **keyword_argument_dict: Unpack[TypedDict]
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
 ):
 ```
 <!-- .element: data-id="code" -->
 
-- So to recap, this is python's argument system:
-- a slash separator marks
-- positional only
-- and those with defaults
-- the standard positional or keyword argument
-- a star separator marks
-- keyword only arguments
-
-> TOOD: separate onto different slides
+So to recap, this is python's function argument and parameter system,
 
 ------
 <!-- .element: data-auto-animate -->
-```python [6|7|8|9]
+```python [3]
 def function(
-    positional_only: int,
-    positional_with_default: str = "hello",
-    /, # Positional only parameter separator
+    positional_only,
+    /, # Positional only parameter indicator
     positional_or_keyword,
-    *arbitrary_argument_tuple: int, # * also marks keyword only
-    keyword_only: str,
-    keyword_with_default: str = "world",
-    **keyword_argument_dict: Unpack[TypedDict]
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
 ):
 ```
 <!-- .element: data-id="code" -->
 
-- and can be used to handle arbitrary positional arguments
-- there's keyword arguments
-- and those with defaults
-- and finally double star, to handle arbitrary keyword arguments
+The slash special parameter marks that the previous parameters
 
 ------
 <!-- .element: data-auto-animate -->
-```python []
+```python [2]
 def function(
-    positional_only: int,
-    positional_with_default: str = "hello",
-    /, # Positional only parameter separator
+    positional_only,
+    /, # Positional only parameter indicator
     positional_or_keyword,
-    *arbitrary_argument_tuple: int, # * also marks keyword only
-    keyword_only: str,
-    keyword_with_default: str = "world",
-    **keyword_argument_dict: Unpack[TypedDict]
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
 ):
 ```
 <!-- .element: data-id="code" -->
 
-and while you can argue that it's both approaching, and amazing
+are positional only
+
+------
+<!-- .element: data-auto-animate -->
+```python [4]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="code" -->
+
+There's the standard parameter that can be positional or keyword,
+
+------
+<!-- .element: data-auto-animate -->
+```python [5]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="code" -->
+
+and can also be set with a default
+
+------
+<!-- .element: data-auto-animate -->
+```python [3,5]
+def function(
+    positional_only,
+    positional_only_with_default="baz",
+    /, # Positional only parameter indicator
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="code" -->
+
+as can positional only if they, and all other positional arguments are also given defaults
+
+------
+<!-- .element: data-auto-animate -->
+```python [6]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="code" -->
+
+`*` captures an arbitrary number of positional arguments,
+
+------
+<!-- .element: data-auto-animate -->
+```python [7,8]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="code" -->
+
+and also indicates that further parameters are keyword only
+
+------
+<!-- .element: data-auto-animate -->
+```python [7]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="code" -->
+
+such as this keyword argument,
+
+------
+<!-- .element: data-auto-animate -->
+```python [8]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="code" -->
+
+or this one with a default.
+
+------
+<!-- .element: data-auto-animate -->
+```python [6]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *, # Keyword only parameter indicator
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="code" -->
+
+And `*` can also be used alone as a special parameter to do the same. 
+
+------
+<!-- .element: data-auto-animate -->
+```python [9]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="code" -->
+
+And finally double star, to handle arbitrary keyword arguments
+
+------
+<!-- .slide: data-background-image="images/approaching_amazing_changing_0.svg"-->
+
+So while you can argue that Python's function system
+
+------
+<!-- .slide: data-background-image="images/approaching_amazing_changing_1.svg"-->
+
+is both approaching,
+
+------
+<!-- .slide: data-background-image="images/approaching_amazing_changing_2.svg"-->
+
+and amazing,
+
+------
+<!-- .slide: data-background-image="images/approaching_amazing_changing_3.svg"-->
+
 at least it's forever changing...
 
 ------
@@ -3212,7 +3383,7 @@ at least it's forever changing...
 ## `args-amazing-or-approaching.nohumanerrors.com`
 # `@ekohilas`
 
-If you're after the resources for this talk, you can find them in the links above.
+If you're after the resources for this talk, you can find them in these links.
 
 Or if you're after me, you can collaborate with me on nohumanerrors.com, find me online at ekohilas, or here if you have any questions or feedback!
 
