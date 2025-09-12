@@ -87,6 +87,8 @@ Okay so, anyone want to take a guess at what these are called?
 
 Yeah these are arguments!
 
+> TIME
+
 ------
 <!-- .element: data-auto-animate -->
 ```python []
@@ -336,6 +338,8 @@ rotated = rotated_rectangle(10, 20, 45);
 
 And sets the new parameter with a default argument, which in our case will be 0.
 
+> TIME
+
 ------
 <!-- .element: data-auto-animate -->
 ```java []
@@ -487,6 +491,8 @@ While there are packages like multipledispatch that you can use to replicate fun
 
 function overloading in general can also become problematic, for reasons that will become more apparent later.
 
+> TIMe
+
 ------
 <!-- .element: data-auto-animate -->
 ```python []
@@ -605,6 +611,8 @@ rotated = rectangle(10, 20, 45)
 <!-- .element: data-id="code" -->
 
 Then we can rename our function back to rectangle, to get our beautiful definition.
+
+> TIME
 
 ------
 <!-- .slide: data-background-image="images/sunshine_and_rainbows.svg"-->
@@ -750,6 +758,8 @@ print(big.metadata)   # {"width": 300, "height": 400"}
 
 So if your functions need mutable defaults, the best way to do so is to default them to None, and set the mutable that you want if it hasn't been specified.
 
+> TIME
+
 > TODO: Update example to use 3/4 not 1/2
 
 ------
@@ -837,6 +847,8 @@ var rectangle = Rectangle
 <!-- .element: data-id="builder" -->
 
 before building the final state.
+
+> TIME
 
 ------
 <!-- .element: data-auto-animate -->
@@ -979,6 +991,8 @@ shape_2 = rectangle(20, 10);
 <!-- .element: data-id="builder" -->
 
 Without having to reference the signature of the functions, there's no knowing whether the arguments are set correctly.
+
+> TIME
 
 ------
 <!-- .slide: data-background-image="images/history_keyword_args.svg"-->
@@ -1150,6 +1164,8 @@ rectangle(
 
 They're now actually for height, width, and opacity, without us ever knowing.
 
+> TIME
+
 ------
 <!-- .element: data-auto-animate -->
 ```python [10-12]
@@ -1319,6 +1335,8 @@ rectangle(
 <!-- .element: data-id="code" -->
 
 opacity will be in the same place for both.
+
+> TIME
 
 ------
 <!-- .slide: data-background-image="images/no_teamwork.svg"-->
@@ -1552,6 +1570,8 @@ which would require updating the arguments to be keyword arguments.
 
 But that can be cumbersome, as it can be forgotten, can make the code noisy, and would also require updating all previously made functions.
 
+> TIME
+
 ------
 <!-- .element: data-auto-animate -->
 ```python [8-9]
@@ -1738,6 +1758,8 @@ And if that's the intention, provides a fix to bring clarity with a keyword argu
 So if mitigating human errors excites you, I'd love to talk with you on how we can make more of these kinds of tools!
 
 > NOTE: Could expand? e.g. this is because these lint rules can analyse the definitions during the calls of functions
+
+> TIME
 
 ------
 <!-- .slide: data-background-image="images/inspired-emoji.png"-->
@@ -1979,7 +2001,9 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-However this can become messy, and the reference to the original parameter is still kept.
+However this can become messy, as the reference to the original parameter is still kept.
+
+> TIME
 
 ------
 <!-- .slide: data-background-image="images/sad-python.png"-->
@@ -2125,6 +2149,8 @@ rectangle(
 <!-- .element: data-id="code" -->
 
 Wouldn't it be awesome if we could do the same thing in Python?
+
+> TIME
 
 ------
 <!-- .slide: data-background-image="images/javascript-logo.png"-->
@@ -2342,6 +2368,8 @@ rectangle(obj);
 
 which in effect, is like assigning the variables from an object individually.
 
+> TIME
+
 ------
 ```javascript []
 // javascript
@@ -2479,6 +2507,8 @@ rectangle({
 <!-- .element: data-id="code" -->
 
 Allowing us to save the remaining properties for whatever they may be needed for.
+
+> TIME
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2644,6 +2674,8 @@ Well... it was only for tuples
 But who knows, maybe it'll come back to Python 3 after a PEP?
 
 Anyways where were we...
+
+> TIME
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2826,6 +2858,8 @@ rectangle(
 <!-- .element: data-id="code" -->
 
 Making it such that those extra keyword arguments are forced into kwargs.
+
+> TIME
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3043,6 +3077,8 @@ rectangle(
 
 We'll get an error for an unexpected keyword argument.
 
+> TIME
+
 ------
 <!-- .element: data-auto-animate -->
 ```python [9-15]
@@ -3155,6 +3191,8 @@ def rectangle(
 <!-- .element: data-id="code" -->
 
 We can also do the same thing with `*` to unpack into functions with variable arguments, to respect shape's function definition.
+
+> TIME
 
 ------
 <!-- .slide: data-background-image="images/thinking.svg"-->
@@ -3269,6 +3307,8 @@ def rectangle(
 <!-- .element: data-id="code" -->
 
 And for typing keyword arguments, only from Python 3.11 were additions added as support, to help specify what keywords could be caught, and what their types could be.
+
+> TIME
 
 > https://docs.python.org/3/library/typing.html#typing.Unpack
 > https://typing.python.org/en/latest/spec/callables.html#unpack-kwargs
@@ -3494,6 +3534,8 @@ def function(
 
 And finally double star, to handle arbitrary keyword arguments
 
+> TIME
+
 ------
 <!-- .slide: data-background-image="images/approaching_amazing_changing_0.svg"-->
 
@@ -3535,4 +3577,6 @@ Or if you're after me, you can collaborate with me on nohumanerrors.com, find me
 # `@ekohilas`
 
 Thanks to my friends, family, the open source community, as well as to you for listening!
+
+> TIME
 
