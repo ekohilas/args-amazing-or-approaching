@@ -10,6 +10,7 @@
 > TODO: Add void to function signatures
 > TODO: Check code examples
 > TODO: Add history notes for when features were introduced
+> TODO: don't read out pep numbers
 > TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L32321 (keyword arguments)
 > TODO: https://www.python.org/download/releases/1.6/ (variable arguments)
 > TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L32776 (default arguments)
@@ -2546,7 +2547,7 @@ params = {
     "height": 10,
     "width": 20,
     "rotation": 45,
-    "extra": "argument,
+    "extra": "argument",
 }
 # TypeError: rectangle() got an unexpected keyword argument 'extra'
 rectangle(**params)
@@ -2900,7 +2901,7 @@ But there are also cases where we can't define a keyword for every argument.
 Say for example, when we want to sum a list of numbers.
 
 ------
-<!-- .slide: data-background-image="images/history_keyword_args.svg"-->
+<!-- .slide: data-background-image="images/history_var_args.svg"-->
 
 Thankfully, back in 1992, this was added as part of Python 0.9.2!
 
