@@ -83,7 +83,7 @@ Yeah these are arguments!
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python []
 def function(
     a,
     b,
@@ -101,7 +101,7 @@ Okay now that that's out of the way let's go back to python's beautiful function
 
 ------
 <!-- .element: data-auto-animate -->
-```java
+```java []
 void function(
     int a,
     int b
@@ -114,8 +114,7 @@ void function(
 To show what I mean, I'll start by using a function from another language.
 
 ------
-<!-- .element: data-auto-animate -->
-```java
+```java []
 Rectangle rectangle(
     int width,
     int height
@@ -125,11 +124,25 @@ Rectangle rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-And I'll change it up to a more concrete, relatable example, making rectangles!
+And I'll change it up to a more concrete,
 
 ------
 <!-- .element: data-auto-animate -->
-```java
+```java []
+Rectangle rectangle(
+    int width,
+    int height
+) {
+    // function code
+}
+```
+<!-- .element: data-id="code" -->
+
+relatable example, making rectangles!
+
+------
+<!-- .element: data-auto-animate -->
+```java []
 Rectangle rectangle(
     int width,
     int height
@@ -155,7 +168,7 @@ And now, this function can be called to create a basic rectangle of a particular
 
 ------
 <!-- .element: data-auto-animate -->
-```java
+```java []
 Rectangle rectangle(
     int width,
     int height
@@ -202,17 +215,16 @@ Now we can make a rotated rectangle!
 
 ------
 <!-- .element: data-auto-animate -->
-```java [7, 10]
+```java [6-8]
 Rectangle rectangle(
     int width,
     int height,
     int rotation
 );
-
-basic = rectangle(10, 20);
+basic = rectangle(10, 20); 
+// error: constructor Rectangle in class Rectangle
+//          cannot be applied to given types;
 rotated = rectangle(10, 20, 45);
-
-// error: constructor Rectangle in class Rectangle cannot be applied to given types;
 ```
 <!-- .element: data-id="code" -->
 
@@ -236,7 +248,7 @@ And this creates a problem, because we now need to go through and update all exi
 
 ------
 <!-- .element: data-auto-animate -->
-```java
+```java []
 Rectangle rectangle(
     int width,
     int height,
@@ -297,7 +309,6 @@ rotated = rotated_rectangle(10, 20, 45);
 So we update the old function, such that it calls the new function
 
 ------
-<!-- .element: data-auto-animate -->
 ```java [10-12]
 Rectangle rotated_rectangle(
     int width,
@@ -321,7 +332,7 @@ And sets the new parameter with a default argument, which in our case will be 0.
 
 ------
 <!-- .element: data-auto-animate -->
-```java
+```java []
 Rectangle rotated_rectangle(
     int width,
     int height,
@@ -392,7 +403,7 @@ This removes the need for us to rename any functions, as these programming langu
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python []
 def rectangle(
     width,
     height,
@@ -414,7 +425,7 @@ If we looked at the same code in python
 
 ------
 <!-- .element: data-auto-animate -->
-```python [14-17]
+```python [14-16]
 def rectangle(
     width,
     height,
@@ -429,9 +440,8 @@ def rectangle(
 
 basic = rectangle(10, 20)
 rotated = rectangle(10, 20, 45)
-
-# TypeError:
-#  rectangle() takes 2 positional arguments but 3 were given
+# TypeError: rectangle() takes 2 positional arguments
+#              but 3 were given
 ```
 <!-- .element: data-id="code" -->
 
@@ -441,7 +451,7 @@ It would fail!
 
 ------
 <!-- .element: data-auto-animate -->
-```python [1-10]
+```python [1,7]
 def rectangle(
     width,
     height,
@@ -461,8 +471,6 @@ rotated = rectangle(10, 20, 45)
 
 And this is because in Python, defining a function with the same name overwrites the previous definition.
 
-> TODO: Fix highlighting to be only on names
-
 ------
 <!-- .slide: data-background-image="images/multipledispatch-pypi.png"-->
 
@@ -475,7 +483,7 @@ function overloading in general can also become problematic, for reasons that wi
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python []
 def rotated_rectangle(
     width,
     height,
@@ -613,10 +621,10 @@ def rectangle(
     metadata["height"] = height
 
 small = rectangle(10, 20)
-big = rectangle(200, 100)
+big = rectangle(300, 400)
 
 print(small.metadata) # {"width": 10, "height": 20"}
-print(big.metadata)   # {"width": 200, "height": 100"}
+print(big.metadata)   # {"width": 300, "height": 400"}
 ```
 <!-- .element: data-id="code" -->
 
@@ -634,10 +642,10 @@ def rectangle(
     metadata["height"] = height
 
 small = rectangle(10, 20)
-big = rectangle(200, 100)
+big = rectangle(300, 400)
 
-print(small.metadata) # {"width": 200, "height": 100"}
-print(big.metadata)   # {"width": 200, "height": 100"}
+print(small.metadata) # {"width": 300, "height": 400"}
+print(big.metadata)   # {"width": 300, "height": 400"}
 ```
 <!-- .element: data-id="code" -->
 
@@ -655,10 +663,10 @@ def rectangle(
     metadata["height"] = height
 
 small = rectangle(10, 20)
-big = rectangle(200, 100)
+big = rectangle(300, 400)
 
-print(small.metadata) # {"width": 200, "height": 100"}
-print(big.metadata)   # {"width": 200, "height": 100"}
+print(small.metadata) # {"width": 300, "height": 400"}
+print(big.metadata)   # {"width": 300, "height": 400"}
 ```
 <!-- .element: data-id="code" -->
 
@@ -676,10 +684,10 @@ def rectangle(
     metadata["height"] = height
 
 small = rectangle(10, 20)
-big = rectangle(200, 100)
+big = rectangle(300, 400)
 
-print(small.metadata) # {"width": 200, "height": 100"}
-print(big.metadata)   # {"width": 200, "height": 100"}
+print(small.metadata) # {"width": 300, "height": 400"}
+print(big.metadata)   # {"width": 300, "height": 400"}
 ```
 <!-- .element: data-id="code" -->
 
@@ -700,10 +708,10 @@ def rectangle(
     metadata["height"] = height
 
 small = rectangle(10, 20)
-big = rectangle(200, 100)
+big = rectangle(300, 400)
 
 print(small.metadata) # {"width": 10, "height": 20"}
-print(big.metadata)   # {"width": 200, "height": 100"}
+print(big.metadata)   # {"width": 300, "height": 400"}
 ```
 <!-- .element: data-id="code" -->
 
@@ -718,7 +726,7 @@ Now if we step away from the thunderstorms and lightning (which are very very fr
 
 ------
 <!-- .element: data-auto-animate -->
-```java
+```java []
 Rectangle rectangle(
     int width,
     int height
@@ -732,11 +740,11 @@ and go back to our original non python example,
 
 ------
 <!-- .element: data-auto-animate -->
-```java
+```java []
 Rectangle rectangle(
     int width,
-    int height,
-    int rotation=0 // how?
+    int height
+    /* int rotation=0 how? */
 );
 
 basic = rectangle(10, 20);
@@ -747,7 +755,7 @@ how could defaults be done in a language that doesn't support them?
 
 ------
 <!-- .element: data-auto-animate -->
-```java
+```java []
 var rectangle = Rectangle
     .builder(height, width)
     .build();
@@ -760,7 +768,7 @@ Well, some of you might be familiar with a programming construct called the buil
 
 ------
 <!-- .element: data-auto-animate -->
-```java [1]
+```java [2]
 var rectangle = Rectangle
     .builder(height, width)
     .build();
@@ -773,7 +781,7 @@ On initiation, it requires and stores all necessary data
 
 ------
 <!-- .element: data-auto-animate -->
-```java [2]
+```java [3]
 var rectangle = Rectangle
     .builder(height, width)
     .withRotation(rotation)
@@ -786,7 +794,7 @@ and then allows for adding of any optional data
 
 ------
 <!-- .element: data-auto-animate -->
-```java [3]
+```java [4]
 var rectangle = Rectangle
     .builder(height, width)
     .withRotation(rotation)
@@ -799,7 +807,7 @@ before building the final state.
 
 ------
 <!-- .element: data-auto-animate -->
-```java
+```java []
 var rectangle = Rectangle
     .builder(height, width)
     .build();
@@ -814,13 +822,24 @@ Can anyone spot the error here?
 
 (water break)
 
+------
+<!-- .element: data-auto-animate -->
+```java [2]
+var rectangle = Rectangle
+    .builder(height, width)
+    .build();
+
+```
+<!-- .element: data-notrim -->
+<!-- .element: data-id="builder" -->
+
 [No one noticed, that when I defined this builder, the ordering of height and width were swapped?]
 
 [Yes well done] It should be width and height,
 
 ------
 <!-- .element: data-auto-animate -->
-```java [2-3,6]
+```java [2,6-7]
 var rectangle = Rectangle
     .builder(height, width)
     .build();
@@ -840,7 +859,7 @@ And, in case you were wondering, I _have_ seen this in a codebase.
 
 ------
 <!-- .element: data-auto-animate -->
-```java
+```java [1,6,12,13]
 Rectangle rectangle(
     int width,
     int height
@@ -906,11 +925,31 @@ shape_2 = rectangle(20, 10);
 
 But as soon as we remove the rotation of the shape, the shapes dimensions are now different.
 
+------
+<!-- .element: data-auto-animate -->
+```java [2-3,7-8]
+Rectangle rectangle(
+    int width,
+    int height
+);
+
+Rectangle rectangle(
+    int height,
+    int width,
+    int rotation
+);
+
+shape_1 = rectangle(10, 20);
+shape_2 = rectangle(20, 10);
+```
+<!-- .element: data-notrim -->
+<!-- .element: data-id="builder" -->
+
 Without having to reference the signature of the functions, there's no knowing whether the arguments are set correctly.
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python []
 rectangle(
     width=width,
     height=height,
@@ -922,10 +961,10 @@ Python is beautiful, in that it solves both of these issues with keyword argumen
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python []
 rectangle(
-    width=1,
-    height=2,
+    width=10,
+    height=20,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -935,10 +974,10 @@ Meaning that not only are our functions self documenting by having constant argu
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python []
 rectangle(
-    height=2,
-    width=1,
+    height=20,
+    width=10,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -960,8 +999,11 @@ def rectangle(
 ):
     ...
 
-
-rectangle(1, 2, 3,)
+rectangle(
+    10, # height
+    20, # width
+    45, # rotation
+)
 ```
 <!-- .element: data-id="rectangle" -->
 
@@ -969,7 +1011,7 @@ Like for example, if we go back to a default argument being used for rotation
 
 ------
 <!-- .element: data-auto-animate -->
-```python [9-13]
+```python [8-12]
 def rectangle(
     height,
     width,
@@ -977,20 +1019,19 @@ def rectangle(
 ):
     ...
 
-
 rectangle(
-    1,
-    2,
-    3,
+    10, # height
+    20, # width
+    45, # rotation
 )
 ```
-<!-- .element: data-id="rectangle" -->
+<!-- .element: data-id="code" -->
 
 then we could call that function,
 
 ------
 <!-- .element: data-auto-animate -->
-```python [12]
+```python [11]
 def rectangle(
     height,
     width,
@@ -998,11 +1039,10 @@ def rectangle(
 ):
     ...
 
-
 rectangle(
-    1, # height
-    2, # width
-    3, # rotation
+    10, # height
+    20, # width
+    45, # rotation
 )
 ```
 <!-- .element: data-id="code" -->
@@ -1021,9 +1061,9 @@ def rectangle(
     ...
 
 rectangle(
-    1,
-    2,
-    3,
+    10, # height
+    20, # width
+    45, # rotation
 )
 ```
 <!-- .element: data-id="code" -->
@@ -1042,14 +1082,14 @@ def rectangle(
     ...
 
 rectangle(
-    1, # height
-    2, # width
-    3, # rotation
+    10, # height
+    20, # width
+    45, # rotation
 )
 ```
 <!-- .element: data-id="code" -->
 
-where 1, 2, and 3 were previously for height, width, and rotation
+where 10, 20, and 45 were previously for height, width, and rotation
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1063,9 +1103,9 @@ def rectangle(
     ...
 
 rectangle(
-    1, # height
-    2, # width
-    3, # opacity
+    10, # height
+    20, # width
+    45, # opacity
 )
 ```
 <!-- .element: data-id="code" -->
@@ -1084,9 +1124,9 @@ def rectangle(
     ...
 
 rectangle(
-    height=1,
-    width=2,
-    opacity=3,
+    height=10,
+    width=20,
+    opacity=45,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -1105,9 +1145,9 @@ def rectangle(
     ...
 
 rectangle(
-    height=1,
-    width=2,
-    opacity=3,
+    height=10,
+    width=20,
+    opacity=45,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -1126,9 +1166,9 @@ def rectangle(
     ...
 
 rectangle(
-    height=1,
-    width=2,
-    opacity=3,
+    height=10,
+    width=20,
+    opacity=45,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -1147,9 +1187,9 @@ def rectangle(
     ...
 
 rectangle(
-    height=1,
-    width=2,
-    opacity=3,
+    height=10,
+    width=20,
+    opacity=45,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -1158,7 +1198,7 @@ we now don't have to make changes to re-order those arguments everywhere that fu
 
 ------
 <!-- .element: data-auto-animate -->
-```python [10-11]
+```python [2-3,8-9]
 def rectangle(
     height,
     width,
@@ -1166,8 +1206,8 @@ def rectangle(
     ...
 
 rectangle(
-    height=1,
-    width=2,
+    height=10,
+    width=20,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -1176,7 +1216,7 @@ And if we choose to sort the ordering of arguments and parameters, we can reduce
 
 ------
 <!-- .element: data-auto-animate -->
-```python [10-11]
+```python [3-4,11-12]
 def rectangle(
     height,
     opacity,
@@ -1186,9 +1226,10 @@ def rectangle(
     ...
 
 rectangle(
-    height=1,
+    height=10,
     opacity=30,
-    width=2,
+    rotation=45,
+    width=20,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -1197,7 +1238,7 @@ for example, if one commit adds opacity and rotation,
 
 ------
 <!-- .element: data-auto-animate -->
-```python [10-11]
+```python [2,4,10,12]
 def rectangle(
     color,
     height,
@@ -1208,9 +1249,9 @@ def rectangle(
 
 rectangle(
     color="green"
-    height=1,
+    height=10,
     opacity=30,
-    width=2,
+    width=20,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -1219,7 +1260,7 @@ and the other adds opacity and color, as when they're combined
 
 ------
 <!-- .element: data-auto-animate -->
-```python [10-11]
+```python [2,4,5,11,13,14]
 def rectangle(
     color,
     height,
@@ -1231,10 +1272,10 @@ def rectangle(
 
 rectangle(
     color="green"
-    height=1,
+    height=10,
     opacity=30,
     rotation=40,
-    width=2,
+    width=20,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -1248,7 +1289,7 @@ Even if you don't care for refactoring or collaboration, I'd still recommend usi
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python []
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
@@ -1263,6 +1304,8 @@ Can anyone spot the error in this example?
 (and if you already know then let others have a chance)
 (water break)
 (hint, it's do to with function arguments and parameters)
+
+> TODO: continue code and slide numbering from here
 
 >  https://github.com/python/cpython/issues/56166
 
@@ -1386,7 +1429,7 @@ And the way that they will do that, is to put `*` as a parameter before count an
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python []
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
@@ -1416,8 +1459,8 @@ def rectangle(
     ...
 
 rectangle(
-    1, # height
-    2, # width
+    10, # height
+    20, # width
 )
 ```
 <!-- .element: data-id="named" -->
@@ -1435,8 +1478,8 @@ def rectangle(
     ...
 
 rectangle(
-    height=1,
-    width=2,
+    height=10,
+    width=20,
 )
 ```
 <!-- .element: data-id="named" -->
@@ -1644,7 +1687,7 @@ Or, if I've inspired you enough to start using this paradigm in your code day to
 range(
     start=0,
     stop=10,
-    skip=2,
+    skip=20,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -1657,7 +1700,7 @@ For one, you may notice in your excitement to use keyword arguments for all your
 range(
     start=0,
     stop=10,
-    skip=2,
+    skip=20,
 )
 # TypeError: range() takes no keyword arguments
 ```
@@ -1670,7 +1713,7 @@ that not _all_ functions are happy with that.
 def range(
     start,
     stop,
-    skip=1,
+    skip=10,
     /,
 )
 ```
@@ -1689,7 +1732,7 @@ Well there's three cases that I've seen
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python []
 def rectangle(
     width,
     height,
@@ -1795,7 +1838,7 @@ With the trade off being that our functions couldn't use keyword arguments.
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python []
 def rectangle(
     width,
     height,
@@ -2496,7 +2539,7 @@ But fun fact, it did used to in python 2! https://peps.python.org/pep-3113/
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python []
 def rectangle(
     (width, height),
 ):
@@ -2709,7 +2752,7 @@ rectangle(
     height=20,
     rotation=45,
     color="green",
-    line_width=1,
+    line_width=10,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -2718,7 +2761,7 @@ Now you might have noticed that **kwargs is pretty cool, since it lets us pass i
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python []
 sum(
     10,
     20,
@@ -3112,7 +3155,7 @@ then in most cases, the definition should be updated with those param types.
 
 ------
 <!-- .element: data-auto-animate -->
-```python
+```python []
 from typing import TypedDict, Unpack
 
 class ShapeValues(TypedDict):
