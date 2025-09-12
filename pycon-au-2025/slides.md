@@ -1305,8 +1305,6 @@ Can anyone spot the error in this example?
 (water break)
 (hint, it's do to with function arguments and parameters)
 
-> TODO: continue code and slide numbering from here
-
 >  https://github.com/python/cpython/issues/56166
 
 ------
@@ -1404,12 +1402,12 @@ In fact, so many people have had this issue, that Python has fixed it by introdu
 
 ------
 <!-- .element: data-auto-animate -->
-```python [5,13]
+```python [12-14]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
     content,
-    flags=re.IGNORECASE,
+    re.IGNORECASE,
 )
 
 def sub(
@@ -1425,11 +1423,9 @@ def sub(
 
 And the way that they will do that, is to put `*` as a parameter before count and flags.
 
-> TODO: remove flags= and Fix highlighting to include * and count/flags
-
 ------
 <!-- .element: data-auto-animate -->
-```python []
+```python [1-6,8]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
@@ -1437,10 +1433,16 @@ re.sub(
     re.IGNORECASE,
 )
 
-# Traceback (most recent call last):
-#   File "<stdin>", line 1, in <module>
 # TypeError: sub() takes 3 positional arguments but 4 were given
 
+def sub(
+    pattern,
+    repl,
+    string,
+    *,
+    count=0,
+    flags=0,
+)
 ```
 <!-- .element: data-id="code" -->
 
@@ -1453,14 +1455,14 @@ What this will do, is throw us an error when we try to call the function without
 <!-- .element: data-auto-animate -->
 ```python []
 def rectangle(
-    height,
     width,
+    height,
 ):
     ...
 
 rectangle(
-    10, # height
-    20, # width
+    10, # width 
+    20, # height 
 )
 ```
 <!-- .element: data-id="named" -->
@@ -1469,7 +1471,7 @@ So, if you are convinced by keyword arguments, and want to ensure that functions
 
 ------
 <!-- .element: data-auto-animate -->
-```python [2,9-10]
+```python [2]
 def rectangle(
     *,
     width,
@@ -1478,8 +1480,8 @@ def rectangle(
     ...
 
 rectangle(
-    height=10,
-    width=20,
+    width=10,
+    height=20,
 )
 ```
 <!-- .element: data-id="named" -->
@@ -1487,7 +1489,23 @@ rectangle(
 then one way you could force that, is by putting `*` as the first parameter,
 
 ------
-<!-- .slide: data-background-image="images/agonising-emoji.png"-->
+<!-- .element: data-auto-animate -->
+```python [9-10]
+def rectangle(
+    *,
+    width,
+    height,
+):
+    ...
+
+rectangle(
+    width=10,
+    height=20,
+)
+```
+<!-- .element: data-id="named" -->
+
+which would require updating the arguments to be keyword arguments.
 
 But that can be cumbersome, as it can be forgotten, can make the code noisy, and would also require updating all previously made functions.
 
@@ -1501,8 +1519,8 @@ def rectangle(
     ...
 
 rectangle(
-    height=height,
     width=width,
+    height=height,
 )
 ```
 <!-- .element: data-id="named" -->
@@ -1566,6 +1584,8 @@ rectangle(
 The good news is, I'm not the only one who's thought about this.
 
 PEP736 proposes using a trailing = for arguments that should take from existing variable names
+
+> TODO: continue code and slide numbering from here
 
 ------
 <!-- .slide: data-background-image="images/pep_rejected.svg"-->
