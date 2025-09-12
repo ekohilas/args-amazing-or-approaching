@@ -252,7 +252,7 @@ Because this is tedious work that we want to avoid, in most of these languages, 
 
 ------
 <!-- .element: data-auto-animate -->
-```java [1-5]
+```java [1,4]
 Rectangle rotated_rectangle(
     int width,
     int height,
@@ -1914,7 +1914,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-Then instead of creating a new variable to re-name the parameter 
+Then instead of creating a new variable to re-name the parameter
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2471,7 +2471,7 @@ The general convention in Python is `kwargs` for keyword args.
 <!-- .element: data-auto-animate -->
 ```python [2]
 def rectangle(
-    { width, height }, # SyntaxError: invalid syntax 
+    { width, height }, # SyntaxError: invalid syntax
     height,
     rotation=0,
     **kwargs,
@@ -2558,7 +2558,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-what happens if arguments are provided in the function and with the double star? 
+what happens if arguments are provided in the function and with the double star?
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2665,7 +2665,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-And this is the last of three cases I mentioned earlier, as another use of slash to enforce positional arguments. 
+And this is the last of three cases I mentioned earlier, as another use of slash to enforce positional arguments.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3335,7 +3335,7 @@ def function(
 ```
 <!-- .element: data-id="code" -->
 
-And `*` can also be used alone as a special parameter to do the same. 
+And `*` can also be used alone as a special parameter to do the same.
 
 ------
 <!-- .element: data-auto-animate -->
