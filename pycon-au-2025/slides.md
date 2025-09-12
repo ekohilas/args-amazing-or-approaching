@@ -1,13 +1,19 @@
 <!-- intentionally blank -->
 
-> TODO: Fix sectioning
+> TODO: Timing
 > TODO: Ensure height and width are ordered where they're meant to be
 > TODO: Ensure all slides are highlighting the right part
-> TODO: Add void to function signatures
 > TODO: Spellcheck final
+> TODO: Run through
 > TODO: Check code is linked properly
+> TODO: Fix sectioning
+> TODO: Add void to function signatures
 > TODO: Check code examples
 > TODO: Add history notes for when features were introduced
+> TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L32321 (keyword arguments)
+> TODO: https://www.python.org/download/releases/1.6/ (variable arguments)
+> TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L32776 (default arguments)
+> TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L34416 (var arguments) 
 
 ------
 
@@ -523,7 +529,34 @@ rotated = rotated_rectangle(10, 20, 45)
 ```
 <!-- .element: data-id="code" -->
 
-Well in python, the concept of default arguments is built into the language (using the equals sign in the parameter definition)
+Well in python, we have default arguments!
+
+------
+<!-- .slide: data-background-image="images/history_defaults.svg"-->
+
+These were added way back in 1994 for Python 1.0.2
+
+------
+<!-- .element: data-auto-animate -->
+```python [4]
+def rotated_rectangle(
+    width,
+    height,
+    rotation=0,
+): ...
+
+def rectangle(
+    width,
+    height,
+):
+    return rotated_rectangle(width, height, 0)
+
+basic = rectangle(10, 20)
+rotated = rotated_rectangle(10, 20, 45)
+```
+<!-- .element: data-id="code" -->
+
+So we can specify default arguments using the equals sign in the parameter definition.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -539,7 +572,7 @@ rotated = rotated_rectangle(10, 20, 45)
 ```
 <!-- .element: data-id="code" -->
 
-So now, if we only keep a single definition, we can remove the need for function chaining
+And now, if we only keep a single definition, we can remove the need for function chaining
 
 ------
 <!-- .element: data-auto-animate -->
@@ -948,6 +981,11 @@ shape_2 = rectangle(20, 10);
 Without having to reference the signature of the functions, there's no knowing whether the arguments are set correctly.
 
 ------
+<!-- .slide: data-background-image="images/history_keyword_args.svg"-->
+
+But in 1995 Python 1.3 did the beautiful thing of adding keyword arguments
+
+------
 <!-- .element: data-auto-animate -->
 ```python []
 rectangle(
@@ -957,7 +995,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-Python is beautiful, in that it solves both of these issues with keyword arguments (and thus does away with builders and function overloading)
+Which let us choose what argument we wish to fill, and thus let us solve these issues (and do away with builders and function overloading)
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1452,6 +1490,11 @@ What this will do, is throw us an error when we try to call the function without
 > TOOD: clean up error
 
 ------
+<!-- .slide: data-background-image="images/history_keyword_parameter.svg"-->
+
+This feature was added by PEP3102 for Python 3.0!
+
+------
 <!-- .element: data-auto-animate -->
 ```python []
 def rectangle(
@@ -1740,6 +1783,23 @@ def range(
 <!-- .element: data-id="code" -->
 
 This is because of another special parameter, `/`.
+
+------
+<!-- .slide: data-background-image="images/history_positional_parameter.svg"-->
+
+Which was added by PEP five seven zero (570) in Python 3.8 (which only went out of support last year).
+
+------
+```python [5]
+def range(
+    start,
+    stop,
+    skip=10,
+    /,
+)
+```
+<!-- .element: data-id="code" -->
+
 Unlike `*` which makes all further parameters keyword only,
 `/` prevents all previous parameters from being passed into using keyword arguments.
 
@@ -2304,6 +2364,11 @@ rectangle({
 Okay so why am I explaining all this?
 
 ------
+<!-- .slide: data-background-image="images/history_variable.svg"-->
+
+Well in the year 2000, Python 1.6 added support for unpacking into function calls.
+
+------
 <!-- .element: data-auto-animate -->
 ```python [8-13]
 def rectangle(
@@ -2322,7 +2387,7 @@ rectangle(**params)
 ```
 <!-- .element: data-id="code" -->
 
-Because Python let's you do this with dictionaries too!
+Letting us do what javascript does with dictionaries too!
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2531,6 +2596,11 @@ rectangle(**params)
 The general convention in Python is `kwargs` for keyword args.
 
 ------
+<!-- .slide: data-background-image="images/history_keyword_args.svg"-->
+
+Which was also added back in Python 1.3!
+
+------
 <!-- .element: data-auto-animate -->
 ```python [2]
 def rectangle(
@@ -2550,7 +2620,7 @@ rectangle(**params)
 ```
 <!-- .element: data-id="code" -->
 
-And unlike JavaScript, Python doesn't currently have a way to unpack parameters within function definitions.
+But unlike JavaScript, Python doesn't currently have a way to unpack parameters within function definitions.
 
 ------
 <!-- .slide: data-background-image="images/good-old-days.png"-->
@@ -2796,6 +2866,11 @@ But there are also cases where we can't define a keyword for every argument.
 Say for example, when we want to sum a list of numbers.
 
 ------
+<!-- .slide: data-background-image="images/history_keyword_args.svg"-->
+
+Thankfully, back in 1992, this was added as part of Python 0.9.2!
+
+------
 <!-- .element: data-auto-animate -->
 ```python [4]
 def rectangle(
@@ -2807,7 +2882,7 @@ def rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-This is where `*args` comes in, which is like `**kwargs` but for positional arguments.
+So we can use `*args`, which is like `**kwargs` but for positional arguments.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3176,6 +3251,7 @@ then in most cases, the definition should be updated with those param types.
 ------
 <!-- .element: data-auto-animate -->
 ```python []
+# Python 3.11
 from typing import TypedDict, Unpack
 
 class ShapeValues(TypedDict):
@@ -3216,7 +3292,7 @@ def function(
     **keyword_argument_dict,
 ):
 ```
-<!-- .element: data-id="code" -->
+<!-- .element: data-id="summary" -->
 
 So to recap, this is python's function argument and parameter system,
 
@@ -3234,7 +3310,7 @@ def function(
     **keyword_argument_dict,
 ):
 ```
-<!-- .element: data-id="code" -->
+<!-- .element: data-id="summary" -->
 
 The slash special parameter marks that the previous parameters
 
@@ -3252,7 +3328,7 @@ def function(
     **keyword_argument_dict,
 ):
 ```
-<!-- .element: data-id="code" -->
+<!-- .element: data-id="summary" -->
 
 are positional only
 
@@ -3270,7 +3346,7 @@ def function(
     **keyword_argument_dict,
 ):
 ```
-<!-- .element: data-id="code" -->
+<!-- .element: data-id="summary" -->
 
 There's the standard parameter that can be positional or keyword,
 
@@ -3288,7 +3364,7 @@ def function(
     **keyword_argument_dict,
 ):
 ```
-<!-- .element: data-id="code" -->
+<!-- .element: data-id="summary" -->
 
 and can also be set with a default
 
@@ -3306,7 +3382,7 @@ def function(
     **keyword_argument_dict,
 ):
 ```
-<!-- .element: data-id="code" -->
+<!-- .element: data-id="summary" -->
 
 as can positional only if they, and all other positional arguments are also given defaults
 
@@ -3324,7 +3400,7 @@ def function(
     **keyword_argument_dict,
 ):
 ```
-<!-- .element: data-id="code" -->
+<!-- .element: data-id="summary" -->
 
 `*` captures an arbitrary number of positional arguments,
 
@@ -3342,7 +3418,7 @@ def function(
     **keyword_argument_dict,
 ):
 ```
-<!-- .element: data-id="code" -->
+<!-- .element: data-id="summary" -->
 
 and also indicates that further parameters are keyword only
 
@@ -3360,7 +3436,7 @@ def function(
     **keyword_argument_dict,
 ):
 ```
-<!-- .element: data-id="code" -->
+<!-- .element: data-id="summary" -->
 
 such as this keyword argument,
 
@@ -3378,7 +3454,7 @@ def function(
     **keyword_argument_dict,
 ):
 ```
-<!-- .element: data-id="code" -->
+<!-- .element: data-id="summary" -->
 
 or this one with a default.
 
@@ -3396,7 +3472,7 @@ def function(
     **keyword_argument_dict,
 ):
 ```
-<!-- .element: data-id="code" -->
+<!-- .element: data-id="summary" -->
 
 And `*` can also be used alone as a special parameter to do the same.
 
@@ -3414,7 +3490,7 @@ def function(
     **keyword_argument_dict,
 ):
 ```
-<!-- .element: data-id="code" -->
+<!-- .element: data-id="summary" -->
 
 And finally double star, to handle arbitrary keyword arguments
 
