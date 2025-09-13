@@ -1,6 +1,5 @@
 <!-- intentionally blank -->
 
-> TODO: Timing
 > TODO: Ensure height and width are ordered where they're meant to be
 > TODO: Ensure all slides are highlighting the right part
 > TODO: Spellcheck final
@@ -10,7 +9,6 @@
 > TODO: Add void to function signatures
 > TODO: Check code examples
 > TODO: Add history notes for when features were introduced
-> TODO: don't read out pep numbers
 > TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L32321 (keyword arguments)
 > TODO: https://www.python.org/download/releases/1.6/ (variable arguments)
 > TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L32776 (default arguments)
@@ -1511,7 +1509,7 @@ What this will do, is throw us an error when we try to call the function without
 ------
 <!-- .slide: data-background-image="images/history_keyword_parameter.svg"-->
 
-This feature was added by PEP3102 for Python 3.0!
+This feature was added in Python 3.0!
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1810,7 +1808,7 @@ This is because of another special parameter, `/`.
 ------
 <!-- .slide: data-background-image="images/history_positional_parameter.svg"-->
 
-Which was added by PEP five seven zero (570) in Python 3.8 (which only went out of support last year).
+Which was added in Python 3.8 (which only went out of support last year).
 
 ------
 ```python [5]
@@ -2656,7 +2654,9 @@ But unlike JavaScript, Python doesn't currently have a way to unpack parameters 
 ------
 <!-- .slide: data-background-image="images/good-old-days.png"-->
 
-But fun fact, it did used to in python 2! https://peps.python.org/pep-3113/
+But fun fact, it did used to in python 2!
+
+> https://peps.python.org/pep-3113/
 
 ------
 <!-- .element: data-auto-animate -->
