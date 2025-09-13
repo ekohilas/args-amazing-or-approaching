@@ -455,8 +455,6 @@ rotated = rectangle(10, 20, 45)
 
 It would fail!
 
-> TODO: fix failure to appear on slide
-
 ------
 <!-- .element: data-auto-animate -->
 ```python [1,7]
@@ -758,8 +756,6 @@ So if your functions need mutable defaults, the best way to do so is to default 
 
 > 06:10 (1:10) {5}
 
-> TODO: Update example to use 3/4 not 1/2
-
 ------
 <!-- .slide: data-background-image="images/thunderstorms_and_lightning.svg"-->
 
@@ -1020,7 +1016,6 @@ rectangle(
 <!-- .element: data-id="code" -->
 
 Meaning that not only are our functions self documenting by having constant arguments labelled
-> TODO: fix numbering of arguments above
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1502,8 +1497,28 @@ def sub(
 
 What this will do, is throw us an error when we try to call the function without naming those arguments.
 
-> TODO: add slide with flags having argument
-> TOOD: clean up error
+------
+<!-- .element: data-auto-animate -->
+```python [5,14]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    flag=re.IGNORECASE,
+)
+
+def sub(
+    pattern,
+    repl,
+    string,
+    *,
+    count=0,
+    flags=0,
+)
+```
+<!-- .element: data-id="code" -->
+
+And require that we explicitly specify the flag with a keyword argument.
 
 ------
 <!-- .slide: data-background-image="images/history_keyword_parameter.svg"-->
@@ -1646,8 +1661,6 @@ The good news is, I'm not the only one who's thought about this.
 
 PEP736 proposes using a trailing = for arguments that should take from existing variable names
 
-> TODO: continue code and slide numbering from here
-
 ------
 <!-- .slide: data-background-image="images/pep_rejected.svg"-->
 
@@ -1770,7 +1783,7 @@ Or, if I've inspired you enough to start using this paradigm in your code day to
 range(
     start=0,
     stop=10,
-    skip=20,
+    skip=2,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -1783,7 +1796,7 @@ For one, you may notice in your excitement to use keyword arguments for all your
 range(
     start=0,
     stop=10,
-    skip=20,
+    skip=2,
 )
 # TypeError: range() takes no keyword arguments
 ```
@@ -1796,7 +1809,7 @@ that not _all_ functions are happy with that.
 def range(
     start,
     stop,
-    skip=10,
+    skip=1,
     /,
 )
 ```
@@ -1814,7 +1827,7 @@ Which was added in Python 3.8 (which only went out of support last year).
 def range(
     start,
     stop,
-    skip=10,
+    skip=1,
     /,
 )
 ```
@@ -1832,7 +1845,7 @@ Well there's three cases that I've seen
 
 ------
 <!-- .element: data-auto-animate -->
-```python []
+```python [4]
 def rectangle(
     width,
     height,
@@ -1872,7 +1885,7 @@ For example, we may want to change the specification, and be more specific that 
 
 ------
 <!-- .element: data-auto-animate -->
-```python [11,14-16]
+```python [4,8-9]
 def rectangle(
     width,
     height,
@@ -1880,19 +1893,19 @@ def rectangle(
 ):
     ...
 
+# TypeError:
+#   rectangle() got an unexpected keyword argument 'rotation'
 rectangle(
     height=10,
     width=20,
     rotation=45,
 )
-
-# Traceback (most recent call last):
-#   File "<stdin>", line 1, in <module>
-# TypeError: rectangle() got an unexpected keyword argument 'rotation'
 ```
 <!-- .element: data-id="code" -->
 
 If we updated the name of our parameter, now any calls that pass in the `rotation` argument would now fail.
+
+> TODO: continue code and slide numbering from here
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3225,8 +3238,6 @@ fn main() {
 While I'm not an expert in Rust, to my understanding, Rust doesn't support variable function arguments.
 Not only is it hard for the type checker, but also hard for the reader.
 So if you do want this complexity, you can use lists, which don't cause variable type signatures, or macros, which pass the complexity onto the writer.
-
-TODO: Update rust statement and emphasize point about complexity that Python allows
 
 ------
 <!-- .element: data-auto-animate -->
