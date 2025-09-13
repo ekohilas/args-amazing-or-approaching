@@ -1905,8 +1905,6 @@ rectangle(
 
 If we updated the name of our parameter, now any calls that pass in the `rotation` argument would now fail.
 
-> TODO: continue code and slide numbering from here
-
 ------
 <!-- .element: data-auto-animate -->
 ```python [5]
@@ -1951,7 +1949,7 @@ With the trade off being that our functions couldn't use keyword arguments.
 
 ------
 <!-- .element: data-auto-animate -->
-```python []
+```python [4,12]
 def rectangle(
     width,
     height,
@@ -2033,7 +2031,7 @@ If we look at other languages like Swift, then this concept of naming parameters
 func rectangle(
     width: Int,
     height: Int,
-    rotation: Int = 0
+    rotation: Int = 0,
 ) -> Rectangle {
     let rotationInDegrees = rotation
     print(rotationInDegrees)
@@ -2043,7 +2041,7 @@ func rectangle(
 rectangle(
     width: 20,
     height: 10,
-    rotation: 45
+    rotation: 45,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -2057,7 +2055,7 @@ If we convert our previous python rectangle example to swift...
 func rectangle(
     width: Int,
     height: Int,
-    rotation: Int = 0
+    rotation: Int = 0,
 ) -> Rectangle {
     let rotationInDegrees = rotation
     print(rotationInDegrees)
@@ -2067,7 +2065,7 @@ func rectangle(
 rectangle(
     width: 20,
     height: 10,
-    rotation: 45
+    rotation: 45,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -2081,7 +2079,7 @@ Then instead of creating a new variable to re-name the parameter
 func rectangle(
     width: Int,
     height: Int,
-    rotation rotationInDegrees: Int = 0
+    rotation rotationInDegrees: Int = 0,
 ) -> Rectangle {
     print(rotationInDegrees)
 }
@@ -2089,7 +2087,7 @@ func rectangle(
 rectangle(
     width: 20,
     height: 10,
-    rotation: 45
+    rotation: 45,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -2103,7 +2101,7 @@ An argument label can be used that's internal to the function
 func rectangle(
     width: Int,
     height: Int,
-    rotation rotationInDegrees: Int = 0
+    rotation rotationInDegrees: Int = 0,
 ) -> Rectangle {
     print(rotationInDegrees)
 }
@@ -2111,7 +2109,7 @@ func rectangle(
 rectangle(
     width: 20,
     height: 10,
-    rotation: 45
+    rotation: 45,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -2125,7 +2123,7 @@ Avoiding the need to change the interface,
 func rectangle(
     width: Int,
     height: Int,
-    rotation rotationInDegrees: Int = 0
+    rotation rotationInDegrees: Int = 0,
 ) -> Rectangle {
     print(rotationInDegrees)
 }
@@ -2133,7 +2131,7 @@ func rectangle(
 rectangle(
     width: 20,
     height: 10,
-    rotation: 45
+    rotation: 45,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -2194,7 +2192,7 @@ But for those of you unfamiliar with JavaScript, the way it works is quite diffe
 
 ------
 <!-- .element: data-auto-animate -->
-```javascript [1,6,10,14]
+```javascript [1,2,6,10,14]
 // javascript
 function rectangle({
     width,
@@ -2499,7 +2497,7 @@ But, there is a way to keep them, and that is by using the ellipses `...rest` pr
 
 ------
 <!-- .element: data-auto-animate -->
-```javascript [4]
+```javascript [6,13]
 // javascript
 function rectangle({
     width,
@@ -2592,7 +2590,7 @@ and that is by using our good friend `**` again, adding it to a `rest` parameter
 
 ------
 <!-- .element: data-auto-animate -->
-```python [5]
+```python [5,12]
 def rectangle(
     width,
     height,
@@ -2672,17 +2670,48 @@ But fun fact, it did used to in python 2!
 
 ------
 <!-- .element: data-auto-animate -->
-```python []
+```python [7]
 def rectangle(
     (width, height),
 ):
-    print "width:", width, "height:", height
+    print "width:", width # 10
+    print "height:", height # 20
 
-rectangle((10, 20)) # width: 10 height: 20
+rectangle((10, 20))
 ```
 <!-- .element: data-id="code" -->
 
-Well... it was only for tuples
+Well... it only worked if you passed in a tuple
+
+------
+<!-- .element: data-auto-animate -->
+```python [2]
+def rectangle(
+    (width, height),
+):
+    print "width:", width # 10
+    print "height:", height # 20
+
+rectangle((10, 20))
+```
+<!-- .element: data-id="code" -->
+
+And defined the parameters with tuples
+
+------
+<!-- .element: data-auto-animate -->
+```python [4,5]
+def rectangle(
+    (width, height),
+):
+    print "width:", width # 10
+    print "height:", height # 20
+
+rectangle((10, 20))
+```
+<!-- .element: data-id="code" -->
+
+Which were unpacked for use within the function.
 
 But who knows, maybe it'll come back to Python 3 after a PEP?
 
@@ -2692,14 +2721,13 @@ Anyways where were we...
 
 ------
 <!-- .element: data-auto-animate -->
-```python [14]
+```python [13]
 def rectangle(
     width,
     height,
     rotation=0,
-    **kwargs, # { "extra": "argument" }
-):
-    ...
+    **kwargs,
+): ...
 
 params = {
     "height": 10,
@@ -2712,16 +2740,17 @@ rectangle(**params)
 
 A question you may have about `**` is,
 
+> TODO: CONTINUE FROM HERE
+
 ------
 <!-- .element: data-auto-animate -->
-```python [15-17]
+```python [9-10,14-16]
 def rectangle(
     width,
     height,
     rotation=0,
     **kwargs,
-):
-    ...
+): ...
 
 params = {
     "height": 10,
@@ -2731,8 +2760,9 @@ params = {
 rectangle(
     height=30,
     width=40,
-    **params
+    **params,
 )
+
 ```
 <!-- .element: data-id="code" -->
 
@@ -2740,14 +2770,13 @@ what happens if arguments are provided in the function and with the double star?
 
 ------
 <!-- .element: data-auto-animate -->
-```python [14]
+```python [13]
 def rectangle(
     width,
     height,
     rotation=0,
     **kwargs,
-):
-    ...
+): ...
 
 params = {
     "width": 10,
@@ -2758,7 +2787,7 @@ params = {
 rectangle(
     width=30,
     height=40,
-    **params
+    **params,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -2767,14 +2796,13 @@ Well, Python will nicely tell us that we've made a mistake.
 
 ------
 <!-- .element: data-auto-animate -->
-```python [14,16-17]
+```python [13,15-16]
 def rectangle(
     width,
     height,
     rotation=0,
     **kwargs,
-):
-    ...
+): ...
 
 params = {
     "width": 10,
@@ -2785,7 +2813,7 @@ params = {
 rectangle(
     30,
     40,
-    **params
+    **params,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -2794,14 +2822,13 @@ And we'll get the same error if they're passed in as positionals instead.
 
 ------
 <!-- .element: data-auto-animate -->
-```python [9-18]
+```python [8-12,14-16]
 def rectangle(
     width,
     height,
     rotation=0,
     **kwargs,
-):
-    ...
+): ...
 
 params = {
     "width": 10,
@@ -2811,7 +2838,7 @@ params = {
 rectangle(
     30,
     40,
-    **params
+    **params,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -2827,8 +2854,7 @@ def rectangle(
     /,
     rotation=0,
     **kwargs,
-):
-    ...
+): ...
 
 params = {
     "width": 10,
@@ -2838,7 +2864,7 @@ params = {
 rectangle(
     30,
     40,
-    **params
+    **params,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -2847,15 +2873,14 @@ And this is the last of three cases I mentioned earlier, as another use of slash
 
 ------
 <!-- .element: data-auto-animate -->
-```python [2-3,6]
+```python [6,10-11,17]
 def rectangle(
     width, # 30
     height, # 40
     /,
     rotation=0,
     **kwargs, # {"width": 10, "height": 20", "extra": "argument"}
-):
-    ...
+): ...
 
 params = {
     "width": 10,
@@ -2865,7 +2890,7 @@ params = {
 rectangle(
     30,
     40,
-    **params
+    **params,
 )
 ```
 <!-- .element: data-id="code" -->
@@ -3000,7 +3025,7 @@ and the function is run as before...
 
 ------
 <!-- .element: data-auto-animate -->
-```python [9]
+```python [9-10]
 def rectangle(
     width,
     height,
@@ -3009,7 +3034,8 @@ def rectangle(
 ):
     ...
 
-# TypeError: rectangle() missing 1 required keyword-only argument: 'rotation'
+# TypeError:
+#   rectangle() missing 1 required keyword-only argument: 'rotation'
 rectangle(
     10,
     20,
@@ -3089,6 +3115,8 @@ rectangle(
 <!-- .element: data-id="code" -->
 
 We'll get an error for an unexpected keyword argument.
+
+> TODO: continue from here
 
 > 24:15 (00:40) {18}
 
