@@ -2,7 +2,6 @@
 
 > TODO: Ensure height and width are ordered where they're meant to be
 > TODO: Ensure all slides are highlighting the right part
-> TODO: Spellcheck final
 > TODO: Run through
 > TODO: Check code is linked properly
 > TODO: Fix sectioning
