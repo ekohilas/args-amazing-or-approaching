@@ -5,8 +5,7 @@ A [repo](https://github.com/ekohilas/args-amazing-or-approaching) for resources 
 ## Evan Kohilas
 | Conference | Slides | Video | Notes | Length | Year |
 |------------|:------:|:-----:|:-----:|-------:|-----:|
-| [PyCon AU](https://pycon.org.au) | [🔗](https://args-amazing-or-approaching.nohumanerrors.com/pycon-au-2025) | [🔗]() | [🔗](https://2025.pycon.org.au/program/B38QTB/
-) | 30 min | 2025 |
+| [PyCon AU](https://pycon.org.au) | [🔗](https://args-amazing-or-approaching.nohumanerrors.com/pycon-au-2025) | [🔗]() | [🔗](https://2025.pycon.org.au/program/B38QTB/) | 30 min | 2025 |
 | [Canberra Python User Group](https://www.meetup.com/canberra-python-meetup-group/) | [🔗](https://ekohilas.github.io/args-amazing-or-approaching/canberra-python-2025) | [🔗](https://youtube.com/watch?v=xH2qPTn2ybk) | [🔗](https://www.meetup.com/canberra-python-meetup-group/events/305683255/?eventOrigin=home_next_event_you_are_hosting) | 30 min | 2025 |
 | [PyCon US](https://us.pycon.org) | [🔗](https://ekohilas.github.io/args-amazing-or-approaching/pycon-us-2025-lightning) | [🔗](https://youtu.be/lXngPPRaqGg?t=315) | [🔗](https://us.pycon.org/2025/schedule/presentation/28/) | 5 min | 2025 |
 
