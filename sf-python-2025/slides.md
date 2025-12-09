@@ -11,7 +11,15 @@
 > TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L32321 (keyword arguments)
 > TODO: https://www.python.org/download/releases/1.6/ (variable arguments)
 > TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L32776 (default arguments)
-> TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L34416 (var arguments) 
+> TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L34416 (var arguments)
+> TODO: https://github.com/ekohilas/args-amazing-or-approaching/issues/1
+> TODO: Mention how keyword arguments are slower
+> TOOD: Mention work in basedpyright
+> TODO: Mention NewType
+> TODO: Make it more clear between language transitions
+> TODO: Mention frozendict for mutable defaults
+> TODO: Renaming parameters allows for better pytest deps
+> TODO: Mention faded out keyword args are good, but not great because they don't appear in PR Reviews
 
 ------
 
