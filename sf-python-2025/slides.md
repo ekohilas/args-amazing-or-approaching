@@ -673,6 +673,45 @@ And then, we added that metadata within the function.
 
 ------
 <!-- .element: data-auto-animate -->
+```python [9-10]
+def rectangle(
+    width,
+    height,
+    metadata={},
+):
+    metadata["width"] = width
+    metadata["height"] = height
+
+small = rectangle(10, 20)
+big = rectangle(300, 400)
+```
+<!-- .element: data-id="code" -->
+
+What you'll find, is that if we create two rectangles,
+
+------
+<!-- .element: data-auto-animate -->
+```python [12-13]
+def rectangle(
+    width,
+    height,
+    metadata={},
+):
+    metadata["width"] = width
+    metadata["height"] = height
+
+small = rectangle(10, 20)
+big = rectangle(300, 400)
+
+print(small.metadata)
+print(big.metadata)
+```
+<!-- .element: data-id="code" -->
+
+and print out their contents,
+
+------
+<!-- .element: data-auto-animate -->
 ```python [12-13]
 def rectangle(
     width,
@@ -690,7 +729,7 @@ print(big.metadata)   # {"width": 300, "height": 400"}
 ```
 <!-- .element: data-id="code" -->
 
-What you'll find, is that instead of the obvious answer that you'd expect when printing this metadata
+then instead of the obvious expected answer,
 
 ------
 <!-- .element: data-auto-animate -->
@@ -711,7 +750,7 @@ print(big.metadata)   # {"width": 300, "height": 400"}
 ```
 <!-- .element: data-id="code" -->
 
-Instead, their metadata ends up being the same.
+their metadata ends up being the same.
 
 ------
 <!-- .element: data-auto-animate -->
