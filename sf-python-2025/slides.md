@@ -16,7 +16,7 @@
 > TODO: Mention how keyword arguments are slower
 > TOOD: Mention work in basedpyright
 > TODO: Mention NewType
-> TODO: Make it more clear between language transitions
+> TODO: Use background images for language transitions
 > TODO: Mention frozendict for mutable defaults
 > TODO: Renaming parameters allows for better pytest deps
 > TODO: Mention faded out keyword args are good, but not great because they don't appear in PR Reviews
@@ -129,6 +129,7 @@ void function(
 To show what I mean, I'll start by using a function from another language.
 
 ------
+<!-- .element: data-auto-animate -->
 ```java []
 // not python
 Rectangle rectangle(
