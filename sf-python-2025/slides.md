@@ -11,7 +11,7 @@
 > TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L32321 (keyword arguments)
 > TODO: https://www.python.org/download/releases/1.6/ (variable arguments)
 > TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L32776 (default arguments)
-> TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L34416 (var arguments)
+> TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L34416 (var arguments) 
 > TODO: https://github.com/ekohilas/args-amazing-or-approaching/issues/1
 > TODO: Mention how keyword arguments are slower
 > TOOD: Mention work in basedpyright
@@ -116,6 +116,7 @@ Okay now that that's out of the way let's go back to python's beautiful function
 ------
 <!-- .element: data-auto-animate -->
 ```java []
+// not python
 void function(
     int a,
     int b
@@ -129,6 +130,7 @@ To show what I mean, I'll start by using a function from another language.
 
 ------
 ```java []
+// not python
 Rectangle rectangle(
     int width,
     int height
@@ -143,6 +145,7 @@ And I'll change it up to a more concrete,
 ------
 <!-- .element: data-auto-animate -->
 ```java []
+// not python
 Rectangle rectangle(
     int width,
     int height
@@ -157,6 +160,7 @@ relatable example, making rectangles!
 ------
 <!-- .element: data-auto-animate -->
 ```java []
+// not python
 Rectangle rectangle(
     int width,
     int height
@@ -168,7 +172,8 @@ I'll also simplify it down to the function type signature.
 
 ------
 <!-- .element: data-auto-animate -->
-```java [6]
+```java [7]
+// not python
 Rectangle rectangle(
     int width,
     int height
@@ -183,6 +188,7 @@ And now, this function can be called to create a basic rectangle of a particular
 ------
 <!-- .element: data-auto-animate -->
 ```java []
+// not python
 Rectangle rectangle(
     int width,
     int height
@@ -198,7 +204,8 @@ But let's say that a basic rectangle isn't good enough. And we've been asked to 
 
 ------
 <!-- .element: data-auto-animate -->
-```java [4]
+```java [5]
+// not python
 Rectangle rectangle(
     int width,
     int height,
@@ -213,7 +220,8 @@ And to do so, we need to add the rotation parameter.
 
 ------
 <!-- .element: data-auto-animate -->
-```java [8]
+```java [9]
+// not python
 Rectangle rectangle(
     int width,
     int height,
@@ -229,7 +237,8 @@ Now we can make a rotated rectangle!
 
 ------
 <!-- .element: data-auto-animate -->
-```java [6-8]
+```java [7-9]
+// not python
 Rectangle rectangle(
     int width,
     int height,
@@ -246,7 +255,8 @@ But now our previous function call needs to be updated, as it'll now error from 
 
 ------
 <!-- .element: data-auto-animate -->
-```java [7]
+```java [8]
+// not python
 Rectangle rectangle(
     int width,
     int height,
@@ -263,6 +273,7 @@ And this creates a problem, because we now need to go through and update all exi
 ------
 <!-- .element: data-auto-animate -->
 ```java []
+// not python
 Rectangle rectangle(
     int width,
     int height,
@@ -278,7 +289,8 @@ Because this is tedious work that we want to avoid, in most of these languages, 
 
 ------
 <!-- .element: data-auto-animate -->
-```java [1,4]
+```java [2,5]
+// not python
 Rectangle rotated_rectangle(
     int width,
     int height,
@@ -301,7 +313,8 @@ Of course, we don't want to duplicate the code that makes these rectangles.
 
 ------
 <!-- .element: data-auto-animate -->
-```java [10-12]
+```java [11-13]
+// not python
 Rectangle rotated_rectangle(
     int width,
     int height,
@@ -323,7 +336,8 @@ rotated = rotated_rectangle(10, 20, 45);
 So we update the old function, such that it calls the new function
 
 ------
-```java [10-12]
+```java [11-13]
+// not python
 Rectangle rotated_rectangle(
     int width,
     int height,
@@ -349,6 +363,7 @@ And sets the new parameter with a default argument, which in our case will be 0.
 ------
 <!-- .element: data-auto-animate -->
 ```java []
+// not python
 Rectangle rotated_rectangle(
     int width,
     int height,
@@ -371,7 +386,8 @@ Now if we take a step back, we might start to see how this might get a bit messy
 
 ------
 <!-- .element: data-auto-animate -->
-```java [1-4,7-9]
+```java [2-5,8-10]
+// not python
 Rectangle rectangle(
     int width,
     int height,
@@ -396,7 +412,8 @@ With function overloading, we can define multiple functions with the same name, 
 
 ------
 <!-- .element: data-auto-animate -->
-```java [11,14,15]
+```java [12,15,16]
+// not python
 Rectangle rectangle(
     int width,
     int height,
@@ -772,6 +789,7 @@ Now if we step away from the thunderstorms and lightning (which are very very fr
 ------
 <!-- .element: data-auto-animate -->
 ```java []
+// not python
 Rectangle rectangle(
     int width,
     int height
@@ -786,6 +804,7 @@ and go back to our original non python example,
 ------
 <!-- .element: data-auto-animate -->
 ```java []
+// not python
 Rectangle rectangle(
     int width,
     int height
@@ -801,6 +820,7 @@ how could defaults be done in a language that doesn't support them?
 ------
 <!-- .element: data-auto-animate -->
 ```java []
+// not python
 var rectangle = Rectangle
     .builder(height, width)
     .build();
@@ -813,7 +833,8 @@ Well, some of you might be familiar with a programming construct called the buil
 
 ------
 <!-- .element: data-auto-animate -->
-```java [2]
+```java [3]
+// not python
 var rectangle = Rectangle
     .builder(height, width)
     .build();
@@ -826,7 +847,8 @@ On initiation, it requires and stores all necessary data
 
 ------
 <!-- .element: data-auto-animate -->
-```java [3]
+```java [4]
+// not python
 var rectangle = Rectangle
     .builder(height, width)
     .withRotation(rotation)
@@ -839,7 +861,8 @@ and then allows for adding of any optional data
 
 ------
 <!-- .element: data-auto-animate -->
-```java [4]
+```java [5]
+// not python
 var rectangle = Rectangle
     .builder(height, width)
     .withRotation(rotation)
@@ -855,6 +878,7 @@ before building the final state.
 ------
 <!-- .element: data-auto-animate -->
 ```java []
+// not python
 var rectangle = Rectangle
     .builder(height, width)
     .build();
@@ -871,7 +895,8 @@ Can anyone spot the error here?
 
 ------
 <!-- .element: data-auto-animate -->
-```java [2]
+```java [3]
+// not python
 var rectangle = Rectangle
     .builder(height, width)
     .build();
@@ -886,7 +911,8 @@ var rectangle = Rectangle
 
 ------
 <!-- .element: data-auto-animate -->
-```java [2,6-7]
+```java [3,7-8]
+// not python
 var rectangle = Rectangle
     .builder(height, width)
     .build();
@@ -906,7 +932,8 @@ And, in case you were wondering, I _have_ seen this in a codebase.
 
 ------
 <!-- .element: data-auto-animate -->
-```java [1,6,12,13]
+```java [2,7,13,14]
+// not python
 Rectangle rectangle(
     int width,
     int height
@@ -930,7 +957,8 @@ For example, both of these are valid definitions,
 
 ------
 <!-- .element: data-auto-animate -->
-```java [2-3,7-8]
+```java [3-4,8-9]
+// not python
 Rectangle rectangle(
     int width,
     int height
@@ -952,7 +980,8 @@ the only difference being the ordering of the parameters
 
 ------
 <!-- .element: data-auto-animate -->
-```java [13]
+```java [14]
+// not python
 Rectangle rectangle(
     int width,
     int height
@@ -974,7 +1003,8 @@ But as soon as we remove the rotation of the shape, the shapes dimensions are no
 
 ------
 <!-- .element: data-auto-animate -->
-```java [2-3,7-8]
+```java [3-4,8-9]
+// not python
 Rectangle rectangle(
     int width,
     int height
