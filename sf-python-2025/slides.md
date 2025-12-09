@@ -797,6 +797,27 @@ Giving this strange outcome, where all functions are sharing the same state.
 
 ------
 <!-- .element: data-auto-animate -->
+```python [4]
+def rectangle(
+    width,
+    height,
+    metadata={},
+):
+    metadata["width"] = width
+    metadata["height"] = height
+
+small = rectangle(10, 20)
+big = rectangle(300, 400)
+
+print(small.metadata) # {"width": 300, "height": 400"}
+print(big.metadata)   # {"width": 300, "height": 400"}
+```
+<!-- .element: data-id="code" -->
+
+For this reason, there's very few cases where it makes sense to use a mutable default over an immutable one (like for caching).
+
+------
+<!-- .element: data-auto-animate -->
 ```python [4,6-7]
 def rectangle(
     width,
@@ -817,7 +838,7 @@ print(big.metadata)   # {"width": 300, "height": 400"}
 ```
 <!-- .element: data-id="code" -->
 
-So if your functions need mutable defaults, the best way to do so is to default them to None, and set the mutable that you want if it hasn't been specified.
+But if you really need mutation, the best way to do so is to default them to None, and set the mutable that you want, if it hasn't been specified.
 
 > 06:10 (1:10) {5}
 
