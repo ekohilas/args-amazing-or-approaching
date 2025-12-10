@@ -14,7 +14,6 @@
 > TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L32776 (default arguments)
 > TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L34416 (var arguments) 
 > TODO: https://github.com/ekohilas/args-amazing-or-approaching/issues/1
-> TODO: Mention how keyword arguments are slower
 > TOOD: Mention work in basedpyright
 > TODO: Mention NewType
 > TODO: Use background images for language transitions
@@ -1685,7 +1684,7 @@ rectangle(
 
 which would require updating the arguments to be keyword arguments.
 
-But that can be cumbersome, as it can be forgotten, can make the code noisy, and would also require updating all previously made functions.
+But that can be cumbersome, as it can be forgotten, can make the code noisy, slower, and would also require updating all previously made functions.
 
 > 15:20 (02:20) {10}
 
