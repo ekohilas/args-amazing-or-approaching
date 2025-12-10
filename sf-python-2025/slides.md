@@ -1280,6 +1280,11 @@ rectangle(
 Naming our arguments easily lets us prevent this issue!
 
 ------
+<!-- .slide: data-background-image="images/inlays.svg"-->
+
+And while you could argue that language server inlay hints could acheive the same effect,
+
+------
 <!-- .element: data-auto-animate -->
 ```python []
 def rectangle(
@@ -1298,7 +1303,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-But in addition, also reduces issues with refactoring!
+keyword arguments not only appear everywhere for everyone, but also reduces issues with refactoring!
 
 ------
 <!-- .element: data-auto-animate -->
