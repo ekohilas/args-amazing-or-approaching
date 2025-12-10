@@ -1,5 +1,6 @@
 <!-- .slide: data-background-image="images/frame.png"-->
 
+> TODO: Cleanup TODOs
 > TODO: Ensure height and width are ordered where they're meant to be
 > TODO: Ensure all slides are highlighting the right part
 > TODO: Run through
