@@ -19,7 +19,6 @@
 > TODO: Use background images for language transitions
 > TODO: Mention frozendict for mutable defaults
 > TODO: Renaming parameters allows for better pytest deps
-> TODO: Mention faded out keyword args are good, but not great because they don't appear in PR Reviews
 
 ------
 
