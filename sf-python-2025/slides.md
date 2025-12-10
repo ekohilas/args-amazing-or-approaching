@@ -1407,7 +1407,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-and the other adds opacity and color, as when they're combined
+and the other adds opacity and color, when they're combined
 
 ------
 <!-- .element: data-auto-animate -->
