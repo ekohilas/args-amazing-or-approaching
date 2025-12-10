@@ -3708,7 +3708,7 @@ at least it's forever changing...
 
 If you're after the resources for this talk, you can find them in these links.
 
-Or if you're after me, you can collaborate with me on nohumanerrors.com, find me online at ekohilas, or here if you have any questions or feedback!
+Or if you're after me and any updates, you can subcribe to my mailing list on nohumanerrors.com, find me online at ekohilas, or here if you have any questions or feedback!
 
 ------
 
