@@ -2248,7 +2248,7 @@ or create additional variables.
 def rectangle(
     width,
     height,
-    rotation rotation_in_degrees=0,
+    rotation as rotation_in_degrees=0,
 ):
     print(rotation_in_degrees)
     ...
