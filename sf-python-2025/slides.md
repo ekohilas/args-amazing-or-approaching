@@ -1607,7 +1607,7 @@ re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
     content,
-    flag=re.IGNORECASE,
+    flags=re.IGNORECASE,
 )
 
 def sub(
