@@ -3,6 +3,7 @@
 A [repo](https://github.com/ekohilas/args-amazing-or-approaching) for resources of the talk.
 
 ## Evan Kohilas
+
 | Conference | Slides | Video | Notes | Length | Year |
 |------------|:------:|:-----:|:-----:|-------:|-----:|
 | [PyCon AU](https://pycon.org.au) | [🔗](https://args-amazing-or-approaching.nohumanerrors.com/pycon-au-2025) | [🔗]() | [🔗](https://2025.pycon.org.au/program/B38QTB/) | 30 min | 2025 |
