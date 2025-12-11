@@ -3148,7 +3148,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-We'll get a missing keyword argument error.
+We'll get an error for a missing keyword argument.
 
 ------
 <!-- .element: data-auto-animate -->
