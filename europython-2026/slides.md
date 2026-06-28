@@ -1702,7 +1702,7 @@ And the way that they will do that, is to put `*` as a parameter before count an
 
 ------
 <!-- .element: data-auto-animate -->
-```python [1-6,8]
+```python [5,8]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
@@ -1746,12 +1746,12 @@ def sub(
 ```
 <!-- .element: data-id="code" -->
 
-And require that we explicitly specify the flag with a keyword argument.
+Instead, requiring that we explicitly specify the flag with a keyword argument.
 
 ------
 <!-- .slide: data-background-image="images/history_keyword_parameter.svg"-->
 
-This feature was added in Python 3.0!
+And if you're curious, this feature was added in Python 3.0!
 
 ------
 <!-- .element: data-auto-animate -->
