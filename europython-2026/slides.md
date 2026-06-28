@@ -19,6 +19,8 @@
 > TODO: Use background images for language transitions
 > TODO: Mention frozendict for mutable defaults
 > TODO: Renaming parameters allows for better pytest deps
+> TODO: Update args linter
+> TODO: Start with connecting story
 
 ------
 
