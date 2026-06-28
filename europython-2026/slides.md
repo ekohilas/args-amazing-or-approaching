@@ -861,7 +861,7 @@ basic = rectangle(10, 20);
 ```
 <!-- .element: data-id="code" -->
 
-and go back to our original non python example,
+and go back to our original non python example.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -877,7 +877,14 @@ basic = rectangle(10, 20);
 ```
 <!-- .element: data-id="code" -->
 
-how could defaults be done in a language that doesn't support them?
+The language doesn't support defaults... So, can we fix it?
+
+------
+<!-- .slide: data-background-image="images/bob_the_builder.svg"-->
+
+Yes we can!
+
+That's what Bob the Builder would say, if you're not familiar with him.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -891,7 +898,7 @@ var rectangle = Rectangle
 <!-- .element: data-notrim -->
 <!-- .element: data-id="builder" -->
 
-Well, some of you might be familiar with a programming construct called the builder pattern.
+But you may be familiar with a programming construct called the builder pattern. AaAh!
 
 ------
 <!-- .element: data-auto-animate -->
