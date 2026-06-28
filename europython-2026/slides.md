@@ -1119,17 +1119,15 @@ Without having to reference the signature of the functions, there's no knowing w
 ------
 <!-- .slide: data-background-image="images/history_keyword_args.svg"-->
 
-But in 1995 Python 1.3 did the beautiful thing of adding keyword arguments
+But in 1995 Python 1.3 did this BEAUTIFUL thing of adding keyword arguments
 
 ------
-<!-- .element: data-auto-animate -->
 ```python []
 rectangle(
     width=width,
     height=height,
 )
 ```
-<!-- .element: data-id="code" -->
 
 Which let us choose what argument we wish to fill, and thus let us solve these issues (and do away with builders and function overloading)
 
