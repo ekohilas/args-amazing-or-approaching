@@ -1531,6 +1531,22 @@ re.sub(
 
 My brain shuts down and everything becomes regex goop. 
 
+Which is a problem because, at this point, I'm hitting my head against my keyboard for hours trying to figure out why my expected thousands of substitutions weren't working
+
+------
+<!-- .element: data-auto-animate -->
+```python [3]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+```
+<!-- .element: data-id="code" -->
+
+and I'm like, second guessing my replacement function... it wasn't a fun night.
+
 ------
 <!-- .element: data-auto-animate -->
 ```python [1]
@@ -1543,7 +1559,7 @@ re.sub(
 ```
 <!-- .element: data-id="code" -->
 
-It's pretty hard to spot if we don't know the function definition, so let's bring it up.
+So what happened? Well it's pretty hard to spot if we don't know the function definition, so let's bring it up.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1569,6 +1585,28 @@ If we look at the definition of re.sub,
 
 ------
 <!-- .element: data-auto-animate -->
+```python [13]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+
+def sub(
+    pattern,
+    repl,
+    string,
+    count=0,
+    flags=0,
+)
+```
+<!-- .element: data-id="code" -->
+
+and we look at the parameter that the flag is passed in as, you'll see it's not flags,
+
+------
+<!-- .element: data-auto-animate -->
 ```python [5,12]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
@@ -1587,16 +1625,16 @@ def sub(
 ```
 <!-- .element: data-id="code" -->
 
-and we look at the parameter that the flag is passed in as, you'll see it's count, not flags.
+but count.
 
 ------
 <!-- .element: data-auto-animate -->
-```python [5]
+```python [5,12]
 re.sub(
     r"(\w+)(\[.*?\])\s*\n(.*?)",
     replacement_function,
     content,
-    re.IGNORECASE, # 2
+    re.IGNORECASE,
 )
 
 def sub(
@@ -1609,9 +1647,30 @@ def sub(
 ```
 <!-- .element: data-id="code" -->
 
-and then the flag is read as an int, setting the maximum number of substitutions to 2.
+and then this re.IGNORECASE flag is read in as an int.
 
-That would explain why I spent hours trying to figure out why my expected thousands of substitutions weren't working, and was instead second guessing my replacement function.
+------
+```python [5,12]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    2,
+)
+
+def sub(
+    pattern,
+    repl,
+    string,
+    count=0,
+    flags=0,
+)
+```
+<!-- .element: data-id="code" -->
+
+which happens to be 2, and now becomes the maximum number of substitutions.
+
+Which is why my code looked like it wasn't replacing anything... 
 
 ------
 <!-- .slide: data-background-image="images/positional-deprecated.png"-->
