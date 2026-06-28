@@ -1071,6 +1071,27 @@ shape_2 = rectangle(20, 10);
 But as soon as we remove the rotation of the shape, the shapes dimensions are now different.
 
 ------
+```java [14]
+// not python
+Rectangle rectangle(
+    int width,
+    int height
+);
+
+Rectangle rectangle(
+    int height,
+    int width,
+    int rotation
+);
+
+shape_1 = rectangle(10, 20);
+shape_2 = rectangle(20, 10); 😱
+```
+<!-- .element: data-notrim -->
+
+Dun dun dun!
+
+------
 <!-- .element: data-auto-animate -->
 ```java [3-4,8-9]
 // not python
