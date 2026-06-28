@@ -1502,9 +1502,48 @@ re.sub(
 
 It's how the IGNORECASE flag is being passed in!
 
-Side note: Isn't it interesting how much harder errors are to spot when there's complexity?
+Isn't it so interesting, how much harder errors are to spot when there's complexity?
 
-This is pretty hard to spot if we don't know the function definition, so let's bring it up.
+------
+<!-- .element: data-auto-animate -->
+```python [2]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+```
+<!-- .element: data-id="code" -->
+
+Like as soon as I see a line of regex,
+
+------
+```python []
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    r"(?P<x>[A-Z]\w*)\(\)",
+    r"\b\d{2,4}[-/.]\d{1,2}\b",
+    r"(?i)\[[^\]]+\]\s*\$",
+)
+```
+<!-- .element: data-id="code" -->
+
+My brain shuts down and everything becomes regex goop. 
+
+------
+<!-- .element: data-auto-animate -->
+```python [1]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+```
+<!-- .element: data-id="code" -->
+
+It's pretty hard to spot if we don't know the function definition, so let's bring it up.
 
 ------
 <!-- .element: data-auto-animate -->
