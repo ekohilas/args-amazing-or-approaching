@@ -1286,7 +1286,6 @@ They're now actually for height, width, and opacity, without us ever knowing.
 > 10:15 (0:55) {8}
 
 ------
-<!-- .element: data-auto-animate -->
 ```python [10-12]
 def rectangle(
     height,
@@ -1309,7 +1308,7 @@ Naming our arguments easily lets us prevent this issue!
 ------
 <!-- .slide: data-background-image="images/inlays.svg"-->
 
-And while you could argue that language server inlay hints could acheive the same effect,
+And while you could argue that language server inlay hints could achieve the same effect,
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1330,7 +1329,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-keyword arguments not only appear everywhere for everyone, but also reduces issues with refactoring!
+the benefit of keyword arguments is that they not only appear *everywhere* for *everyone*, but they also reduce issues with refactoring!
 
 ------
 <!-- .element: data-auto-animate -->
