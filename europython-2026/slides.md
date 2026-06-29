@@ -19,7 +19,6 @@
 > TODO: Update args linter
 > TODO: Start with connecting story
 > TODO: Look for where engagement can be added before builders
-> TODO: Add fixture example for awesome in python.
 
 ------
 
