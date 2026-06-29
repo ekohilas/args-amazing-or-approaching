@@ -8,7 +8,6 @@
 > TODO: Fix sectioning
 > TODO: Add void to function signatures
 > TODO: Check code examples
-> TODO: Add history notes for when features were introduced
 > TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L32321 (keyword arguments)
 > TODO: https://www.python.org/download/releases/1.6/ (variable arguments)
 > TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L32776 (default arguments)
@@ -17,14 +16,11 @@
 > TOOD: Mention work in basedpyright
 > TODO: Mention NewType
 > TODO: Use background images for language transitions
-> TODO: Mention frozendict for mutable defaults
 > TODO: Renaming parameters allows for better pytest deps
 > TODO: Update args linter
 > TODO: Start with connecting story
-> TODO: Update ending
 > TODO: Look for where engagement can be added before builders
 > TODO: Add fixture example for awesome in python.
-> TODO: Turn ** into a smiley face in the good friend section.
 
 ------
 
@@ -844,6 +840,8 @@ print(big.metadata)   # {"width": 300, "height": 400"}
 <!-- .element: data-id="code" -->
 
 But if you really need mutation, the best way to do so is to default them to None, and set the mutable that you want, if it hasn't been specified.
+
+> TODO: Or maybe use frozendict?
 
 > 06:10 (1:10) {5}
 
