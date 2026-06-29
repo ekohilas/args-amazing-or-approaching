@@ -16,7 +16,6 @@
 > TOOD: Mention work in basedpyright
 > TODO: Mention NewType
 > TODO: Use background images for language transitions
-> TODO: Renaming parameters allows for better pytest deps
 > TODO: Update args linter
 > TODO: Start with connecting story
 > TODO: Look for where engagement can be added before builders
@@ -2384,9 +2383,22 @@ rectangle(
     rotation=45,
 )
 ```
-<!-- .element: data-id="code" -->
 
-Wouldn't it be awesome if we could do the same thing in Python?
+Wouldn't it be awesome if you could use something like the as keyword do the same thing in Python?
+
+------
+<!-- .element: data-auto-animate -->
+```python []
+def test_painting(
+    square_fixture as rectangle,
+):
+    paint_with(rectangle)
+    ...
+```
+
+Take this case for example, where you want to use a different pytest fixture.
+
+With named parameters, you wouldn't have to rename the same variable everywhere within your test!
 
 > 19:05 (00:55) {13}
 
