@@ -3572,7 +3572,7 @@ But still, you don't really know whether the function logic will reject differen
 ------
 <!-- .element: data-auto-animate -->
 ```python []
-# Python 3.11
+# Python 3.12
 from typing import TypedDict, Unpack
 
 class ShapeValues(TypedDict):
@@ -3589,10 +3589,11 @@ def rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-And for typing keyword arguments, only from Python 3.11 were additions added as support, to help specify what keywords could be caught, and what their types could be.
+And for typing keyword arguments, only from Python 3.12 were additions added as support, to help specify what keywords could be caught, and what their types could be.
 
 > 26: (00:55) {20}
 
+> https://peps.python.org/pep-0692/
 > https://docs.python.org/3/library/typing.html#typing.Unpack
 > https://typing.python.org/en/latest/spec/callables.html#unpack-kwargs
 > https://chatgpt.com/share/67ea8fb7-5874-8004-a270-1fa956b296f2
