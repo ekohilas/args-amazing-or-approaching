@@ -18,7 +18,6 @@
 > TODO: Use background images for language transitions
 > TODO: Update args linter
 > TODO: Start with connecting story
-> TODO: Look for where engagement can be added before builders
 
 ------
 
@@ -287,6 +286,8 @@ rotated = rectangle(10, 20, 45);
 
 Because this is tedious work that you want to avoid, in most of these languages, there are other ways that a default rotation can be setup.
 
+Okay so you're thinking, thinking, what can I do...
+
 ------
 <!-- .element: data-auto-animate -->
 ```java [2,5]
@@ -307,7 +308,7 @@ rotated = rotated_rectangle(10, 20, 45);
 ```
 <!-- .element: data-id="code" -->
 
-The most basic way, is by creating a new function with this rotation parameter.
+And you go, Ah! The most basic way, is by creating a new function with this rotation parameter.
 
 Of course, you don't want to duplicate the code that makes these rectangles.
 
@@ -386,6 +387,30 @@ Now if you take a step back, you might start to see how this might get a bit mes
 
 ------
 <!-- .element: data-auto-animate -->
+```java [2,8]
+// not python
+Rectangle rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+Rectangle rectangle(
+    int width,
+    int height
+) {
+    return rectangle(width, height, 0);
+}
+
+basic = rectangle(10, 20);
+rotated = rectangle(10, 20, 45);
+```
+<!-- .element: data-id="code" -->
+
+With function overloading, you can define multiple functions with the same name,
+
+------
+<!-- .element: data-auto-animate -->
 ```java [2-5,8-10]
 // not python
 Rectangle rectangle(
@@ -406,9 +431,7 @@ rotated = rectangle(10, 20, 45);
 ```
 <!-- .element: data-id="code" -->
 
-With function overloading, you can define multiple functions with the same name, but different type signatures.
-
-> TODO: Split into two slides (one on names, another on type signatures)
+but different type signatures.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -500,17 +523,19 @@ rotated = rectangle(10, 20, 45)
 ```
 <!-- .element: data-id="code" -->
 
-And this is because in Python, defining a function with the same name overwrites the previous definition.
+And this is because in Python, defining a function with the same name overwrites that previous definition.
 
 ------
 <!-- .slide: data-background-image="images/multipledispatch-pypi.png"-->
 
-While there are packages like multipledispatch that you can use to replicate function overloading
+Now, some of you might say, aren't there packages like multipledispatch that you can use to replicate function overloading?
+
+And yes, you'd be correct,
 
 ------
 <!-- .slide: data-background-image="images/overloading-problem.png"-->
 
-function overloading in general can also become problematic, for reasons that will become more apparent later.
+however, function overloading in general can also become problematic, for reasons that will become more apparent later.
 
 > 04:15 (01:10) {3}
 
@@ -534,7 +559,7 @@ rotated = rotated_rectangle(10, 20, 45)
 ```
 <!-- .element: data-id="code" -->
 
-So without function overloading, how does Python let you simplify this?
+So without function overloading, how does Python let you simplify this mess?
 
 ------
 <!-- .element: data-auto-animate -->
