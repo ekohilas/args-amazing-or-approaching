@@ -23,6 +23,8 @@
 > TODO: Start with connecting story
 > TODO: Update ending
 > TODO: Look for where engagement can be added before builders
+> TODO: Add fixture example for awesome in python.
+> TODO: Turn ** into a smiley face in the good friend section.
 
 ------
 
