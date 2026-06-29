@@ -3381,7 +3381,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-What if we wanted to be sure that we could always pass in all arguments?
+And now, you might be thinking, what if we wanted to be sure, that we could always pass in all arguments?
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3430,7 +3430,6 @@ def rectangle(
 This would let us pass in all extra arguments down to other functions.
 
 ------
-<!-- .element: data-auto-animate -->
 ```python [13]
 def rectangle(
     width,
@@ -3453,7 +3452,7 @@ And similar to `**` that allows for unpacking within a function call,
 
 ------
 <!-- .element: data-auto-animate -->
-```python [11]
+```python [12]
 def rectangle(
     width,
     height,
