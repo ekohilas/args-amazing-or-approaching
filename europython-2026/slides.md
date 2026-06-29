@@ -2076,7 +2076,6 @@ Given the wonders you've just seen with keyword arguments, you might be wonderin
 Well there's three cases that I've seen
 
 ------
-<!-- .element: data-auto-animate -->
 ```python [4]
 def rectangle(
     width,
@@ -2944,6 +2943,8 @@ rectangle((10, 20))
 <!-- .element: data-id="code" -->
 
 Which were unpacked for use within the function.
+
+This feature wasn't used a lot, and 😬 didn't make it through in the transition.
 
 But who knows, maybe it'll come back to Python 3 after a PEP?
 
