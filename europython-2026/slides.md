@@ -199,7 +199,7 @@ basic = rectangle(10, 20);
 ```
 <!-- .element: data-id="code" -->
 
-But let's say that a basic rectangle isn't good enough. And we've been asked to create a rotated one instead.
+But let's say that a basic rectangle isn't good enough. And you've been asked to create a rotated one instead.
 
 > TODO: Change return type signature of rectangle
 
@@ -217,7 +217,7 @@ basic = rectangle(10, 20);
 ```
 <!-- .element: data-id="code" -->
 
-And to do so, we need to add the rotation parameter.
+And to do so, you need to add the rotation parameter.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -234,7 +234,7 @@ rotated = rectangle(10, 20, 45);
 ```
 <!-- .element: data-id="code" -->
 
-Now we can make a rotated rectangle!
+Now you can make a rotated rectangle!
 
 ------
 <!-- .element: data-auto-animate -->
@@ -252,7 +252,7 @@ rotated = rectangle(10, 20, 45);
 ```
 <!-- .element: data-id="code" -->
 
-But now our previous function call needs to be updated, as it'll now error from not enough arguments.
+But now your previous function call needs to be updated, as it'll now error from not enough arguments.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -269,7 +269,7 @@ rotated = rectangle(10, 20, 45);
 ```
 <!-- .element: data-id="code" -->
 
-And this creates a problem, because we now need to go through and update all existing function calls for any un-rotated rectangles, and add an additional argument for a default rotation of 0
+And this creates a problem, because you now need to go through and update all existing function calls for any un-rotated rectangles, and add an additional argument for a default rotation of 0
 
 ------
 <!-- .element: data-auto-animate -->
@@ -286,7 +286,7 @@ rotated = rectangle(10, 20, 45);
 ```
 <!-- .element: data-id="code" -->
 
-Because this is tedious work that we want to avoid, in most of these languages, there are other ways that a default rotation can be setup.
+Because this is tedious work that you want to avoid, in most of these languages, there are other ways that a default rotation can be setup.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -310,7 +310,7 @@ rotated = rotated_rectangle(10, 20, 45);
 
 The most basic way, is by creating a new function with this rotation parameter.
 
-Of course, we don't want to duplicate the code that makes these rectangles.
+Of course, you don't want to duplicate the code that makes these rectangles.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -334,7 +334,7 @@ rotated = rotated_rectangle(10, 20, 45);
 ```
 <!-- .element: data-id="code" -->
 
-So we update the old function, such that it calls the new function
+So you update the old function, such that it calls the new function
 
 ------
 ```java [11-13]
@@ -357,7 +357,7 @@ rotated = rotated_rectangle(10, 20, 45);
 ```
 <!-- .element: data-id="code" -->
 
-And sets the new parameter with a default argument, which in our case will be 0.
+And sets the new parameter with a default argument, which in your case will be 0.
 
 > 03:05 (01:55) {2}
 
@@ -383,7 +383,7 @@ rotated = rotated_rectangle(10, 20, 45);
 ```
 <!-- .element: data-id="code" -->
 
-Now if we take a step back, we might start to see how this might get a bit messy. The good news is, in some languages, we can do a bit of clean up through the use of function overloading.
+Now if you take a step back, you might start to see how this might get a bit messy. The good news is, in some languages, you can do a bit of clean up through the use of function overloading.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -407,7 +407,7 @@ rotated = rectangle(10, 20, 45);
 ```
 <!-- .element: data-id="code" -->
 
-With function overloading, we can define multiple functions with the same name, but different type signatures.
+With function overloading, you can define multiple functions with the same name, but different type signatures.
 
 > TODO: Split into two slides (one on names, another on type signatures)
 
@@ -433,7 +433,7 @@ rotated = rectangle(10, 20, 45);
 ```
 <!-- .element: data-id="code" -->
 
-This removes the need for us to rename any functions, as these programming languages will determine which functions to call using the parameter types instead.
+This removes the need for you to rename any functions, as these programming languages will determine which functions to call using the parameter types instead.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -455,7 +455,7 @@ rotated = rectangle(10, 20, 45)
 ```
 <!-- .element: data-id="code" -->
 
-If we looked at the same code in python
+If you looked at the same code in python
 
 ------
 <!-- .element: data-auto-animate -->
@@ -535,7 +535,7 @@ rotated = rotated_rectangle(10, 20, 45)
 ```
 <!-- .element: data-id="code" -->
 
-So without function overloading, how does Python let us simplify this?
+So without function overloading, how does Python let you simplify this?
 
 ------
 <!-- .element: data-auto-animate -->
@@ -557,7 +557,7 @@ rotated = rotated_rectangle(10, 20, 45)
 ```
 <!-- .element: data-id="code" -->
 
-Well in python, we have default arguments!
+Well in python, you have default arguments!
 
 ------
 <!-- .slide: data-background-image="images/history_defaults.svg"-->
@@ -584,7 +584,7 @@ rotated = rotated_rectangle(10, 20, 45)
 ```
 <!-- .element: data-id="code" -->
 
-So we can specify default arguments using the equals sign in the parameter definition.
+So you can specify default arguments using the equals sign in the parameter definition.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -600,7 +600,7 @@ rotated = rotated_rectangle(10, 20, 45)
 ```
 <!-- .element: data-id="code" -->
 
-And now, if we only keep a single definition, we can remove the need for function chaining
+And now, if you only keep a single definition, you can remove the need for function chaining
 
 ------
 <!-- .element: data-auto-animate -->
@@ -632,7 +632,7 @@ rotated = rectangle(10, 20, 45)
 ```
 <!-- .element: data-id="code" -->
 
-Then we can rename our function back to rectangle, to get our beautiful definition.
+Then you can rename your function back to rectangle, to get your beautiful definition.
 
 > 05:00 (00:45) {4}
 
@@ -655,7 +655,7 @@ def rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-Let's say for example, that we wanted to set a default argument for our rectangles to contain metadata based on how they were created.
+Let's say for example, that you wanted to set a default argument for your rectangles to contain metadata based on how they were created.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -670,7 +670,7 @@ def rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-And then, we added that metadata within the function.
+And then, you added that metadata within the function.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -688,7 +688,7 @@ big = rectangle(300, 400)
 ```
 <!-- .element: data-id="code" -->
 
-What you'll find, is that if we create two rectangles,
+What you'll find, is that if you create two rectangles,
 
 ------
 <!-- .element: data-auto-animate -->
@@ -862,7 +862,7 @@ basic = rectangle(10, 20);
 ```
 <!-- .element: data-id="code" -->
 
-and go back to our original non python example.
+and go back to your original non python example.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1069,7 +1069,7 @@ shape_2 = rectangle(20, 10);
 <!-- .element: data-notrim -->
 <!-- .element: data-id="builder" -->
 
-But as soon as we remove the rotation of the shape, the shapes dimensions are now different.
+But as soon as you remove the rotation of the shape, the shapes dimensions are now different.
 
 ------
 ```java [14]
@@ -1130,7 +1130,7 @@ rectangle(
 )
 ```
 
-Which let us choose what argument we wish to fill, and thus let us solve these issues (and do away with builders and function overloading)
+Which let you choose what argument you wish to fill, and thus let you solve these issues (and do away with builders and function overloading)
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1142,7 +1142,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-Meaning that not only are our functions self documenting by having constant arguments labelled
+Meaning that not only are your functions self documenting by having constant arguments labelled
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1154,7 +1154,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-But now our argument ordering is redundant!
+But now your argument ordering is redundant!
 
 ------
 <!-- .slide: data-background-image="images/never_ending_benefits.svg"-->
@@ -1179,7 +1179,7 @@ rectangle(
 ```
 <!-- .element: data-id="rectangle" -->
 
-Like for example, if we go back to a default argument being used for rotation
+Like for example, if you go back to a default argument being used for rotation
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1199,7 +1199,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-then we could call that function,
+then you could call that function,
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1240,7 +1240,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-But once we introduce a new required positional argument like opacity
+But once you introduce a new required positional argument like opacity
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1282,7 +1282,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-They're now actually for height, width, and opacity, without us ever knowing.
+They're now actually for height, width, and opacity, without you ever knowing.
 
 > 10:15 (0:55) {8}
 
@@ -1304,7 +1304,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-Naming our arguments easily lets us prevent this issue!
+Naming your arguments easily lets you prevent this issue!
 
 ------
 <!-- .slide: data-background-image="images/inlays.svg"-->
@@ -1351,7 +1351,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-such as in the case where we want to fix the mis-ordered parameters,
+such as in the case where you want to fix the mis-ordered parameters,
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1372,7 +1372,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-we now don't have to make changes to re-order those arguments everywhere that function is called.
+you now don't have to make changes to re-order those arguments everywhere that function is called.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1390,7 +1390,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-And if we choose to sort the ordering of arguments and parameters, we can reduce the chance of merge conflicts
+And if you choose to sort the ordering of arguments and parameters, you can reduce the chance of merge conflicts
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1560,7 +1560,7 @@ re.sub(
 ```
 <!-- .element: data-id="code" -->
 
-So what happened? Well it's pretty hard to spot if we don't know the function definition, so let's bring it up.
+So what happened? Well it's pretty hard to spot if you don't know the function definition, so let's bring it up.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1582,7 +1582,7 @@ def sub(
 ```
 <!-- .element: data-id="code" -->
 
-If we look at the definition of re.sub,
+If you look at the definition of re.sub,
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1604,7 +1604,7 @@ def sub(
 ```
 <!-- .element: data-id="code" -->
 
-and we look at the parameter that the flag is passed in as, you'll see it's not flags,
+and you look at the parameter that the flag is passed in as, you'll see it's not flags,
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1724,7 +1724,7 @@ def sub(
 ```
 <!-- .element: data-id="code" -->
 
-What this will do, is throw us an error when we try to call the function without naming those arguments.
+What this will do, is throw an error when you try to call the function without naming those arguments.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1747,7 +1747,7 @@ def sub(
 ```
 <!-- .element: data-id="code" -->
 
-Instead, requiring that we explicitly specify the flag with a keyword argument.
+Instead, requiring that you explicitly specify the flag with a keyword argument.
 
 ------
 <!-- .slide: data-background-image="images/history_keyword_parameter.svg"-->
@@ -1898,7 +1898,7 @@ The bad news is, that this was rejected earlier this year...
 ------
 ![ruff logo](images/ruff.svg)
 
-Personally I feel that linters are a cleaner, more pragmatic way to not only check, but also correct this for us!
+Personally I feel that linters are a cleaner, more pragmatic way to not only check, but also correct this for you!
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2089,7 +2089,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-The first may be made apparent if we had to refactor our function and change the name of our parameters.
+The first may be made apparent if you had to refactor your function and change the name of your parameters.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2109,7 +2109,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-For example, we may want to change the specification, and be more specific that the rotation is in degrees, not radians.
+For example, you may want to change the specification, and be more specific that the rotation is in degrees, not radians.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2131,7 +2131,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-If we updated the name of our parameter, now any calls that pass in the `rotation` argument would now fail.
+If you updated the name of your parameter, now any calls that pass in the `rotation` argument would now fail.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2173,7 +2173,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-With the trade off being that our functions couldn't use keyword arguments.
+With the trade off being that your functions couldn't use keyword arguments.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2194,7 +2194,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-Another case is when we want to keep the external argument name the same, and change the internal parameter name within our function.
+Another case is when you want to keep the external argument name the same, and change the internal parameter name within your function.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2215,7 +2215,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-And we could do that by setting this parameter to another variable at the top of the function.
+And you could do that by setting this parameter to another variable at the top of the function.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2250,7 +2250,7 @@ This is another case where you could argue that Python isn't perfect.
 ------
 <!-- .slide: data-background-image="images/swift_logo.svg"-->
 
-If we look at other languages like Swift, then this concept of naming parameters different from arguments does exist!
+If you look at other languages like Swift, then this concept of naming parameters different from arguments does exist!
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2274,7 +2274,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-If we convert our previous python rectangle example to swift...
+If you convert your previous python rectangle example to swift...
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2665,7 +2665,7 @@ rectangle(**params)
 ```
 <!-- .element: data-id="code" -->
 
-Letting us do what javascript does with dictionaries too!
+Letting you do what javascript does with dictionaries too!
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2756,7 +2756,7 @@ rectangle({
 ```
 <!-- .element: data-id="code" -->
 
-Allowing us to save the remaining properties for whatever they may be needed for.
+Allowing you to save the remaining properties for whatever they may be needed for.
 
 > 21:30 (01:25) {15}
 
@@ -2780,7 +2780,7 @@ rectangle(**params)
 ```
 <!-- .element: data-id="code" -->
 
-But if this is how JavaScript named parameters work, what happens in python, if we pass extra keyword arguments into a python function?
+But if this is how JavaScript named parameters work, what happens in python, if you pass extra keyword arguments into a python function?
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2803,7 +2803,7 @@ rectangle(**params)
 ```
 <!-- .element: data-id="code" -->
 
-Well, unlike JavaScript, we'll get an error, telling us off that we passed in an unexpected keyword argument, which you could argue is pretty good default behavior!
+Well, unlike JavaScript, you'll get an error, telling you off that you passed in an unexpected keyword argument, which you could argue is pretty good default behavior!
 
 And I say default here because you can also specify a way to keep these leftover arguments,
 
@@ -3042,7 +3042,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-Well, Python will nicely tell us that we've made a mistake.
+Well, Python will nicely tell you that there's a mistake.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3068,7 +3068,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-And we'll get the same error if they're passed in as positionals instead.
+And you'll get the same error if they're passed in as positionals instead.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3169,7 +3169,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-Now you might have noticed that **kwargs is pretty cool, since it lets us pass in an arbitrary number of arguments.
+Now you might have noticed that **kwargs is pretty cool, since it lets you pass in an arbitrary number of arguments.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3183,9 +3183,9 @@ sum(
 ```
 <!-- .element: data-id="code" -->
 
-But there are also cases where we can't define a keyword for every argument.
+But there are also cases where you can't define a keyword for every argument.
 
-Say for example, when we want to sum a list of numbers.
+Say for example, when you want to sum a list of numbers.
 
 ------
 <!-- .slide: data-background-image="images/history_var_args.svg"-->
@@ -3204,7 +3204,7 @@ def rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-So we can use `*args`, which is like `**kwargs` but for positional arguments.
+So you can use `*args`, which is like `**kwargs` but for positional arguments.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3295,7 +3295,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-We'll get an error for a missing keyword argument.
+You'll get an error for a missing keyword argument.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3364,7 +3364,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-We'll get an error for an unexpected keyword argument.
+You'll get an error for an unexpected keyword argument.
 
 > TODO: continue from here
 
@@ -3391,7 +3391,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-And now, you might be thinking, what if we wanted to be sure, that we could always pass in all arguments?
+And now, you might be thinking, what if you wanted to be sure, that you could always pass in all arguments?
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3415,7 +3415,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-Then we could end the definition with **kwargs so that our function captures both!
+Then you could end the definition with **kwargs so that your function captures both!
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3437,7 +3437,7 @@ def rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-This would let us pass in all extra arguments down to other functions.
+This would let you pass in all extra arguments down to other functions.
 
 ------
 ```python [13]
@@ -3480,7 +3480,7 @@ def rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-We can also do the same thing with `*` to unpack into functions with variable arguments, to respect shape's function definition.
+You can also do the same thing with `*` to unpack into functions with variable arguments, to respect shape's function definition.
 
 > 25:45 (01:30) {19}
 
@@ -3492,7 +3492,7 @@ But are arbitrary keyword or positional arguments a good idea?
 ------
 <!-- .slide: data-background-image="images/rust_logo.svg"-->
 
-For that, we could look at the design of newer, safer, languages like rust.
+For that, you could look at the design of newer, safer, languages like rust.
 
 ------
 <!-- .element: data-auto-animate -->
