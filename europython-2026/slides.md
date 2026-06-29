@@ -2052,7 +2052,7 @@ This is because of another special parameter, `/`.
 ------
 <!-- .slide: data-background-image="images/history_positional_parameter.svg"-->
 
-Which was added in Python 3.8 (which only went out of support last year).
+Which was added in Python 3.8 (which, relative to the other additions, is quite recent!) 
 
 ------
 ```python [5]
