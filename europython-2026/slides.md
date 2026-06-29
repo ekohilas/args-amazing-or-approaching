@@ -2820,6 +2820,13 @@ rectangle(**params)
 and that is by using our good friend `**` again, adding it to a `rest` parameter.
 
 ------
+<!-- .slide: data-background-image="images/good_friend.svg"-->
+
+Doesn't it look so cute?
+
+Anyways
+
+------
 <!-- .element: data-auto-animate -->
 ```python [5,12]
 def rectangle(
@@ -2839,7 +2846,7 @@ rectangle(**params)
 ```
 <!-- .element: data-id="code" -->
 
-which captures any extra keyword arguments into a dictionary
+this captures any extra keyword arguments into a dictionary.
 
 As a side note, similar to javascript, this parameter doesn't have to be called `rest` either.
 
