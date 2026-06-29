@@ -3505,6 +3505,7 @@ fn main() {
 While I'm not an expert in Rust, to my understanding, Rust doesn't support variable function arguments.
 Not only is it hard for the type checker, but also hard for the reader.
 So if you do want this complexity, you can use lists, which don't cause variable type signatures, or macros, which pass the complexity onto the writer.
+And avoiding that complexity is understandable!
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3524,9 +3525,11 @@ def rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-And this complexity is seen in Python, since they can make functions difficult to understand how they should be used, given there's no need for types.
+Like, in Python, you might have seen this monstrosity before, and learned to hate it.
 
-For example what can really be passed into rectangle?
+And for those who haven't, this is because it makes it really difficult to understand how to use the function.
+
+You can't tell what can and can't be passed through, especially since there's no need for typing.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3561,6 +3564,8 @@ def rectangle(
 <!-- .element: data-id="code" -->
 
 then in most cases, the definition should be updated with those param types.
+
+But still, you don't really know whether the function logic will reject different keywords. 
 
 > https://docs.python.org/3/library/typing.html#typing.TypeVarTuple
 
