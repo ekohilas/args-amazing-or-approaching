@@ -31,6 +31,8 @@ Hello everyone!
 Are you excited?!
 Great! Because I am too since...
 
+> 00:10 (00:10) {1}
+
 ------
 
 <div class="r-stack">
@@ -54,6 +56,8 @@ def function(
 Just look at it, isn't it great? Okay I'm not that crazy, ... at least I think.
 Anyways, let's get some formalities out of the way.
 
+> (00:20)
+
 ------
 <!-- .element: data-auto-animate -->
 ```python [2-3]
@@ -67,9 +71,11 @@ def function(
 
 Anyone know what the name of these are called?
 
+[5 seconds max]
 [Anyone else thought they were called arguments?]
-
 [Yeah it still gets me, so don't fault me if I get confused!]
+
+> (00:20)
 
 ------
 <!-- .element: data-auto-animate -->
@@ -89,7 +95,11 @@ function(
 
 Okay so, anyone want to take a guess at what these are called?
 
+[3 seconds]
+
 Yeah these are arguments!
+
+> (00:10)
 
 > 01:10 (01:10) {1}
 
@@ -360,7 +370,9 @@ rotated = rotated_rectangle(10, 20, 45);
 
 And sets the new parameter with a default argument, which in your case will be 0.
 
-> 03:05 (01:55) {2}
+> (2:10)
+
+> 03:05 (01:55) {2} [2:22]
 
 ------
 <!-- .element: data-auto-animate -->
@@ -540,7 +552,7 @@ And yes, you'd be correct,
 
 however, function overloading in general can also become problematic, for reasons that we'll cover later.
 
-> 04:15 (01:10) {3}
+> 04:15 (01:05) {3} [1:35]
 
 ------
 <!-- .element: data-auto-animate -->
@@ -864,10 +876,11 @@ print(big.metadata)   # {"width": 300, "height": 400"}
 <!-- .element: data-id="code" -->
 
 there **is** no case for mutable defaults.
+[pause for effect]
 There is always a better option that's dependant on your situation.
 (If you disagree, feel free to fight me outside)
 
-> 06:10 (1:10) {5}
+> 06:10 (1:30) {5}
 
 > 1. Using immutables like `None`, `tuple`, `frozendict` can lead to side-effect driven development.
 > 2. Re-initialising the object `metadata = dict(metadata)` doesn't capture nested mutable objects.
@@ -974,7 +987,7 @@ var rectangle = Rectangle
 
 before building the final state.
 
-> 08:00 (01:50) {6}
+> 08:00 (00:45) {6}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -992,7 +1005,9 @@ But yet another issue lies with required arguments, that even builders can't fix
 
 Can anyone spot the error here?
 
-(water break)
+[5s water break]
+
+> (0:15)
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1146,7 +1161,7 @@ shape_2 = rectangle(20, 10);
 
 Without having to reference the signature of the functions, there's no knowing whether the arguments are set correctly.
 
-> 09:20 (01:20) {7}
+> 09:20 (00:55) {7}
 
 ------
 <!-- .slide: data-background-image="images/history_keyword_args.svg"-->
@@ -1191,6 +1206,8 @@ But now your argument ordering is redundant!
 <!-- .slide: data-background-image="images/never_ending_benefits.svg"-->
 
 This might not seem like much, but this little change, of always using keywords arguments, leads to so many benefits, and prevention of errors.
+
+> (00:40)
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1315,7 +1332,7 @@ rectangle(
 
 They're now actually for height, width, and opacity, without you ever knowing.
 
-> 10:15 (0:55) {8}
+> 10:15 (0:30) {8}
 
 ------
 ```python [10-12]
@@ -1491,12 +1508,12 @@ rectangle(
 
 opacity will be in the same place for both.
 
-> 13:00 (02:45) {9}
-
 ------
 <!-- .slide: data-background-image="images/no_teamwork.svg"-->
 
-Even if you don't care for refactoring or collaboration, I'd still recommend using keyword arguments to reduce human errors.
+Even if you don't care for refactoring or collaboration, keyword arguments will still reduce reduce human errors for you.
+
+> 13:00 (01:00) {9}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1512,11 +1529,18 @@ re.sub(
 
 Pop quiz!
 Can anyone spot the error in this example?
-(and if you already know then let others have a chance)
-(water break)
+
+(and if you've come across this before, let others have a chance)
+
+[3 seconds water]
+
 (hint, it's do to with function arguments and parameters)
 
-> TODO: Add timing on audience participation
+[3 seconds]
+
+Okay that's not a fair hint...
+
+> (00:20)
 
 >  https://github.com/python/cpython/issues/56166
 
@@ -1533,10 +1557,11 @@ re.sub(
 <!-- .element: data-id="code" -->
 
 [Yes!]
+[So the answer is because of how]
 
 It's how the IGNORECASE flag is being passed in!
 
-Did anyone else get distracted by the complexity?
+Which is quite hard to catch with the surrounding complexity.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1580,6 +1605,8 @@ re.sub(
 <!-- .element: data-id="code" -->
 
 and I'm like, second guessing my replacement function... it wasn't a fun night.
+
+> (0:35)
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1681,7 +1708,7 @@ def sub(
 ```
 <!-- .element: data-id="code" -->
 
-and then this re.IGNORECASE flag is read in as an int.
+and then this IGNORECASE flag is read in as an int.
 
 ------
 ```python [5,12]
@@ -1705,6 +1732,8 @@ def sub(
 which happens to be 2, and now becomes the maximum number of substitutions.
 
 Which is why my code looked like it wasn't replacing anything... 
+
+> (0:40)
 
 ------
 <!-- .slide: data-background-image="images/positional-deprecated.png"-->
@@ -1785,7 +1814,9 @@ Instead, requiring that you explicitly specify the flag with a keyword argument.
 ------
 <!-- .slide: data-background-image="images/history_keyword_parameter.svg"-->
 
-And if you're curious, this feature was added in Python 3.0!
+And if you're curious, this keyword only feature was added in Python 3.0!
+
+> (0:45)
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1845,7 +1876,7 @@ which would require updating the arguments to be keyword arguments.
 
 But that can be cumbersome, as it can be forgotten, can make the code noisy, slower, and would also require updating all previously made functions.
 
-> 15:20 (02:20) {10}
+> 15:20 (00:30) {10}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1885,6 +1916,10 @@ it can get pretty unreadable when the number of parameters and their names are m
 
 For example, has anyone spotted the mistake here?
 
+[5s]
+
+> (0:25)
+
 ------
 <!-- .element: data-auto-animate -->
 ```python [3]
@@ -1900,7 +1935,7 @@ rectangle(
 ```
 <!-- .element: data-id="long" -->
 
-Yeah it's in the 2nd argument, where the x should be a y.
+Yes! It's in the 2nd argument, where the x should be a y.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2032,7 +2067,7 @@ So if mitigating human errors excites you, I'd love to talk with you on how we c
 
 > NOTE: Could expand? e.g. this is because these lint rules can analyse the definitions during the calls of functions
 
-> 17:25 (02:05) {11}
+> 17:25 (01:40) {11}
 
 ------
 <!-- .slide: data-background-image="images/inspired-emoji.png"-->
@@ -2273,7 +2308,7 @@ rectangle(
 
 However this can become messy, as the reference to the original parameter is still kept.
 
-> 18:10 (00:45) {12}
+> 18:10 (01:55) {12}
 
 ------
 <!-- .slide: data-background-image="images/sad-python.png"-->
@@ -2651,7 +2686,7 @@ rectangle(obj);
 
 which in effect, is like assigning the variables from an object individually.
 
-> 20:05 (01:00) {14}
+> 20:05 (00:45) {14}
 
 ------
 ```javascript []
@@ -2791,7 +2826,7 @@ rectangle({
 
 Allowing you to save the remaining properties for whatever they may be needed for.
 
-> 21:30 (01:25) {15}
+> 21:30 (01:00) {15}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3000,7 +3035,7 @@ But who knows, maybe it'll come back to Python 3 after a PEP?
 
 Anyways where were we...
 
-> 22:20 (00:50) {16}
+> 22:20 (01:40) {16}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3180,7 +3215,7 @@ rectangle(
 
 Making it such that those extra keyword arguments are forced into kwargs.
 
-> 23:35 (01:15) {17}
+> 23:35 (00:40) {17}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3401,7 +3436,7 @@ You'll get an error for an unexpected keyword argument.
 
 > TODO: continue from here
 
-> 24:15 (00:40) {18}
+> 24:15 (01:10) {18}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3513,9 +3548,9 @@ def rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-You can also do the same thing with `*` to unpack into functions with variable arguments, to respect shape's function definition.
+You can also do the same thing with `*` to unpack into functions with variable arguments, and respect that function definition.
 
-> 25:45 (01:30) {19}
+> 25:45 (00:35) {19}
 
 ------
 <!-- .slide: data-background-image="images/thinking.svg"-->
@@ -3545,9 +3580,10 @@ fn main() {
 <!-- .element: data-id="code" -->
 
 
-While I'm not an expert in Rust, to my understanding, Rust doesn't support variable function arguments.
-Not only is it hard for the type checker, but also hard for the reader.
-So if you do want this complexity, you can use lists, which don't cause variable type signatures, or macros, which pass the complexity onto the writer.
+To my best understanding, Rust doesn't quite support variable function arguments.
+
+I see this as Rust knowing that this adds complexity, and thus leaves that as a problem for the writer to think about.
+
 And avoiding that complexity is understandable!
 
 ------
@@ -3634,7 +3670,7 @@ def rectangle(
 
 And for typing keyword arguments, only from Python 3.12 were additions added as support, to help specify what keywords could be caught, and what their types could be.
 
-> 26: (00:55) {20}
+> 26: (01:30) {20}
 
 > https://peps.python.org/pep-0692/
 > https://docs.python.org/3/library/typing.html#typing.Unpack
@@ -3861,7 +3897,7 @@ def function(
 
 And finally double star, to handle arbitrary keyword arguments
 
-> 26:20 (00:35) {21}
+> 26:20 (00:50) {21}
 
 ------
 <!-- .slide: data-background-image="images/approaching_amazing_changing_0.svg"-->
@@ -3897,7 +3933,7 @@ And if any of this was of interest to you, reach out!
 
 I'm looking for my next engagement and would love to work with you on solving complex problems. 
 
-If you enjoyed this talk, please take a picture to share it online.
+If you enjoyed this talk, please say so online! 
 
 You can also subscribe to my mailing list on nohumanerrors.com, find me online at ekohilas, or here if you have any questions or feedback!
 
@@ -3911,5 +3947,5 @@ You can also subscribe to my mailing list on nohumanerrors.com, find me online a
 
 Thanks to my friends, family, the open source community, as well as to you for listening!
 
-> 00:00 (00:00) {}
+> 00:00 (00:45) {}
 
