@@ -197,7 +197,7 @@ basic = rectangle(10, 20);
 ```
 <!-- .element: data-id="code" -->
 
-But let's say that a basic rectangle isn't good enough. And you've been asked to create a rotated one instead.
+But now you're told, a basic rectangle isn't good enough. And you've been asked to create a rotated one instead.
 
 > TODO: Change return type signature of rectangle
 
@@ -310,7 +310,8 @@ rotated = rotated_rectangle(10, 20, 45);
 
 And you go, Ah! The most basic way, is by creating a new function with this rotation parameter.
 
-Of course, you don't want to duplicate the code that makes these rectangles.
+Of course, you don't want to duplicate the code that makes these rectangles (right? right??)
+Okay good I see some nodding.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -411,7 +412,7 @@ With function overloading, you can define multiple functions with the same name,
 
 ------
 <!-- .element: data-auto-animate -->
-```java [2-5,8-10]
+```java [3-5,9-10]
 // not python
 Rectangle rectangle(
     int width,
@@ -477,7 +478,7 @@ rotated = rectangle(10, 20, 45)
 ```
 <!-- .element: data-id="code" -->
 
-If you looked at the same code in python
+If you tried to do the same thing in Python,
 
 ------
 <!-- .element: data-auto-animate -->
@@ -501,7 +502,9 @@ rotated = rectangle(10, 20, 45)
 ```
 <!-- .element: data-id="code" -->
 
-It would fail!
+It would error!
+
+(2s pause)
 
 ------
 <!-- .element: data-auto-animate -->
@@ -535,7 +538,7 @@ And yes, you'd be correct,
 ------
 <!-- .slide: data-background-image="images/overloading-problem.png"-->
 
-however, function overloading in general can also become problematic, for reasons that will become more apparent later.
+however, function overloading in general can also become problematic, for reasons that we'll cover later.
 
 > 04:15 (01:10) {3}
 
@@ -875,7 +878,7 @@ There is always a better option that's dependant on your situation.
 ------
 <!-- .slide: data-background-image="images/thunderstorms_and_lightning.svg"-->
 
-Now if we step away from the thunderstorms and lightning (which are very very frightening),
+Okay let's step away from the thunderstorms and lightning (which are very very frightening),
 
 ------
 <!-- .element: data-auto-animate -->
@@ -890,7 +893,7 @@ basic = rectangle(10, 20);
 ```
 <!-- .element: data-id="code" -->
 
-and go back to your original non python example.
+and go back to the original non python example.
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1513,6 +1516,8 @@ Can anyone spot the error in this example?
 (water break)
 (hint, it's do to with function arguments and parameters)
 
+> TODO: Add timing on audience participation
+
 >  https://github.com/python/cpython/issues/56166
 
 ------
@@ -1531,7 +1536,7 @@ re.sub(
 
 It's how the IGNORECASE flag is being passed in!
 
-Isn't it so interesting, how much harder errors are to spot when there's complexity?
+Did anyone else get distracted by the complexity?
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1545,7 +1550,7 @@ re.sub(
 ```
 <!-- .element: data-id="code" -->
 
-Like as soon as I see a line of regex,
+Like for me, as soon as I see a line of regex,
 
 ------
 ```python []
@@ -1921,7 +1926,7 @@ PEP736 proposes using a trailing = for arguments that should take from existing 
 ------
 <!-- .slide: data-background-image="images/pep_rejected.svg"-->
 
-The bad news is, that this was rejected earlier this year...
+The bad news is, that this was rejected last year...
 
 ------
 ![ruff logo](images/ruff.svg)
@@ -2077,7 +2082,7 @@ This is because of another special parameter, `/`.
 ------
 <!-- .slide: data-background-image="images/history_positional_parameter.svg"-->
 
-Which was added in Python 3.8 (which, relative to the other additions, is quite recent!) 
+Which was added in Python 3.8 (quite recent relative to the other additions!) 
 
 ------
 ```python [5]
@@ -2302,7 +2307,7 @@ rectangle(
 ```
 <!-- .element: data-id="code" -->
 
-If you convert your previous python rectangle example to swift...
+If you convert the previous python rectangle example to swift...
 
 ------
 <!-- .element: data-auto-animate -->
