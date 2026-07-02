@@ -838,35 +838,39 @@ print(big.metadata)   # {"width": 300, "height": 400"}
 ```
 <!-- .element: data-id="code" -->
 
-For this reason, there's very few cases where it makes sense to use a mutable default over an immutable one (like for caching).
+The reason I'm highlighting this, (even though it's a hypothetical example), is to raise awareness of how mutable defaults work.
+
+And the solution... well, honestly my take is that,
 
 ------
-<!-- .element: data-auto-animate -->
-```python [4,6-7]
+```python [4]
 def rectangle(
     width,
     height,
-    metadata=None,
+    metadata={}, # B006: Do not use mutable data structures for argument defaults
 ):
-    if metadata is None:
-        metadata = {}
-
     metadata["width"] = width
     metadata["height"] = height
 
 small = rectangle(10, 20)
 big = rectangle(300, 400)
 
-print(small.metadata) # {"width": 10, "height": 20"}
+print(small.metadata) # {"width": 300, "height": 400"}
 print(big.metadata)   # {"width": 300, "height": 400"}
 ```
 <!-- .element: data-id="code" -->
 
-But if you really need mutation, the best way to do so is to default them to None, and set the mutable that you want, if it hasn't been specified.
-
-> TODO: Or maybe use frozendict?
+there **is** no case for mutable defaults.
+There is always a better option that's dependant on your situation.
+(If you disagree, feel free to fight me outside)
 
 > 06:10 (1:10) {5}
+
+> 1. Using immutables like `None`, `tuple`, `frozendict` can lead to side-effect driven development.
+> 2. Re-initialising the object `metadata = dict(metadata)` doesn't capture nested mutable objects.
+> 3. Making a deep-copy can be computationally inefficient.
+> 4. Caching is more explicit when done with dedicated constructs `@cache`.
+> 5. Performance name binding adds complexity and may not work with future python versions.
 
 ------
 <!-- .slide: data-background-image="images/thunderstorms_and_lightning.svg"-->
