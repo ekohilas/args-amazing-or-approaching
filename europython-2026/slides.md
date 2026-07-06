@@ -999,7 +999,7 @@ var rectangle = Rectangle
 
 before building the final state.
 
-> 00:00
+> 07:15
 > (00:45)
 > {9}
 
@@ -1021,9 +1021,9 @@ Can anyone spot the error here?
 
 [5s water break]
 
-> 00:00
+> 07:30
 > (0:15)
-> {7}
+> {10}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1177,9 +1177,9 @@ shape_2 = rectangle(20, 10);
 
 Without having to reference the signature of the functions, there's no knowing whether the arguments are set correctly.
 
-> 00:00
+> 08:25
 > (00:55)
-> {7}
+> {11}
 
 ------
 <!-- .slide: data-background-image="images/history_keyword_args.svg"-->
@@ -1225,9 +1225,9 @@ But now your argument ordering is redundant!
 
 This might not seem like much, but this little change, of always using keywords arguments, leads to so many benefits, and prevention of errors.
 
-> 00:00
+> 09:05
 > (00:40)
-> {8}
+> {12}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1352,9 +1352,9 @@ rectangle(
 
 They're now actually for height, width, and opacity, without you ever knowing.
 
-> 00:00
+> 09:35
 > (0:30)
-> {8}
+> {13}
 
 ------
 ```python [10-12]
@@ -1535,9 +1535,9 @@ opacity will be in the same place for both.
 
 Even if you don't care for refactoring or collaboration, keyword arguments will still reduce reduce human errors for you.
 
-> 00:00
+> 10:35
 > (01:00)
-> {9}
+> {14}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1564,9 +1564,9 @@ Can anyone spot the error in this example?
 
 Okay that's not a fair hint...
 
-> 13:20
+> 10:55
 > (00:20)
-> {10}
+> {15}
 
 >  https://github.com/python/cpython/issues/56166
 
@@ -1632,9 +1632,9 @@ re.sub(
 
 and I'm like, second guessing my replacement function... it wasn't a fun night.
 
-> 13:55
+> 11:30
 > (0:35)
-> {10}
+> {16}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1761,9 +1761,9 @@ which happens to be 2, and now becomes the maximum number of substitutions.
 
 Which is why my code looked like it wasn't replacing anything... 
 
-> 14:35
+> 12:10
 > (0:40)
-> {10}
+> {17}
 
 ------
 <!-- .slide: data-background-image="images/positional-deprecated.png"-->
@@ -1846,9 +1846,9 @@ Instead, requiring that you explicitly specify the flag with a keyword argument.
 
 And if you're curious, this keyword only feature was added in Python 3.0!
 
-> 15:20
+> 12:55
 > (0:45)
-> {10}
+> {18}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1908,9 +1908,9 @@ which would require updating the arguments to be keyword arguments.
 
 But that can be cumbersome, as it can be forgotten, can make the code noisy, slower, and would also require updating all previously made functions.
 
-> 15:20
+> 13:25
 > (00:30)
-> {10}
+> {19}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1952,9 +1952,9 @@ For example, has anyone spotted the mistake here?
 
 [5s]
 
-> 15:45
+> 13:50
 > (0:25)
-> {11}
+> {20}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -2103,9 +2103,9 @@ So if mitigating human errors excites you, I'd love to talk with you on how we c
 
 > NOTE: Could expand? e.g. this is because these lint rules can analyse the definitions during the calls of functions
 
-> 17:25
+> 15:30
 > (01:40)
-> {11}
+> {21}
 
 ------
 <!-- .slide: data-background-image="images/inspired-emoji.png"-->
@@ -2346,9 +2346,9 @@ rectangle(
 
 However this can become messy, as the reference to the original parameter is still kept.
 
-> 18:10
+> 17:25
 > (01:55)
-> {12}
+> {22}
 
 ------
 <!-- .slide: data-background-image="images/sad-python.png"-->
@@ -2508,9 +2508,9 @@ Take this case for example, where you want to use a different pytest fixture.
 
 With named parameters, you wouldn't have to rename the same variable everywhere within your test!
 
-> 19:05
+> 18:20
 > (00:55)
-> {13}
+> {23}
 
 ------
 <!-- .slide: data-background-image="images/javascript-logo.png"-->
@@ -2728,9 +2728,9 @@ rectangle(obj);
 
 which in effect, is like assigning the variables from an object individually.
 
-> 20:05
+> 19:05
 > (00:45)
-> {14}
+> {24}
 
 ------
 ```javascript []
@@ -2870,9 +2870,9 @@ rectangle({
 
 Allowing you to save the remaining properties for whatever they may be needed for.
 
-> 21:30
+> 20:05
 > (01:00)
-> {15}
+> {25}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3081,9 +3081,9 @@ But who knows, maybe it'll come back to Python 3 after a PEP?
 
 Anyways where were we...
 
-> 22:20
+> 21:45
 > (01:40)
-> {16}
+> {26}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3263,9 +3263,9 @@ rectangle(
 
 Making it such that those extra keyword arguments are forced into kwargs.
 
-> 23:35
+> 22:25
 > (00:40)
-> {17}
+> {27}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3486,9 +3486,9 @@ You'll get an error for an unexpected keyword argument.
 
 > TODO: continue from here
 
-> 24:15
+> 23:35
 > (01:10)
-> {18}
+> {28}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -3602,9 +3602,9 @@ def rectangle(
 
 You can also do the same thing with `*` to unpack into functions with variable arguments, and respect that function definition.
 
-> 25:45
+> 24:10
 > (00:35)
-> {19}
+> {29}
 
 ------
 <!-- .slide: data-background-image="images/thinking.svg"-->
@@ -3724,9 +3724,9 @@ def rectangle(
 
 And for typing keyword arguments, only from Python 3.12 were additions added as support, to help specify what keywords could be caught, and what their types could be.
 
-> 26:00
+> 25:40
 > (01:30)
-> {20}
+> {30}
 
 > https://peps.python.org/pep-0692/
 > https://docs.python.org/3/library/typing.html#typing.Unpack
@@ -3953,9 +3953,9 @@ def function(
 
 And finally double star, to handle arbitrary keyword arguments
 
-> 26:20
+> 26:30
 > (00:50)
-> {21}
+> {31}
 
 ------
 <!-- .slide: data-background-image="images/approaching_amazing_changing_0.svg"-->
@@ -4005,7 +4005,7 @@ You can also subscribe to my mailing list on nohumanerrors.com, find me online a
 
 Thanks to my friends, family, the open source community, as well as to you for listening!
 
-> 00:00
+> 27:15
 > (00:45)
-> {}
+> {32}
 
