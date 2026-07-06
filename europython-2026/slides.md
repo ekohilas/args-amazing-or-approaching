@@ -56,7 +56,7 @@ def function(
 Just look at it, isn't it great? Okay I'm not that crazy, ... at least I think.
 Anyways, let's get some formalities out of the way.
 
-> (00:20)
+> 00:30 (00:20) {2}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -75,7 +75,7 @@ Anyone know what the name of these are called?
 [Anyone else thought they were called arguments?]
 [Yeah it still gets me, so don't fault me if I get confused!]
 
-> (00:20)
+> 00:50 (00:20) {3}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -99,9 +99,7 @@ Okay so, anyone want to take a guess at what these are called?
 
 Yeah these are arguments!
 
-> (00:10)
-
-> 01:10 (01:10) {1}
+> 01:00 (00:10) {4}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -370,9 +368,7 @@ rotated = rotated_rectangle(10, 20, 45);
 
 And sets the new parameter with a default argument, which in your case will be 0.
 
-> (2:10)
-
-> 03:05 (01:55) {2} [2:22]
+> 03:10 (2:10) {5}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -552,7 +548,7 @@ And yes, you'd be correct,
 
 however, function overloading in general can also become problematic, for reasons that we'll cover later.
 
-> 04:15 (01:05) {3} [1:35]
+> 04:15 (01:05) {6}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -673,7 +669,7 @@ rotated = rectangle(10, 20, 45)
 
 Then you can rename your function back to rectangle, to get your beautiful definition.
 
-> 05:00 (00:45) {4}
+> 05:00 (00:45) {7}
 
 ------
 <!-- .slide: data-background-image="images/sunshine_and_rainbows.svg"-->
@@ -880,7 +876,7 @@ there **is** no case for mutable defaults.
 There is always a better option that's dependant on your situation.
 (If you disagree, feel free to fight me outside)
 
-> 06:10 (1:30) {5}
+> 06:30 (1:30) {8}
 
 > 1. Using immutables like `None`, `tuple`, `frozendict` can lead to side-effect driven development.
 > 2. Re-initialising the object `metadata = dict(metadata)` doesn't capture nested mutable objects.
@@ -987,7 +983,7 @@ var rectangle = Rectangle
 
 before building the final state.
 
-> 08:00 (00:45) {6}
+> 00:00 (00:45) {9}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1007,7 +1003,7 @@ Can anyone spot the error here?
 
 [5s water break]
 
-> (0:15)
+> 00:00 (0:15) {7}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1161,7 +1157,7 @@ shape_2 = rectangle(20, 10);
 
 Without having to reference the signature of the functions, there's no knowing whether the arguments are set correctly.
 
-> 09:20 (00:55) {7}
+> 00:00 (00:55) {7}
 
 ------
 <!-- .slide: data-background-image="images/history_keyword_args.svg"-->
@@ -1207,7 +1203,7 @@ But now your argument ordering is redundant!
 
 This might not seem like much, but this little change, of always using keywords arguments, leads to so many benefits, and prevention of errors.
 
-> (00:40)
+> 00:00 (00:40) {8}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1332,7 +1328,7 @@ rectangle(
 
 They're now actually for height, width, and opacity, without you ever knowing.
 
-> 10:15 (0:30) {8}
+> 00:00 (0:30) {8}
 
 ------
 ```python [10-12]
@@ -1513,7 +1509,7 @@ opacity will be in the same place for both.
 
 Even if you don't care for refactoring or collaboration, keyword arguments will still reduce reduce human errors for you.
 
-> 13:00 (01:00) {9}
+> 00:00 (01:00) {9}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1540,7 +1536,7 @@ Can anyone spot the error in this example?
 
 Okay that's not a fair hint...
 
-> (00:20)
+> 13:20 (00:20) {10}
 
 >  https://github.com/python/cpython/issues/56166
 
@@ -1606,7 +1602,7 @@ re.sub(
 
 and I'm like, second guessing my replacement function... it wasn't a fun night.
 
-> (0:35)
+> 13:55 (0:35) {10}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1733,7 +1729,7 @@ which happens to be 2, and now becomes the maximum number of substitutions.
 
 Which is why my code looked like it wasn't replacing anything... 
 
-> (0:40)
+> 14:35 (0:40) {10}
 
 ------
 <!-- .slide: data-background-image="images/positional-deprecated.png"-->
@@ -1816,7 +1812,7 @@ Instead, requiring that you explicitly specify the flag with a keyword argument.
 
 And if you're curious, this keyword only feature was added in Python 3.0!
 
-> (0:45)
+> 15:20 (0:45) {10}
 
 ------
 <!-- .element: data-auto-animate -->
@@ -1918,7 +1914,7 @@ For example, has anyone spotted the mistake here?
 
 [5s]
 
-> (0:25)
+> 15:45 (0:25) {11}
 
 ------
 <!-- .element: data-auto-animate -->
