@@ -26,7 +26,26 @@
 ## Evan Kohilas
 ## `@ekohilas` - `nohumanerrors.com`
 
-Hello everyone!
+Before we start, I have to say, idk about you, but Europe is way too bloody hot for me.
+
+Like, I shouldn’t be complaining as a Greek living in Australia, but the weekend before I left, I was surfing down the snowy mountain on my snowboard, jamming to music, and last weekend I was sticky and sweaty and probably sunburnt…
+
+Anyone else think EuroPython in the Snowy Austrian Alps would be wonderful?
+
+Okay thank you for letting me know it’s not just me and thanks to EuroPython for inviting me!
+
+> 00:45
+> (00:45)
+> {1}
+
+------
+
+# Args: Amazing<br>or Approaching?
+<!-- .element: class="r-fit-text" -->
+## Evan Kohilas
+## `@ekohilas` - `nohumanerrors.com`
+
+Now, back to the talk!
 
 Are you excited?!
 Great! Because I am too since...
