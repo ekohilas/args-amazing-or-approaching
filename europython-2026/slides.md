@@ -1,0 +1,4030 @@
+<!-- .slide: data-background-image="images/frame.png"-->
+
+> TODO: Cleanup TODOs
+> TODO: Ensure height and width are ordered where they're meant to be
+> TODO: Ensure all slides are highlighting the right part
+> TODO: Run through
+> TODO: Check code is linked properly
+> TODO: Fix sectioning
+> TODO: Add void to function signatures
+> TODO: Check code examples
+> TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L32321 (keyword arguments)
+> TODO: https://www.python.org/download/releases/1.6/ (variable arguments)
+> TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L32776 (default arguments)
+> TODO: https://github.com/python/cpython/blob/ea26f6da39294b7d3c28873d070a2218bd528b5f/Misc/HISTORY#L34416 (var arguments) 
+> TODO: https://github.com/ekohilas/args-amazing-or-approaching/issues/1
+> TOOD: Mention work in basedpyright
+> TODO: Mention NewType
+> TODO: Use background images for language transitions
+> TODO: Update args linter
+> TODO: Start with connecting story
+
+------
+
+# Args: Amazing<br>or Approaching?
+<!-- .element: class="r-fit-text" -->
+## Evan Kohilas
+## `@ekohilas` - `nohumanerrors.com`
+
+Before we start, I have to say, idk about you, but Europe is way too bloody hot for me.
+
+Like, I shouldn’t be complaining as a Greek living in Australia, but the weekend before I left, I was surfing down the snowy mountain on my snowboard, jamming to music, and last weekend I was sticky and sweaty and probably sunburnt…
+
+Rodrigo wants EuroPython in Lisbon, but wouldn't it be wonderful in the Snowy Austrian Alps?
+
+Okay thank you for letting me know it’s not just me and thanks to EuroPython for inviting me!
+
+> 00:45
+> (00:45)
+> {1}
+
+------
+
+# Args: Amazing<br>or Approaching?
+<!-- .element: class="r-fit-text" -->
+## Evan Kohilas
+## `@ekohilas` - `nohumanerrors.com`
+
+Now, back to the talk!
+
+Are you excited?!
+Great! Because I am too since...
+
+> 00:55
+> (00:10)
+> {2}
+
+------
+
+<div class="r-stack">
+    <img src="images/hearts.png">
+    <img src="images/python.svg">
+</div>
+
+I have utmost adoration for python's beautiful function argument and parameter system.
+
+------
+<!-- .element: data-auto-animate -->
+```python []
+def function(
+    a,
+    b,
+):
+    ...
+```
+<!-- .element: data-id="code" -->
+
+Just look at it, isn't it great? Okay I'm not that crazy, ... at least I think.
+Anyways, let's get some formalities out of the way.
+
+> 01:15
+> (00:20)
+> {3}
+
+------
+<!-- .element: data-auto-animate -->
+```python [2-3]
+def function(
+    a,
+    b,
+):
+    ...
+```
+<!-- .element: data-id="function" -->
+
+Anyone know what the name of these are called?
+
+[5 seconds max]
+[Anyone else thought they were called arguments?]
+[Yeah it still gets me, so don't fault me if I get confused!]
+
+> 01:35
+> (00:20)
+> {4}
+
+------
+<!-- .element: data-auto-animate -->
+```python [8-9]
+def function(
+    a,
+    b,
+):
+    ...
+
+function(
+    a,
+    b,
+)
+```
+<!-- .element: data-id="function" -->
+
+Okay so, anyone want to take a guess at what these are called?
+
+[3 seconds]
+
+Yeah these are arguments!
+
+> 01:45
+> (00:10)
+> {5}
+
+------
+<!-- .element: data-auto-animate -->
+```python []
+def function(
+    a,
+    b,
+):
+    ...
+
+function(
+    a,
+    b,
+)
+```
+<!-- .element: data-id="function" -->
+
+Okay now that that's out of the way let's go back to python's beautiful function argument and parameter system, that maybe I am crazy for...
+
+------
+<!-- .element: data-auto-animate -->
+```java []
+// not python
+void function(
+    int a,
+    int b
+) {
+    // function code
+}
+```
+<!-- .element: data-id="code" -->
+
+To show what I mean, I'll start by using a function from another language.
+
+------
+<!-- .element: data-auto-animate -->
+```java []
+// not python
+Rectangle rectangle(
+    int width,
+    int height
+) {
+    // function code
+}
+```
+<!-- .element: data-id="code" -->
+
+And I'll change it up to a more concrete,
+
+------
+<!-- .element: data-auto-animate -->
+```java []
+// not python
+Rectangle rectangle(
+    int width,
+    int height
+) {
+    // function code
+}
+```
+<!-- .element: data-id="code" -->
+
+relatable example, making rectangles!
+
+------
+<!-- .element: data-auto-animate -->
+```java []
+// not python
+Rectangle rectangle(
+    int width,
+    int height
+);
+```
+<!-- .element: data-id="code" -->
+
+I'll also simplify it down to the function type signature.
+
+------
+<!-- .element: data-auto-animate -->
+```java [7]
+// not python
+Rectangle rectangle(
+    int width,
+    int height
+);
+
+basic = rectangle(10, 20);
+```
+<!-- .element: data-id="code" -->
+
+And now, this function can be called to create a basic rectangle of a particular width and height.
+
+------
+<!-- .element: data-auto-animate -->
+```java []
+// not python
+Rectangle rectangle(
+    int width,
+    int height
+);
+
+basic = rectangle(10, 20);
+```
+<!-- .element: data-id="code" -->
+
+But now you're told, a basic rectangle isn't good enough. And you've been asked to create a rotated one instead.
+
+> TODO: Change return type signature of rectangle
+
+------
+<!-- .element: data-auto-animate -->
+```java [5]
+// not python
+Rectangle rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+basic = rectangle(10, 20);
+```
+<!-- .element: data-id="code" -->
+
+And to do so, you need to add the rotation parameter.
+
+------
+<!-- .element: data-auto-animate -->
+```java [9]
+// not python
+Rectangle rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+basic = rectangle(10, 20);
+rotated = rectangle(10, 20, 45);
+```
+<!-- .element: data-id="code" -->
+
+Now you can make a rotated rectangle!
+
+------
+<!-- .element: data-auto-animate -->
+```java [7-9]
+// not python
+Rectangle rectangle(
+    int width,
+    int height,
+    int rotation
+);
+basic = rectangle(10, 20); 
+// error: constructor Rectangle in class Rectangle
+//          cannot be applied to given types;
+rotated = rectangle(10, 20, 45);
+```
+<!-- .element: data-id="code" -->
+
+But now your previous function call needs to be updated, as it'll now error from not enough arguments.
+
+------
+<!-- .element: data-auto-animate -->
+```java [8]
+// not python
+Rectangle rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+basic = rectangle(10, 20, 0);
+rotated = rectangle(10, 20, 45);
+```
+<!-- .element: data-id="code" -->
+
+And this creates a problem, because you now need to go through and update all existing function calls for any un-rotated rectangles, and add an additional argument for a default rotation of 0
+
+------
+<!-- .element: data-auto-animate -->
+```java []
+// not python
+Rectangle rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+basic = rectangle(10, 20, 0);
+rotated = rectangle(10, 20, 45);
+```
+<!-- .element: data-id="code" -->
+
+Because this is tedious work that you want to avoid, in most of these languages, there are other ways that a default rotation can be setup.
+
+Okay so you're thinking, thinking, what can I do...
+
+------
+<!-- .element: data-auto-animate -->
+```java [2,5]
+// not python
+Rectangle rotated_rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+Rectangle rectangle(
+    int width,
+    int height
+);
+
+basic = rectangle(10, 20);
+rotated = rotated_rectangle(10, 20, 45);
+```
+<!-- .element: data-id="code" -->
+
+And you go, Ah! The most basic way, is by creating a new function with this rotation parameter.
+
+Of course, you don't want to duplicate the code that makes these rectangles (right? right??)
+Okay good I see some nodding.
+
+------
+<!-- .element: data-auto-animate -->
+```java [11-13]
+// not python
+Rectangle rotated_rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+Rectangle rectangle(
+    int width,
+    int height
+) {
+    return rotated_rectangle(width, height);
+}
+
+basic = rectangle(10, 20);
+rotated = rotated_rectangle(10, 20, 45);
+```
+<!-- .element: data-id="code" -->
+
+So you update the old function, such that it calls the new function
+
+------
+```java [11-13]
+// not python
+Rectangle rotated_rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+Rectangle rectangle(
+    int width,
+    int height
+) {
+    return rotated_rectangle(width, height, 0);
+}
+
+basic = rectangle(10, 20);
+rotated = rotated_rectangle(10, 20, 45);
+```
+<!-- .element: data-id="code" -->
+
+And sets the new parameter with a default argument, which in your case will be 0.
+
+> 03:55
+> (2:10)
+> {6}
+
+------
+<!-- .element: data-auto-animate -->
+```java []
+// not python
+Rectangle rotated_rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+Rectangle rectangle(
+    int width,
+    int height
+) {
+    return rotated_rectangle(width, height, 0);
+}
+
+basic = rectangle(10, 20);
+rotated = rotated_rectangle(10, 20, 45);
+```
+<!-- .element: data-id="code" -->
+
+Now if you take a step back, you might start to see how this might get a bit messy. The good news is, in some languages, you can do a bit of clean up through the use of function overloading.
+
+------
+<!-- .element: data-auto-animate -->
+```java [2,8]
+// not python
+Rectangle rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+Rectangle rectangle(
+    int width,
+    int height
+) {
+    return rectangle(width, height, 0);
+}
+
+basic = rectangle(10, 20);
+rotated = rectangle(10, 20, 45);
+```
+<!-- .element: data-id="code" -->
+
+With function overloading, you can define multiple functions with the same name,
+
+------
+<!-- .element: data-auto-animate -->
+```java [3-5,9-10]
+// not python
+Rectangle rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+Rectangle rectangle(
+    int width,
+    int height
+) {
+    return rectangle(width, height, 0);
+}
+
+basic = rectangle(10, 20);
+rotated = rectangle(10, 20, 45);
+```
+<!-- .element: data-id="code" -->
+
+but different type signatures.
+
+------
+<!-- .element: data-auto-animate -->
+```java [12,15,16]
+// not python
+Rectangle rectangle(
+    int width,
+    int height,
+    int rotation
+);
+
+Rectangle rectangle(
+    int width,
+    int height
+) {
+    return rectangle(width, height, 0);
+}
+
+basic = rectangle(10, 20);
+rotated = rectangle(10, 20, 45);
+```
+<!-- .element: data-id="code" -->
+
+This removes the need for you to rename any functions, as these programming languages will determine which functions to call using the parameter types instead.
+
+------
+<!-- .element: data-auto-animate -->
+```python []
+def rectangle(
+    width,
+    height,
+    rotation,
+): ...
+
+def rectangle(
+    width,
+    height,
+):
+    return rectangle(width, height, 0)
+
+basic = rectangle(10, 20)
+rotated = rectangle(10, 20, 45)
+```
+<!-- .element: data-id="code" -->
+
+If you tried to do the same thing in Python,
+
+------
+<!-- .element: data-auto-animate -->
+```python [14-16]
+def rectangle(
+    width,
+    height,
+    rotation,
+): ...
+
+def rectangle(
+    width,
+    height,
+):
+    return rectangle(width, height, 0)
+
+basic = rectangle(10, 20)
+rotated = rectangle(10, 20, 45)
+# TypeError: rectangle() takes 2 positional arguments
+#              but 3 were given
+```
+<!-- .element: data-id="code" -->
+
+It would error!
+
+(2s pause)
+
+------
+<!-- .element: data-auto-animate -->
+```python [1,7]
+def rectangle(
+    width,
+    height,
+    rotation,
+): ...
+
+def rectangle(
+    width,
+    height,
+):
+    return rectangle(width, height, 0)
+
+basic = rectangle(10, 20)
+rotated = rectangle(10, 20, 45)
+```
+<!-- .element: data-id="code" -->
+
+And this is because in Python, defining a function with the same name overwrites that previous definition.
+
+------
+<!-- .slide: data-background-image="images/multipledispatch-pypi.png"-->
+
+Now, some of you might say, aren't there packages like multipledispatch that you can use to replicate function overloading?
+
+And yes, you'd be correct,
+
+------
+<!-- .slide: data-background-image="images/overloading-problem.png"-->
+
+however, function overloading in general can also become problematic, for reasons that we'll cover later.
+
+> 05:00
+> (01:05)
+> {7}
+
+------
+<!-- .element: data-auto-animate -->
+```python []
+def rotated_rectangle(
+    width,
+    height,
+    rotation,
+): ...
+
+def rectangle(
+    width,
+    height,
+):
+    return rotated_rectangle(width, height, 0)
+
+basic = rectangle(10, 20)
+rotated = rotated_rectangle(10, 20, 45)
+```
+<!-- .element: data-id="code" -->
+
+So without function overloading, how does Python let you simplify this mess?
+
+------
+<!-- .element: data-auto-animate -->
+```python [4]
+def rotated_rectangle(
+    width,
+    height,
+    rotation=0,
+): ...
+
+def rectangle(
+    width,
+    height,
+):
+    return rotated_rectangle(width, height, 0)
+
+basic = rectangle(10, 20)
+rotated = rotated_rectangle(10, 20, 45)
+```
+<!-- .element: data-id="code" -->
+
+Well in python, you have default arguments!
+
+------
+<!-- .slide: data-background-image="images/history_defaults.svg"-->
+
+These were added way back in 1994 for Python 1.0.2
+
+------
+<!-- .element: data-auto-animate -->
+```python [4]
+def rotated_rectangle(
+    width,
+    height,
+    rotation=0,
+): ...
+
+def rectangle(
+    width,
+    height,
+):
+    return rotated_rectangle(width, height, 0)
+
+basic = rectangle(10, 20)
+rotated = rotated_rectangle(10, 20, 45)
+```
+<!-- .element: data-id="code" -->
+
+So you can specify default arguments using the equals sign in the parameter definition.
+
+------
+<!-- .element: data-auto-animate -->
+```python [7]
+def rotated_rectangle(
+    width,
+    height,
+    rotation=0,
+): ...
+
+basic = rotated_rectangle(10, 20, 0)
+rotated = rotated_rectangle(10, 20, 45)
+```
+<!-- .element: data-id="code" -->
+
+And now, if you only keep a single definition, you can remove the need for function chaining
+
+------
+<!-- .element: data-auto-animate -->
+```python [7]
+def rotated_rectangle(
+    width,
+    height,
+    rotation=0,
+): ...
+
+basic = rotated_rectangle(10, 20)
+rotated = rotated_rectangle(10, 20, 45)
+```
+<!-- .element: data-id="code" -->
+
+And then, remove the need to pass in 0, since it'll use the default instead.
+
+------
+<!-- .element: data-auto-animate -->
+```python [1,7,8]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+): ...
+
+basic = rectangle(10, 20)
+rotated = rectangle(10, 20, 45)
+```
+<!-- .element: data-id="code" -->
+
+Then you can rename your function back to rectangle, to get your beautiful definition.
+
+> 05:45
+> (00:45)
+> {8}
+
+------
+<!-- .slide: data-background-image="images/sunshine_and_rainbows.svg"-->
+
+As a side note, Python is not all sunshine and rainbows either (I don't think any language is!)
+
+And I highlight that because of one detail that can be easily missed.
+
+------
+<!-- .element: data-auto-animate -->
+```python [4]
+def rectangle(
+    width,
+    height,
+    metadata={},
+):
+    ...
+```
+<!-- .element: data-id="code" -->
+
+Let's say for example, that you wanted to set a default argument for your rectangles to contain metadata based on how they were created.
+
+------
+<!-- .element: data-auto-animate -->
+```python [6-7]
+def rectangle(
+    width,
+    height,
+    metadata={},
+):
+    metadata["width"] = width
+    metadata["height"] = height
+```
+<!-- .element: data-id="code" -->
+
+And then, you added that metadata within the function.
+
+------
+<!-- .element: data-auto-animate -->
+```python [9-10]
+def rectangle(
+    width,
+    height,
+    metadata={},
+):
+    metadata["width"] = width
+    metadata["height"] = height
+
+small = rectangle(10, 20)
+big = rectangle(300, 400)
+```
+<!-- .element: data-id="code" -->
+
+What you'll find, is that if you create two rectangles,
+
+------
+<!-- .element: data-auto-animate -->
+```python [12-13]
+def rectangle(
+    width,
+    height,
+    metadata={},
+):
+    metadata["width"] = width
+    metadata["height"] = height
+
+small = rectangle(10, 20)
+big = rectangle(300, 400)
+
+print(small.metadata)
+print(big.metadata)
+```
+<!-- .element: data-id="code" -->
+
+and print out their contents,
+
+------
+<!-- .element: data-auto-animate -->
+```python [12-13]
+def rectangle(
+    width,
+    height,
+    metadata={},
+):
+    metadata["width"] = width
+    metadata["height"] = height
+
+small = rectangle(10, 20)
+big = rectangle(300, 400)
+
+print(small.metadata) # {"width": 10, "height": 20"}
+print(big.metadata)   # {"width": 300, "height": 400"}
+```
+<!-- .element: data-id="code" -->
+
+then instead of the obvious expected answer,
+
+------
+<!-- .element: data-auto-animate -->
+```python [12-13]
+def rectangle(
+    width,
+    height,
+    metadata={},
+):
+    metadata["width"] = width
+    metadata["height"] = height
+
+small = rectangle(10, 20)
+big = rectangle(300, 400)
+
+print(small.metadata) # {"width": 300, "height": 400"}
+print(big.metadata)   # {"width": 300, "height": 400"}
+```
+<!-- .element: data-id="code" -->
+
+their metadata ends up being the same.
+
+------
+<!-- .element: data-auto-animate -->
+```python [4]
+def rectangle(
+    width,
+    height,
+    metadata={},
+):
+    metadata["width"] = width
+    metadata["height"] = height
+
+small = rectangle(10, 20)
+big = rectangle(300, 400)
+
+print(small.metadata) # {"width": 300, "height": 400"}
+print(big.metadata)   # {"width": 300, "height": 400"}
+```
+<!-- .element: data-id="code" -->
+
+This is because in Python, the values for these default parameters are created when the function is defined, **not** when it's called.
+
+------
+<!-- .element: data-auto-animate -->
+```python [12-13]
+def rectangle(
+    width,
+    height,
+    metadata={},
+):
+    metadata["width"] = width
+    metadata["height"] = height
+
+small = rectangle(10, 20)
+big = rectangle(300, 400)
+
+print(small.metadata) # {"width": 300, "height": 400"}
+print(big.metadata)   # {"width": 300, "height": 400"}
+```
+<!-- .element: data-id="code" -->
+
+Giving this strange outcome, where all functions are sharing the same state.
+
+------
+<!-- .element: data-auto-animate -->
+```python [4]
+def rectangle(
+    width,
+    height,
+    metadata={},
+):
+    metadata["width"] = width
+    metadata["height"] = height
+
+small = rectangle(10, 20)
+big = rectangle(300, 400)
+
+print(small.metadata) # {"width": 300, "height": 400"}
+print(big.metadata)   # {"width": 300, "height": 400"}
+```
+<!-- .element: data-id="code" -->
+
+The reason I'm highlighting this, (even though it's a hypothetical example), is to raise awareness of how mutable defaults work.
+
+And the solution... well, honestly my take is that,
+
+------
+```python [4]
+def rectangle(
+    width,
+    height,
+    metadata={}, # B006: Do not use mutable data structures for argument defaults
+):
+    metadata["width"] = width
+    metadata["height"] = height
+
+small = rectangle(10, 20)
+big = rectangle(300, 400)
+
+print(small.metadata) # {"width": 300, "height": 400"}
+print(big.metadata)   # {"width": 300, "height": 400"}
+```
+<!-- .element: data-id="code" -->
+
+there **is** no case for mutable defaults.
+[pause for effect]
+There is always a better option that's dependant on your situation.
+(If you disagree, feel free to fight me outside)
+
+> 07:15
+> (1:30)
+> {9}
+
+> 1. Using immutables like `None`, `tuple`, `frozendict` can lead to side-effect driven development.
+> 2. Re-initialising the object `metadata = dict(metadata)` doesn't capture nested mutable objects.
+> 3. Making a deep-copy can be computationally inefficient.
+> 4. Caching is more explicit when done with dedicated constructs `@cache`.
+> 5. Performance name binding adds complexity and may not work with future python versions.
+
+------
+<!-- .slide: data-background-image="images/thunderstorms_and_lightning.svg"-->
+
+Okay let's step away from the thunderstorms and lightning (which are very very frightening),
+
+------
+<!-- .element: data-auto-animate -->
+```java []
+// not python
+Rectangle rectangle(
+    int width,
+    int height
+);
+
+basic = rectangle(10, 20);
+```
+<!-- .element: data-id="code" -->
+
+and go back to the original non python example.
+
+------
+<!-- .element: data-auto-animate -->
+```java []
+// not python
+Rectangle rectangle(
+    int width,
+    int height
+    /* int rotation=0 how? */
+);
+
+basic = rectangle(10, 20);
+```
+<!-- .element: data-id="code" -->
+
+The language doesn't support defaults... So, can we fix it?
+
+------
+<!-- .slide: data-background-image="images/bob_the_builder.svg"-->
+
+Yes we can!
+
+That's what Bob the Builder would say, if you're not familiar with him.
+
+------
+<!-- .element: data-auto-animate -->
+```java []
+// not python
+var rectangle = Rectangle
+    .builder(height, width)
+    .build();
+
+```
+<!-- .element: data-notrim -->
+<!-- .element: data-id="builder" -->
+
+But you may be familiar with a programming construct called the builder pattern. AaAh!
+
+------
+<!-- .element: data-auto-animate -->
+```java [3]
+// not python
+var rectangle = Rectangle
+    .builder(height, width)
+    .build();
+
+```
+<!-- .element: data-notrim -->
+<!-- .element: data-id="builder" -->
+
+On initiation, it requires and stores all necessary data
+
+------
+<!-- .element: data-auto-animate -->
+```java [4]
+// not python
+var rectangle = Rectangle
+    .builder(height, width)
+    .withRotation(rotation)
+    .build();
+```
+<!-- .element: data-notrim -->
+<!-- .element: data-id="builder" -->
+
+and then allows for adding of any optional data
+
+------
+<!-- .element: data-auto-animate -->
+```java [5]
+// not python
+var rectangle = Rectangle
+    .builder(height, width)
+    .withRotation(rotation)
+    .build();
+```
+<!-- .element: data-notrim -->
+<!-- .element: data-id="builder" -->
+
+before building the final state.
+
+> 08:00
+> (00:45)
+> {10}
+
+------
+<!-- .element: data-auto-animate -->
+```java []
+// not python
+var rectangle = Rectangle
+    .builder(height, width)
+    .build();
+
+```
+<!-- .element: data-notrim -->
+<!-- .element: data-id="builder" -->
+
+But yet another issue lies with required arguments, that even builders can't fix.
+
+Can anyone spot the error here?
+
+[5s water break]
+
+> 08:15
+> (0:15)
+> {11}
+
+------
+<!-- .element: data-auto-animate -->
+```java [3]
+// not python
+var rectangle = Rectangle
+    .builder(height, width)
+    .build();
+
+```
+<!-- .element: data-notrim -->
+<!-- .element: data-id="builder" -->
+
+[No one noticed, that when I defined this builder, the ordering of height and width were swapped?]
+
+[Yes well done] It should be width and height,
+
+------
+<!-- .element: data-auto-animate -->
+```java [3,7-8]
+// not python
+var rectangle = Rectangle
+    .builder(height, width)
+    .build();
+
+Rectangle rectangle(
+    int width,
+    int height
+);
+```
+<!-- .element: data-id="builder" -->
+
+Not height and width.
+
+(pause for effect)
+
+And, in case you were wondering, I _have_ seen this in a codebase.
+
+------
+<!-- .element: data-auto-animate -->
+```java [2,7,13,14]
+// not python
+Rectangle rectangle(
+    int width,
+    int height
+);
+
+Rectangle rectangle(
+    int height,
+    int width,
+    int rotation
+);
+
+shape_1 = rectangle(10, 20);
+shape_2 = rectangle(20, 10, 45);
+```
+<!-- .element: data-notrim -->
+<!-- .element: data-id="builder" -->
+
+Going one step further, this same issue is what can cause function overloading to be harmful.
+
+For example, both of these are valid definitions,
+
+------
+<!-- .element: data-auto-animate -->
+```java [3-4,8-9]
+// not python
+Rectangle rectangle(
+    int width,
+    int height
+);
+
+Rectangle rectangle(
+    int height,
+    int width,
+    int rotation
+);
+
+shape_1 = rectangle(10, 20);
+shape_2 = rectangle(20, 10, 45);
+```
+<!-- .element: data-notrim -->
+<!-- .element: data-id="builder" -->
+
+the only difference being the ordering of the parameters
+
+------
+<!-- .element: data-auto-animate -->
+```java [14]
+// not python
+Rectangle rectangle(
+    int width,
+    int height
+);
+
+Rectangle rectangle(
+    int height,
+    int width,
+    int rotation
+);
+
+shape_1 = rectangle(10, 20);
+shape_2 = rectangle(20, 10);
+```
+<!-- .element: data-notrim -->
+<!-- .element: data-id="builder" -->
+
+But as soon as you remove the rotation of the shape, the shapes dimensions are now different.
+
+------
+```java [14]
+// not python
+Rectangle rectangle(
+    int width,
+    int height
+);
+
+Rectangle rectangle(
+    int height,
+    int width,
+    int rotation
+);
+
+shape_1 = rectangle(10, 20);
+shape_2 = rectangle(20, 10); 😱
+```
+<!-- .element: data-notrim -->
+
+Dun dun dun!
+
+------
+<!-- .element: data-auto-animate -->
+```java [3-4,8-9]
+// not python
+Rectangle rectangle(
+    int width,
+    int height
+);
+
+Rectangle rectangle(
+    int height,
+    int width,
+    int rotation
+);
+
+shape_1 = rectangle(10, 20);
+shape_2 = rectangle(20, 10);
+```
+<!-- .element: data-notrim -->
+<!-- .element: data-id="builder" -->
+
+Without having to reference the signature of the functions, there's no knowing whether the arguments are set correctly.
+
+> 09:10
+> (00:55)
+> {12}
+
+------
+<!-- .slide: data-background-image="images/history_keyword_args.svg"-->
+
+But in 1995 Python 1.3 did this BEAUTIFUL thing of adding keyword arguments
+
+------
+```python []
+rectangle(
+    width=width,
+    height=height,
+)
+```
+
+Which let you choose what argument you wish to fill, and thus let you solve these issues (and do away with builders and function overloading)
+
+------
+<!-- .element: data-auto-animate -->
+```python []
+rectangle(
+    width=10,
+    height=20,
+)
+```
+<!-- .element: data-id="code" -->
+
+Meaning that not only are your functions self documenting by having constant arguments labelled
+
+------
+<!-- .element: data-auto-animate -->
+```python []
+rectangle(
+    height=20,
+    width=10,
+)
+```
+<!-- .element: data-id="code" -->
+
+But now your argument ordering is redundant!
+
+------
+<!-- .slide: data-background-image="images/never_ending_benefits.svg"-->
+
+This might not seem like much, but this little change, of always using keywords arguments, leads to so many benefits, and prevention of errors.
+
+> 09:50
+> (00:40)
+> {13}
+
+------
+<!-- .element: data-auto-animate -->
+```python [4]
+def rectangle(
+    height,
+    width,
+    rotation=0,
+):
+    ...
+
+rectangle(
+    10, # height
+    20, # width
+    45, # rotation
+)
+```
+<!-- .element: data-id="rectangle" -->
+
+Like for example, if you go back to a default argument being used for rotation
+
+------
+<!-- .element: data-auto-animate -->
+```python [8-12]
+def rectangle(
+    height,
+    width,
+    rotation=0,
+):
+    ...
+
+rectangle(
+    10, # height
+    20, # width
+    45, # rotation
+)
+```
+<!-- .element: data-id="code" -->
+
+then you could call that function,
+
+------
+<!-- .element: data-auto-animate -->
+```python [11]
+def rectangle(
+    height,
+    width,
+    rotation=0,
+):
+    ...
+
+rectangle(
+    10, # height
+    20, # width
+    45, # rotation
+)
+```
+<!-- .element: data-id="code" -->
+
+with the 3rd argument overriding that default.
+
+------
+<!-- .element: data-auto-animate -->
+```python [4]
+def rectangle(
+    height,
+    width,
+    opacity,
+    rotation=0,
+):
+    ...
+
+rectangle(
+    10, # height
+    20, # width
+    45, # rotation
+)
+```
+<!-- .element: data-id="code" -->
+
+But once you introduce a new required positional argument like opacity
+
+------
+<!-- .element: data-auto-animate -->
+```python [9-13]
+def rectangle(
+    height,
+    width,
+    opacity,
+    rotation=0,
+):
+    ...
+
+rectangle(
+    10, # height
+    20, # width
+    45, # rotation
+)
+```
+<!-- .element: data-id="code" -->
+
+where 10, 20, and 45 were previously for height, width, and rotation
+
+------
+<!-- .element: data-auto-animate -->
+```python [12]
+def rectangle(
+    height,
+    width,
+    opacity,
+    rotation=0,
+):
+    ...
+
+rectangle(
+    10, # height
+    20, # width
+    45, # opacity
+)
+```
+<!-- .element: data-id="code" -->
+
+They're now actually for height, width, and opacity, without you ever knowing.
+
+> 10:20
+> (0:30)
+> {14}
+
+------
+```python [10-12]
+def rectangle(
+    height,
+    width,
+    opacity,
+    rotation=0,
+):
+    ...
+
+rectangle(
+    height=10,
+    width=20,
+    opacity=45,
+)
+```
+<!-- .element: data-id="code" -->
+
+Naming your arguments easily lets you prevent this issue!
+
+------
+<!-- .slide: data-background-image="images/inlays.svg"-->
+
+And while you could argue that language server inlay hints could achieve the same effect,
+
+------
+<!-- .element: data-auto-animate -->
+```python []
+def rectangle(
+    height,
+    width,
+    opacity,
+    rotation=0,
+):
+    ...
+
+rectangle(
+    height=10,
+    width=20,
+    opacity=45,
+)
+```
+<!-- .element: data-id="code" -->
+
+the benefit of keyword arguments is that they not only appear *everywhere* for *everyone*, but they also reduce issues with refactoring!
+
+------
+<!-- .element: data-auto-animate -->
+```python [2-3]
+def rectangle(
+    width,
+    height,
+    opacity,
+    rotation=0,
+):
+    ...
+
+rectangle(
+    height=10,
+    width=20,
+    opacity=45,
+)
+```
+<!-- .element: data-id="code" -->
+
+such as in the case where you want to fix the mis-ordered parameters,
+
+------
+<!-- .element: data-auto-animate -->
+```python [10-11]
+def rectangle(
+    width,
+    height,
+    opacity,
+    rotation=0,
+):
+    ...
+
+rectangle(
+    height=10,
+    width=20,
+    opacity=45,
+)
+```
+<!-- .element: data-id="code" -->
+
+you now don't have to make changes to re-order those arguments everywhere that function is called.
+
+------
+<!-- .element: data-auto-animate -->
+```python [2-3,8-9]
+def rectangle(
+    height,
+    width,
+):
+    ...
+
+rectangle(
+    height=10,
+    width=20,
+)
+```
+<!-- .element: data-id="code" -->
+
+And if you choose to sort the ordering of arguments and parameters, you can reduce the chance of merge conflicts
+
+------
+<!-- .element: data-auto-animate -->
+```python [3-4,11-12]
+def rectangle(
+    height,
+    opacity,
+    rotation,
+    width,
+):
+    ...
+
+rectangle(
+    height=10,
+    opacity=30,
+    rotation=45,
+    width=20,
+)
+```
+<!-- .element: data-id="code" -->
+
+for example, if one commit adds opacity and rotation,
+
+------
+<!-- .element: data-auto-animate -->
+```python [2,4,10,12]
+def rectangle(
+    color,
+    height,
+    opacity,
+    width,
+):
+    ...
+
+rectangle(
+    color="green"
+    height=10,
+    opacity=30,
+    width=20,
+)
+```
+<!-- .element: data-id="code" -->
+
+and the other adds opacity and color, when they're combined
+
+------
+<!-- .element: data-auto-animate -->
+```python [2,4,5,11,13,14]
+def rectangle(
+    color,
+    height,
+    opacity,
+    rotation,
+    width,
+):
+    ...
+
+rectangle(
+    color="green"
+    height=10,
+    opacity=30,
+    rotation=40,
+    width=20,
+)
+```
+<!-- .element: data-id="code" -->
+
+opacity will be in the same place for both.
+
+------
+<!-- .slide: data-background-image="images/no_teamwork.svg"-->
+
+Even if you don't care for refactoring or collaboration, keyword arguments will still reduce reduce human errors for you.
+
+> 11:20
+> (01:00)
+> {15}
+
+------
+<!-- .element: data-auto-animate -->
+```python []
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+```
+<!-- .element: data-id="code" -->
+
+Pop quiz!
+Can anyone spot the error in this example?
+
+(and if you've come across this before, let others have a chance)
+
+[3 seconds water]
+
+(hint, it's do to with function arguments and parameters)
+
+[3 seconds]
+
+Okay that's not a fair hint...
+
+> 11:40
+> (00:20)
+> {16}
+
+>  https://github.com/python/cpython/issues/56166
+
+------
+<!-- .element: data-auto-animate -->
+```python [5]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+```
+<!-- .element: data-id="code" -->
+
+[Yes!]
+[So the answer is because of how]
+
+It's how the IGNORECASE flag is being passed in!
+
+Which is quite hard to catch with the surrounding complexity.
+
+------
+<!-- .element: data-auto-animate -->
+```python [2]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+```
+<!-- .element: data-id="code" -->
+
+Like for me, as soon as I see a line of regex,
+
+------
+```python []
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    r"(?P<x>[A-Z]\w*)\(\)",
+    r"\b\d{2,4}[-/.]\d{1,2}\b",
+    r"(?i)\[[^\]]+\]\s*\$",
+)
+```
+<!-- .element: data-id="code" -->
+
+My brain shuts down and everything becomes regex goop. 
+
+Which is a problem because, at this point, I'm hitting my head against my keyboard for hours trying to figure out why my expected thousands of substitutions weren't working
+
+------
+<!-- .element: data-auto-animate -->
+```python [3]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+```
+<!-- .element: data-id="code" -->
+
+and I'm like, second guessing my replacement function... it wasn't a fun night.
+
+> 12:15
+> (0:35)
+> {17}
+
+------
+<!-- .element: data-auto-animate -->
+```python [1]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+```
+<!-- .element: data-id="code" -->
+
+So what happened? Well it's pretty hard to spot if you don't know the function definition, so let's bring it up.
+
+------
+<!-- .element: data-auto-animate -->
+```python [8-14]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+
+def sub(
+    pattern,
+    repl,
+    string,
+    count=0,
+    flags=0,
+)
+```
+<!-- .element: data-id="code" -->
+
+If you look at the definition of re.sub,
+
+------
+<!-- .element: data-auto-animate -->
+```python [13]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+
+def sub(
+    pattern,
+    repl,
+    string,
+    count=0,
+    flags=0,
+)
+```
+<!-- .element: data-id="code" -->
+
+and you look at the parameter that the flag is passed in as, you'll see it's not flags,
+
+------
+<!-- .element: data-auto-animate -->
+```python [5,12]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+
+def sub(
+    pattern,
+    repl,
+    string,
+    count=0,
+    flags=0,
+)
+```
+<!-- .element: data-id="code" -->
+
+but count.
+
+------
+<!-- .element: data-auto-animate -->
+```python [5,12]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+
+def sub(
+    pattern,
+    repl,
+    string,
+    count=0,
+    flags=0,
+)
+```
+<!-- .element: data-id="code" -->
+
+and then this IGNORECASE flag is read in as an int.
+
+------
+```python [5,12]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    2,
+)
+
+def sub(
+    pattern,
+    repl,
+    string,
+    count=0,
+    flags=0,
+)
+```
+<!-- .element: data-id="code" -->
+
+which happens to be 2, and now becomes the maximum number of substitutions.
+
+Which is why my code looked like it wasn't replacing anything... 
+
+> 12:55
+> (0:40)
+> {18}
+
+------
+<!-- .slide: data-background-image="images/positional-deprecated.png"-->
+
+In fact, so many people have had this issue, that Python has fixed it by introducing a deprecation warning from 3.13, noting that the use of count and flags as a positional argument will be removed and needs to be a keyword instead.
+
+------
+<!-- .element: data-auto-animate -->
+```python [12-14]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+
+def sub(
+    pattern,
+    repl,
+    string,
+    *,
+    count=0,
+    flags=0,
+)
+```
+<!-- .element: data-id="code" -->
+
+And the way that they will do that, is to put `*` as a parameter before count and flags.
+
+------
+<!-- .element: data-auto-animate -->
+```python [5,8]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    re.IGNORECASE,
+)
+
+# TypeError: sub() takes 3 positional arguments but 4 were given
+
+def sub(
+    pattern,
+    repl,
+    string,
+    *,
+    count=0,
+    flags=0,
+)
+```
+<!-- .element: data-id="code" -->
+
+What this will do, is throw an error when you try to call the function without naming those arguments.
+
+------
+<!-- .element: data-auto-animate -->
+```python [5,14]
+re.sub(
+    r"(\w+)(\[.*?\])\s*\n(.*?)",
+    replacement_function,
+    content,
+    flags=re.IGNORECASE,
+)
+
+def sub(
+    pattern,
+    repl,
+    string,
+    *,
+    count=0,
+    flags=0,
+)
+```
+<!-- .element: data-id="code" -->
+
+Instead, requiring that you explicitly specify the flag with a keyword argument.
+
+------
+<!-- .slide: data-background-image="images/history_keyword_parameter.svg"-->
+
+And if you're curious, this keyword only feature was added in Python 3.0!
+
+> 13:40
+> (0:45)
+> {19}
+
+------
+<!-- .element: data-auto-animate -->
+```python []
+def rectangle(
+    width,
+    height,
+):
+    ...
+
+rectangle(
+    10, # width 
+    20, # height 
+)
+```
+<!-- .element: data-id="named" -->
+
+So, if you are convinced by keyword arguments, and want to ensure that functions like rectangle are always called with them.
+
+------
+<!-- .element: data-auto-animate -->
+```python [2]
+def rectangle(
+    *,
+    width,
+    height,
+):
+    ...
+
+rectangle(
+    width=10,
+    height=20,
+)
+```
+<!-- .element: data-id="named" -->
+
+then one way you could force that, is by putting `*` as the first parameter,
+
+------
+<!-- .element: data-auto-animate -->
+```python [9-10]
+def rectangle(
+    *,
+    width,
+    height,
+):
+    ...
+
+rectangle(
+    width=10,
+    height=20,
+)
+```
+<!-- .element: data-id="named" -->
+
+which would require updating the arguments to be keyword arguments.
+
+But that can be cumbersome, as it can be forgotten, can make the code noisy, slower, and would also require updating all previously made functions.
+
+> 14:10
+> (00:30)
+> {20}
+
+------
+<!-- .element: data-auto-animate -->
+```python [8-9]
+def rectangle(
+    width,
+    height,
+):
+    ...
+
+rectangle(
+    width=width,
+    height=height,
+)
+```
+<!-- .element: data-id="named" -->
+
+Not to mention the redundant cases where the names of the variables being passed in are the same as the parameters.
+And while it might look fine in this case,
+
+------
+<!-- .element: data-auto-animate -->
+```python []
+rectangle(
+    top_left_pos_from_x_origin=top_left_pos_from_x_origin,
+    top_left_pos_from_y_origin=top_left_pos_from_x_origin,
+    bottom_right_pos_from_x_origin=bottom_right_pos_from_x_origin,
+    bottom_right_pos_from_y_origin=bottom_right_pos_from_y_origin,
+    rotation_in_radians=rotation_in_radians,
+    color_in_hex=color_in_hex,
+    line_thickness_in_pixels=line_thickness_in_pixels,
+)
+```
+<!-- .element: data-id="long" -->
+
+it can get pretty unreadable when the number of parameters and their names are much longer...
+
+For example, has anyone spotted the mistake here?
+
+[5s]
+
+> 14:35
+> (0:25)
+> {21}
+
+------
+<!-- .element: data-auto-animate -->
+```python [3]
+rectangle(
+    top_left_pos_from_x_origin=top_left_pos_from_x_origin,
+    top_left_pos_from_y_origin=top_left_pos_from_x_origin,
+    bottom_right_pos_from_x_origin=bottom_right_pos_from_x_origin,
+    bottom_right_pos_from_y_origin=bottom_right_pos_from_y_origin,
+    rotation_in_radians=rotation_in_radians,
+    color_in_hex=color_in_hex,
+    line_thickness_in_pixels=line_thickness_in_pixels,
+)
+```
+<!-- .element: data-id="long" -->
+
+Yes! It's in the 2nd argument, where the x should be a y.
+
+------
+<!-- .element: data-auto-animate -->
+```python [8-10]
+def rectangle(
+    height,
+    width,
+):
+    ...
+
+rectangle(
+    # PEP736
+    height=,
+    width=,
+)
+```
+<!-- .element: data-id="named" -->
+
+The good news is, I'm not the only one who's thought about this.
+
+PEP736 proposes using a trailing = for arguments that should take from existing variable names
+
+------
+<!-- .slide: data-background-image="images/pep_rejected.svg"-->
+
+The bad news is, that this was rejected last year...
+
+------
+![ruff logo](images/ruff.svg)
+
+Personally I feel that linters are a cleaner, more pragmatic way to not only check, but also correct this for you!
+
+------
+<!-- .element: data-auto-animate -->
+```python [2, 9-10]
+def rectangle(
+    *,
+    width,
+    height,
+):
+    ...
+
+rectangle(
+    height=height,
+    width=width,
+)
+```
+<!-- .element: data-id="code" -->
+
+For example, a rule that enforces (and auto adds) a star on all function definitions.
+
+------
+<!-- .element: data-auto-animate -->
+```python [2-3,8-9]
+def rectangle(
+    width,
+    height,
+):
+    ...
+
+rectangle(
+    height=height,
+    width=width,
+)
+```
+<!-- .element: data-id="code" -->
+
+Or if that's not up your alley, a rule that enforces all function calls to use keyword arguments wherever possible
+
+------
+<!-- .element: data-auto-animate -->
+```python [3,9]
+def rectangle(
+    width,
+    height,
+):
+    ...
+
+rectangle(
+    width,
+    width,
+)
+```
+<!-- .element: data-id="code" -->
+
+Or, if you want the safety without the redundancy, a rule that for this parameter and argument,
+
+------
+<!-- .element: data-auto-animate -->
+```python [3,9-10]
+def rectangle(
+    width,
+    height,
+):
+    ...
+
+rectangle(
+    width,
+    # "width" argument name != "height" parameter name.
+    width,
+)
+```
+<!-- .element: data-id="code" -->
+
+Warns when a parameter and argument don't match.
+
+------
+<!-- .element: data-auto-animate -->
+```python [3,9]
+def rectangle(
+    width,
+    height,
+):
+    ...
+
+rectangle(
+    width,
+    height=width,
+)
+```
+<!-- .element: data-id="code" -->
+
+And if that's the intention, provides a fix to bring clarity with a keyword argument.
+
+------
+<!-- .slide: data-background-image="images/github-logo.png"-->
+
+So if mitigating human errors excites you, I'd love to talk with you on how we can make more of these kinds of tools!
+
+> NOTE: Could expand? e.g. this is because these lint rules can analyse the definitions during the calls of functions
+
+> 16:15
+> (01:40)
+> {22}
+
+------
+<!-- .slide: data-background-image="images/inspired-emoji.png"-->
+
+Or, if I've inspired you enough to start using this paradigm in your code day to day, here are some things that may be worth noting.
+
+------
+<!-- .element: data-auto-animate -->
+```python []
+range(
+    start=0,
+    stop=10,
+    skip=2,
+)
+```
+<!-- .element: data-id="code" -->
+
+For one, you may notice in your excitement to use keyword arguments for all your function calls...
+
+------
+<!-- .element: data-auto-animate -->
+```python [6]
+range(
+    start=0,
+    stop=10,
+    skip=2,
+)
+# TypeError: range() takes no keyword arguments
+```
+<!-- .element: data-id="code" -->
+
+that not _all_ functions are happy with that.
+
+------
+```python [5]
+def range(
+    start,
+    stop,
+    skip=1,
+    /,
+)
+```
+<!-- .element: data-id="code" -->
+
+This is because of another special parameter, `/`.
+
+------
+<!-- .slide: data-background-image="images/history_positional_parameter.svg"-->
+
+Which was added in Python 3.8 (quite recent relative to the other additions!) 
+
+------
+```python [5]
+def range(
+    start,
+    stop,
+    skip=1,
+    /,
+)
+```
+<!-- .element: data-id="code" -->
+
+Unlike `*` which makes all further parameters keyword only,
+`/` prevents all previous parameters from being passed into using keyword arguments.
+
+------
+![but why gif](images/but_why.gif)
+
+Given the wonders you've just seen with keyword arguments, you might be wondering, when is this helpful?
+
+Well there's three cases that I've seen
+
+------
+```python [4]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    ...
+
+rectangle(
+    height=10,
+    width=20,
+    rotation=45,
+)
+```
+<!-- .element: data-id="code" -->
+
+The first may be made apparent if you had to refactor your function and change the name of your parameters.
+
+------
+<!-- .element: data-auto-animate -->
+```python [4]
+def rectangle(
+    width,
+    height,
+    rotation_in_degrees=0,
+):
+    ...
+
+rectangle(
+    height=10,
+    width=20,
+    rotation=45,
+)
+```
+<!-- .element: data-id="code" -->
+
+For example, you may want to change the specification, and be more specific that the rotation is in degrees, not radians.
+
+------
+<!-- .element: data-auto-animate -->
+```python [4,8-9]
+def rectangle(
+    width,
+    height,
+    rotation_in_degrees=0,
+):
+    ...
+
+# TypeError:
+#   rectangle() got an unexpected keyword argument 'rotation'
+rectangle(
+    height=10,
+    width=20,
+    rotation=45,
+)
+```
+<!-- .element: data-id="code" -->
+
+If you updated the name of your parameter, now any calls that pass in the `rotation` argument would now fail.
+
+------
+<!-- .element: data-auto-animate -->
+```python [5]
+def rectangle(
+    width,
+    height,
+    rotation_in_degrees=0,
+    /,
+):
+    ...
+
+rectangle(
+    10,
+    20,
+    45,
+)
+```
+<!-- .element: data-id="code" -->
+
+Thus, by enforcing that a parameter like rotation can only be passed in as a positional argument, this refactoring would no longer be a breaking change,
+
+------
+<!-- .element: data-auto-animate -->
+```python [9-13]
+def rectangle(
+    width,
+    height,
+    rotation_in_degrees=0,
+    /,
+):
+    ...
+
+rectangle(
+    10,
+    20,
+    45,
+)
+```
+<!-- .element: data-id="code" -->
+
+With the trade off being that your functions couldn't use keyword arguments.
+
+------
+<!-- .element: data-auto-animate -->
+```python [4,12]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    rotation_in_degrees=rotation
+    ...
+
+rectangle(
+    height=10,
+    width=20,
+    rotation=45,
+)
+```
+<!-- .element: data-id="code" -->
+
+Another case is when you want to keep the external argument name the same, and change the internal parameter name within your function.
+
+------
+<!-- .element: data-auto-animate -->
+```python [4,6]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    rotation_in_degrees=rotation
+    ...
+
+rectangle(
+    height=10,
+    width=20,
+    rotation=45,
+)
+```
+<!-- .element: data-id="code" -->
+
+And you could do that by setting this parameter to another variable at the top of the function.
+
+------
+<!-- .element: data-auto-animate -->
+```python [7-8]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    rotation_in_degrees=rotation
+    print(rotation_in_degrees)
+    print(rotation)
+    ...
+
+rectangle(
+    height=10,
+    width=20,
+    rotation=45,
+)
+```
+<!-- .element: data-id="code" -->
+
+However this can become messy, as the reference to the original parameter is still kept.
+
+> 18:10
+> (01:55)
+> {23}
+
+------
+<!-- .slide: data-background-image="images/sad-python.png"-->
+
+This is another case where you could argue that Python isn't perfect.
+
+------
+<!-- .slide: data-background-image="images/swift_logo.svg"-->
+
+If you look at other languages like Swift, then this concept of naming parameters different from arguments does exist!
+
+------
+<!-- .element: data-auto-animate -->
+```swift [1]
+// swift
+func rectangle(
+    width: Int,
+    height: Int,
+    rotation: Int = 0,
+) -> Rectangle {
+    let rotationInDegrees = rotation
+    print(rotationInDegrees)
+    print(rotation)
+}
+
+rectangle(
+    width: 20,
+    height: 10,
+    rotation: 45,
+)
+```
+<!-- .element: data-id="code" -->
+
+If you convert the previous python rectangle example to swift...
+
+------
+<!-- .element: data-auto-animate -->
+```swift [7]
+// swift
+func rectangle(
+    width: Int,
+    height: Int,
+    rotation: Int = 0,
+) -> Rectangle {
+    let rotationInDegrees = rotation
+    print(rotationInDegrees)
+    print(rotation)
+}
+
+rectangle(
+    width: 20,
+    height: 10,
+    rotation: 45,
+)
+```
+<!-- .element: data-id="code" -->
+
+Then instead of creating a new variable to re-name the parameter
+
+------
+<!-- .element: data-auto-animate -->
+```swift [5,7]
+// swift
+func rectangle(
+    width: Int,
+    height: Int,
+    rotation rotationInDegrees: Int = 0,
+) -> Rectangle {
+    print(rotationInDegrees)
+}
+
+rectangle(
+    width: 20,
+    height: 10,
+    rotation: 45,
+)
+```
+<!-- .element: data-id="code" -->
+
+An argument label can be used that's internal to the function
+
+------
+<!-- .element: data-auto-animate -->
+```swift [13]
+// swift
+func rectangle(
+    width: Int,
+    height: Int,
+    rotation rotationInDegrees: Int = 0,
+) -> Rectangle {
+    print(rotationInDegrees)
+}
+
+rectangle(
+    width: 20,
+    height: 10,
+    rotation: 45,
+)
+```
+<!-- .element: data-id="code" -->
+
+Avoiding the need to change the interface,
+
+------
+<!-- .element: data-auto-animate -->
+```swift [7]
+// swift
+func rectangle(
+    width: Int,
+    height: Int,
+    rotation rotationInDegrees: Int = 0,
+) -> Rectangle {
+    print(rotationInDegrees)
+}
+
+rectangle(
+    width: 20,
+    height: 10,
+    rotation: 45,
+)
+```
+<!-- .element: data-id="code" -->
+
+or create additional variables.
+
+------
+<!-- .element: data-auto-animate -->
+```python [4]
+def rectangle(
+    width,
+    height,
+    rotation as rotation_in_degrees=0,
+):
+    print(rotation_in_degrees)
+    ...
+
+rectangle(
+    height=10,
+    width=20,
+    rotation=45,
+)
+```
+
+Wouldn't it be awesome if you could use something like the as keyword do the same thing in Python?
+
+------
+<!-- .element: data-auto-animate -->
+```python []
+def test_painting(
+    square_fixture as rectangle,
+):
+    paint_with(rectangle)
+    ...
+```
+
+Take this case for example, where you want to use a different pytest fixture.
+
+With named parameters, you wouldn't have to rename the same variable everywhere within your test!
+
+> 19:05
+> (00:55)
+> {24}
+
+------
+<!-- .slide: data-background-image="images/javascript-logo.png"-->
+
+This feature also exists in Javascript
+
+------
+<!-- .element: data-auto-animate -->
+```javascript [1,5]
+// javascript
+function rectangle({
+    width,
+    height,
+    rotation: rotationInDegrees=0,
+}) {
+    console.log(rotationInDegrees)
+}
+
+rectangle({
+    width: 10,
+    height: 20,
+    rotation: 45,
+});
+```
+<!-- .element: data-id="code" -->
+
+It looks like this, which is quite similar.
+
+But for those of you unfamiliar with JavaScript, the way it works is quite different.
+
+------
+<!-- .element: data-auto-animate -->
+```javascript [1,2,6,10,14]
+// javascript
+function rectangle({
+    width,
+    height,
+    rotation: rotationInDegrees=0,
+}) {
+    console.log(rotationInDegrees)
+}
+
+rectangle({
+    width: 10,
+    height: 20,
+    rotation: 45,
+});
+```
+<!-- .element: data-id="code" -->
+
+And the secret is in these braces.
+
+------
+<!-- .element: data-auto-animate -->
+```javascript [1,10-15]
+// javascript
+function rectangle({
+    width,
+    height,
+    rotation: rotationInDegrees=0,
+}) {
+    console.log(rotationInDegrees)
+}
+
+const obj = {
+    width: 10,
+    height: 20,
+    rotation: 45,
+};
+rectangle(obj);
+```
+<!-- .element: data-id="code" -->
+
+Because these braces really define an object (like a python dictionary)
+
+------
+<!-- .element: data-auto-animate -->
+```javascript [1,2]
+// javascript
+function rectangle(parameter) {
+    const {
+        width,
+        height,
+        rotation: rotationInDegrees=0,
+    } = parameter;
+    console.log(rotationInDegrees)
+}
+
+const obj = {
+    width: 10,
+    height: 20,
+    rotation: 45,
+};
+rectangle(obj);
+```
+<!-- .element: data-id="code" -->
+
+So really, there's only ever been one argument to this function.
+
+------
+<!-- .element: data-auto-animate -->
+```javascript [1,3-7]
+// javascript
+function rectangle(parameter) {
+    const {
+        width,
+        height,
+        rotation: rotationInDegrees=0,
+    } = parameter;
+    console.log(rotationInDegrees)
+}
+
+const obj = {
+    width: 10,
+    height: 20,
+    rotation: 45,
+};
+rectangle(obj);
+```
+<!-- .element: data-id="code" -->
+
+And what's happening here, is that the
+
+------
+<!-- .element: data-auto-animate -->
+```javascript [12-14]
+// javascript
+function rectangle(parameter) {
+    const {
+        width,
+        height,
+        rotation: rotationInDegrees=0,
+    } = parameter;
+    console.log(rotationInDegrees)
+}
+
+const obj = {
+    width: 10,
+    height: 20,
+    rotation: 45,
+};
+rectangle(obj);
+```
+<!-- .element: data-id="code" -->
+
+values of this object being passed in,
+
+------
+<!-- .element: data-auto-animate -->
+```javascript [4-5]
+// javascript
+function rectangle(parameter) {
+    const {
+        width,
+        height,
+        rotation: rotationInDegrees=0,
+    } = parameter;
+    console.log(rotationInDegrees)
+}
+
+const obj = {
+    width: 10,
+    height: 20,
+    rotation: 45,
+};
+rectangle(obj);
+```
+<!-- .element: data-id="code" -->
+
+are being destructed into the variables width and height,
+
+------
+<!-- .element: data-auto-animate -->
+```javascript [6]
+// javascript
+function rectangle(parameter) {
+    const {
+        width,
+        height,
+        rotation: rotationInDegrees=0,
+    } = parameter;
+    console.log(rotationInDegrees)
+}
+
+const obj = {
+    width: 10,
+    height: 20,
+    rotation: 45,
+};
+rectangle(obj);
+```
+<!-- .element: data-id="code" -->
+
+with rotation being re-assigned to a different name
+
+------
+<!-- .element: data-auto-animate -->
+```javascript [1,3-5]
+// javascript
+function rectangle(parameter) {
+    const width = parameter.width;
+    const height = parameter.height;
+    const rotationInDegrees = parameter.rotation;
+    console.log(rotationInDegrees)
+}
+
+const obj = {
+    width: 10,
+    height: 20,
+    rotation: 45,
+};
+rectangle(obj);
+```
+<!-- .element: data-id="code" -->
+
+which in effect, is like assigning the variables from an object individually.
+
+> 19:50
+> (00:45)
+> {25}
+
+------
+```javascript []
+// javascript
+function rectangle({
+    width,
+    height,
+    rotation: rotationInDegrees=0,
+}) {
+    console.log(rotationInDegrees)
+}
+
+rectangle({
+    width: 10,
+    height: 20,
+    rotation: 45,
+});
+```
+<!-- .element: data-id="code" -->
+
+Okay so why am I explaining all this?
+
+------
+<!-- .slide: data-background-image="images/history_variable.svg"-->
+
+Well in the year 2000, Python 1.6 added support for unpacking into function calls.
+
+------
+<!-- .element: data-auto-animate -->
+```python [8-13]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    ...
+
+params = {
+    "height": 10,
+    "width": 20,
+    "rotation": 45,
+}
+rectangle(**params)
+```
+<!-- .element: data-id="code" -->
+
+Letting you do what javascript does with dictionaries too!
+
+------
+<!-- .element: data-auto-animate -->
+```python [13]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    ...
+
+params = {
+    "height": 10,
+    "width": 20,
+    "rotation": 45,
+}
+rectangle(**params)
+```
+<!-- .element: data-id="code" -->
+
+By using the `**` operator within a function call, python will unpack the keys of the dictionary as the keywords, and the values as the arguments.
+
+------
+<!-- .slide: data-background-image="images/thinking.svg"-->
+
+This might make you wonder, what happens if extra properties are passed into these function calls?
+
+------
+<!-- .element: data-auto-animate -->
+```javascript [1,3-5,12]
+// javascript
+function rectangle({
+    width,
+    height,
+    rotation,
+});
+
+rectangle({
+    width: 10,
+    height: 20,
+    rotation: 45,
+    extra: "argument",
+});
+```
+<!-- .element: data-id="code" -->
+
+Well, I'm sorry to disappoint you, but in JavaScript, the answer is... nothing. They don't get unpacked and thus they're ignored.
+
+------
+<!-- .element: data-auto-animate -->
+```javascript [6]
+// javascript
+function rectangle({
+    width,
+    height,
+    rotation,
+    ...rest,
+});
+
+rectangle({
+    width: 10,
+    height: 20,
+    rotation: 45,
+    extra: "argument",
+});
+```
+<!-- .element: data-id="code" -->
+
+But, there is a way to keep them, and that is by using the ellipses `...rest` property.
+
+------
+<!-- .element: data-auto-animate -->
+```javascript [6,13]
+// javascript
+function rectangle({
+    width,
+    height,
+    rotation,
+    ...rest, // { extra: "argument" }
+});
+
+rectangle({
+    width: 10,
+    height: 20,
+    rotation: 45,
+    extra: "argument",
+});
+```
+<!-- .element: data-id="code" -->
+
+Allowing you to save the remaining properties for whatever they may be needed for.
+
+> 20:50
+> (01:00)
+> {26}
+
+------
+<!-- .element: data-auto-animate -->
+```python [12]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    ...
+
+params = {
+    "height": 10,
+    "width": 20,
+    "rotation": 45,
+    "extra": "argument",
+}
+rectangle(**params)
+```
+<!-- .element: data-id="code" -->
+
+But if this is how JavaScript named parameters work, what happens in python, if you pass extra keyword arguments into a python function?
+
+------
+<!-- .element: data-auto-animate -->
+```python [12,14]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+):
+    ...
+
+params = {
+    "height": 10,
+    "width": 20,
+    "rotation": 45,
+    "extra": "argument",
+}
+# TypeError: rectangle() got an unexpected keyword argument 'extra'
+rectangle(**params)
+```
+<!-- .element: data-id="code" -->
+
+Well, unlike JavaScript, you'll get an error, telling you off that you passed in an unexpected keyword argument, which you could argue is pretty good default behavior!
+
+And I say default here because you can also specify a way to keep these leftover arguments,
+
+------
+<!-- .element: data-auto-animate -->
+```python [5]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+    **rest,
+):
+    ...
+
+params = {
+    "height": 10,
+    "width": 20,
+    "extra": "argument",
+}
+rectangle(**params)
+```
+<!-- .element: data-id="code" -->
+
+and that is by using our good friend `**` again, adding it to a `rest` parameter.
+
+------
+<!-- .slide: data-background-image="images/good_friend.svg"-->
+
+Doesn't it look so cute?
+
+Anyways
+
+------
+<!-- .element: data-auto-animate -->
+```python [5,12]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+    **rest, # { "extra": "argument" }
+):
+    ...
+
+params = {
+    "height": 10,
+    "width": 20,
+    "extra": "argument",
+}
+rectangle(**params)
+```
+<!-- .element: data-id="code" -->
+
+this captures any extra keyword arguments into a dictionary.
+
+As a side note, similar to javascript, this parameter doesn't have to be called `rest` either.
+
+------
+<!-- .element: data-auto-animate -->
+```python [5]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+    **kwargs, # { "extra": "argument" }
+):
+    ...
+
+params = {
+    "height": 10,
+    "width": 20,
+    "extra": "argument",
+}
+rectangle(**params)
+```
+<!-- .element: data-id="code" -->
+
+The general convention in Python is `kwargs` for keyword args.
+
+------
+<!-- .slide: data-background-image="images/history_keyword_args.svg"-->
+
+Which was also added back in Python 1.3!
+
+------
+<!-- .element: data-auto-animate -->
+```python [2]
+def rectangle(
+    { width, height }, # SyntaxError: invalid syntax
+    height,
+    rotation=0,
+    **kwargs,
+):
+    ...
+
+params = {
+    "height": 10,
+    "width": 20,
+    "extra": "argument",
+}
+rectangle(**params)
+```
+<!-- .element: data-id="code" -->
+
+But unlike JavaScript, Python doesn't currently have a way to unpack parameters within function definitions.
+
+------
+<!-- .slide: data-background-image="images/good-old-days.png"-->
+
+But fun fact, it did used to in python 2!
+
+> https://peps.python.org/pep-3113/
+
+------
+<!-- .element: data-auto-animate -->
+```python [7]
+def rectangle(
+    (width, height),
+):
+    print "width:", width # 10
+    print "height:", height # 20
+
+rectangle((10, 20))
+```
+<!-- .element: data-id="code" -->
+
+Well... it only worked if you passed in a tuple
+
+------
+<!-- .element: data-auto-animate -->
+```python [2]
+def rectangle(
+    (width, height),
+):
+    print "width:", width # 10
+    print "height:", height # 20
+
+rectangle((10, 20))
+```
+<!-- .element: data-id="code" -->
+
+And defined the parameters with tuples
+
+------
+<!-- .element: data-auto-animate -->
+```python [4,5]
+def rectangle(
+    (width, height),
+):
+    print "width:", width # 10
+    print "height:", height # 20
+
+rectangle((10, 20))
+```
+<!-- .element: data-id="code" -->
+
+Which were unpacked for use within the function.
+
+This feature wasn't used a lot, and 😬 didn't make it through in the transition.
+
+But who knows, maybe it'll come back to Python 3 after a PEP?
+
+Anyways where were we...
+
+> 22:30
+> (01:40)
+> {27}
+
+------
+<!-- .element: data-auto-animate -->
+```python [13]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+    **kwargs,
+): ...
+
+params = {
+    "height": 10,
+    "width": 20,
+    "extra": "argument",
+}
+rectangle(**params)
+```
+<!-- .element: data-id="code" -->
+
+A question you may have about `**` is,
+
+> TODO: CONTINUE FROM HERE
+
+------
+<!-- .element: data-auto-animate -->
+```python [9-10,14-16]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+    **kwargs,
+): ...
+
+params = {
+    "height": 10,
+    "width": 20,
+    "extra": "argument",
+}
+rectangle(
+    height=30,
+    width=40,
+    **params,
+)
+
+```
+<!-- .element: data-id="code" -->
+
+what happens if arguments are provided in the function and with the double star?
+
+------
+<!-- .element: data-auto-animate -->
+```python [13]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+    **kwargs,
+): ...
+
+params = {
+    "width": 10,
+    "height": 20,
+    "extra": "argument",
+}
+# TypeError: rectangle() got multiple values for keyword argument 'width'
+rectangle(
+    width=30,
+    height=40,
+    **params,
+)
+```
+<!-- .element: data-id="code" -->
+
+Well, Python will nicely tell you that there's a mistake.
+
+------
+<!-- .element: data-auto-animate -->
+```python [13,15-16]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+    **kwargs,
+): ...
+
+params = {
+    "width": 10,
+    "height": 20,
+    "extra": "argument",
+}
+# TypeError: rectangle() got multiple values for keyword argument 'width'
+rectangle(
+    30,
+    40,
+    **params,
+)
+```
+<!-- .element: data-id="code" -->
+
+And you'll get the same error if they're passed in as positionals instead.
+
+------
+<!-- .element: data-auto-animate -->
+```python [8-12,14-16]
+def rectangle(
+    width,
+    height,
+    rotation=0,
+    **kwargs,
+): ...
+
+params = {
+    "width": 10,
+    "height": 20,
+    "extra": "argument",
+}
+rectangle(
+    30,
+    40,
+    **params,
+)
+```
+<!-- .element: data-id="code" -->
+
+If you did want to make it such that this was okay, there is one thing you can do.
+
+------
+<!-- .element: data-auto-animate -->
+```python [4]
+def rectangle(
+    width,
+    height,
+    /,
+    rotation=0,
+    **kwargs,
+): ...
+
+params = {
+    "width": 10,
+    "height": 20,
+    "extra": "argument",
+}
+rectangle(
+    30,
+    40,
+    **params,
+)
+```
+<!-- .element: data-id="code" -->
+
+And this is the last of three cases I mentioned earlier, as another use of slash to enforce positional arguments.
+
+------
+<!-- .element: data-auto-animate -->
+```python [6,10-11,17]
+def rectangle(
+    width, # 30
+    height, # 40
+    /,
+    rotation=0,
+    **kwargs, # {"width": 10, "height": 20", "extra": "argument"}
+): ...
+
+params = {
+    "width": 10,
+    "height": 20,
+    "extra": "argument",
+}
+rectangle(
+    30,
+    40,
+    **params,
+)
+```
+<!-- .element: data-id="code" -->
+
+Making it such that those extra keyword arguments are forced into kwargs.
+
+> 23:10
+> (00:40)
+> {28}
+
+------
+<!-- .element: data-auto-animate -->
+```python [4,9-13]
+def rectangle(
+    width,
+    height,
+    **kwargs,
+):
+    ...
+
+rectangle(
+    width=10,
+    height=20,
+    rotation=45,
+    color="green",
+    line_width=10,
+)
+```
+<!-- .element: data-id="code" -->
+
+Now you might have noticed that **kwargs is pretty cool, since it lets you pass in an arbitrary number of arguments.
+
+------
+<!-- .element: data-auto-animate -->
+```python []
+sum(
+    10,
+    20,
+    30,
+    40,
+)
+```
+<!-- .element: data-id="code" -->
+
+But there are also cases where you can't define a keyword for every argument.
+
+Say for example, when you want to sum a list of numbers.
+
+------
+<!-- .slide: data-background-image="images/history_var_args.svg"-->
+
+Thankfully, back in 1992, this was added as part of Python 0.9.2!
+
+------
+<!-- .element: data-auto-animate -->
+```python [4]
+def rectangle(
+    width,
+    height,
+    *args,
+):
+    ...
+```
+<!-- .element: data-id="code" -->
+
+So you can use `*args`, which is like `**kwargs` but for positional arguments.
+
+------
+<!-- .element: data-auto-animate -->
+```python [4, 11-12]
+def rectangle(
+    width,
+    height,
+    *args, # ("round", 40)
+):
+    ...
+
+rectangle(
+    10,
+    20,
+    "round", # args[0]
+    40,      # args[1]
+)
+```
+<!-- .element: data-id="code" -->
+
+`args` then appears as a variable that holds a tuple of all the extra arguments that were passed in.
+
+It's worth noting that by nature of `*args` capturing all additional positional arguments, any further parameters must be keyword only.
+
+------
+<!-- .element: data-auto-animate -->
+```python [5]
+def rectangle(
+    width,
+    height,
+    *args, # ("round", 40)
+    rotation,
+):
+    ...
+
+rectangle(
+    10,
+    20,
+    "round",
+    40,
+)
+```
+<!-- .element: data-id="code" -->
+
+So if a new parameter is added after it...
+
+------
+<!-- .element: data-auto-animate -->
+```python [9-14]
+def rectangle(
+    width,
+    height,
+    *args, # ("round", 40)
+    rotation,
+):
+    ...
+
+rectangle(
+    10,
+    20,
+    "round",
+    40,
+)
+```
+<!-- .element: data-id="code" -->
+
+and the function is run as before...
+
+------
+<!-- .element: data-auto-animate -->
+```python [9-10]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+):
+    ...
+
+# TypeError:
+#   rectangle() missing 1 required keyword-only argument: 'rotation'
+rectangle(
+    10,
+    20,
+    "round",
+    40,
+)
+```
+<!-- .element: data-id="code" -->
+
+You'll get an error for a missing keyword argument.
+
+------
+<!-- .element: data-auto-animate -->
+```python [13]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+):
+    ...
+
+rectangle(
+    10,
+    20,
+    "round",
+    rotation=40,
+)
+```
+<!-- .element: data-id="code" -->
+
+Unless that argument is passed in with a keyword.
+
+------
+<!-- .element: data-auto-animate -->
+```python [14]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+):
+    ...
+
+rectangle(
+    10,
+    20,
+    "round",
+    rotation=40,
+    color="green",
+)
+```
+<!-- .element: data-id="code" -->
+
+And if an extra keyword argument is passed in...
+
+------
+<!-- .element: data-auto-animate -->
+```python [9]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+):
+    ...
+
+# TypeError: rectangle() got an unexpected keyword argument 'color'
+rectangle(
+    10,
+    20,
+    "round",
+    rotation=40,
+    color="green",
+)
+```
+<!-- .element: data-id="code" -->
+
+You'll get an error for an unexpected keyword argument.
+
+> TODO: continue from here
+
+> 24:20
+> (01:10)
+> {29}
+
+------
+<!-- .element: data-auto-animate -->
+```python [9-15]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+):
+    ...
+
+rectangle(
+    10,
+    20,
+    "round",
+    rotation=40,
+    color="green",
+)
+```
+<!-- .element: data-id="code" -->
+
+And now, you might be thinking, what if you wanted to be sure, that you could always pass in all arguments?
+
+------
+<!-- .element: data-auto-animate -->
+```python [6]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+    **kwargs,
+):
+    ...
+
+rectangle(
+    10,
+    20,
+    "round",
+    40,
+    color="green",
+)
+```
+<!-- .element: data-id="code" -->
+
+Then you could end the definition with **kwargs so that your function captures both!
+
+------
+<!-- .element: data-auto-animate -->
+```python [8-14]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+    **kwargs,
+):
+    return shape(
+        width,
+        height,
+        rotation,
+        args,
+        kwargs,
+    )
+```
+<!-- .element: data-id="code" -->
+
+This would let you pass in all extra arguments down to other functions.
+
+------
+```python [13]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+    **kwargs,
+):
+    return shape(
+        width,
+        height,
+        rotation,
+        args,
+        **kwargs,
+    )
+```
+<!-- .element: data-id="code" -->
+
+And similar to `**` that allows for unpacking within a function call,
+
+------
+<!-- .element: data-auto-animate -->
+```python [12]
+def rectangle(
+    width,
+    height,
+    *args,
+    rotation,
+    **kwargs,
+):
+    return shape(
+        width,
+        height,
+        rotation,
+        *args,
+        **kwargs,
+    )
+```
+<!-- .element: data-id="code" -->
+
+You can also do the same thing with `*` to unpack into functions with variable arguments, and respect that function definition.
+
+> 24:55
+> (00:35)
+> {30}
+
+------
+<!-- .slide: data-background-image="images/thinking.svg"-->
+
+But are arbitrary keyword or positional arguments a good idea?
+
+------
+<!-- .slide: data-background-image="images/rust_logo.svg"-->
+
+For that, you could look at the design of newer, safer, languages like rust.
+
+------
+<!-- .element: data-auto-animate -->
+```rust
+fn main() {
+    println!("Hello", "world!");
+}
+
+//error: argument never used
+// --> src/main.rs:2:23
+//  |
+//2 |     println!("Hello", "world!");
+//  |              -------  ^^^^^^^^ argument never used
+//  |              |
+//  |              formatting specifier missing
+```
+<!-- .element: data-id="code" -->
+
+
+To my best understanding, Rust doesn't quite support variable function arguments.
+
+I see this as Rust knowing that this adds complexity, and thus leaves that as a problem for the writer to think about.
+
+And avoiding that complexity is understandable!
+
+------
+<!-- .element: data-auto-animate -->
+```python [4-5,10-11]
+def rectangle(
+    width,
+    height,
+    *args,
+    **kwargs,
+):
+    return shape(
+        width,
+        height,
+        *args,
+        **kwargs
+    )
+```
+<!-- .element: data-id="code" -->
+
+Like, in Python, you might have seen this monstrosity before, and learned to hate it.
+
+And for those who haven't, this is because it makes it really difficult to understand how to use the function.
+
+You can't tell what can and can't be passed through, especially since there's no need for typing.
+
+------
+<!-- .element: data-auto-animate -->
+```python [4-5]
+def rectangle(
+    width: int,
+    height: int,
+    *args: str,
+    **kwargs: int,
+):
+    ...
+```
+<!-- .element: data-id="code" -->
+
+Even if they are typed in their most simple form, it requires the values to be of the same type.
+
+Which you could say for the case of args is fine, because if they needed to be typed differently
+
+------
+<!-- .element: data-auto-animate -->
+```python [4-6]
+def rectangle(
+    width: int,
+    height: int,
+    name: str,
+    rotation: int,
+    *args: str,
+    **kwargs: int,
+):
+    ...
+```
+<!-- .element: data-id="code" -->
+
+then in most cases, the definition should be updated with those param types.
+
+But still, you don't really know whether the function logic will reject different keywords. 
+
+> https://docs.python.org/3/library/typing.html#typing.TypeVarTuple
+
+------
+<!-- .element: data-auto-animate -->
+```python []
+# Python 3.12
+from typing import TypedDict, Unpack
+
+class ShapeValues(TypedDict):
+    rotation: int
+    name: str
+
+def rectangle(
+    width: int,
+    height: int,
+    *args: str,
+    **kwargs: Unpack[ShapeValues],
+):
+    ...
+```
+<!-- .element: data-id="code" -->
+
+And for typing keyword arguments, only from Python 3.12 were additions added as support, to help specify what keywords could be caught, and what their types could be.
+
+> 26:25
+> (01:30)
+> {31}
+
+> https://peps.python.org/pep-0692/
+> https://docs.python.org/3/library/typing.html#typing.Unpack
+> https://typing.python.org/en/latest/spec/callables.html#unpack-kwargs
+> https://chatgpt.com/share/67ea8fb7-5874-8004-a270-1fa956b296f2
+
+> If you're new to python, I will note for you to look into the other types of unpacking uses for this `*` operator, as that's outside the scope of this talk.
+> NOTE: Could cut this ** and * content. How to segue?
+> NOTE: Could use sub as the example instead of rectangle to make the statement?
+
+------
+<!-- .element: data-auto-animate -->
+```python [1,10]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="summary" -->
+
+So to recap, this is python's function argument and parameter system,
+
+------
+<!-- .element: data-auto-animate -->
+```python [3]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="summary" -->
+
+The slash special parameter marks that the previous parameters
+
+------
+<!-- .element: data-auto-animate -->
+```python [2]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="summary" -->
+
+are positional only
+
+------
+<!-- .element: data-auto-animate -->
+```python [4]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="summary" -->
+
+There's the standard parameter that can be positional or keyword,
+
+------
+<!-- .element: data-auto-animate -->
+```python [5]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="summary" -->
+
+and can also be set with a default
+
+------
+<!-- .element: data-auto-animate -->
+```python [3,5]
+def function(
+    positional_only,
+    positional_only_with_default="baz",
+    /, # Positional only parameter indicator
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="summary" -->
+
+as can positional only if they, and all other positional arguments are also given defaults
+
+------
+<!-- .element: data-auto-animate -->
+```python [6]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="summary" -->
+
+`*` captures an arbitrary number of positional arguments,
+
+------
+<!-- .element: data-auto-animate -->
+```python [7,8]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="summary" -->
+
+and also indicates that further parameters are keyword only
+
+------
+<!-- .element: data-auto-animate -->
+```python [7]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="summary" -->
+
+such as this keyword argument,
+
+------
+<!-- .element: data-auto-animate -->
+```python [8]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="summary" -->
+
+or this one with a default.
+
+------
+<!-- .element: data-auto-animate -->
+```python [6]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *, # Keyword only parameter indicator
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="summary" -->
+
+And `*` can also be used alone as a special parameter to do the same.
+
+------
+<!-- .element: data-auto-animate -->
+```python [9]
+def function(
+    positional_only,
+    /, # Positional only parameter indicator
+    positional_or_keyword,
+    positional_or_keyword_with_default="foo",
+    *arbitrary_argument_tuple, # * also indicates keyword only
+    keyword_only,
+    keyword_with_default="bar",
+    **keyword_argument_dict,
+):
+```
+<!-- .element: data-id="summary" -->
+
+And finally double star, to handle arbitrary keyword arguments
+
+> 27:15
+> (00:50)
+> {32}
+
+------
+<!-- .slide: data-background-image="images/approaching_amazing_changing_0.svg"-->
+
+So while you can argue that Python's function system
+
+------
+<!-- .slide: data-background-image="images/approaching_amazing_changing_1.svg"-->
+
+is both approaching,
+
+------
+<!-- .slide: data-background-image="images/approaching_amazing_changing_2.svg"-->
+
+and amazing,
+
+------
+<!-- .slide: data-background-image="images/approaching_amazing_changing_3.svg"-->
+
+at least it's forever changing...
+
+------
+
+# <br>
+![args-amazing-or-approaching.nohumanerrors.com](images/args-amazing-or-approaching.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
+<!-- .element: class="r-stretch"-->
+## `args-amazing-or-approaching.nohumanerrors.com`
+# `@ekohilas`
+
+If you're after the resources for this talk, you can find them in these links.
+
+And if any of this was of interest to you, reach out!
+
+I'm looking for my next engagement and would love to work with you on solving complex problems. 
+
+If you enjoyed this talk, please say so online! 
+
+You can also subscribe to my mailing list on nohumanerrors.com, find me online at ekohilas, or here if you have any questions or feedback!
+
+------
+
+# Thanks!
+![args-amazing-or-approaching.nohumanerrors.com](images/args-amazing-or-approaching.nohumanerrors.com_qrcode.svg)<!-- .element: style="max-height: 95%"-->
+<!-- .element: class="r-stretch"-->
+## `args-amazing-or-approaching.nohumanerrors.com`
+# `@ekohilas`
+
+Thanks to my friends, family, the open source community, as well as to you for listening!
+
+> 28:00
+> (00:45)
+> {33}
+
