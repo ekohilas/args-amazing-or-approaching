@@ -30,7 +30,7 @@ Before we start, I have to say, idk about you, but Europe is way too bloody hot 
 
 Like, I shouldn’t be complaining as a Greek living in Australia, but the weekend before I left, I was surfing down the snowy mountain on my snowboard, jamming to music, and last weekend I was sticky and sweaty and probably sunburnt…
 
-Anyone else think EuroPython in the Snowy Austrian Alps would be wonderful?
+Rodrigo wants EuroPython in Lisbon, but wouldn't it be wonderful in the Snowy Austrian Alps?
 
 Okay thank you for letting me know it’s not just me and thanks to EuroPython for inviting me!
 
